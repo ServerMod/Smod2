@@ -30,7 +30,7 @@ namespace ExamplePlugin
 		public override void Register()
 		{
 			// Register Events
-			this.AddEventHandler(typeof(IEventRoundStart), new ExampleHandler(Priority.Highest), Priority.Highest);
+			this.AddEventHandler(typeof(IEventRoundStart), new RoundStartEventHandler(), Priority.Highest);
 			// Register Commands
 			this.AddCommand("hello", new HelloWorldCommand(this));
 		}
