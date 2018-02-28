@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using Smod2.Attributes;
 using Smod2.Commands;
-using Smod2.Game;
+using Smod2..API;
 using Smod2.Logging;
 
 namespace Smod2

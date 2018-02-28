@@ -1,4 +1,4 @@
-﻿namespace Smod2.Game
+﻿namespace Smod2.API
 {
 	public enum DamageType
 	{

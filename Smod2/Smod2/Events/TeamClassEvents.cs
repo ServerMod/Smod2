@@ -1,4 +1,4 @@
-﻿using Smod2.Game;
+﻿using Smod2.API;
 
 namespace Smod2.Events
 {

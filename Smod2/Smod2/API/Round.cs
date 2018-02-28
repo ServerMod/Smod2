@@ -1,8 +1,10 @@
-﻿namespace Smod2.Game
+﻿using System.Collections.Generic;
+
+namespace Smod2.API
 {
 	public abstract class Round
 	{
-		public abstract RoundStats stats { get; }
+		public abstract RoundStats Stats { get; }
 		public abstract void EndRound();
 		public int Duration { get; }
 	}
