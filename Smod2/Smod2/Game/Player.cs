@@ -20,8 +20,9 @@
 	public abstract class Player
 	{
 		public abstract string Class { get; set; }
-		public abstract string Name { get; set; }
+		public abstract string Name { get; }
 		public abstract string IpAddress { get; }
+		public abstract string HardwareId { get; }
 
 		public abstract void Kill();
 		public abstract void Damage(int amount, DamageType type = DamageType.NUKE);

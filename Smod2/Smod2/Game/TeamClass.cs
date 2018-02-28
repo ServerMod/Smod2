@@ -37,7 +37,8 @@ namespace Smod2.Game
 	{
 		public abstract Teams Team { get; }
 		public abstract Classes ClassType { get; }
-		public abstract Boolean DisallowClass { get; set; }
+		public abstract Boolean ClassDisallowed { get; set; }
 		public abstract int MaxHP { get; set; }
+		public abstract String Name { get; set; }
 	}
 }
