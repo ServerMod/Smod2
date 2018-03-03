@@ -10,5 +10,6 @@
 		public abstract bool InWorld { get; }
 		public abstract ItemType ItemType { get; }
 		public abstract void Remove();
+		public abstract void Drop();
 	}
 }

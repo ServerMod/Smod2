@@ -1,4 +1,6 @@
-﻿namespace Smod2.API
+﻿using System.Collections.Generic;
+
+namespace Smod2.API
 {
 	public enum DamageType
 	{
@@ -29,5 +31,6 @@
 		public abstract void Disconnect();
 		public abstract void Ban();
 		public abstract void GiveItem(ItemType type);
+		public abstract List<Item> GetInventory();
 	}
 }
