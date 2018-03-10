@@ -13,6 +13,18 @@ namespace Smod2.Events
 	public class EventManager
     {
 		private static EventManager singleton;
+		
+		public static EventManager Manager
+		{
+			get
+			{
+				if (singleton == null)
+				{
+					singleton = new EventManager();
+				}
+				return singleton;
+			}
+		}
 
 		private static PriorityComparator priorityCompare = new PriorityComparator();
 		Dictionary<Type, List<EventHandlerWrapper>> event_meta;
@@ -22,15 +34,6 @@ namespace Smod2.Events
 		{
 			event_meta = new Dictionary<Type, List<EventHandlerWrapper>>();
 			event_handlers = new Dictionary<Type, List<IEvent>>();
-		}
-
-		public static EventManager GetEventManager()
-		{
-			if (singleton == null)
-			{
-				singleton = new EventManager();
-			}
-			return singleton;
 		}
 
 

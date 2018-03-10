@@ -14,7 +14,7 @@ namespace Smod2
 			set;
 		}
 
-		public readonly EventManager eventManager = EventManager.GetEventManager();
+		public readonly EventManager eventManager = EventManager.Manager;
 		public readonly PluginManager pluginManager = PluginManager.Manager;
 		public abstract void Register();
 		public abstract void OnEnable();
