@@ -1,5 +1,4 @@
-﻿
-using Smod2.Commands;
+﻿using Smod2.Commands;
 
 namespace ExamplePlugin
 {
@@ -21,7 +20,7 @@ namespace ExamplePlugin
 			return "";
 		}
 
-		public void OnCall(string[] args)
+		public void OnCall(ICommandManager manger, string[] args)
 		{
 			plugin.Info("Hello world!");
 		}

@@ -1,15 +1,21 @@
-﻿using System;
-using Smod2;
+﻿using Smod2;
+using Smod2.API;
 using Smod2.Events;
-using Smod2.Game;
 
 namespace Smod.TestPlugin
 {
-    class RoundStartEventHandler: IEventRoundStart
+    class RoundStartHandler : IEventRoundStart
     {
+		private Plugin plugin;
+
+		public RoundStartHandler(Plugin plugin)
+		{
+			this.plugin = plugin;
+		}
+
 		public void OnRoundStart(Server server)
 		{
-			server.MaxPlayers = 2 ^ 32;
+			plugin.Info("ROUND START EVENT CALLER");
 		}
 	}
 }

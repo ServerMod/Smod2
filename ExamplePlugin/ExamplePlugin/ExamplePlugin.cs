@@ -1,5 +1,4 @@
-﻿using System;
-using Smod.TestPlugin;
+﻿using Smod.TestPlugin;
 using Smod2;
 using Smod2.Attributes;
 using Smod2.Events;
@@ -24,13 +23,13 @@ namespace ExamplePlugin
 
 		public override void OnEnable()
 		{
-			Console.WriteLine("On enable :)");
+			this.Info("Example Plugin has loaded :)");
 		}
 
 		public override void Register()
 		{
 			// Register Events
-			this.AddEventHandler(typeof(IEventRoundStart), new RoundStartEventHandler(), Priority.Highest);
+			this.AddEventHandler(typeof(IEventRoundStart), new RoundStartHandler(this), Priority.Highest);
 			// Register Commands
 			this.AddCommand("hello", new HelloWorldCommand(this));
 		}
