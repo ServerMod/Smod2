@@ -123,7 +123,6 @@ namespace Smod2
 			{
 				foreach (Type t in a.GetTypes())
 				{
-					t = null;
 					if (t.IsSubclassOf(typeof(Plugin)) && t != typeof(Plugin))
 					{
 						try
