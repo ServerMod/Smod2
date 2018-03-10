@@ -6,6 +6,7 @@ using Smod2.Attributes;
 using Smod2.Commands;
 using Smod2.API;
 using Smod2.Logging;
+using System.Linq;
 
 namespace Smod2
 {
@@ -13,38 +14,41 @@ namespace Smod2
     {
 		private Dictionary<string, Plugin> plugins;
 
+		private ICommandManager commandManager;
 		public ICommandManager CommandManager
 		{
-			get { return CommandManager; }
+			get { return commandManager; }
 			set
 			{
-				if (CommandManager == null)
+				if (commandManager == null)
 				{
-					CommandManager = value;
+					commandManager = value;
 				}
 			}
 		}
 
+		private Server server;
 		public Server Server
 		{
-			get { return Server; }
+			get { return server; }
 			set
 			{
-				if (Server == null)
+				if (server == null)
 				{
-					Server = value;
+					server = value;
 				}
 			}
 		}
 
+		private Logger logger;
 		public Logger Logger
 		{
-			get { return Logger; }
+			get { return logger; }
 			set
 			{
-				if (Logger == null)
+				if (logger == null)
 				{
-					Logger = value;
+					logger = value;
 				}
 			}
 		}
@@ -105,6 +109,7 @@ namespace Smod2
 			{
 				if (file.Contains(".dll"))
 				{
+					Logger.Debug("PLUGIN_LOADER", file);
 					LoadAssembly(file);
 				}
 			}
@@ -112,6 +117,7 @@ namespace Smod2
 
 		public void LoadAssembly(string path)
 		{
+			Logger.Debug("PLUGIN_LOADER", path);
 			Assembly.LoadFrom(path);
 			foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
 			{
@@ -128,6 +134,7 @@ namespace Smod2
 								// should do version checking too
 								plugin.Details = details;
 								plugins.Add(details.id, plugin);
+								Logger.Info("PLUGIN_LOADER", "Plugin loaded:" + plugin.ToString());
 							}
 							else
 							{

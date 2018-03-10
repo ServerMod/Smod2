@@ -33,6 +33,7 @@ namespace Smod2
 			}
 			else
 			{
+				this.Debug("Command handler registered for command " + command);
 				PluginManager.Manager.CommandManager.RegisterCommand(this, command, handler);
 			}
 		}

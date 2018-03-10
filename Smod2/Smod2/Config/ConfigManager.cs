@@ -22,14 +22,15 @@ namespace Smod2
 			}
 		}
 
+		private IConfigFile config;
 		public IConfigFile Config
 		{
-			get { return Config; }
+			get { return config; }
 			set
 			{
-				if (Config == null)
+				if (config == null)
 				{
-					Config = value;
+					config = value;
 				}
 			}
 		}
