@@ -4,17 +4,16 @@ using System.IO;
 using System.Reflection;
 using Smod2.Attributes;
 using Smod2.Commands;
-using Smod2..API;
+using Smod2.API;
 using Smod2.Logging;
 
 namespace Smod2
 {
     public class PluginManager
     {
-		private Dictionary<String, Plugin> plugins;
-		private static PluginManager singleton;
+		private Dictionary<string, Plugin> plugins;
 
-		public CommandManager CommandManager
+		public ICommandManager CommandManager
 		{
 			get { return CommandManager; }
 			set
@@ -22,18 +21,6 @@ namespace Smod2
 				if (CommandManager == null)
 				{
 					CommandManager = value;
-				}
-			}
-		}
-
-		public ConfigFile Config
-		{
-			get { return Config; }
-			set
-			{
-				if (Config == null)
-				{
-					Config = value;
 				}
 			}
 		}
@@ -62,28 +49,32 @@ namespace Smod2
 			}
 		}
 
+		private static PluginManager singleton;
+		public static PluginManager Manager
+		{
+			get
+			{
+				if (singleton == null)
+				{
+					singleton = new PluginManager();
+				}
+
+				return singleton;
+			}
+		}
+
 		public PluginManager()
 		{
-			plugins = new Dictionary<String, Plugin>();
+			plugins = new Dictionary<string, Plugin>();
 		}
 
-		public static PluginManager GetPluginManager()
-		{
-			if (singleton == null)
-			{
-				singleton = new PluginManager();
-			}
-
-			return singleton;
-		}
-
-		public Plugin GetPlugin(String id)
+		public Plugin GetPlugin(string id)
 		{
 			plugins.TryGetValue(id, out Plugin plugin);
 			return plugin;
 		}
 
-		public List<Plugin> FindPlugins(String name)
+		public List<Plugin> FindPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
 			foreach (var plugin in plugins.Values)
@@ -107,10 +98,10 @@ namespace Smod2
 			}
 		}
 
-		public void LoadAssemblies(String dir)
+		public void LoadAssemblies(string dir)
 		{
-			String[] files = Directory.GetFiles(dir);
-			foreach (String file in files)
+			string[] files = Directory.GetFiles(dir);
+			foreach (string file in files)
 			{
 				if (file.Contains(".dll"))
 				{
@@ -119,7 +110,7 @@ namespace Smod2
 			}
 		}
 
-		public void LoadAssembly(String path)
+		public void LoadAssembly(string path)
 		{
 			Assembly.LoadFrom(path);
 			foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
@@ -141,12 +132,12 @@ namespace Smod2
 							else
 							{
 								// print message
-								Console.WriteLine("Plugin loaded but missing an id: " + t + "(" + path + ")");
+								Logger.Warn("PLUGIN_LOADER", "Plugin loaded but missing an id: " + t + "(" + path + ")");
 							}
 						}
 						catch
 						{
-							Console.WriteLine("Failed to create instance of plugin " + t + "(" + path + ")");
+							Logger.Error("PLUGIN_LOADER", "Failed to create instance of plugin " + t + "(" + path + ")");
 						}
 					}
 				}

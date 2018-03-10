@@ -39,9 +39,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\PluginDetails.cs" />
-    <Compile Include="Commands\CommandManager.cs" />
+    <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
-    <Compile Include="ConfigFile.cs" />
+    <Compile Include="Config\IConfigFile.cs" />
+    <Compile Include="Config\ConfigManager.cs" />
+    <Compile Include="Config\ConfigSetting.cs" />
     <Compile Include="Events\EventManager.cs" />
     <Compile Include="Events\PlayerItemEvents.cs" />
     <Compile Include="Events\ServerRoundEvents.cs" />
@@ -53,7 +55,7 @@
     <Compile Include="API\Round.cs" />
     <Compile Include="API\RoundStats.cs" />
     <Compile Include="API\Server.cs" />
-    <Compile Include="Logging\Debug.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

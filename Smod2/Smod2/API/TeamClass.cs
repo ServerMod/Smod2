@@ -37,8 +37,8 @@ namespace Smod2.API
 	{
 		public abstract Teams Team { get; }
 		public abstract Classes ClassType { get; }
-		public abstract Boolean ClassDisallowed { get; set; }
+		public abstract bool ClassDisallowed { get; set; }
 		public abstract int MaxHP { get; set; }
-		public abstract String Name { get; set; }
+		public abstract string Name { get; set; }
 	}
 }

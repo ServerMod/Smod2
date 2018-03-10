@@ -21,7 +21,7 @@ namespace Smod2.API
 	}
 	public abstract class Player
 	{
-		public abstract string Class { get; set; }
+		public abstract TeamClass Class { get; set; }
 		public abstract string Name { get; }
 		public abstract string IpAddress { get; }
 		public abstract string HardwareId { get; }
@@ -29,7 +29,7 @@ namespace Smod2.API
 		public abstract void Kill();
 		public abstract void Damage(int amount, DamageType type = DamageType.NUKE);
 		public abstract void Disconnect();
-		public abstract void Ban();
+		public abstract void Ban(int duration);
 		public abstract void GiveItem(ItemType type);
 		public abstract List<Item> GetInventory();
 	}

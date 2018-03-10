@@ -2,7 +2,7 @@
 {
 	public abstract class Connection
 	{
-		public abstract string IpAddres { get; }
+		public abstract string IpAddress { get; }
 		public abstract void Disconnect();
 	}
 }

@@ -6,6 +6,6 @@ namespace Smod2.API
 	{
 		public abstract RoundStats Stats { get; }
 		public abstract void EndRound();
-		public int Duration { get; }
+		public abstract int Duration { get; }
 	}
 }

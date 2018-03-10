@@ -36,7 +36,7 @@ namespace Smod2.Events
 
 		public void AddEventHandler(Plugin plugin, Type eventType, IEvent handler, Priority priority=Priority.Normal)
 		{
-			plugin.Debug(String.Format("Adding event handler from: {0} type: {1} priority: {2} hander: {3}", plugin.Details.name, eventType, priority, handler.GetType()));
+			plugin.Debug(string.Format("Adding event handler from: {0} type: {1} priority: {2} hander: {3}", plugin.Details.name, eventType, priority, handler.GetType()));
 			EventHandlerWrapper wrapper = new EventHandlerWrapper(plugin, priority, handler);
 			if (!event_meta.ContainsKey(eventType))
 			{

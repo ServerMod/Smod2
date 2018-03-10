@@ -2,6 +2,7 @@
 {
 	public enum ItemType
 	{
+		NULL = -1,
 		JANITOR_KEYCARD = 0 // CBF right now
 	}
 

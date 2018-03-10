@@ -8,9 +8,9 @@ namespace Smod2.Attributes
 		public int SmodMinor;
 		public int SmodRevision;
 		public string id;
-		public String name;
-		public String author;
-		public String description;
-		public String version;
+		public string name;
+		public string author;
+		public string description;
+		public string version;
     }
 }

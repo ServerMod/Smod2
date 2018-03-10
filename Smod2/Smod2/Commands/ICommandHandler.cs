@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Smod2.Commands
+﻿namespace Smod2.Commands
 {
 	public interface ICommandHandler
 	{
-		void OnCall(String[] args);
-		String GetUsage();
-		String GetCommandDescription();
+		void OnCall(ICommandManager manager, string[] args);
+		string GetUsage();
+		string GetCommandDescription();
 	}
 }
