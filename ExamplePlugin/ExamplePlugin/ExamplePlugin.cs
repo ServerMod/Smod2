@@ -11,7 +11,7 @@ namespace ExamplePlugin
 		description = "Example plugin",
 		id = "courtney.example.plugin",
 		version = "1.0",
-		SmodMajor = 1,
+		SmodMajor = 2,
 		SmodMinor = 0,
 		SmodRevision = 0
 		)]
