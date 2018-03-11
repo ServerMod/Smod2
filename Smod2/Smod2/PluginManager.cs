@@ -119,38 +119,37 @@ namespace Smod2
 		public void LoadAssembly(string path)
 		{
 			Logger.Debug("PLUGIN_LOADER", path);
-			Assembly.LoadFrom(path);
-			foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
+			Assembly a = Assembly.LoadFrom(path);
+
+			foreach (Type t in a.GetTypes())
 			{
-				foreach (Type t in a.GetTypes())
+				if (t.IsSubclassOf(typeof(Plugin)) && t != typeof(Plugin))
 				{
-					if (t.IsSubclassOf(typeof(Plugin)) && t != typeof(Plugin))
+					try
 					{
-						try
+						Plugin plugin = Activator.CreateInstance(t) as Plugin;
+						PluginDetails details = (PluginDetails) Attribute.GetCustomAttribute(t, typeof(PluginDetails));
+						if (details.id != null)
 						{
-							Plugin plugin = Activator.CreateInstance(t) as Plugin;
-							PluginDetails details = (PluginDetails) Attribute.GetCustomAttribute(t, typeof(PluginDetails));
-							if (details.id != null)
-							{
-								// should do version checking too
-								plugin.Details = details;
-								plugins.Add(details.id, plugin);
-								Logger.Info("PLUGIN_LOADER", "Plugin loaded:" + plugin.ToString());
-							}
-							else
-							{
-								// print message
-								Logger.Warn("PLUGIN_LOADER", "Plugin loaded but missing an id: " + t + "(" + path + ")");
-							}
+							// should do version checking too
+							plugin.Details = details;
+							plugins.Add(details.id, plugin);
+							Logger.Info("PLUGIN_LOADER", "Plugin loaded:" + plugin.ToString());
 						}
-						catch
+						else
 						{
-							Logger.Error("PLUGIN_LOADER", "Failed to create instance of plugin " + t + "(" + path + ")");
+							// print message
+							Logger.Warn("PLUGIN_LOADER", "Plugin loaded but missing an id: " + t + "(" + path + ")");
 						}
+					}
+					catch
+					{
+						Logger.Error("PLUGIN_LOADER", "Failed to create instance of plugin " + t + "(" + path + ")");
 					}
 				}
 			}
 		}
+		
 
 
     }
