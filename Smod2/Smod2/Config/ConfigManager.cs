@@ -62,13 +62,18 @@ namespace Smod2
 			if (primary_settings_map.ContainsKey(key))
 			{
 				ConfigSetting primary = ResolvePrimary(key);
+				PluginManager.Manager.Logger.Debug("DEFAULT_CONFIG_RESOLVER", "primary map contains " + key + ", using default " + primary.Default);
 				if (primary != null)
 				{
 					def = (primary.Default != null) ? primary.Default : "";
 				}
 			}
+			else
+			{
+				PluginManager.Manager.Logger.Warn("DEFAULT_CONFIG_RESOLVER", "Default setting for config " + key + " does not exist");
+			}
 
-			return "";
+			return def;
 		}
 
 
@@ -121,7 +126,11 @@ namespace Smod2
 							PluginManager.Manager.Logger.Warn("CONFIG_MANAGER", plugin.ToString() + " is trying to register as a primary user of config setting " + setting.Key + " this may cause some weird behaviour");
 						}
 					}
-					primary_settings_map.Add(setting.Key, plugin);
+					else
+					{
+						PluginManager.Manager.Logger.Debug("CONFIG_MANAGER", "Adding primary config setting " + setting.Key + " for plugin " + plugin.Details.id);
+						primary_settings_map.Add(setting.Key, plugin);
+					}
 				}
 				else
 				{

@@ -51,31 +51,31 @@ namespace Smod2
 			}
 		}
 
-		public string GetConfigSting(string key)
+		public string GetConfigString(string key)
 		{
-			CheckConfigRegistered(key);
-			string def = ConfigManager.Manager.ResolveDefault(key);
-			return ConfigManager.Manager.Config.GetStringValue(key, def);
+			CheckConfigRegistered(key.ToUpper());
+			string def = ConfigManager.Manager.ResolveDefault(key.ToUpper());
+			return ConfigManager.Manager.Config.GetStringValue(key.ToUpper(), def);
 		}
 
 		public int GetConfigInt(string key)
 		{
-			CheckConfigRegistered(key);
-			Int32.TryParse(ConfigManager.Manager.ResolveDefault(key), out int def);
-			return ConfigManager.Manager.Config.GetIntValue(key, def);
+			CheckConfigRegistered(key.ToUpper());
+			Int32.TryParse(ConfigManager.Manager.ResolveDefault(key.ToUpper()), out int def);
+			return ConfigManager.Manager.Config.GetIntValue(key.ToUpper(), def);
 		}
 
 		public bool GetConfigBool(string key)
 		{
-			CheckConfigRegistered(key);
-			bool.TryParse(ConfigManager.Manager.ResolveDefault(key), out bool def);
-			return ConfigManager.Manager.Config.GetBoolValue(key, def);
+			CheckConfigRegistered(key.ToUpper());
+			bool.TryParse(ConfigManager.Manager.ResolveDefault(key.ToUpper()), out bool def);
+			return ConfigManager.Manager.Config.GetBoolValue(key.ToUpper(), def);
 		}
 
 		public string[] GetConfigList(string key)
 		{
-			CheckConfigRegistered(key);
-			return ConfigManager.Manager.Config.GetListValue(key);
+			CheckConfigRegistered(key.ToUpper());
+			return ConfigManager.Manager.Config.GetListValue(key.ToUpper());
 		}
 
 		public void Debug(string message)

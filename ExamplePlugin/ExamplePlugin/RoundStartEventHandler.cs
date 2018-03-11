@@ -16,6 +16,13 @@ namespace Smod.TestPlugin
 		public void OnRoundStart(Server server)
 		{
 			plugin.Info("ROUND START EVENT CALLER");
+			plugin.Info("Players: " + server.GetPlayers().Count);
+			foreach (Player player in server.GetPlayers())
+			{
+				// Print the player info and then their class info
+				plugin.Info(player.ToString());
+				plugin.Info(player.Class.ToString());
+			}
 		}
 	}
 }

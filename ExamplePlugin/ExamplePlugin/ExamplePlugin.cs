@@ -24,6 +24,7 @@ namespace ExamplePlugin
 		public override void OnEnable()
 		{
 			this.Info("Example Plugin has loaded :)");
+			this.Info("Config value: " + this.GetConfigString("test"));
 		}
 
 		public override void Register()
@@ -32,6 +33,8 @@ namespace ExamplePlugin
 			this.AddEventHandler(typeof(IEventRoundStart), new RoundStartHandler(this), Priority.Highest);
 			// Register Commands
 			this.AddCommand("hello", new HelloWorldCommand(this));
+			// Register config settings
+			this.AddConfig(new Smod2.Config.ConfigSetting("test", "yes", Smod2.Config.SettingType.STRING, true, "test"));
 		}
 	}
 }

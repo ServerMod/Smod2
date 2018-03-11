@@ -57,7 +57,7 @@
 
 		public ConfigSetting(string key, string defaultValue, SettingType type,  bool primaryUser, string description)
 		{
-			this.key = key;
+			this.key = key.ToUpper();
 			this.defaultValue = defaultValue;
 			this.configType = type;
 			this.primaryUser = primaryUser;

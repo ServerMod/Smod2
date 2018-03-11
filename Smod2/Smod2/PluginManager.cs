@@ -97,6 +97,7 @@ namespace Smod2
 			foreach(var plugin in plugins)
 			{
 				plugin.Value.Info("Enabling plugin " + plugin.Value.Details.name + " " + plugin.Value.Details.version);
+				ConfigManager.Manager.RegisterPlugin(plugin.Value);
 				plugin.Value.Register();
 				plugin.Value.OnEnable();
 			}
