@@ -26,7 +26,7 @@ namespace Smod2.Events
 		void OnConnect(Connection conn);
 	}
 
-	public interface IEventdisconnect : IEvent
+	public interface IEventDisconnect : IEvent
 	{
 		void OnDisconnect(Connection conn);
 	}

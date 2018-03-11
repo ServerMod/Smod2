@@ -4,6 +4,7 @@ namespace Smod2.API
 {
 	public enum Teams
 	{
+		NONE = -1,
 		SCP = 0,
 		NITETAILFOX = 1,
 		CHAOS_INSURGENCY = 2,
@@ -15,6 +16,7 @@ namespace Smod2.API
 
 	public enum Classes
 	{
+		UNASSIGNED = -1,
 		SCP173 = 0,
 		CLASSD = 1,
 		SPECTATOR = 2,
