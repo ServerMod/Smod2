@@ -12,6 +12,7 @@ namespace Smod2
 {
     public class PluginManager
     {
+		public static readonly string SMOD_API_VERSION = "2.0.2";
 		private Dictionary<string, Plugin> plugins;
 
 		private ICommandManager commandManager;
@@ -134,7 +135,7 @@ namespace Smod2
 							// should do version checking too
 							plugin.Details = details;
 							plugins.Add(details.id, plugin);
-							Logger.Info("PLUGIN_LOADER", "Plugin loaded:" + plugin.ToString());
+							Logger.Info("PLUGIN_LOADER", "Plugin loaded: " + plugin.ToString());
 						}
 						else
 						{

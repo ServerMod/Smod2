@@ -19,6 +19,17 @@ namespace Smod2.API
 		PISTOL,
 		HEAVY_MG // grenade?
 	}
+
+	public enum Role
+	{
+		ADMIN = 5,
+		PROJECT_MANAGER = 4,
+		GAME_STAFF = 3,
+		BETATESTER = 2,
+		PATREON_SUPPORTED = 1,
+		NONE = 0
+	}
+
 	public abstract class Player
 	{
 		public abstract TeamClass Class { get; set; }
@@ -28,6 +39,9 @@ namespace Smod2.API
 
 		public abstract void Kill();
 		public abstract void Damage(int amount, DamageType type = DamageType.NUKE);
+		public abstract Vector GetPosition();
+		public abstract void Teleport(Vector pos);
+		public abstract void SetRole(Role role);
 		public abstract void Disconnect();
 		public abstract void Ban(int duration);
 		public abstract void GiveItem(ItemType type);
