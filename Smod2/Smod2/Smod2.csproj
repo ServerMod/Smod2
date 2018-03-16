@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>E:\SteamLibrary\steamapps\common\SCP Secret Laboratory2\SCPSL_Data\Managed\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\SCP Secret Laboratory\SCPSL_Data\Managed\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

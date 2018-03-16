@@ -12,7 +12,7 @@ namespace Smod2
 {
     public class PluginManager
     {
-		public static readonly string SMOD_API_VERSION = "2.0.3";
+		public static readonly string SMOD_API_VERSION = "2.0.2";
 		private Dictionary<string, Plugin> plugins;
 
 		private ICommandManager commandManager;
