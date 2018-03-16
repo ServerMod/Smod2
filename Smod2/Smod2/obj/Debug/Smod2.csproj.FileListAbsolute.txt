@@ -1,8 +1,0 @@
-C:\Users\Courtney\source\repos\Smod2\Smod2\bin\Debug\Smod2.dll
-C:\Users\Courtney\source\repos\Smod2\Smod2\bin\Debug\Smod2.pdb
-C:\Users\Courtney\source\repos\Smod2\Smod2\obj\Debug\Smod2.csprojResolveAssemblyReference.cache
-C:\Users\Courtney\source\repos\Smod2\Smod2\obj\Debug\Smod2.csproj.CoreCompileInputs.cache
-C:\Users\Courtney\source\repos\Smod2\Smod2\obj\Debug\Smod2.dll
-C:\Users\Courtney\source\repos\Smod2\Smod2\obj\Debug\Smod2.pdb
-C:\Users\Courtney\source\repos\SmodEventTest\SmodEventTest\bin\Debug\Smod2.dll
-C:\Users\Courtney\source\repos\SmodEventTest\SmodEventTest\bin\Debug\Smod2.pdb
