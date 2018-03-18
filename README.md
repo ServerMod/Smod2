@@ -3,6 +3,9 @@ ServerMod2 is a server side plugin system with a bunch of additional configurati
 
 The latest release can be found here: [Release link](https://github.com/Grover-c13/Smod2/releases/latest)
 
+## Discord
+You can join our discord here: https://discord.gg/8nvmMTr
+
 ## ServerMod Installation:
 To install:
 1. Navigate to your SCP Secret Lab folder.
