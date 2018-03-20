@@ -45,7 +45,7 @@ Type Info:
 - Boolean: True or False value
 - Integer: A number without decimals
 - List: A list with items separated by ",", for example: `list = 1,2,3,4,5;`
-- Dictionary: A dictionary with items separated by ":", and each entry separated by ",", for example: dictionary = 1:2,2:3,3:4;
+- Dictionary: A dictionary with items separated by ":", and each entry separated by ",", for example: `dictionary = 1:2,2:3,3:4;`
 - Seconds: Time in seconds, usually a value of -1 disables the feature
 - Minutes: Time in minutes, usually a value of -1 disables the feature
 
