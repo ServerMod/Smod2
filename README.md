@@ -108,6 +108,18 @@ SCP106_AMOUNT | Integer | 1 | Max amount of SCP-106 that can be spawned in rando
 SCP173_AMOUNT | Integer | 1 | Max amount of SCP-173 that can be spawned in randomly
 SCP457_AMOUNT | Integer | 1 | Max amount of SCP-457 that can be spawned in randomly
 
+### Risky IP Checker
+Before using this, make sure you check out the API that's used: https://getipintel.net/
+Config Option | Value Type | Default Value | Description
+--- | :---: | :---: | ---
+kick_risky_ips | Boolean | False | Enables/Disables Risky IP Checker (Uses https://getipintel.net/)
+trusted_ips_reset_every | Integer | 10 | The number of rounds until the cached IPs are cleared
+kick_risky_ips_ratelimit | Seconds | 30 | The seconds between requests (CHECK https://getipintel.net/#API)
+kick_risky_ips_email | String | **Empty** | Your email, this is used in requests
+kick_risky_ips_subdomain | String | check | If you get a custom subdomain for https://getipintel.net/, use it here
+kick_risky_ips_at_percent | Integer | 95 | The percentage of suspicion to kick a player
+ban_risky_ips_at_percent | Integer | 100 | The percentage of suspicion to ban a player
+
 ### Smart Class Picker
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
@@ -116,10 +128,14 @@ smart_class_picker_starting_weight | Integer | 5 | The weight a class starts out
 smart_class_picker_weight_limit | Integer | 10 | The maximum weight a class can have
 smart_class_picker_class_<Class #>_weight_decrease | Integer | **Dynamic** | The amount a weight goes down when a player plays the specified class, the default value is dynamic based on which team and class the player is
 smart_class_picker_class_<Class #>_weight_increase | Integer | **Dynamic** | The amount a weight goes up when the player isn't the specified class, the default value is dynamic based on which team and class the player is
+smart_class_picker_team_<Team #>_weight_decrease | Integer | **Dynamic** | The amount the weight for each class on a team goes down when a player plays on the specified team, the default value is dynamic based on which team and class the player is
+smart_class_picker_team_<Team #>_weight_increase | Integer | **Dynamic** | The amount the weight for each class on a team goes up when the player isn't on the specified team, the default value is dynamic based on which team and class the player is
+
 
 #### Default Functionality
 - Every class gets +1 weight except for the class the player is chosen to be or the chosen class is NTF
 - If the player is chosen to be NTF, the chosen class gets -4 weight and every other NTF class gets -2 weight
+- If the player is chosen to be SCP, the chosen class gets -3 weight and every other SCP class gets -2 weight
 - If the player is chosen to be Class D, Class D gets -3 weight
 - If the player is chosen to be any other class, the chosen class gets -2 weight
 
