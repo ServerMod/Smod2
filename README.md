@@ -109,7 +109,6 @@ SCP173_AMOUNT | Integer | 1 | Max amount of SCP-173 that can be spawned in rando
 SCP457_AMOUNT | Integer | 1 | Max amount of SCP-457 that can be spawned in randomly
 
 ### Risky IP Checker
-Before using this, make sure you check out the API that's used: https://getipintel.net/
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 kick_risky_ips | Boolean | False | Enables/Disables Risky IP Checker (Uses https://getipintel.net/)
@@ -119,6 +118,7 @@ kick_risky_ips_email | String | **Empty** | Your email, this is used in requests
 kick_risky_ips_subdomain | String | check | If you get a custom subdomain for https://getipintel.net/, use it here
 kick_risky_ips_at_percent | Integer | 95 | The percentage of suspicion to kick a player
 ban_risky_ips_at_percent | Integer | 100 | The percentage of suspicion to ban a player
+Before using this, make sure you check out the API that's used: https://getipintel.net/
 
 ### Smart Class Picker
 Config Option | Value Type | Default Value | Description
