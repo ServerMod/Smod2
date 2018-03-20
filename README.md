@@ -11,7 +11,7 @@ To install:
 1. Navigate to your SCP Secret Lab folder.
 2. Go into SCSL_Data/Managed/
 3. Make a backup of Assembly-CSharp.dll
-4. Replace Assembly-CSharp.dll with the one in the releases tab.
+4. Replace Assembly-CSharp.dll with the one in the releases tab and copy Smod2.dll from the releases tab into the same folder.
 
 ## Server Name Variables
 Currently supported variables (place in your servers name):
@@ -44,8 +44,11 @@ Example:
 Type Info:
 - Boolean: True or False value
 - Integer: A number without decimals
-- List: A list with items separated by ","
+- List: A list with items separated by ",", for example: `list = 1,2,3,4,5;`
+- Dictionary: A dictionary with items separated by ":", and each entry separated by ",", for example: dictionary = 1:2,2:3,3:4;
 - Seconds: Time in seconds, usually a value of -1 disables the feature
+- Minutes: Time in minutes, usually a value of -1 disables the feature
+
 
 ### General
 Config Option | Value Type | Default Value | Description
@@ -65,6 +68,14 @@ allow_scpsl_staff_to_use_remoteadmin | Boolean | False | Allow SCP: SL staff to 
 allow_scpsl_beta_tester_to_use_remoteadmin | Boolean | False | Allow SCP: SL beta testers to use Remote Admin
 allow_scpsl_patreon_to_use_remoteadmin | Boolean | False | Allow SCP: SL patrons to use Remote Admin
 afk_kick | Seconds | -1 | Kicks players who haven't moved in a specified amount of time
+remove_item_loot | List | **Empty** | Removes all instances of the specified item ID from all lockers
+replace_item_loot | Dictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
+add_item_loot | List | **Empty** | Adds the specified item ID to all lockers' loot
+auto_round_restart_time | Seconds | 10 | The time before the next round starts when a round ends
+create_offline_ban_files | Boolean | True | Enables / Disables creating pre-made ban files
+offline_ban_database_folder | String | [appdata]/SCP Secret Laboratory/Premade Bans | The location to save pre-made ban files
+offline_ban_duration | Minutes | 26297460 | The duration of the ban to create pre-made ban files with
+offline_ban_keep_duplicates | Boolean | False | Keeps duplicate ban entries for pre-made ban files (Overwrites the ban file by username)
 
 ### Warhead Options
 Config Option | Value Type | Default Value | Description
@@ -73,6 +84,12 @@ nuke_disable_cooldown | Seconds | 0 | Stop the nuke from being spammed, this wil
 auto_warhead_start | Seconds | -1 | Automatically activated the nuke after the specified amount of time has elapsed (-1 disables this feature)
 auto_warhead_start_lock | Boolean | False | Automatically prevents the warhead detonation from being cancelled when it's automatically started
 unlock_nuke_door_on_detonate | Boolean | True | Makes all doors openable without a keycard after the nuke has detonated
+
+### SCP-914 Options
+Config Option | Value Type | Default Value | Description
+--- | :---: | :---: | ---
+SCP914_teleport_players | Boolean | True | Moves players in SCP-914's input area to the output area
+SCP914_<rough/coarse/1_to_1/fine/very_fine>_change_class | Dictionary | **Empty** | Changes a player's class from the first specified class to the second specified class when they're teleported to SCP-914's output area
 
 ### Class Based
 Config Option | Value Type | Default Value | Description
@@ -119,6 +136,7 @@ kick_risky_ips_email | String | **Empty** | Your email, this is used in requests
 kick_risky_ips_subdomain | String | check | If you get a custom subdomain for https://getipintel.net/, use it here
 kick_risky_ips_at_percent | Integer | 95 | The percentage of suspicion to kick a player
 ban_risky_ips_at_percent | Integer | 100 | The percentage of suspicion to ban a player
+risky_ip_whitelist | List | **Empty** | A list of IPs to not check (Prevent them from being kicked / banned)
 
 ### Smart Class Picker
 Config Option | Value Type | Default Value | Description
