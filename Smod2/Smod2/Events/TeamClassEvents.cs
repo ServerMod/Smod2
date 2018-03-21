@@ -4,20 +4,22 @@ namespace Smod2.Events
 {
 	public interface IEventAssignTeam : IEvent
 	{
-		// Called when the player is assigned a team at round start.
-		void OnAssignTeam(Player player, out Teams team);
+		// Called when a team is picked for a player. Nothing is assigned to the player, but you can change what team the player will spawn as.
+		// Make sure to set teamOutput to team at the start of your plugin.
+		void OnAssignTeam(Player player, Teams team, out Teams teamOutput);
 	}
 
 	public interface IEventSetClass : IEvent
 	{
-		// Called when the player is set a class, at any point in the game
-		void OnAssignTeam(Player player, out TeamClass teamclass);
+		// Called after the player is set a class, at any point in the game. Be sure to set teamclassOutput to the player's class at the start of your plugin.
+		// If teamclassOutput is different, the player will be given that new class.
+		void OnAssignTeam(Player player, TeamClass teamclass, out TeamClass teamclassOutput);
 	}
 
 	public interface IEventTeamRespawn : IEvent
 	{
 		// Called when CI/NTF respawn
-		void OnTeamRespawn(Player[] deadPlayers, out Player[] selectedPlayers, out bool spawnChaos);
+		void OnTeamRespawn(Player[] deadPlayers, out Player[] selectedPlayers, bool spawnChaos, out bool spawnChaosOutput);
 	}
 
 	public interface IEventInitSCP : IEvent
@@ -28,8 +30,8 @@ namespace Smod2.Events
 
 	public interface IEventDecideTeamRespawnQueue : IEvent
 	{
-		// when the server reads in the team_respawn_queue setting, you can modify it here
-		void OnDecideTeamRespawnQueue(out Teams[] teams);
+		// when the server reads in the team_respawn_queue setting, you can modify it here. Be sure to set teamsOutput to teams at the start of your plugin.
+		void OnDecideTeamRespawnQueue(Teams[] teams, out Teams[] teamsOutput);
 	}
 
 	public interface IEventBanSCP : IEvent
