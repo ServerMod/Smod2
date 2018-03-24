@@ -48,6 +48,7 @@
     <Compile Include="Config\ConfigSetting.cs" />
     <Compile Include="Events\EventManager.cs" />
     <Compile Include="Events\AdminEvents.cs" />
+    <Compile Include="Events\MiscEvents.cs" />
     <Compile Include="Events\PlayerItemEvents.cs" />
     <Compile Include="Events\ServerRoundEvents.cs" />
     <Compile Include="Events\TeamClassEvents.cs" />

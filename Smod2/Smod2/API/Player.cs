@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+
 namespace Smod2.API
 {
 	public enum DamageType
@@ -46,5 +47,7 @@ namespace Smod2.API
 		public abstract void Ban(int duration);
 		public abstract void GiveItem(ItemType type);
 		public abstract List<Item> GetInventory();
+		public abstract void ChangeClass(Classes newClass);
+		public abstract object GetGameObject();
 	}
 }
