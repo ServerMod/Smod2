@@ -5,7 +5,10 @@
 		NUMERIC,
 		STRING,
 		BOOL,
-		LIST
+		LIST,
+		NUMERIC_LIST,
+		DICTIONARY,
+		NUMERIC_DICTIONARY
 	}
 
 	public class ConfigSetting
