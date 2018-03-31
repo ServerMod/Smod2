@@ -3,6 +3,7 @@ using Smod2.Attributes;
 using Smod2.Commands;
 using Smod2.Config;
 using Smod2.Events;
+using System.Collections.Generic;
 
 namespace Smod2
 {
@@ -76,6 +77,24 @@ namespace Smod2
 		{
 			CheckConfigRegistered(key.ToUpper());
 			return ConfigManager.Manager.Config.GetListValue(key.ToUpper());
+		}
+
+		public int[] GetConfigIntList(string key)
+		{
+			CheckConfigRegistered(key.ToUpper());
+			return ConfigManager.Manager.Config.GetIntListValue(key.ToUpper());
+		}
+
+		public Dictionary<string, string> GetConfigDict(string key)
+		{
+			CheckConfigRegistered(key.ToUpper());
+			return ConfigManager.Manager.Config.GetDictValue(key.ToUpper());
+		}
+
+		public Dictionary<int, int> GetConfigIntDict(string key)
+		{
+			CheckConfigRegistered(key.ToUpper());
+			return ConfigManager.Manager.Config.GetIntDictValue(key.ToUpper());
 		}
 
 		public void Debug(string message)
