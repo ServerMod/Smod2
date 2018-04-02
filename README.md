@@ -48,7 +48,7 @@ Type Info:
 - Dictionary: A dictionary with items separated by ":", and each entry separated by ",", for example: `dictionary = 1:2,2:3,3:4;`
 - Seconds: Time in seconds, usually a value of -1 disables the feature
 - Minutes: Time in minutes, usually a value of -1 disables the feature
-
+- R: If the config option has an R before it, it means that you can use a random value in it. A random value is defined by having "{}", items listed like "weight%value" where if you don't put a weight it defaults to a weight of 1, separated by "|", for example: `rlist = {1%1|2%7|6},3,6,{15%3|2|45%2};`
 
 ### General
 Config Option | Value Type | Default Value | Description
@@ -68,14 +68,16 @@ allow_scpsl_staff_to_use_remoteadmin | Boolean | False | Allow SCP: SL staff to 
 allow_scpsl_beta_tester_to_use_remoteadmin | Boolean | False | Allow SCP: SL beta testers to use Remote Admin
 allow_scpsl_patreon_to_use_remoteadmin | Boolean | False | Allow SCP: SL patrons to use Remote Admin
 afk_kick | Seconds | -1 | Kicks players who haven't moved in a specified amount of time
-remove_item_loot | List | **Empty** | Removes all instances of the specified item ID from all lockers
-replace_item_loot | Dictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
-add_item_loot | List | **Empty** | Adds the specified item ID to all lockers' loot
+remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
+replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
+add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
 auto_round_restart_time | Seconds | 10 | The time before the next round starts when a round ends
 create_offline_ban_files | Boolean | True | Enables / Disables creating pre-made ban files
 offline_ban_database_folder | String | [appdata]/SCP Secret Laboratory/Premade Bans | The location to save pre-made ban files
 offline_ban_duration | Minutes | 26297460 | The duration of the ban to create pre-made ban files with
 offline_ban_keep_duplicates | Boolean | False | Keeps duplicate ban entries for pre-made ban files (Overwrites the ban file by username)
+client_mod_commands | Boolean | False | Allow client mods to remotely run commands through QueryProcessor (Requires player to be logged into Remote Admin)
+master_server_to_contact | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists
 
 ### Warhead Options
 Config Option | Value Type | Default Value | Description
@@ -89,7 +91,10 @@ unlock_nuke_door_on_detonate | Boolean | True | Makes all doors openable without
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 SCP914_teleport_players | Boolean | True | Moves players in SCP-914's input area to the output area
-SCP914_<rough/coarse/1_to_1/fine/very_fine>_change_class | Dictionary | **Empty** | Changes a player's class from the first specified class to the second specified class when they're teleported to SCP-914's output area
+SCP914_keep_health | Boolean | True | Keep the same health when a player moves from SCP-914's input area to the output area and the class is changed
+SCP914_<rough/coarse/1_to_1/fine/very_fine>_change_class | RDictionary | **Empty** | Changes a player's class from the first specified class to the second specified class when they're teleported to SCP-914's output area
+SCP914_in_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value before their class is changed
+SCP914_out_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value after their class is changed
 
 ### Class Based
 Config Option | Value Type | Default Value | Description
@@ -124,19 +129,6 @@ SCP096_AMOUNT | Integer | 1 | Max amount of SCP-096 that can be spawned in rando
 SCP106_AMOUNT | Integer | 1 | Max amount of SCP-106 that can be spawned in randomly
 SCP173_AMOUNT | Integer | 1 | Max amount of SCP-173 that can be spawned in randomly
 SCP457_AMOUNT | Integer | 1 | Max amount of SCP-457 that can be spawned in randomly
-
-### Risky IP Checker
-#### Before using this, make sure you check out the API that's used, https://getipintel.net/
-Config Option | Value Type | Default Value | Description
---- | :---: | :---: | ---
-kick_risky_ips | Boolean | False | Enables/Disables Risky IP Checker (Uses https://getipintel.net/)
-trusted_ips_reset_every | Integer | 10 | The number of rounds until the cached IPs are cleared
-kick_risky_ips_ratelimit | Seconds | 30 | The seconds between requests (CHECK https://getipintel.net/#API)
-kick_risky_ips_email | String | **Empty** | Your email, this is used in requests
-kick_risky_ips_subdomain | String | check | If you get a custom subdomain for https://getipintel.net/, use it here
-kick_risky_ips_at_percent | Integer | 95 | The percentage of suspicion to kick a player
-ban_risky_ips_at_percent | Integer | 100 | The percentage of suspicion to ban a player
-risky_ip_whitelist | List | **Empty** | A list of IPs to not check (Prevent them from being kicked / banned)
 
 ### Smart Class Picker
 Config Option | Value Type | Default Value | Description
