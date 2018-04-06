@@ -9,17 +9,13 @@ namespace Smod2.Events
 		STAFF,
 		PROJECT_MANAGMENT
 	}
-
-
-
 	public interface IEventAdminQuery : IEvent
 	{
-		void OnAdminQuery(Player admin, Player target, string password, out string query);
+		void OnAdminQuery(Player admin, string adminIp, string query, out string queryOutput);
 	}
-
 	public interface IEventAuthCheck : IEvent
 	{
-		void OnAuthCheck(Player admin, AuthType authType, string entered_password, string server_password, out Role setrole, out bool allow);
+		void OnAuthCheck(Player admin, AuthType authType, string entered_password, string server_password, Role roleOverwrite, out Role roleOutput, bool allowOverwrite, out bool allowOutput);
 	}
 
 }

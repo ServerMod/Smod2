@@ -13,7 +13,7 @@ namespace Smod2.Events
 	{
 		// Called after the player is set a class, at any point in the game. Be sure to set teamclassOutput to the player's class at the start of your plugin.
 		// If teamclassOutput is different, the player will be given that new class.
-		void OnAssignTeam(Player player, TeamClass teamclass, out TeamClass teamclassOutput);
+		void OnSetClass(Player player, TeamClass teamclass, out TeamClass teamclassOutput);
 	}
 
 	public interface IEventTeamRespawn : IEvent
