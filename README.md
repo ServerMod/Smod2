@@ -78,6 +78,8 @@ offline_ban_duration | Minutes | 26297460 | The duration of the ban to create pr
 offline_ban_keep_duplicates | Boolean | False | Keeps duplicate ban entries for pre-made ban files (Overwrites the ban file by username)
 client_mod_commands | Boolean | False | Allow client mods to remotely run commands through QueryProcessor (Requires player to be logged into Remote Admin)
 master_server_to_contact | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists
+dedicated_slots | Integer | **Number if IPs in** `dedicated_slot_ips` | The number of slots above the maximum to reserve for certain players
+dedicated_slot_ips | List | **Empty** | A list of the IPs of players to allow into the reserved slots
 
 ### Warhead Options
 Config Option | Value Type | Default Value | Description
