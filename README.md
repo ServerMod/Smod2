@@ -44,6 +44,7 @@ Example:
 Type Info:
 - Boolean: True or False value
 - Integer: A number without decimals
+- Float: A number with decimals (Formatting like "1.0" and "1,0" both work and are the same value)
 - List: A list with items separated by ",", for example: `list = 1,2,3,4,5;`
 - Dictionary: A dictionary with items separated by ":", and each entry separated by ",", for example: `dictionary = 1:2,2:3,3:4;`
 - Seconds: Time in seconds, usually a value of -1 disables the feature
@@ -53,7 +54,6 @@ Type Info:
 ### General
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
-max_players | Integer | 20 | The max amount of players per server
 force_disable_enable | Boolean | False | Overrides game's default ban value with chosen values (**USE OF THIS IS NOT RECOMMENDED**)
 item_cleanup | Seconds | -1 | Cleans up items after the specified amount of time
 nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname contains anything in this list
@@ -63,28 +63,23 @@ allow_incompatible | Boolean | False | Allow the server to run an incompatible v
 sm_debug | Boolean | False | Print more verbose debug messages for debugging
 sm_server_name | String | **Dynamic** | server name in a separate option, defaults to the value of server_name (You'd use this if you don't want variables showing up in your server name when ServerMod isn't working)
 sm_tracking | Boolean | True | Appends the ServerMod version to your server name, this is for tracking how many servers are running ServerMod
-allow_project_manager_remote_admin | Boolean | False | Allow SCP: SL project managers to use Remote Admin
-allow_scpsl_staff_to_use_remoteadmin | Boolean | False | Allow SCP: SL staff to use Remote Admin
-allow_scpsl_beta_tester_to_use_remoteadmin | Boolean | False | Allow SCP: SL beta testers to use Remote Admin
-allow_scpsl_patreon_to_use_remoteadmin | Boolean | False | Allow SCP: SL patrons to use Remote Admin
 afk_kick | Seconds | -1 | Kicks players who haven't moved in a specified amount of time
 remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
 replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
 add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
 auto_round_restart_time | Seconds | 10 | The time before the next round starts when a round ends
-create_offline_ban_files | Boolean | True | Enables / Disables creating pre-made ban files
-offline_ban_database_folder | String | [appdata]/SCP Secret Laboratory/Premade Bans | The location to save pre-made ban files
-offline_ban_duration | Minutes | 26297460 | The duration of the ban to create pre-made ban files with
-offline_ban_keep_duplicates | Boolean | False | Keeps duplicate ban entries for pre-made ban files (Overwrites the ban file by username)
 client_mod_commands | Boolean | False | Allow client mods to remotely run commands through QueryProcessor (Requires player to be logged into Remote Admin)
 master_server_to_contact | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists
 dedicated_slots | Integer | **Number of IPs in** `dedicated_slot_ips` | The number of slots above the maximum to reserve for certain players
 dedicated_slot_ips | List | **Empty** | A list of the IPs of players to allow into the reserved slots
+disable_decontamination | Boolean | False | Enables / Disables Light Containment Zone decontamination
+scp_grenade_multiplier | Float | 2.0 | The multiplier for the amount of damage grenades do to SCPs
+human_grenade_multiplier | Float | 1.0 | The multiplier for the amount of damage grenades do to humans
+escapee_restrained_check | Boolean | False | If true, escapees are set to the opposite team if they are cuffed (disarmed), for example, if a Class-D escaped while cuffed, they would become NTF
 
 ### Warhead Options
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
-nuke_disable_cooldown | Seconds | 0 | Stop the nuke from being spammed, this will stop the nuke arm switch from being disabled until this has elapsed
 auto_warhead_start | Seconds | -1 | Automatically activated the nuke after the specified amount of time has elapsed (-1 disables this feature)
 auto_warhead_start_lock | Boolean | False | Automatically prevents the warhead detonation from being cancelled when it's automatically started
 unlock_nuke_door_on_detonate | Boolean | True | Makes all doors openable without a keycard after the nuke has detonated
