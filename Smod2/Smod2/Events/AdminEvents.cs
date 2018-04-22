@@ -15,7 +15,7 @@ namespace Smod2.Events
 	}
 	public interface IEventAuthCheck : IEvent
 	{
-		void OnAuthCheck(Player admin, AuthType authType, string entered_password, string server_password, Role roleOverwrite, out Role roleOutput, bool allowOverwrite, out bool allowOutput);
+		void OnAuthCheck(Player admin, AuthType authType, string entered_password, string server_password, bool allowOverwrite, out bool allowOutput);
 	}
 
 }
