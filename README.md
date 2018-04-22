@@ -76,6 +76,7 @@ disable_decontamination | Boolean | False | Enables / Disables Light Containment
 scp_grenade_multiplier | Float | 2.0 | The multiplier for the amount of damage grenades do to SCPs
 human_grenade_multiplier | Float | 1.0 | The multiplier for the amount of damage grenades do to humans
 escapee_restrained_check | Boolean | False | If true, escapees are set to the opposite team if they are cuffed (disarmed), for example, if a Class-D escaped while cuffed, they would become NTF
+disable_badges | Boolean | False | If true, admins will not have the admin badge on your server. Global badges (staff, etc.) will still be shown (for now.)
 
 ### Warhead Options
 Config Option | Value Type | Default Value | Description
