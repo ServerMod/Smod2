@@ -30,7 +30,7 @@ namespace Smod2.Events
 
 	public interface IEventDecideTeamRespawnQueue : IEvent
 	{
-		// when the server reads in the team_respawn_queue setting, you can modify it here. Be sure to set teamsOutput to teams at the start of your plugin.
+		// Called at the start, when the team respawn queue is being read. This happens BEFORE it fills it to full with filler_team_id. Be sure to set teamsOutput to teams at the start of your plugin.
 		void OnDecideTeamRespawnQueue(Teams[] teams, out Teams[] teamsOutput);
 	}
 

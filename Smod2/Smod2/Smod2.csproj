@@ -59,6 +59,7 @@
     <Compile Include="API\Round.cs" />
     <Compile Include="API\RoundStats.cs" />
     <Compile Include="API\Server.cs" />
+    <Compile Include="Events\WarheadEvents.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginManager.cs" />
