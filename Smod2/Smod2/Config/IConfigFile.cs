@@ -6,7 +6,8 @@ namespace Smod2
 	public interface IConfigFile
 	{
 		int GetIntValue(string key, int def);
-		string GetStringValue(string key, string def);
+		float GetFloatValue(string key, float def);
+		string GetStringValue(string key, string def, bool randomValues = false);
 		bool GetBoolValue(string key, bool def);
 		string[] GetListValue(string key, string[] def, bool randomValues = false);
 		string[] GetListValue(string key, bool randomValues = false);

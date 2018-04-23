@@ -42,7 +42,7 @@ namespace Smod2.API
 		public abstract void Damage(int amount, DamageType type = DamageType.NUKE);
 		public abstract Vector GetPosition();
 		public abstract void Teleport(Vector pos);
-		public abstract void SetRole(Role role);
+		public abstract void SetRole(string color, string test);
 		public abstract void Disconnect();
 		public abstract void Ban(int duration);
 		public abstract void GiveItem(ItemType type);
