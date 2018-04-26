@@ -6,7 +6,7 @@ namespace Smod2.API
 	{
 		NONE = -1,
 		SCP = 0,
-		NITETAILFOX = 1,
+		NINETAILFOX = 1,
 		CHAOS_INSURGENCY = 2,
 		SCIENTISTS = 3,
 		CLASSD = 4,
@@ -17,7 +17,7 @@ namespace Smod2.API
 	public enum Classes
 	{
 		UNASSIGNED = -1,
-		SCP173 = 0,
+		SCP_173 = 0,
 		CLASSD = 1,
 		SPECTATOR = 2,
 		SCP_106 = 3,
