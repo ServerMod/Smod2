@@ -8,15 +8,18 @@ namespace Smod2.API
 		LURE,
 		SCP_049_2,
 		NUKE,
+		WALL,
 		TESLA, // Tesla and Grenade
 		SCP_173,
 		SCP_106,
+		CONTAIN,
+		SCP_096,
 		SCP_049,
 		POCKET,
 		FALLDOWN,
 		PULSE_RIFLE,
 		PULSE_PISTOL,
-		SCORPION,
+		SKORPION,
 		PISTOL,
 		HEAVY_MG // Chaos Gun
 	}
