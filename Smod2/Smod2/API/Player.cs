@@ -8,7 +8,7 @@ namespace Smod2.API
 		LURE,
 		SCP_049_2,
 		NUKE,
-		TESLA,
+		TESLA, // Tesla and Grenade
 		SCP_173,
 		SCP_106,
 		SCP_049,
@@ -18,7 +18,7 @@ namespace Smod2.API
 		PULSE_PISTOL,
 		SCORPION,
 		PISTOL,
-		HEAVY_MG // grenade?
+		HEAVY_MG // Chaos Gun
 	}
 
 	public enum Role
@@ -38,7 +38,7 @@ namespace Smod2.API
 		public abstract string IpAddress { get; }
 		public abstract string SteamId { get; }
 
-		public abstract void Kill();
+		public abstract void Kill(DamageType type = DamageType.NUKE);
 		public abstract void Damage(int amount, DamageType type = DamageType.NUKE);
 		public abstract Vector GetPosition();
 		public abstract void Teleport(Vector pos);
