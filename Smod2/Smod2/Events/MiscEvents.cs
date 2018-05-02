@@ -9,7 +9,7 @@ namespace Smod2.Events
 	}
 	public interface IEvent914Activate : IEvent
 	{
-		void On914Activate(int settingID, object[] inputs, Vector intakePos, Vector outputPos);
+		void On914Activate(KnobSetting knobSetting, object[] inputs, Vector intakePos, Vector outputPos);
 	}
 	public interface IEventPocketDimensionExit : IEvent
 	{

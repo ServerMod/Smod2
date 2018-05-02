@@ -35,6 +35,15 @@
 		DROPPED_PAT = 29
 	}
 
+	public enum KnobSetting
+	{
+		ROUGH,
+		COARSE,
+		ONE_TO_ONE,
+		FINE,
+		VERY_FINE
+	}
+
 	public abstract class Item
 	{
 		public abstract bool InWorld { get; }
