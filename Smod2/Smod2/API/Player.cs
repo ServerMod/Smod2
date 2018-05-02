@@ -5,6 +5,7 @@ namespace Smod2.API
 {
 	public enum DamageType
 	{
+		NONE,
 		LURE,
 		SCP_049_2,
 		NUKE,
