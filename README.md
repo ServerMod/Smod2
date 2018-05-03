@@ -54,29 +54,34 @@ Type Info:
 ### General
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
+afk_kick | Seconds | -1 | Kicks players who haven't moved in a specified amount of time
+allow_incompatible | Boolean | False | Allow the server to run an incompatible version of ServerMod
+auto_round_restart_time | Seconds | 10 | The time before the next round starts when a round ends
+dedicated_slots | Integer | **Number of IPs in** `dedicated_slot_ips` | The number of slots above the maximum to reserve for certain players
+dedicated_slot_ips | List | **Empty** | A list of the IPs of players to allow into the reserved slots
+disable_badges | Boolean | False | If true, admins will not have the admin badge on your server. Global badges (staff, etc.) will still be shown (for now.)
+disable_decontamination | Boolean | False | Enables / Disables Light Containment Zone decontamination
+escapee_restrained_check | Boolean | False | If true, escapees are set to the opposite team if they are cuffed (disarmed), for example, if a Class-D escaped while cuffed, they would become NTF
+filler_team_id | Integer | 4 | If the team spawn queue is shorter than the max player count, this team number will be used for the rest of the players when they spawn
 force_disable_enable | Boolean | False | Overrides game's default ban value with chosen values (**USE OF THIS IS NOT RECOMMENDED**)
 item_cleanup | Seconds | -1 | Cleans up items after the specified amount of time
+last_movement_timeout | Seconds | 30 | After this amount of time without a player sending any movement, they will be kicked (still sends movement if they're standing still, so this isn't anti-afk)
 nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname contains anything in this list
-show_on_serverlist | Boolean | True | If your server is verified, this shows it on the server list
+pd_exit_count | Integer | 1 | The amount of exits to the pocket dimension
 server_frame_rate | Integer | 60 | The framerate that a server runs at
-allow_incompatible | Boolean | False | Allow the server to run an incompatible version of ServerMod
+rejected_movement_limit | Integer | -1 | The amount of movements detected by the anti-cheat as invalid before a player is kicked, the detection count increases per invalid movement and decreases per valid movement
+show_on_serverlist | Boolean | True | If your server is verified, this shows it on the server list
 sm_debug | Boolean | False | Print more verbose debug messages for debugging
+sm_onplayerjoin_tries_timeout | Integer | 50 | The amount of tries before the OnPlayerJoin event gives up on executing for a player (to prevent it constantly running if a player disconnects before it's run)
 sm_server_name | String | **Dynamic** | server name in a separate option, defaults to the value of server_name (You'd use this if you don't want variables showing up in your server name when ServerMod isn't working)
 sm_tracking | Boolean | True | Appends the ServerMod version to your server name, this is for tracking how many servers are running ServerMod
-afk_kick | Seconds | -1 | Kicks players who haven't moved in a specified amount of time
 remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
 replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
 add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
-auto_round_restart_time | Seconds | 10 | The time before the next round starts when a round ends
-client_mod_commands | Boolean | False | Allow client mods to remotely run commands through QueryProcessor (Requires player to be logged into Remote Admin)
-master_server_to_contact | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists
-dedicated_slots | Integer | **Number of IPs in** `dedicated_slot_ips` | The number of slots above the maximum to reserve for certain players
-dedicated_slot_ips | List | **Empty** | A list of the IPs of players to allow into the reserved slots
-disable_decontamination | Boolean | False | Enables / Disables Light Containment Zone decontamination
+master_server_to_contact | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists **(DEPRICATED, USE "secondary_servers_to_contact")**
+secondary_servers_to_contact | List | **Empty** | The master servers to push data to, this is used for private server lists
 scp_grenade_multiplier | Float | 2.0 | The multiplier for the amount of damage grenades do to SCPs
 human_grenade_multiplier | Float | 1.0 | The multiplier for the amount of damage grenades do to humans
-escapee_restrained_check | Boolean | False | If true, escapees are set to the opposite team if they are cuffed (disarmed), for example, if a Class-D escaped while cuffed, they would become NTF
-disable_badges | Boolean | False | If true, admins will not have the admin badge on your server. Global badges (staff, etc.) will still be shown (for now.)
 
 ### Warhead Options
 Config Option | Value Type | Default Value | Description
