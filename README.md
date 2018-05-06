@@ -57,13 +57,13 @@ Config Option | Value Type | Default Value | Description
 afk_kick | Seconds | -1 | Kicks players who haven't moved in a specified amount of time
 allow_incompatible | Boolean | False | Allow the server to run an incompatible version of ServerMod
 auto_round_restart_time | Seconds | 10 | The time before the next round starts when a round ends
-dedicated_slots | Integer | **Number of IPs in** `dedicated_slot_ips` | The number of slots above the maximum to reserve for certain players
+dedicated_slots | Integer | **Number of IPs in** `dedicated_slot_ips` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
 dedicated_slot_ips | List | **Empty** | A list of the IPs of players to allow into the reserved slots
 disable_badges | Boolean | False | If true, admins will not have the admin badge on your server. Global badges (staff, etc.) will still be shown (for now.)
 disable_decontamination | Boolean | False | Enables / Disables Light Containment Zone decontamination
 escapee_restrained_check | Boolean | False | If true, escapees are set to the opposite team if they are cuffed (disarmed), for example, if a Class-D escaped while cuffed, they would become NTF
 filler_team_id | Integer | 4 | If the team spawn queue is shorter than the max player count, this team number will be used for the rest of the players when they spawn
-force_disable_enable | Boolean | False | Overrides game's default ban value with chosen values (**USE OF THIS IS NOT RECOMMENDED**)
+force_disable_enable | Boolean | False | Overrides game's default ban value with chosen values **(USE OF THIS IS NOT RECOMMENDED)**
 item_cleanup | Seconds | -1 | Cleans up items after the specified amount of time
 last_movement_timeout | Seconds | 30 | After this amount of time without a player sending any movement, they will be kicked (still sends movement if they're standing still, so this isn't anti-afk)
 nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname contains anything in this list
