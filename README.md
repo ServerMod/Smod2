@@ -80,6 +80,8 @@ replace_item_loot | RDictionary | **Empty** | Replaces all instances of the spec
 add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
 master_server_to_contact | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists **(DEPRICATED, USE "secondary_servers_to_contact")**
 secondary_servers_to_contact | List | **Empty** | The master servers to push data to, this is used for private server lists
+scp_grenade_multiplier | Float | 2.0 | The multiplier for the amount of damage grenades do to SCPs
+human_grenade_multiplier | Float | 1.0 | The multiplier for the amount of damage grenades do to humans
 
 ### Warhead Options
 Config Option | Value Type | Default Value | Description
