@@ -65,6 +65,7 @@ master_server_to_contact | String | https://hubertmoszka.pl/authenticator.php | 
 secondary_servers_to_contact | List | **Empty** | The master servers to push data to, this is used for private server lists
 
 ### Administration / Gameplay
+Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 dedicated_slots | Integer | **Number of IPs in** `dedicated_slot_ips` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
 dedicated_slot_ips | List | **Empty** | A list of the IPs of players to allow into the reserved slots
