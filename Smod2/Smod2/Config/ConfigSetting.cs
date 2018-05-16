@@ -3,6 +3,7 @@
 	public enum SettingType
 	{
 		NUMERIC,
+		FLOAT,
 		STRING,
 		BOOL,
 		LIST,
@@ -22,12 +23,21 @@
 			}
 		}
 
-		private string defaultValue;
-		public string Default
+		private object defaultValue;
+		public object Default
 		{
 			get
 			{
 				return defaultValue;
+			}
+		}
+
+		private bool randomized;
+		public bool RandomizedValue
+		{
+			get
+			{
+				return randomized;
 			}
 		}
 
@@ -50,7 +60,7 @@
 		}
 
 		private string description;
-		private string Description
+		public string Description
 		{
 			get
 			{
@@ -58,14 +68,24 @@
 			}
 		}
 
-		public ConfigSetting(string key, string defaultValue, SettingType type,  bool primaryUser, string description)
+		public ConfigSetting(string key, object defaultValue, bool randomized, SettingType type,  bool primaryUser, string description)
 		{
 			this.key = key.ToUpper();
 			this.defaultValue = defaultValue;
+			this.randomized = randomized;
 			this.configType = type;
 			this.primaryUser = primaryUser;
 			this.description = description;
 		}
 
+		public ConfigSetting(string key, object defaultValue, SettingType type, bool primaryUser, string description)
+		{
+			this.key = key.ToUpper();
+			this.defaultValue = defaultValue;
+			this.randomized = false;
+			this.configType = type;
+			this.primaryUser = primaryUser;
+			this.description = description;
+		}
 	}
 }

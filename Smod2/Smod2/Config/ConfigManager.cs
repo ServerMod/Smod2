@@ -56,16 +56,16 @@ namespace Smod2
 			return isRegistered;
 		}
 
-		public string ResolveDefault(string key)
+		public object ResolveDefault(string key)
 		{
-			string def = "";
+			object def = null;
 			if (primary_settings_map.ContainsKey(key))
 			{
 				ConfigSetting primary = ResolvePrimary(key);
-				PluginManager.Manager.Logger.Debug("DEFAULT_CONFIG_RESOLVER", "primary map contains " + key + ", using default " + primary.Default);
+				PluginManager.Manager.Logger.Debug("DEFAULT_CONFIG_RESOLVER", "Primary map contains " + key + ", using default " + primary.Default.ToString());
 				if (primary != null)
 				{
-					def = (primary.Default != null) ? primary.Default : "";
+					def = (primary.Default != null) ? primary.Default : null;
 				}
 			}
 			else
@@ -112,6 +112,10 @@ namespace Smod2
 			{
 				PluginManager.Manager.Logger.Error("CONFIG_MANAGER", "Trying to register a config setting before the plugin has registered with Config Manager");
 			}
+			else if (!CheckTypeMatch(setting))
+			{
+				PluginManager.Manager.Logger.Error("CONFIG_MANAGER", "Trying to register a config setting \"" + setting.Key + "\" with a mismatched default and setting type (Expected \"" + GetTypeString(setting.ConfigValueType) + "\", got \"" + (setting.Default != null ? setting.Default.GetType().ToString() : "null") + "\" instead)");
+			}
 			else
 			{
 				Dictionary<string, Config.ConfigSetting> pluginSettings = settings[plugin];
@@ -150,6 +154,106 @@ namespace Smod2
 				{
 					PluginManager.Manager.Logger.Warn("CONFIG_MANAGER", plugin.ToString() + " is trying to register a duplicate setting: " + setting.Key);
 				}
+			}
+		}
+
+		public bool CheckTypeMatch(ConfigSetting setting)
+		{
+			if (setting.Default != null)
+			{
+				switch (setting.ConfigValueType)
+				{
+					case SettingType.NUMERIC:
+						if (setting.Default is int)
+						{
+							return true;
+						}
+						break;
+
+					case SettingType.FLOAT:
+						if (setting.Default is float)
+						{
+							return true;
+						}
+						break;
+
+					case SettingType.STRING:
+						if (setting.Default is string)
+						{
+							return true;
+						}
+						break;
+
+					case SettingType.BOOL:
+						if (setting.Default is bool)
+						{
+							return true;
+						}
+						break;
+
+					case SettingType.LIST:
+						if (setting.Default is string[])
+						{
+							return true;
+						}
+						break;
+
+					case SettingType.NUMERIC_LIST:
+						if (setting.Default is int[])
+						{
+							return true;
+						}
+						break;
+
+					case SettingType.DICTIONARY:
+						if (setting.Default is Dictionary<string, string>)
+						{
+							return true;
+						}
+						break;
+
+					case SettingType.NUMERIC_DICTIONARY:
+						if (setting.Default is Dictionary<int, int>)
+						{
+							return true;
+						}
+						break;
+				}
+			}
+
+			return false;
+		}
+
+		public string GetTypeString(SettingType setting)
+		{
+			switch (setting)
+			{
+				case SettingType.NUMERIC:
+					return typeof(int).ToString();
+
+				case SettingType.FLOAT:
+					return typeof(float).ToString();
+
+				case SettingType.STRING:
+					return typeof(string).ToString();
+
+				case SettingType.BOOL:
+					return typeof(bool).ToString();
+
+				case SettingType.LIST:
+					return typeof(string[]).ToString();
+
+				case SettingType.NUMERIC_LIST:
+					return typeof(int[]).ToString();
+
+				case SettingType.DICTIONARY:
+					return typeof(Dictionary<string, string>).ToString();
+
+				case SettingType.NUMERIC_DICTIONARY:
+					return typeof(Dictionary<int, int>).ToString();
+
+				default:
+					return "null";
 			}
 		}
 
