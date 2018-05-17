@@ -144,16 +144,17 @@ SCP457_AMOUNT | Integer | 1 | Max amount of SCP-457 that can be spawned in rando
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 smart_class_picker | Boolean | False | Enables/Disables Smart Class Picker
-smart_class_picker_starting_weight | Integer | 5 | The weight a class starts out with
-smart_class_picker_weight_limit | Integer | 10 | The maximum weight a class can have
-smart_class_picker_class_<Class #>_weight_decrease | Integer | **Dynamic** | The amount a weight goes down when a player plays the specified class, the default value is dynamic based on which team and class the player is
-smart_class_picker_class_<Class #>_weight_increase | Integer | **Dynamic** | The amount a weight goes up when the player isn't the specified class, the default value is dynamic based on which team and class the player is
-smart_class_picker_team_<Team #>_weight_decrease | Integer | **Dynamic** | The amount the weight for each class on a team goes down when a player plays on the specified team, the default value is dynamic based on which team and class the player is
-smart_class_picker_team_<Team #>_weight_increase | Integer | **Dynamic** | The amount the weight for each class on a team goes up when the player isn't on the specified team, the default value is dynamic based on which team and class the player is
+smart_cp_starting_weight | Integer | 6 | The weight a class starts out with
+smart_cp_weight_min | Integer | 1 | The minimum weight a class can have
+smart_cp_weight_max | Integer | 11 | The maximum weight a class can have
+smart_cp_class_<Class #>_weight_decrease | Integer | **Dynamic** | The amount a weight goes down when a player plays the specified class, the default value is dynamic based on which team and class the player is
+smart_cp_class_<Class #>_weight_increase | Integer | **Dynamic** | The amount a weight goes up when the player isn't the specified class, the default value is dynamic based on which team and class the player is
+smart_cp_team_<Team #>_weight_decrease | Integer | **Dynamic** | The amount the weight for each class on a team goes down when a player plays on the specified team, the default value is dynamic based on which team and class the player is
+smart_cp_team_<Team #>_weight_increase | Integer | **Dynamic** | The amount the weight for each class on a team goes up when the player isn't on the specified team, the default value is dynamic based on which team and class the player is
 
 
 #### Default Functionality
-- Every class gets +1 weight except for the class the player is chosen to be or the chosen class is NTF
+- Every class gets +1 weight except for the class the player is chosen to be or the chosen class is NTF or SCP
 - If the player is chosen to be NTF, the chosen class gets -4 weight and every other NTF class gets -2 weight
 - If the player is chosen to be SCP, the chosen class gets -3 weight and every other SCP class gets -2 weight
 - If the player is chosen to be Class D, Class D gets -3 weight
