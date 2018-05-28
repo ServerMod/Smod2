@@ -70,8 +70,8 @@ secondary_servers_to_contact | List | **Empty** | The master servers to push dat
 ### Administration / Gameplay
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
-dedicated_slots | Integer | **Number of IPs in** `Reserved slots.txt` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
-~~dedicated_slot_ips~~ | List | **Empty** | A list of the IPs of players to allow into the reserved slots **(Depricated, scroll down for new system)**
+dedicated_slots | Integer | **Number of IPs in** `Reserved Slots.txt` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
+~~dedicated_slot_ips~~ | List | **Empty** | A list of the IPs of players to allow into the reserved slots **(Depricated, use "Reserved Slots.txt" instead, scroll down for the usage)**
 reserved_slots_simulate_full | Boolean | False | For debugging, this simulates the server being full, so only players with reserved slots can **(Do not enable this if you don't know what you're doing)**
 disable_badges | Boolean | False | If true, admins will not have the admin badge on your server. Global badges (staff, etc.) will still be shown (for now.)
 disable_decontamination | Boolean | False | Enables / Disables Light Containment Zone decontamination
@@ -90,7 +90,7 @@ human_grenade_multiplier | Float | 0.7 | The multiplier for the amount of damage
 
 #### Reserved Slots
 How to use the new Reserved Slots:
-In the new "Reserved slots.txt" file in the SCP AppData location, you put one SteamID or IP per line, and you can end each line with a comment using "//". If you want to use both an IP and SteamID, you put the IP, a semicolon (";"), then the SteamID
+In the new "Reserved Slots.txt" file in the SCP AppData location, you put one SteamID or IP per line, and you can end each line with a comment using "//". If you want to use both an IP and SteamID, you put the IP, a semicolon (";"), then the SteamID
 
 Example Usage:
 ```
