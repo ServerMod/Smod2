@@ -70,7 +70,7 @@ secondary_servers_to_contact | List | **Empty** | The master servers to push dat
 ### Administration / Gameplay
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
-dedicated_slots | Integer | **Number of IPs in** `dedicated_slot_ips` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
+dedicated_slots | Integer | **Number of IPs in** `Reserved slots.txt` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
 ~~dedicated_slot_ips~~ | List | **Empty** | A list of the IPs of players to allow into the reserved slots **(Depricated, scroll down for new system)**
 reserved_slots_simulate_full | Boolean | False | For debugging, this simulates the server being full, so only players with reserved slots can **(Do not enable this if you don't know what you're doing)**
 disable_badges | Boolean | False | If true, admins will not have the admin badge on your server. Global badges (staff, etc.) will still be shown (for now.)
