@@ -48,6 +48,7 @@ namespace Smod2.API
 		public abstract void Teleport(Vector pos);
 		public abstract void SetRole(string color, string test);
 		public abstract void Disconnect();
+		public abstract void Disconnect(string message);
 		public abstract void Ban(int duration);
 		public abstract void GiveItem(ItemType type);
 		public abstract List<Item> GetInventory();
