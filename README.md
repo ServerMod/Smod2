@@ -92,11 +92,15 @@ human_grenade_multiplier | Float | 0.7 | The multiplier for the amount of damage
 How to use the new Reserved Slots:
 In the new "Reserved Slots.txt" file in the SCP AppData location, you put one SteamID or IP per line, and you can end each line with a comment using "//". If you want to use both an IP and SteamID, you put the IP, a semicolon (";"), then the SteamID
 
+Everything following and including the "//" is optional
+
 Example Usage:
 ```
 1.1.1.1 // IP
 11111111111111111 // SteamID64 (Automatically fetches IP)
 127.0.0.1;22222222222222222 // IP and SteamID64 (Automatically updates IP)
+127.0.0.1;22222222222222222
+127.0.0.1;11111111111111111
 ```
 
 Known bugs:
