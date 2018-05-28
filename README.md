@@ -22,6 +22,7 @@ Currently supported variables (place in your servers name):
 - $number (will display the number of the instance, assuming youre using default ports, this works by subtracting 7776 from the port (so $number will = 1 for the first server, #2 for the second)
 - $lobby_id (debugging to print the lobby_id)
 - $version (version of the game)
+- $sm_version (version of ServerMod)
 - $max_players (max amount of players in the config)
 - $scp_alive - number of alive SCPS.
 - $scp_start - number of SCPs at start of the round.
@@ -45,11 +46,13 @@ Type Info:
 - Boolean: True or False value
 - Integer: A number without decimals
 - Float: A number with decimals (Formatting like "1.0" and "1,0" both work and are the same value)
-- List: A list with items separated by ",", for example: `list = 1,2,3,4,5;`
-- Dictionary: A dictionary with items separated by ":", and each entry separated by ",", for example: `dictionary = 1:2,2:3,3:4;`
+- List: A list with items separated by ",", for example: `list: 1,2,3,4,5`
+- Dictionary: A dictionary with items separated by ":", and each entry separated by ",", for example: `dictionary: 1:2,2:3,3:4`
 - Seconds: Time in seconds, usually a value of -1 disables the feature
 - Minutes: Time in minutes, usually a value of -1 disables the feature
-- R: If the config option has an R before it, it means that you can use a random value in it. A random value is defined by having "{}", items listed like "weight%value" where if you don't put a weight it defaults to a weight of 1, separated by "|", for example: `rlist = {1%1|2%7|6},3,6,{15%3|2|45%2};`
+- R: If the config option has an R before it, it means that you can use a random value in it. A random value is defined by having "{}", items listed like "weight%value" where if you don't put a weight it defaults to a weight of 1, separated by "|", for example: `rlist: {1%1|2%7|6},3,6,{15%3|2|45%2}`
+
+Crossed out config options are removed, unless otherwise specified in the description
 
 ### General
 Config Option | Value Type | Default Value | Description
@@ -61,25 +64,44 @@ show_on_serverlist | Boolean | True | If your server is verified, this shows it 
 sm_debug | Boolean | False | Print more verbose debug messages for debugging
 sm_server_name | String | **Dynamic** | server name in a separate option, defaults to the value of server_name (You'd use this if you don't want variables showing up in your server name when ServerMod isn't working)
 sm_tracking | Boolean | True | Appends the ServerMod version to your server name, this is for tracking how many servers are running ServerMod
-master_server_to_contact | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists **(DEPRICATED, USE "secondary_servers_to_contact")**
+~~master_server_to_contact~~ | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists **(DEPRICATED, USE "secondary_servers_to_contact")**
 secondary_servers_to_contact | List | **Empty** | The master servers to push data to, this is used for private server lists
 
 ### Administration / Gameplay
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 dedicated_slots | Integer | **Number of IPs in** `dedicated_slot_ips` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
-dedicated_slot_ips | List | **Empty** | A list of the IPs of players to allow into the reserved slots
+~~dedicated_slot_ips~~ | List | **Empty** | A list of the IPs of players to allow into the reserved slots **(Depricated, scroll down for new system)**
+reserved_slots_simulate_full | Boolean | False | For debugging, this simulates the server being full, so only players with reserved slots can **(Do not enable this if you don't know what you're doing)**
 disable_badges | Boolean | False | If true, admins will not have the admin badge on your server. Global badges (staff, etc.) will still be shown (for now.)
 disable_decontamination | Boolean | False | Enables / Disables Light Containment Zone decontamination
+enable_ra_server_commands | Boolean | True | Enables / Disables running console commands through text based Remote Admin
+server_command_whitelist | List | **Empty** | A list of SteamID64s for the users allowed to run console commands through text based Remote Admin (Whitelist is used by default even if you don't specify it)
+bypass_server_command_whitelist | Boolean | False | Allows anybody with access to text based Remote Admin to run console commands
 filler_team_id | Integer | 4 | If the team spawn queue is shorter than the max player count, this team number will be used for the rest of the players when they spawn
 item_cleanup | Seconds | -1 | Cleans up items after the specified amount of time
 nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname contains anything in this list
-pd_exit_count | Integer | 1 | The amount of exits to the pocket dimension
+~~pd_exit_count~~ | Integer | 1 | The amount of exits to the pocket dimension
 remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
 replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
 add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
-scp_grenade_multiplier | Float | 2.0 | The multiplier for the amount of damage grenades do to SCPs
-human_grenade_multiplier | Float | 1.0 | The multiplier for the amount of damage grenades do to humans
+scp_grenade_multiplier | Float | 1.0 | The multiplier for the amount of damage grenades do to SCPs
+human_grenade_multiplier | Float | 0.7 | The multiplier for the amount of damage grenades do to humans
+
+#### Reserved Slots
+How to use the new Reserved Slots:
+In the new "Reserved slots.txt" file in the SCP AppData location, you put one SteamID or IP per line, and you can end each line with a comment using "//". If you want to use both an IP and SteamID, you put the IP, a semicolon (";"), then the SteamID
+
+Example Usage:
+```
+1.1.1.1 // IP
+11111111111111111 // SteamID64 (Automatically fetches IP)
+127.0.0.1;22222222222222222 // IP and SteamID64 (Automatically updates IP)
+```
+
+Known bugs:
+
+Server might crash when first creating "Reserved Slots.txt", just restart the server if this happens and it shouldn't happen again.
 
 ### Player Management
 Config Option | Value Type | Default Value | Description
@@ -87,8 +109,8 @@ Config Option | Value Type | Default Value | Description
 afk_kick | Seconds | -1 | Kicks players who haven't moved in a specified amount of time
 escapee_restrained_check | Boolean | False | If true, escapees are set to the opposite team if they are cuffed (disarmed), for example, if a Class-D escaped while cuffed, they would become NTF
 last_movement_timeout | Seconds | 30 | After this amount of time without a player sending any movement, they will be kicked (still sends movement if they're standing still, so this isn't anti-afk)
-rejected_movement_limit | Integer | -1 | The amount of movements detected by the anti-cheat as invalid before a player is kicked, the detection count increases per invalid movement and decreases per valid movement
-sm_onplayerjoin_tries_timeout | Integer | 50 | The amount of tries before the OnPlayerJoin event gives up on executing for a player (to prevent it constantly running if a player disconnects before it's run)
+~~rejected_movement_limit~~ | Integer | -1 | The amount of movements detected by the anti-cheat as invalid before a player is kicked, the detection count increases per invalid movement and decreases per valid movement
+~~sm_onplayerjoin_tries_timeout~~ | Integer | 50 | The amount of tries before the OnPlayerJoin event gives up on executing for a player (to prevent it constantly running if a player disconnects before it's run)
 
 ### Warhead Options
 Config Option | Value Type | Default Value | Description
@@ -126,6 +148,8 @@ NTFG_HP | Integer | 100 | Sets the starting HP for NTF Guards
 NTFSCIENTIST_HP | Integer | 120 | Sets the starting HP for NTF Scientists
 NTFL_HP | Integer | 120 | Sets the starting HP for NTF Lieutenants
 NTFC_HP | Integer | 150 | Sets the starting HP for NTF Commanders
+FACILITYGUARD_HP | Integer | 100 | Sets the starting HP for Facility Guards
+
 force_disable_enable | Boolean | False | Overrides game's default class ban value with chosen values **(USE OF THIS IS NOT RECOMMENDED)**
 SCP049_DISABLE | Boolean | False | Disables SCP-049
 SCP079_DISABLE | Boolean | True | Disables SCP-079

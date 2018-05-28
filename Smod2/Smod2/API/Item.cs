@@ -37,11 +37,11 @@
 
 	public enum KnobSetting
 	{
-		ROUGH,
-		COARSE,
-		ONE_TO_ONE,
-		FINE,
-		VERY_FINE
+		ROUGH = 0,
+		COARSE = 1,
+		ONE_TO_ONE = 2,
+		FINE = 3,
+		VERY_FINE = 4
 	}
 
 	public abstract class Item

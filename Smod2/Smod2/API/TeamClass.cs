@@ -33,7 +33,7 @@ namespace Smod2.API
 		NTF_COMMANDER = 12,
 		NTF_CADET = 13,
 		TUTORIAL = 14,
-		FACILITY_GUARD = 14
+		FACILITY_GUARD = 15
 	}
 
 	public abstract class TeamClass

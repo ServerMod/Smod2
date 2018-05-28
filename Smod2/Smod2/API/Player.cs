@@ -37,9 +37,9 @@ namespace Smod2.API
 
 	public enum AmmoType
 	{
-		TYPE_0, // Epsilon-11 Standard Rifle
-		TYPE_1, // MP7, Logicer
-		TYPE_2 // COM15, P90
+		DROPPED_5 = 0, // Epsilon-11 Standard Rifle (Type 0)
+		DROPPED_7 = 1, // MP7, Logicer (Type 1)
+		DROPPED_9 = 2 // COM15, P90 (Type 2)
 	}
 
 	public abstract class Player
