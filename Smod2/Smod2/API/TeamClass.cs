@@ -31,8 +31,9 @@ namespace Smod2.API
 		ZOMBIE = 10,
 		NTF_LIEUTENANT = 11,
 		NTF_COMMANDER = 12,
-		NTF_GUARD = 13,
-		TUTORIAL = 14
+		NTF_CADET = 13,
+		TUTORIAL = 14,
+		FACILITY_GUARD = 14
 	}
 
 	public abstract class TeamClass

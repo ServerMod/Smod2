@@ -18,11 +18,11 @@ namespace Smod2.API
 		SCP_049,
 		POCKET,
 		FALLDOWN,
-		PULSE_RIFLE,
-		PULSE_PISTOL,
-		SKORPION,
-		PISTOL,
-		HEAVY_MG // Chaos Gun
+		COM15,
+		E11_STANDARD_RIFLE,
+		P90,
+		MP7,
+		LOGICER // Chaos Gun
 	}
 
 	public enum Role
@@ -35,6 +35,13 @@ namespace Smod2.API
 		NONE = 0
 	}
 
+	public enum AmmoType
+	{
+		TYPE_0, // Epsilon-11 Standard Rifle
+		TYPE_1, // MP7, Logicer
+		TYPE_2 // COM15, P90
+	}
+
 	public abstract class Player
 	{
 		public abstract TeamClass Class { get; set; }
@@ -43,7 +50,12 @@ namespace Smod2.API
 		public abstract string SteamId { get; }
 
 		public abstract void Kill(DamageType type = DamageType.NUKE);
+		public abstract int GetHealth();
+		public abstract void AddHealth(int amount);
 		public abstract void Damage(int amount, DamageType type = DamageType.NUKE);
+		public abstract void SetHealth(int amount, DamageType type = DamageType.NUKE);
+		public abstract int GetAmmo(AmmoType type);
+		public abstract void SetAmmo(AmmoType type, int amount);
 		public abstract Vector GetPosition();
 		public abstract void Teleport(Vector pos);
 		public abstract void SetRole(string color, string test);
