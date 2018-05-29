@@ -21,7 +21,7 @@ namespace Smod2
 		public abstract void OnEnable();
 		public abstract void OnDisable();
 
-		public void AddEventHandler(Type eventType, IEvent handler, Priority priority=Priority.Normal)
+		public void AddEventHandler(Type eventType, IEventHandler handler, Priority priority=Priority.Normal)
 		{
 			eventManager.AddEventHandler(this, eventType, handler, priority);
 		}
