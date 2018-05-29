@@ -68,6 +68,7 @@ sm_server_name | String | **Dynamic** | server name in a separate option, defaul
 sm_tracking | Boolean | True | Appends the ServerMod version to your server name, this is for tracking how many servers are running ServerMod
 ~~master_server_to_contact~~ | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists **(DEPRICATED, USE "secondary_servers_to_contact")**
 secondary_servers_to_contact | List | **Empty** | The master servers to push data to, this is used for private server lists
+start_round_timer | Seconds | 20 | The amount of time before the round auto-starts (when queueing for a round)
 
 ### Administration / Gameplay
 Config Option | Value Type | Default Value | Description
@@ -157,7 +158,6 @@ NTFSCIENTIST_HP | Integer | 120 | Sets the starting HP for NTF Scientists
 NTFL_HP | Integer | 120 | Sets the starting HP for NTF Lieutenants
 NTFC_HP | Integer | 150 | Sets the starting HP for NTF Commanders
 FACILITYGUARD_HP | Integer | 100 | Sets the starting HP for Facility Guards
-
 force_disable_enable | Boolean | False | Overrides game's default class ban value with chosen values **(USE OF THIS IS NOT RECOMMENDED)**
 SCP049_DISABLE | Boolean | False | Disables SCP-049
 SCP079_DISABLE | Boolean | True | Disables SCP-079
