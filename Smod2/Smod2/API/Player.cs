@@ -58,7 +58,7 @@ namespace Smod2.API
 		public abstract void SetAmmo(AmmoType type, int amount);
 		public abstract Vector GetPosition();
 		public abstract void Teleport(Vector pos);
-		public abstract void SetRole(string color, string test);
+		public abstract void SetRole(string color = "", string text = "", string group = "");
 		public abstract void Disconnect();
 		public abstract void Disconnect(string message);
 		public abstract void Ban(int duration);
