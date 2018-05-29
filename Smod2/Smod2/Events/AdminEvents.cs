@@ -11,11 +11,14 @@ namespace Smod2.Events
 	}
 	public interface IEventAdminQuery : IEvent
 	{
-		void OnAdminQuery(Player admin, string adminIp, string query, out string queryOutput);
+		void OnAdminQuery(Player admin, string query, out string queryOutput);
 	}
 	public interface IEventAuthCheck : IEvent
 	{
 		void OnAuthCheck(Player admin, AuthType authType, string entered_password, string server_password, bool allowOverwrite, out bool allowOutput);
 	}
-
+	public interface IEventBan : IEvent
+	{
+		void OnBan(Player player, Player admin, int duration, string reason, string result, out bool allowBan, out string resultOutput);
+	}
 }
