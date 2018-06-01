@@ -42,7 +42,7 @@ namespace Smod2.Events
 			SpawnRagdoll = spawnRagdoll;
 		}
 
-		public Player Killer { get; set; }
+		public Player Killer { get; }
 		public bool SpawnRagdoll { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -99,17 +99,6 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PlayerLeaveEvent : PlayerEvent
-	{
-		public PlayerLeaveEvent(Player player) : base(player)
-		{
-		}
-
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-			((IEventHandlerPlayerLeave)handler).OnPlayerLeave(this);
-		}
-	}
 
 	public class PlayerNicknameSetEvent : PlayerEvent
 	{
@@ -140,7 +129,6 @@ namespace Smod2.Events
 			((IEventHandlerAssignTeam)handler).OnAssignTeam(this);
 		}
 	}
-
 
 	public class PlayerSetRoleEvent : PlayerEvent
 	{

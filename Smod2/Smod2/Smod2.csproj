@@ -43,9 +43,9 @@
     <Compile Include="Attributes\PluginDetails.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
-    <Compile Include="Config\IConfigFile.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\ConfigSetting.cs" />
+    <Compile Include="Config\IConfigFile.cs" />
     <Compile Include="EventSystem\EventHandlers\EventHandler.cs" />
     <Compile Include="EventSystem\Events\EnvironmentEvents.cs" />
     <Compile Include="EventSystem\Events\ServerRoundEvents.cs" />
@@ -58,7 +58,7 @@
     <Compile Include="EventSystem\EventHandlers\TeamEventHandlers.cs" />
     <Compile Include="API\Connection.cs" />
     <Compile Include="API\Item.cs" />
-    <Compile Include="API\TeamClass.cs" />
+    <Compile Include="API\TeamRole.cs" />
     <Compile Include="API\Player.cs" />
     <Compile Include="API\Round.cs" />
     <Compile Include="API\RoundStats.cs" />

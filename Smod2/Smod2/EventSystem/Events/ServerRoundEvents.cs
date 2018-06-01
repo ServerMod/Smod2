@@ -28,11 +28,14 @@ namespace Smod2.Events
 
 	public class RoundEndEvent : ServerEvent
 	{
-		public RoundEndEvent(Server server) : base(server)
+		public RoundEndEvent(Server server, Round round) : base(server)
 		{
+            this.round = round;
 		}
 
+        private Round round;
 		public Round Round { get; }
+
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerRoundEnd)handler).OnRoundEnd(this);

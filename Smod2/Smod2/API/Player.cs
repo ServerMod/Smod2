@@ -44,7 +44,7 @@ namespace Smod2.API
 
 	public abstract class Player
 	{
-		public abstract TeamRole Role { get; set; }
+		public abstract TeamRole TeamRole { get; set; }
 		public abstract string Name { get; }
 		public abstract string IpAddress { get; }
 		public abstract string SteamId { get; }
@@ -61,11 +61,12 @@ namespace Smod2.API
 		public abstract void SetRole(string color = "", string text = "", string group = "");
 		public abstract void Disconnect();
 		public abstract void Disconnect(string message);
-		public abstract void Ban(int duration);
+        public abstract void Ban(int duration);
+		public abstract void Ban(int duration, string message);
 		public abstract void GiveItem(ItemType type);
 		public abstract List<Item> GetInventory();
 		public abstract bool IsHandcuffed();
-		public abstract void ChangeRole(TeamRole role, bool full = true, bool force = false);
+		public abstract void ChangeRole(Role role, bool full = true, bool force = false);
 		public abstract object GetGameObject();
 	}
 }
