@@ -10,7 +10,7 @@ namespace Smod2.EventSystem.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerRoundEnd)handler).OnRoundEnd(this);
+			((IEventHandlerDecideTeamRespawnQueue)handler).OnDecideTeamRespawnQueue(this);
 		}
 	}
 

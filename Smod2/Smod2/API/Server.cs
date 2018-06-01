@@ -4,9 +4,8 @@ namespace Smod2.API
 {
 	public enum AuthType
 	{
-		PASSWORD,
-		STAFF,
-		PROJECT_MANAGMENT
+		SERVER,
+		GAMESTAFF
 	}
 
 	public abstract class Server

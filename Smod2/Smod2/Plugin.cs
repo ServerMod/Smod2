@@ -4,6 +4,7 @@ using Smod2.Commands;
 using Smod2.Config;
 using Smod2.Events;
 using System.Collections.Generic;
+using Smod2.EventHandlers;
 
 namespace Smod2
 {

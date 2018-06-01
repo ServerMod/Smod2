@@ -2,12 +2,6 @@
 
 namespace Smod2.EventHandlers
 {
-	public enum AuthType
-	{
-		PASSWORD,
-		STAFF,
-		PROJECT_MANAGMENT
-	}
 	public interface IEventHandlerAdminQuery : IEventHandler
 	{
 		void OnAdminQuery(AdminQueryEvent ev);

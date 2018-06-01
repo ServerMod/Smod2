@@ -5,8 +5,8 @@ namespace Smod2.Events
 {
 	public class AdminQueryEvent : Event
 	{
-		Player Admin { get; set; }
-		string Query { get; set; }
+		public Player Admin { get; set; }
+		public string Query { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
@@ -16,13 +16,10 @@ namespace Smod2.Events
 
 	public class AuthCheckEvent : Event
 	{
-		Player Admin { get; set; }
-		AuthType AuthType { get; set; }
-		string EnteredPassword { get; set; }
-		string ServerPassword { get; set; }
-		bool AllowOverwrite { get; set; }
-		bool AllowOutput { get; set; }
-
+		public Player Requester { get; set; }
+		public AuthType AuthType { get; set; }
+		public bool Allow { get; set; }
+		public string DeniedMessage { get; set; }
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerAuthCheck)handler).OnAuthCheck(this);
@@ -31,13 +28,12 @@ namespace Smod2.Events
 
 	public class BanEvent : Event
 	{
-		Player Player { get; set; }
-		Player Admin { get; set; }
-		int Duration { get; set; }
-		string Reason { get; set; }
-		string Result { get; set; }
-		bool AllowBan { get; set; }
-		string ResultOutput { get; set; }
+        public Player Player { get; set; }
+        public Player Admin { get; set; }
+        public int Duration { get; set; }
+        public string Reason { get; set; }
+        public string Result { get; set; }
+        public bool AllowBan { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
