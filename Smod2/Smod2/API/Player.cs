@@ -61,7 +61,7 @@ namespace Smod2.API
 		public abstract void SetRole(string color = "", string text = "", string group = "");
 		public abstract void Disconnect();
 		public abstract void Disconnect(string message);
-        public abstract void Ban(int duration);
+		public abstract void Ban(int duration);
 		public abstract void Ban(int duration, string message);
 		public abstract void GiveItem(ItemType type);
 		public abstract List<Item> GetInventory();
