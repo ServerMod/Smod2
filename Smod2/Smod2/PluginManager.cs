@@ -6,13 +6,20 @@ using Smod2.Attributes;
 using Smod2.Commands;
 using Smod2.API;
 using Smod2.Logging;
-using System.Linq;
 
 namespace Smod2
 {
     public class PluginManager
     {
-		public static readonly string SMOD_API_VERSION = "3.0.0";
+        public static readonly int SMOD_MAJOR = 3;
+        public static readonly int SMOD_MINOR = 0;
+        public static readonly int SMOD_REVISION = 0;
+
+        public static String GetSmodVersion()
+        {
+            return String.Format("{0}.{1}.{2}", SMOD_MAJOR, SMOD_MINOR, SMOD_FIX);
+        }
+
 		private Dictionary<string, Plugin> plugins;
 
 		private ICommandManager commandManager;
@@ -133,9 +140,17 @@ namespace Smod2
 						if (details.id != null)
 						{
 							// should do version checking too
-							plugin.Details = details;
-							plugins.Add(details.id, plugin);
-							Logger.Info("PLUGIN_LOADER", "Plugin loaded: " + plugin.ToString());
+                            if (details.SmodMajor != SMOD_MAJOR && details.SmodMinor != SMOD_MINOR)
+                            {
+                                Logger.Warn("PLUGIN_LOADER", "Trying to load an outdated plugin " + details.name + " " + details.version);
+                            }
+                            else
+                            {
+                                plugin.Details = details;
+                                plugins.Add(details.id, plugin);
+                                Logger.Info("PLUGIN_LOADER", "Plugin loaded: " + plugin.ToString());
+                            }
+
 						}
 						else
 						{
