@@ -1,8 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Smod2.API
 {
+	public enum AuthType
+	{
+		SERVER,
+		GAMESTAFF
+	}
+
 	public abstract class Server
 	{
 		public abstract string Name { get; set; }
@@ -16,7 +21,7 @@ namespace Smod2.API
 
 		public abstract List<Player> GetPlayers(string filter = "");
 		public abstract List<Connection> GetConnections(string filter = "");
-		public abstract List<TeamClass> GetClasses(string filter = "");
+		public abstract List<TeamRole> GetRoles(string filter = "");
 		public abstract List<Item> GetItems(ItemType type, bool world_only); // may be removed.
 
 	}

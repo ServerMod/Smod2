@@ -46,12 +46,16 @@
     <Compile Include="Config\IConfigFile.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\ConfigSetting.cs" />
-    <Compile Include="Events\EventManager.cs" />
-    <Compile Include="Events\AdminEvents.cs" />
-    <Compile Include="Events\MiscEvents.cs" />
-    <Compile Include="Events\PlayerItemEvents.cs" />
-    <Compile Include="Events\ServerRoundEvents.cs" />
-    <Compile Include="Events\TeamClassEvents.cs" />
+    <Compile Include="EventSystem\EventHandlers\EventHandler.cs" />
+    <Compile Include="EventSystem\Events\EnvironmentEvents.cs" />
+    <Compile Include="EventSystem\Events\ServerRoundEvents.cs" />
+    <Compile Include="EventSystem\Events\PlayerEvents.cs" />
+    <Compile Include="EventSystem\EventManager.cs" />
+    <Compile Include="EventSystem\EventHandlers\AdminHandlers.cs" />
+    <Compile Include="EventSystem\EventHandlers\EnviomentEventHandlers.cs" />
+    <Compile Include="EventSystem\EventHandlers\PlayerEventHandlers.cs" />
+    <Compile Include="EventSystem\EventHandlers\ServerRoundEventHandlers.cs" />
+    <Compile Include="EventSystem\EventHandlers\TeamEventHandlers.cs" />
     <Compile Include="API\Connection.cs" />
     <Compile Include="API\Item.cs" />
     <Compile Include="API\TeamClass.cs" />
@@ -59,11 +63,13 @@
     <Compile Include="API\Round.cs" />
     <Compile Include="API\RoundStats.cs" />
     <Compile Include="API\Server.cs" />
-    <Compile Include="Events\WarheadEvents.cs" />
+    <Compile Include="EventSystem\Events\AdminEvents.cs" />
+    <Compile Include="EventSystem\Events\TeamEvents.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EventSystem\Event.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

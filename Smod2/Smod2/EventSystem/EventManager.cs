@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Smod2.EventHandlers;
 
 namespace Smod2.Events
 {
-	public interface IEvent
-	{
-	}
+
 
 	public enum Priority {Highest = 100, High = 80, Normal = 50, Low = 20, Lowest = 0};
 
@@ -28,16 +27,34 @@ namespace Smod2.Events
 
 		private static PriorityComparator priorityCompare = new PriorityComparator();
 		Dictionary<Type, List<EventHandlerWrapper>> event_meta;
-		Dictionary<Type, List<IEvent>> event_handlers;
+		Dictionary<Type, List<IEventHandler>> event_handlers;
 
 		public EventManager()
 		{
 			event_meta = new Dictionary<Type, List<EventHandlerWrapper>>();
-			event_handlers = new Dictionary<Type, List<IEvent>>();
+			event_handlers = new Dictionary<Type, List<IEventHandler>>();
 		}
 
 
-		public void AddEventHandler(Plugin plugin, Type eventType, IEvent handler, Priority priority=Priority.Normal)
+		public void HandleEvent<T>(Event ev)
+		{
+			var list = this.GetEventHandlers<T>();
+
+			foreach(IEventHandler handler in list)
+			{
+				try
+				{
+					ev.ExecuteHandler(handler);
+				} catch (Exception e)
+				{
+					PluginManager.Manager.Logger.Error("Event", "Event Handler: " + handler.GetType().ToString() + " Failed to handle event:" + ev.GetType().ToString());
+					PluginManager.Manager.Logger.Error("Event", e.Message);
+					PluginManager.Manager.Logger.Error("Event", e.StackTrace);
+				}
+			}
+		}
+
+		public void AddEventHandler(Plugin plugin, Type eventType, IEventHandler handler, Priority priority=Priority.Normal)
 		{
 			plugin.Debug(string.Format("Adding event handler from: {0} type: {1} priority: {2} handler: {3}", plugin.Details.name, eventType, priority, handler.GetType()));
 			EventHandlerWrapper wrapper = new EventHandlerWrapper(plugin, priority, handler);
@@ -45,7 +62,7 @@ namespace Smod2.Events
 			{
 				event_meta.Add(eventType, new List<EventHandlerWrapper>());
 				event_meta[eventType].Add(wrapper);
-				event_handlers.Add(eventType, new List<IEvent>());
+				event_handlers.Add(eventType, new List<IEventHandler>());
 				event_handlers[eventType].Add(handler);
 			}
 			else
@@ -91,7 +108,7 @@ namespace Smod2.Events
 		private void RebuildHandlerList(Type eventType)
 		{
 			List<EventHandlerWrapper> meta = event_meta[eventType];
-			List<IEvent> handlers = new List<IEvent>();
+			List<IEventHandler> handlers = new List<IEventHandler>();
 			foreach (EventHandlerWrapper metaDetails in meta)
 			{
 				handlers.Add(metaDetails.Handler);
@@ -133,13 +150,14 @@ namespace Smod2.Events
 
 	}
 
+
 	public class EventHandlerWrapper
 	{
 		public Priority Priority { get; }
-		public IEvent Handler { get; }
+		public IEventHandler Handler { get; }
 		public Plugin Plugin { get; }
 
-		public EventHandlerWrapper(Plugin plugin, Priority priority, IEvent handler)
+		public EventHandlerWrapper(Plugin plugin, Priority priority, IEventHandler handler)
 		{
 			this.Plugin = plugin;
 			this.Priority = priority;

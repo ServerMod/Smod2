@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Smod2.API
+﻿namespace Smod2.API
 {
-	public enum Teams
+	public enum Team
 	{
 		NONE = -1,
 		SCP = 0,
@@ -14,7 +12,7 @@ namespace Smod2.API
 		TUTORIAL = 6
 	}
 
-	public enum Classes
+	public enum Role
 	{
 		UNASSIGNED = -1,
 		SCP_173 = 0,
@@ -36,11 +34,11 @@ namespace Smod2.API
 		FACILITY_GUARD = 15
 	}
 
-	public abstract class TeamClass
+	public abstract class TeamRole
 	{
-		public abstract Teams Team { get; }
-		public abstract Classes ClassType { get; }
-		public abstract bool ClassDisallowed { get; set; }
+		public abstract Team Team { get; }
+		public abstract Role Role { get; }
+		public abstract bool RoleDisallowed { get; set; }
 		public abstract int MaxHP { get; set; }
 		public abstract string Name { get; set; }
 	}

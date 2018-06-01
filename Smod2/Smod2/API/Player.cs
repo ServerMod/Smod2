@@ -25,7 +25,7 @@ namespace Smod2.API
 		LOGICER // Chaos Gun
 	}
 
-	public enum Role
+	public enum UserRank
 	{
 		ADMIN = 5,
 		PROJECT_MANAGER = 4,
@@ -44,7 +44,7 @@ namespace Smod2.API
 
 	public abstract class Player
 	{
-		public abstract TeamClass Class { get; set; }
+		public abstract TeamRole Role { get; set; }
 		public abstract string Name { get; }
 		public abstract string IpAddress { get; }
 		public abstract string SteamId { get; }
@@ -66,7 +66,7 @@ namespace Smod2.API
 		public abstract void GiveItem(ItemType type);
 		public abstract List<Item> GetInventory();
 		public abstract bool IsHandcuffed();
-		public abstract void ChangeClass(Classes newClass, bool full = true, bool force = false);
+		public abstract void ChangeRole(TeamRole role, bool full = true, bool force = false);
 		public abstract object GetGameObject();
 	}
 }
