@@ -1,6 +1,7 @@
 ﻿using Smod.TestPlugin;
 using Smod2;
 using Smod2.Attributes;
+using Smod2.EventHandlers;
 using Smod2.Events;
 
 namespace ExamplePlugin
@@ -11,7 +12,7 @@ namespace ExamplePlugin
 		description = "Example plugin",
 		id = "courtney.example.plugin",
 		version = "1.0",
-		SmodMajor = 2,
+		SmodMajor = 3,
 		SmodMinor = 0,
 		SmodRevision = 0
 		)]
@@ -30,7 +31,8 @@ namespace ExamplePlugin
 		public override void Register()
 		{
 			// Register Events
-			this.AddEventHandler(typeof(IEventRoundStart), new RoundStartHandler(this), Priority.Highest);
+			this.AddEventHandler(typeof(IEventHandlerRoundStart), new RoundStartHandler(this), Priority.Highest);
+            this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.Highest);
 			// Register Commands
 			this.AddCommand("hello", new HelloWorldCommand(this));
 			// Register config settings

@@ -53,19 +53,21 @@ namespace Smod2.Events
 
 	public abstract class PlayerItemEvent : PlayerEvent
 	{
-		public PlayerItemEvent(Player player, Item item, bool allow) : base(player)
+		public PlayerItemEvent(Player player, Item item, ItemType change, bool allow) : base(player)
 		{
 			Item = item;
 			Allow = allow;
+            ChangeTo = change;
 		}
 
-		Item Item { get; set; }
-		bool Allow { get; set; }
+		public Item Item { get; set; }
+        public ItemType ChangeTo { get; set; }
+		public bool Allow { get; set; }
 	}
 
 	public class PlayerPickupItemEvent : PlayerItemEvent
 	{
-		public PlayerPickupItemEvent(Player player, Item item, bool allow) : base(player, item, allow)
+		public PlayerPickupItemEvent(Player player, Item item, ItemType change, bool allow) : base(player, item, change, allow)
 		{
 		}
 
@@ -77,7 +79,7 @@ namespace Smod2.Events
 
 	public class PlayerDropItemEvent : PlayerItemEvent
 	{
-		public PlayerDropItemEvent(Player player, Item item, bool allow) : base(player, item, allow)
+		public PlayerDropItemEvent(Player player, Item item, ItemType change, bool allow) : base(player, item, change, allow)
 		{
 		}
 
