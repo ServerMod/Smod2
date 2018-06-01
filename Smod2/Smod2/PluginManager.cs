@@ -17,7 +17,7 @@ namespace Smod2
 
         public static String GetSmodVersion()
         {
-            return String.Format("{0}.{1}.{2}", SMOD_MAJOR, SMOD_MINOR, SMOD_FIX);
+            return String.Format("{0}.{1}.{2}", SMOD_MAJOR, SMOD_MINOR, SMOD_REVISION);
         }
 
 		private Dictionary<string, Plugin> plugins;
