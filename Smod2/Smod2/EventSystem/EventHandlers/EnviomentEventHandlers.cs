@@ -9,18 +9,11 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnSCP914Activate(SCP914ActivateEvent ev);
 	}
-	public interface IEventHandlerPocketDimensionExit : IEventHandler
-	{
-		/// <summary>  
-		///  This is the event handler for when a player exits the pocket dimension
-		/// </summary> 
-		void OnPocketDimensionExit(PokerDimensionExitEvent ev);
-	}
 
 	public interface IEventHandlerWarheadStartCountdown : IEventHandler //Before the countdown is started
 	{
 		/// <summary>  
-		///  This is the event handler for when the warhead starts counting down, isResumed is false if its the initial count down.
+		///  This is the event handler for when the warhead starts counting down, isResumed is false if its the initial count down. Note: activator can be null
 		/// </summary> 
 		void OnStartCountdown(WarheadStartEvent ev);
 	}

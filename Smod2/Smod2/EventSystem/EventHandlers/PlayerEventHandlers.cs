@@ -46,14 +46,6 @@ namespace Smod2.EventHandlers
 		void OnPlayerJoin(PlayerJoinEvent ev);
 	}
 
-	public interface IEventHandlerPlayerLeave : IEventHandler
-	{
-		/// <summary>  
-		/// This is called when a player leaves
-		/// </summary> 
-		void OnPlayerLeave(PlayerLeaveEvent ev);
-	}
-
 	public interface IEventHandlerNicknameSet : IEventHandler
 	{
 		/// <summary>  

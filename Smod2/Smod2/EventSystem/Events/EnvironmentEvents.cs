@@ -16,24 +16,29 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PokerDimensionExitEvent : Event
-	{
-		public Vector[] PossibleExists { get; set; }
-
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-			((IEventHandlerPocketDimensionExit)handler).OnPocketDimensionExit(this);
-		}
-	}
-
 	public abstract class WarheadEvent : Event
 	{
+        public WarheadEvent(Player player, float timeLeft)
+        {
+            this.player = player;
+            this.TimeLeft = timeLeft;
+            this.Cancel = false;
+        }
+
 		public float TimeLeft { get; set; }
+        private Player player;
+        public Player Activator { get => player; }
+        public bool Cancel { get; set; }
 	}
 
 	public class WarheadStartEvent : WarheadEvent
 	{
-		public bool IsResumed { get; set; }
+        public WarheadStartEvent(Player activator, float timeLeft, bool isResumed): base(activator, timeLeft)
+        {
+            IsResumed = isResumed;
+        }
+
+        public bool IsResumed { get; set; }
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerWarheadStartCountdown)handler).OnStartCountdown(this);
@@ -42,7 +47,11 @@ namespace Smod2.Events
 
 	public class WarheadStopEvent : WarheadEvent
 	{
-		public override void ExecuteHandler(IEventHandler handler)
+        public WarheadStopEvent(Player player, float timeLeft) : base(player, timeLeft)
+        {
+        }
+
+        public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerWarheadStopCountdown)handler).OnStopCountdown(this);
 		}
