@@ -1,0 +1,17 @@
+﻿using Smod2.API;
+using Smod2.EventHandlers;
+using Smod2.Events;
+
+namespace Smod2.EventSystem.Events
+{
+	public class DecideRespawnQueueEvent : Event
+	{
+		public Team[] Teams { get; set; }
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerRoundEnd)handler).OnRoundEnd(this);
+		}
+	}
+
+}

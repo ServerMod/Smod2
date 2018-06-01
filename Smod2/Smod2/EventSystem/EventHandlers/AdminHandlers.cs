@@ -1,8 +1,6 @@
-﻿
-using Smod2.API;
-using Smod2.Events.Admin;
+﻿using Smod2.Events;
 
-namespace Smod2.Events
+namespace Smod2.EventHandlers
 {
 	public enum AuthType
 	{

@@ -37,8 +37,22 @@ namespace Smod2.Events
 		}
 
 
-		public void HandleEvent(Event ev) {
-			ev.ExecuteHandlers();
+		public void HandleEvent<T>(Event ev)
+		{
+			var list = this.GetEventHandlers<T>();
+
+			foreach(IEventHandler handler in list)
+			{
+				try
+				{
+					ev.ExecuteHandler(handler);
+				} catch (Exception e)
+				{
+					PluginManager.Manager.Logger.Error("Event", "Event Handler: " + handler.GetType().ToString() + " Failed to handle event:" + ev.GetType().ToString());
+					PluginManager.Manager.Logger.Error("Event", e.Message);
+					PluginManager.Manager.Logger.Error("Event", e.StackTrace);
+				}
+			}
 		}
 
 		public void AddEventHandler(Plugin plugin, Type eventType, IEventHandler handler, Priority priority=Priority.Normal)

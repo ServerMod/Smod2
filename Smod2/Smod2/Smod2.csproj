@@ -46,8 +46,8 @@
     <Compile Include="Config\IConfigFile.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\ConfigSetting.cs" />
-    <Compile Include="EventHandlers\EventManager.cs" />
-    <Compile Include="EventHandlers\AdminEvents.cs" />
+    <Compile Include="Events\EventManager.cs" />
+    <Compile Include="EventHandlers\AdminHandlers.cs" />
     <Compile Include="EventHandlers\MiscEvents.cs" />
     <Compile Include="EventHandlers\PlayerItemEvents.cs" />
     <Compile Include="EventHandlers\ServerRoundEvents.cs" />
@@ -60,6 +60,7 @@
     <Compile Include="API\RoundStats.cs" />
     <Compile Include="API\Server.cs" />
     <Compile Include="EventHandlers\WarheadEvents.cs" />
+    <Compile Include="Events\Admin\AdminEvents.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginManager.cs" />
