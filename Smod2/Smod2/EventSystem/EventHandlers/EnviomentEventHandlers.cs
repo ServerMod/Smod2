@@ -36,7 +36,7 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		///  This is the event handler for when the warhead is about to detonate (so before it actually triggers)
 		/// </summary> 
-		void OnWarheadDetonate();
+		void OnDetonate();
 	}
 
 }
