@@ -6,6 +6,7 @@ using Smod2.Attributes;
 using Smod2.Commands;
 using Smod2.API;
 using Smod2.Logging;
+using Smod2.Events;
 
 namespace Smod2
 {
@@ -20,7 +21,8 @@ namespace Smod2
 			return String.Format("{0}.{1}.{2}", SMOD_MAJOR, SMOD_MINOR, SMOD_REVISION);
 		}
 
-		private Dictionary<string, Plugin> plugins;
+		private Dictionary<string, Plugin> enabledPlugins;
+		private Dictionary<string, Plugin> disabledPlugins;
 
 		private ICommandManager commandManager;
 		public ICommandManager CommandManager
@@ -77,19 +79,26 @@ namespace Smod2
 
 		public PluginManager()
 		{
-			plugins = new Dictionary<string, Plugin>();
+			enabledPlugins = new Dictionary<string, Plugin>();
+			disabledPlugins = new Dictionary<string, Plugin>();
 		}
 
-		public Plugin GetPlugin(string id)
+		public Plugin GetEnabledPlugin(string id)
 		{
-			plugins.TryGetValue(id, out Plugin plugin);
+			enabledPlugins.TryGetValue(id, out Plugin plugin);
 			return plugin;
 		}
 
-		public List<Plugin> FindPlugins(string name)
+		public Plugin GetDisabledPlugin(string id)
+		{
+			enabledPlugins.TryGetValue(id, out Plugin plugin);
+			return plugin;
+		}
+
+		public List<Plugin> FindEnabledPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
-			foreach (var plugin in plugins.Values)
+			foreach (var plugin in enabledPlugins.Values)
 			{
 				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
 				{
@@ -102,13 +111,48 @@ namespace Smod2
 
 		public void EnablePlugins()
 		{
-			foreach (var plugin in plugins)
+			foreach (var plugin in disabledPlugins)
 			{
 				plugin.Value.Info("Enabling plugin " + plugin.Value.Details.name + " " + plugin.Value.Details.version);
 				ConfigManager.Manager.RegisterPlugin(plugin.Value);
 				plugin.Value.Register();
 				plugin.Value.OnEnable();
+				enabledPlugins.Add(plugin.Key, plugin.Value);
 			}
+		}
+
+		public void DisablePlugins()
+		{
+			foreach (var plugin in enabledPlugins)
+			{
+				DisablePlugin(plugin.Value);
+			}
+			enabledPlugins.Clear();
+		}
+
+		public void DisablePlugin(String id)
+		{
+			Dictionary<String, Plugin> newEnabled = new Dictionary<string, Plugin>();
+			foreach (var plugin in enabledPlugins)
+			{
+				if (plugin.Value.Details.id == id)
+				{
+					DisablePlugin(plugin.Value);
+				}
+				else
+				{
+					newEnabled.Add(plugin.Key, plugin.Value);
+				}
+			}
+			enabledPlugins = newEnabled;
+		}
+
+		public void DisablePlugin(Plugin plugin)
+		{
+			plugin.OnDisable();
+			EventManager.Manager.RemoveEventHandlers(plugin);
+			CommandManager.UnregisterCommands(plugin);
+			disabledPlugins.Add(plugin.Details.id, plugin);
 		}
 
 		public void LoadAssemblies(string dir)
@@ -147,7 +191,7 @@ namespace Smod2
 								else
 								{
 									plugin.Details = details;
-									plugins.Add(details.id, plugin);
+									disabledPlugins.Add(details.id, plugin);
 									Logger.Info("PLUGIN_LOADER", "Plugin loaded: " + plugin.ToString());
 								}
 
