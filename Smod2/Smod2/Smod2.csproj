@@ -52,7 +52,7 @@
     <Compile Include="EventSystem\Events\PlayerEvents.cs" />
     <Compile Include="EventSystem\EventManager.cs" />
     <Compile Include="EventSystem\EventHandlers\AdminHandlers.cs" />
-    <Compile Include="EventSystem\EventHandlers\EnviomentEventHandlers.cs" />
+    <Compile Include="EventSystem\EventHandlers\EnviromentEventHandlers.cs" />
     <Compile Include="EventSystem\EventHandlers\PlayerEventHandlers.cs" />
     <Compile Include="EventSystem\EventHandlers\ServerRoundEventHandlers.cs" />
     <Compile Include="EventSystem\EventHandlers\TeamEventHandlers.cs" />
