@@ -9,16 +9,16 @@ using Smod2.Logging;
 
 namespace Smod2
 {
-    public class PluginManager
-    {
-        public static readonly int SMOD_MAJOR = 3;
-        public static readonly int SMOD_MINOR = 0;
-        public static readonly int SMOD_REVISION = 0;
+	public class PluginManager
+	{
+		public static readonly int SMOD_MAJOR = 3;
+		public static readonly int SMOD_MINOR = 0;
+		public static readonly int SMOD_REVISION = 0;
 
-        public static String GetSmodVersion()
-        {
-            return String.Format("{0}.{1}.{2}", SMOD_MAJOR, SMOD_MINOR, SMOD_REVISION);
-        }
+		public static String GetSmodVersion()
+		{
+			return String.Format("{0}.{1}.{2}", SMOD_MAJOR, SMOD_MINOR, SMOD_REVISION);
+		}
 
 		private Dictionary<string, Plugin> plugins;
 
@@ -102,7 +102,7 @@ namespace Smod2
 
 		public void EnablePlugins()
 		{
-			foreach(var plugin in plugins)
+			foreach (var plugin in plugins)
 			{
 				plugin.Value.Info("Enabling plugin " + plugin.Value.Details.name + " " + plugin.Value.Details.version);
 				ConfigManager.Manager.RegisterPlugin(plugin.Value);
@@ -128,45 +128,50 @@ namespace Smod2
 		{
 			Logger.Debug("PLUGIN_LOADER", path);
 			Assembly a = Assembly.LoadFrom(path);
-
-			foreach (Type t in a.GetTypes())
+			try
 			{
-				if (t.IsSubclassOf(typeof(Plugin)) && t != typeof(Plugin))
+				foreach (Type t in a.GetTypes())
 				{
-					try
+					if (t.IsSubclassOf(typeof(Plugin)) && t != typeof(Plugin))
 					{
-						Plugin plugin = Activator.CreateInstance(t) as Plugin;
-						PluginDetails details = (PluginDetails) Attribute.GetCustomAttribute(t, typeof(PluginDetails));
-						if (details.id != null)
+						try
 						{
-							// should do version checking too
-                            if (details.SmodMajor != SMOD_MAJOR && details.SmodMinor != SMOD_MINOR)
-                            {
-                                Logger.Warn("PLUGIN_LOADER", "Trying to load an outdated plugin " + details.name + " " + details.version);
-                            }
-                            else
-                            {
-                                plugin.Details = details;
-                                plugins.Add(details.id, plugin);
-                                Logger.Info("PLUGIN_LOADER", "Plugin loaded: " + plugin.ToString());
-                            }
+							Plugin plugin = Activator.CreateInstance(t) as Plugin;
+							PluginDetails details = (PluginDetails)Attribute.GetCustomAttribute(t, typeof(PluginDetails));
+							if (details.id != null)
+							{
+								if (details.SmodMajor != SMOD_MAJOR && details.SmodMinor != SMOD_MINOR)
+								{
+									Logger.Warn("PLUGIN_LOADER", "Trying to load an outdated plugin " + details.name + " " + details.version);
+								}
+								else
+								{
+									plugin.Details = details;
+									plugins.Add(details.id, plugin);
+									Logger.Info("PLUGIN_LOADER", "Plugin loaded: " + plugin.ToString());
+								}
 
+							}
+							else
+							{
+								Logger.Warn("PLUGIN_LOADER", "Plugin loaded but missing an id: " + t + "[" + path + "]");
+							}
 						}
-						else
+						catch
 						{
-							// print message
-							Logger.Warn("PLUGIN_LOADER", "Plugin loaded but missing an id: " + t + "(" + path + ")");
+							Logger.Error("PLUGIN_LOADER", "Failed to create instance of plugin " + t + "[" + path + "]");
 						}
-					}
-					catch
-					{
-						Logger.Error("PLUGIN_LOADER", "Failed to create instance of plugin " + t + "(" + path + ")");
 					}
 				}
 			}
+			catch
+			{
+				Logger.Error("PLUGIN_LOADER", "Failed to load DLL [" + path + "], is it up to date?");
+			}
+
 		}
-		
 
 
-    }
+
+	}
 }

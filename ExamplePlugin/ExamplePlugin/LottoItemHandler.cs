@@ -19,6 +19,7 @@ namespace Smod.TestPlugin
 
         public void OnPlayerPickupItem(PlayerPickupItemEvent ev)
         {
+            plugin.Info(ev.Player.Name + " picked up item " + ev.Item.ItemType);
             if (ev.Item.ItemType == ItemType.COIN)
             {
                 double luckyValue = rnd.NextDouble();
