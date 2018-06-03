@@ -119,6 +119,7 @@ namespace Smod2
 				plugin.Value.OnEnable();
 				enabledPlugins.Add(plugin.Key, plugin.Value);
 			}
+			disabledPlugins.Clear();
 		}
 
 		public void DisablePlugins()
