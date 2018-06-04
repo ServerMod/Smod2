@@ -85,4 +85,12 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		void OnSpawn(PlayerSpawnEvent ev);
 	}
+
+	public interface IEventHandlerDoorAccess : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player attempts to access a door that requires perms
+		/// <summary>  
+		void OnDoorAccess(PlayerDoorAccessEvent ev);
+	}
 }

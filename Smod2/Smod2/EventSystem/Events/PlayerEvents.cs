@@ -175,4 +175,19 @@ namespace Smod2.Events
 		}
 	}
 
+	public class PlayerDoorAccessEvent : PlayerEvent
+	{
+		public bool Destroy { get; set; }
+		public bool Allow { get; set; }
+
+		public PlayerDoorAccessEvent(Player player) : base(player)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerDoorAccess)handler).OnDoorAccess(this);
+		}
+	}
+
 }
