@@ -257,5 +257,35 @@ namespace Smod2
 			}
 		}
 
+		public void UnloadPlugin(Plugin plugin)
+		{
+			settings.Remove(plugin);
+
+			var updated_primary_settings_map = new Dictionary<string, Plugin>();
+			foreach (var pair in primary_settings_map)
+			{
+				if (plugin != pair.Value)
+				{
+					updated_primary_settings_map.Add(pair.Key, pair.Value);
+				}
+			}
+			primary_settings_map = updated_primary_settings_map;
+
+			foreach (var pair in secondary_settings_map)
+			{
+				var updated_list = new List<Plugin>();
+				foreach (var secondary_setting_plugin in pair.Value)
+				{
+					if (secondary_setting_plugin != plugin)
+					{
+						updated_list.Add(secondary_setting_plugin);
+					}
+				}
+
+				pair.Value.Clear();
+				pair.Value.AddRange(updated_list);
+			}
+		}
+
 	}
 }
