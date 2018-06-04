@@ -5,16 +5,21 @@ using Smod2.Events;
 
 namespace Smod.TestPlugin
 {
-    class RoundStartHandler : IEventHandlerRoundStart
+    class RoundEventHandler : IEventHandlerRoundStart, IEventHandlerRoundEnd
     {
 		private Plugin plugin;
 
-		public RoundStartHandler(Plugin plugin)
+		public RoundEventHandler(Plugin plugin)
 		{
 			this.plugin = plugin;
 		}
 
-        public void OnRoundStart(RoundStartEvent ev)
+		public void OnRoundEnd(RoundEndEvent ev)
+		{
+			plugin.Info("ROUND END EVENT CALLER");
+		}
+
+		public void OnRoundStart(RoundStartEvent ev)
         {
             plugin.Info("ROUND START EVENT CALLER");
             plugin.Info("Players: " + ev.Server.GetPlayers().Count);

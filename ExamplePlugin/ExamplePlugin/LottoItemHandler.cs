@@ -25,12 +25,12 @@ namespace Smod.TestPlugin
                 double luckyValue = rnd.NextDouble();
                 if (luckyValue > 0.8)
                 {
-                    ev.ChangeTo = ItemType.MICROHID;
-                }
+					ev.Player.Kill();
+				}
 
                 if (luckyValue < 0.1)
                 {
-                    ev.Player.Kill();
+					ev.ChangeTo = ItemType.MICROHID;
                 }
    
             }

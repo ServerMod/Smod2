@@ -54,12 +54,12 @@ namespace Smod2.EventHandlers
 		void OnNicknameSet(PlayerNicknameSetEvent ev);
 	}
 
-	public interface IEventHandlerAssignTeam : IEventHandler
+	public interface IEventHandlerInitialAssignTeam : IEventHandler
 	{
 		/// <summary>  
 		/// Called when a team is picked for a player. Nothing is assigned to the player, but you can change what team the player will spawn as.
 		/// <summary>  
-		void OnAssignTeam(PlayerAssignTeamEvent ev);
+		void OnAssignTeam(PlayerInitialAssignTeamEvent ev);
 	}
 
 	public interface IEventHandlerSetRole : IEventHandler
@@ -68,5 +68,21 @@ namespace Smod2.EventHandlers
 		/// Called after the player is set a class, at any point in the game. 
 		/// <summary>  
 		void OnSetRole(PlayerSetRoleEvent ev);
+	}
+
+	public interface IEventHandlerCheckEscape : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player is checking if they should escape (this is regardless of class)
+		/// <summary>  
+		void OnCheckEscape(PlayerCheckEscapeEvent ev);
+	}
+
+	public interface IEventHandlerSpawn : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player spawns into the world
+		/// <summary>  
+		void OnSpawn(PlayerSpawnEvent ev);
 	}
 }

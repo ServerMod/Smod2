@@ -7,6 +7,9 @@ namespace Smod2.Events
 	{
 		public Player Admin { get; set; }
 		public string Query { get; set; }
+		public string Output { get; set; }
+		public bool Handled { get; set; }
+		public bool Successful { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{

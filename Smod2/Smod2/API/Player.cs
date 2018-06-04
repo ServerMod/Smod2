@@ -58,7 +58,7 @@ namespace Smod2.API
 		public abstract void SetAmmo(AmmoType type, int amount);
 		public abstract Vector GetPosition();
 		public abstract void Teleport(Vector pos);
-		public abstract void SetRole(string color = "", string text = "", string group = "");
+		public abstract void SetRank(string color = "", string text = "", string group = "");
 		public abstract void Disconnect();
 		public abstract void Disconnect(string message);
 		public abstract void Ban(int duration);
@@ -68,5 +68,6 @@ namespace Smod2.API
 		public abstract bool IsHandcuffed();
 		public abstract void ChangeRole(Role role, bool full = true, bool force = false);
 		public abstract object GetGameObject();
+		public abstract UserGroup GetUserGroup();
 	}
 }

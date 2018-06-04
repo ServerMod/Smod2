@@ -11,7 +11,7 @@ namespace ExamplePlugin
 		name = "Test",
 		description = "Example plugin",
 		id = "courtney.example.plugin",
-		version = "1.0",
+		version = "3.0",
 		SmodMajor = 3,
 		SmodMinor = 0,
 		SmodRevision = 0
@@ -31,7 +31,8 @@ namespace ExamplePlugin
 		public override void Register()
 		{
 			// Register Events
-			this.AddEventHandler(typeof(IEventHandlerRoundStart), new RoundStartHandler(this), Priority.Highest);
+			this.AddEventHandlers(new RoundEventHandler(this));
+			// Register with priority (need to specify the handler type
             this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.Highest);
 			// Register Commands
 			this.AddCommand("hello", new HelloWorldCommand(this));

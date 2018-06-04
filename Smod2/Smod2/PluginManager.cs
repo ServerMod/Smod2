@@ -26,6 +26,50 @@ namespace Smod2
 		private Dictionary<string, Plugin> enabledPlugins;
 		private Dictionary<string, Plugin> disabledPlugins;
 
+		public List<Plugin> EnabledPlugins
+		{
+			get
+			{
+				List<Plugin> plugins = new List<Plugin>();
+				foreach (var entry in enabledPlugins)
+				{
+					plugins.Add(entry.Value);
+				}
+				return plugins;
+			}
+		}
+
+		public List<Plugin> DisabledPlugins
+		{
+			get
+			{
+				List<Plugin> plugins = new List<Plugin>();
+				foreach (var entry in disabledPlugins)
+				{
+					plugins.Add(entry.Value);
+				}
+				return plugins;
+			}
+		}
+
+		public List<Plugin> Plugins
+		{
+			get
+			{
+				List<Plugin> plugins = new List<Plugin>();
+				foreach (var entry in disabledPlugins)
+				{
+					plugins.Add(entry.Value);
+				}
+				foreach (var entry in enabledPlugins)
+				{
+					plugins.Add(entry.Value);
+				}
+				return plugins;
+			}
+		}
+
+
 		private ICommandManager commandManager;
 		public ICommandManager CommandManager
 		{
@@ -111,17 +155,36 @@ namespace Smod2
 			return matching;
 		}
 
+		public List<Plugin> FindDisabledPlugins(string name)
+		{
+			List<Plugin> matching = new List<Plugin>();
+			foreach (var plugin in enabledPlugins.Values)
+			{
+				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
+				{
+					matching.Add(plugin);
+				}
+			}
+
+			return matching;
+		}
+
 		public void EnablePlugins()
 		{
 			foreach (var plugin in disabledPlugins)
 			{
-				plugin.Value.Info("Enabling plugin " + plugin.Value.Details.name + " " + plugin.Value.Details.version);
-				ConfigManager.Manager.RegisterPlugin(plugin.Value);
-				plugin.Value.Register();
-				plugin.Value.OnEnable();
-				enabledPlugins.Add(plugin.Key, plugin.Value);
+				EnablePlugin(plugin.Value);
 			}
 			disabledPlugins.Clear();
+		}
+
+		public void EnablePlugin(Plugin plugin)
+		{
+			plugin.Info("Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
+			ConfigManager.Manager.RegisterPlugin(plugin);
+			plugin.Register();
+			plugin.OnEnable();
+			enabledPlugins.Add(plugin.Details.id, plugin);
 		}
 
 		public void DisablePlugins()

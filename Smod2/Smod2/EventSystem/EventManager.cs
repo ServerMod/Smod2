@@ -54,6 +54,17 @@ namespace Smod2.Events
 			}
 		}
 
+		public void AddEventHandlers(Plugin plugin, IEventHandler handler, Priority priority = Priority.Normal)
+		{
+			foreach(Type intfce in handler.GetType().GetInterfaces()) {
+				if (typeof(IEventHandler).IsAssignableFrom(intfce))
+				{
+					plugin.Debug("Adding event handler for " + intfce.Name);
+					AddEventHandler(plugin, intfce, handler, Priority.Normal);
+				}
+			}
+		}
+
 		public void AddEventHandler(Plugin plugin, Type eventType, IEventHandler handler, Priority priority=Priority.Normal)
 		{
 			plugin.Debug(string.Format("Adding event handler from: {0} type: {1} priority: {2} handler: {3}", plugin.Details.name, eventType, priority, handler.GetType()));

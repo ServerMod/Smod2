@@ -23,6 +23,8 @@ namespace Smod2.API
 		public abstract List<Connection> GetConnections(string filter = "");
 		public abstract List<TeamRole> GetRoles(string filter = "");
 		public abstract List<Item> GetItems(ItemType type, bool world_only); // may be removed.
+		public abstract Vector GetRandomSpawnPoint(Role role);
+		public abstract List<Vector> GetSpawnPoints(Role role);
 
 	}
 }

@@ -117,9 +117,9 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PlayerAssignTeamEvent : PlayerEvent
+	public class PlayerInitialAssignTeamEvent : PlayerEvent
 	{
-		public PlayerAssignTeamEvent(Player player, Team team) : base(player)
+		public PlayerInitialAssignTeamEvent(Player player, Team team) : base(player)
 		{
 			Team = team;
 		}
@@ -128,7 +128,22 @@ namespace Smod2.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerAssignTeam)handler).OnAssignTeam(this);
+			((IEventHandlerInitialAssignTeam)handler).OnAssignTeam(this);
+		}
+	}
+
+	public class PlayerCheckEscapeEvent : PlayerEvent
+	{
+		public bool AllowEscape { get; set; }
+		public Role ChangeRole { get; set; }
+
+		public PlayerCheckEscapeEvent(Player player) : base(player)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerCheckEscape)handler).OnCheckEscape(this);
 		}
 	}
 
@@ -144,6 +159,19 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerSetRole)handler).OnSetRole(this);
+		}
+	}
+
+	public class PlayerSpawnEvent : PlayerEvent
+	{
+		public Vector SpawnPos { get; set; }
+		public PlayerSpawnEvent(Player player) : base(player)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSpawn)handler).OnSpawn(this);
 		}
 	}
 
