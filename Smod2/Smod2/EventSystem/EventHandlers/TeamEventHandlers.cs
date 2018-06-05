@@ -17,4 +17,12 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		void OnTeamRespawn(TeamRespawnEvent ev);
 	}
+
+	public interface IEventHandlerSetRoleMaxHP : IEventHandler
+	{
+		/// <summary>  
+		/// Called when the max HP of each role is being set. This happens every round.
+		/// <summary>  
+		void OnSetRoleMaxHP(SetRoleMaxHPEvent ev);
+	}
 }
