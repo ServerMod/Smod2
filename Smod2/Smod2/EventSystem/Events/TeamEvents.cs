@@ -16,6 +16,11 @@ namespace Smod2.EventSystem.Events
 
     public class TeamRespawnEvent : Event
     {
+        public TeamRespawnEvent(bool isCI)
+        {
+            SpawnChaos = isCI;
+        }
+
         public bool SpawnChaos { get; set; }
 
         public override void ExecuteHandler(IEventHandler handler)
