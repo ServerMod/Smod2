@@ -14,4 +14,13 @@ namespace Smod2.EventSystem.Events
 		}
 	}
 
+    public class TeamRespawnEvent : Event
+    {
+        public bool SpawnChaos { get; set; }
+
+        public override void ExecuteHandler(IEventHandler handler)
+        {
+            ((IEventHandlerTeamRespawn)handler).OnTeamRespawn(this);
+        }
+    }
 }
