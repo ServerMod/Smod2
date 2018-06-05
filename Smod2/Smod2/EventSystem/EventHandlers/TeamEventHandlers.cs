@@ -10,11 +10,11 @@ namespace Smod2.EventHandlers
 		void OnDecideTeamRespawnQueue(DecideRespawnQueueEvent ev);
 	}
 
-    public interface IEventHandlerTeamRespawn : IEventHandler
-    {
-        /// <summary>  
-        /// Called before MTF or CI respawn.
-        /// <summary>  
-        void OnTeamRespawn(TeamRespawnEvent ev);
-    }
+	public interface IEventHandlerTeamRespawn : IEventHandler
+	{
+		/// <summary>  
+		/// Called before MTF or CI respawn.
+		/// <summary>  
+		void OnTeamRespawn(TeamRespawnEvent ev);
+	}
 }
