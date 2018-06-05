@@ -32,4 +32,22 @@ namespace Smod2.EventSystem.Events
 			((IEventHandlerTeamRespawn)handler).OnTeamRespawn(this);
 		}
 	}
+
+	public class SetRoleMaxHPEvent : Event
+	{
+		public SetRoleMaxHPEvent(Role role, int maxHP)
+		{
+			Role = role;
+			MaxHP = maxHP;
+		}
+
+		public Role Role { get; }
+		
+		public int MaxHP { get; set; }
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSetRoleMaxHP)handler).OnSetRoleMaxHP(this);
+		}
+	}
 }
