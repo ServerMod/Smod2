@@ -39,11 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Map.cs" />
     <Compile Include="API\UserGroup.cs" />
     <Compile Include="API\Vector.cs" />
     <Compile Include="Attributes\PluginDetails.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
+    <Compile Include="Commands\ICommandSender.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\ConfigSetting.cs" />
     <Compile Include="Config\IConfigFile.cs" />

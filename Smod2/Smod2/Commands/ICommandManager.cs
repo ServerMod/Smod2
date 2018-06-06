@@ -4,7 +4,6 @@
 	{
 		bool RegisterCommand(Plugin plugin, string command, ICommandHandler handler);
 		void UnregisterCommands(Plugin plugin);
-		void CallCommand(string command, string[] args);
-		void Write(string message);
+		string[] CallCommand(ICommandSender sender, string command, string[] args);
 	}
 }

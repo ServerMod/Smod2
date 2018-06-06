@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using Smod2.Commands;
 
 namespace Smod2.API
 {
@@ -42,7 +42,7 @@ namespace Smod2.API
 		DROPPED_9 = 2 // COM15, P90 (Type 2)
 	}
 
-	public abstract class Player
+	public abstract class Player : ICommandSender
 	{
 		public abstract TeamRole TeamRole { get; set; }
 		public abstract string Name { get; }
@@ -70,5 +70,6 @@ namespace Smod2.API
 		public abstract void ChangeRole(Role role, bool full = true, bool force = false);
 		public abstract object GetGameObject();
 		public abstract UserGroup GetUserGroup();
+		public abstract string[] RunCommand(string command, string[] args);
 	}
 }

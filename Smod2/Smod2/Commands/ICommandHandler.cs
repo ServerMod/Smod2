@@ -2,7 +2,7 @@
 {
 	public interface ICommandHandler
 	{
-		void OnCall(ICommandManager manager, string[] args);
+		string[] OnCall(ICommandSender sender, string[] args);
 		string GetUsage();
 		string GetCommandDescription();
 	}
