@@ -93,4 +93,12 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		void OnDoorAccess(PlayerDoorAccessEvent ev);
 	}
+
+	public interface IEventHandlerIntercom : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player uses intercom
+		/// <summary>  
+		void OnIntercom(PlayerIntercomEvent ev);
+	}
 }
