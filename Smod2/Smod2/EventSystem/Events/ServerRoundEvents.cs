@@ -78,4 +78,22 @@ namespace Smod2.Events
 	}
 
 
+	public class CheckRoundEndEvent : ServerEvent
+	{
+		public ROUND_END_STATUS Status { get; set; }
+
+		public CheckRoundEndEvent(Server server, Round round) : base(server)
+		{
+			this.round = round;
+		}
+
+		private Round round;
+		public Round Round { get; }
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerCheckRoundEnd)handler).OnCheckRoundEnd(this);
+		}
+	}
+
 }

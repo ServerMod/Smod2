@@ -33,5 +33,12 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnDisconnect(DisconnectEvent ev);
 	}
+
+	public interface IEventHandlerCheckRoundEnd : IEventHandler {
+		/// <summary>  
+		///  This event handler will call everytime the game checks for a round end
+		/// </summary> 
+		void OnCheckRoundEnd(CheckRoundEndEvent ev);
+	}
 }
 
