@@ -12,17 +12,20 @@ namespace ExamplePlugin
 
 		public string GetCommandDescription()
 		{
+			// This prints when someone types HELP HELLO
 			return "Prints hello world";
 		}
 
 		public string GetUsage()
 		{
-			return "";
+			// This prints when someone types HELP HELLO
+			return "HELLO";
 		}
 
-		public void OnCall(ICommandManager manger, string[] args)
+		public string[] OnCall(ICommandSender sender, string[] args)
 		{
-			plugin.Info("Hello world!");
+			// This will print 3 lines in console.
+			return new string[] { "Hello World!", "My name is example plugin.", "thank you for listening, good bye!" };
 		}
 	}
 }
