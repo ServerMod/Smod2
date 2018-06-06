@@ -28,13 +28,16 @@ namespace Smod2.Events
 
 	public class RoundEndEvent : ServerEvent
 	{
-		public RoundEndEvent(Server server, Round round) : base(server)
+		public RoundEndEvent(Server server, Round round, ROUND_END_STATUS status) : base(server)
 		{
             this.round = round;
+			this.status = status;
 		}
 
         private Round round;
 		public Round Round { get; }
+		private ROUND_END_STATUS status;
+		public ROUND_END_STATUS Status { get => status; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
@@ -80,8 +83,6 @@ namespace Smod2.Events
 
 	public class CheckRoundEndEvent : ServerEvent
 	{
-		public ROUND_END_STATUS Status { get; set; }
-
 		public CheckRoundEndEvent(Server server, Round round) : base(server)
 		{
 			this.round = round;
@@ -89,6 +90,7 @@ namespace Smod2.Events
 
 		private Round round;
 		public Round Round { get; }
+		public ROUND_END_STATUS Status { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
