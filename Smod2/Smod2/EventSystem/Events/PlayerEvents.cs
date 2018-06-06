@@ -190,4 +190,20 @@ namespace Smod2.Events
 		}
 	}
 
+	public class PlayerIntercomEvent : PlayerEvent
+	{
+		public float SpeechTime { get; set; }
+		public float CooldownTime { get; set; }
+
+		public PlayerIntercomEvent(Player player, float speechTime, float cooldownTime) : base(player)
+		{
+			SpeechTime = speechTime;
+			CooldownTime = cooldownTime;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerIntercom)handler).OnIntercom(this);
+		}
+	}
 }
