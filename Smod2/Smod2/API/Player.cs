@@ -63,11 +63,16 @@ namespace Smod2.API
 		public abstract void Disconnect(string message);
 		public abstract void Ban(int duration);
 		public abstract void Ban(int duration, string message);
-		public abstract void GiveItem(ItemType type);
+		public abstract Item GiveItem(ItemType type);
 		public abstract List<Item> GetInventory();
 		public abstract Item GetCurrentItem();
+		public abstract void SetCurrentItem(ItemType type);
+		public abstract int GetCurrentItemIndex();
+		public abstract void SetCurrentItemIndex(int index);
+		public abstract bool HasItem(ItemType type);
+		public abstract int GetItemIndex(ItemType type);
 		public abstract bool IsHandcuffed();
-		public abstract void ChangeRole(Role role, bool full = true, bool force = false);
+		public abstract void ChangeRole(Role role, bool full = true, bool spawnTeleport = true);
 		public abstract object GetGameObject();
 		public abstract UserGroup GetUserGroup();
 		public abstract string[] RunCommand(string command, string[] args);
