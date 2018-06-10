@@ -158,7 +158,9 @@ namespace Smod2.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
+			Player.CallSetRoleEvent = false;
 			((IEventHandlerSetRole)handler).OnSetRole(this);
+			Player.CallSetRoleEvent = true;
 		}
 	}
 
@@ -177,11 +179,15 @@ namespace Smod2.Events
 
 	public class PlayerDoorAccessEvent : PlayerEvent
 	{
-		public bool Destroy { get; set; }
+		public Door Door { get => door; }
 		public bool Allow { get; set; }
+		public bool Destroy { get; set; }
 
-		public PlayerDoorAccessEvent(Player player) : base(player)
+		private Door door;
+
+		public PlayerDoorAccessEvent(Player player, Door door) : base(player)
 		{
+			this.door = door;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)

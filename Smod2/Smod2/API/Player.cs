@@ -44,6 +44,9 @@ namespace Smod2.API
 
 	public abstract class Player : ICommandSender
 	{
+		internal bool CallSetRoleEvent { get; set; }
+		protected bool ShouldCallSetRoleEvent { get => CallSetRoleEvent; } // used in the game
+
 		public abstract TeamRole TeamRole { get; set; }
 		public abstract string Name { get; }
 		public abstract string IpAddress { get; }
@@ -76,5 +79,6 @@ namespace Smod2.API
 		public abstract object GetGameObject();
 		public abstract UserGroup GetUserGroup();
 		public abstract string[] RunCommand(string command, string[] args);
+
 	}
 }
