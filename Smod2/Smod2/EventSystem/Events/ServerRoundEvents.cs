@@ -35,7 +35,7 @@ namespace Smod2.Events
 		}
 
         private Round round;
-		public Round Round { get; }
+		public Round Round { get => round; }
 		private ROUND_END_STATUS status;
 		public ROUND_END_STATUS Status { get => status; }
 
@@ -89,7 +89,7 @@ namespace Smod2.Events
 		}
 
 		private Round round;
-		public Round Round { get; }
+		public Round Round { get => round; }
 		public ROUND_END_STATUS Status { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
