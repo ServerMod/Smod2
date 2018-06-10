@@ -212,4 +212,19 @@ namespace Smod2.Events
 			((IEventHandlerIntercom)handler).OnIntercom(this);
 		}
 	}
+
+	public class PlayerPocketDimensionExitEvent : PlayerEvent
+	{
+		public Vector ExitPosition { get; set; }
+
+		public PlayerPocketDimensionExitEvent(Player player, Vector exitPosition) : base(player)
+		{
+			ExitPosition = exitPosition;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPocketDimensionExit)handler).OnPocketDimensionExit(this);
+		}
+	}
 }
