@@ -87,6 +87,7 @@ filler_team_id | Integer | 4 | If the team spawn queue is shorter than the max p
 item_cleanup | Seconds | -1 | Cleans up items after the specified amount of time
 nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname contains anything in this list
 ~~pd_exit_count~~ | Integer | 1 | The amount of exits to the pocket dimension
+pd_random_exit | Boolean | true | If true, players will be teleported to a random place after escaping from Pocket Dimension
 remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
 replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
 add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
