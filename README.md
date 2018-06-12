@@ -86,9 +86,6 @@ bypass_server_command_whitelist | Boolean | False | Allows anybody with access t
 filler_team_id | Integer | 4 | If the team spawn queue is shorter than the max player count, this team number will be used for the rest of the players when they spawn
 item_cleanup | Seconds | -1 | Cleans up items after the specified amount of time
 nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname contains anything in this list
-pd_exit_count | Integer | 2 | The amount of exits to the pocket dimension
-pd_random_exit | Boolean | True | If true, players will be teleported to a random place after escaping from Pocket Dimension
-pd_refresh_exit | Boolean | True | Randomly refresh the exit of Pocket Dimension after it's used
 remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
 replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
 add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
@@ -137,6 +134,14 @@ SCP914_keep_health | Boolean | True | Keep the same health when a player moves f
 SCP914_<rough/coarse/1_to_1/fine/very_fine>_change_class | RDictionary | **Empty** | Changes a player's class from the first specified class to the second specified class when they're teleported to SCP-914's output area
 SCP914_in_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value before their class is changed
 SCP914_out_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value after their class is changed
+
+### Pocket Dimension Options
+Config Option | Value Type | Default Value | Description
+--- | :---: | :---: | ---
+pd_exit_count | Integer | 2 | The amount of exits to the Pocket Dimension
+pd_random_exit | Boolean | True | If true, players will be teleported to a random place after escaping from Pocket Dimension
+pd_random_exit_ignore_rids | List | **Empty** | The list of RoomIDs that won't be used when pd_random_exit is enabled
+pd_refresh_exit | Boolean | True | Randomly refresh the exit of Pocket Dimension after it's used
 
 ### Class Based
 Config Option | Value Type | Default Value | Description
