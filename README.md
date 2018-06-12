@@ -139,9 +139,9 @@ SCP914_out_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty**
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 pd_exit_count | Integer | 2 | The amount of exits to the Pocket Dimension
-pd_random_exit | Boolean | True | If true, players will be teleported to a random place after escaping from Pocket Dimension
+pd_random_exit | Boolean | False | If true, players will be teleported to a random place after escaping from Pocket Dimension
 pd_random_exit_ignore_rids | List | **Empty** | The list of RoomIDs that won't be used when pd_random_exit is enabled
-pd_refresh_exit | Boolean | True | Randomly refresh the exit of Pocket Dimension after it's used
+pd_refresh_exit | Boolean | False | Randomly refresh the exit of Pocket Dimension after it's used
 
 ### Class Based
 Config Option | Value Type | Default Value | Description
@@ -155,7 +155,7 @@ SCP049-2_HP | Integer | 400 | Sets the starting HP for SCP-049-2
 SCP079_HP | Integer | 100 | Sets the starting HP for SCP-079
 SCP096_HP | Integer | 2000 | Sets the starting HP for SCP-096
 SCP106_HP | Integer | 700 | Sets the starting HP for SCP-106
-SCP173_HP | Integer | 2000 | Sets the starting HP for SCP-173
+SCP173_HP | Integer | 3200 | Sets the starting HP for SCP-173
 ~~SCP457_HP~~ | Integer | 700 | Sets the starting HP for SCP-457
 CLASSD_HP | Integer | 100 | Sets the starting HP for Class Ds
 SCIENTIST_HP | Integer | 100 | Sets the starting HP for Scientists
