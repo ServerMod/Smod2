@@ -80,7 +80,6 @@ namespace Smod2.Events
 		}
 	}
 
-
 	public class CheckRoundEndEvent : ServerEvent
 	{
 		public CheckRoundEndEvent(Server server, Round round) : base(server)
@@ -98,4 +97,15 @@ namespace Smod2.Events
 		}
 	}
 
+	public class WaitingForPlayersEvent : ServerEvent
+	{
+		public WaitingForPlayersEvent(Server server) : base(server)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerWaitingForPlayers)handler).OnWaitingForPlayers(this);
+		}
+	}
 }
