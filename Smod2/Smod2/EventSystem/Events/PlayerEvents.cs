@@ -227,4 +227,23 @@ namespace Smod2.Events
 			((IEventHandlerPocketDimensionExit)handler).OnPocketDimensionExit(this);
 		}
 	}
+
+	public class PlayerPocketDimensionEnterEvent : PlayerEvent
+	{
+		public float Damage { get; set; }
+		public Vector LastPosition { get; }
+		public Vector TargetPosition { get; set; }
+
+		public PlayerPocketDimensionEnterEvent(Player player, float damage, Vector lastPosition, Vector targetPosition) : base(player)
+		{
+			Damage = damage;
+			LastPosition = lastPosition;
+			TargetPosition = targetPosition;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPocketDimensionEnter)handler).OnPocketDimensionEnter(this);
+		}
+	}
 }

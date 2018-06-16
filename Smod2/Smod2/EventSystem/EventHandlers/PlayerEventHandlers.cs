@@ -109,4 +109,12 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		void OnPocketDimensionExit(PlayerPocketDimensionExitEvent ev);
 	}
+
+	public interface IEventHandlerPocketDimensionEnter: IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player enters Pocket Demension
+		/// <summary>  
+		void OnPocketDimensionEnter(PlayerPocketDimensionEnterEvent ev);
+	}
 }
