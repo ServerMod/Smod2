@@ -50,4 +50,34 @@ namespace Smod2.EventSystem.Events
 			((IEventHandlerSetRoleMaxHP)handler).OnSetRoleMaxHP(this);
 		}
 	}
+
+	public class SetSCPAmountEvent : Event
+	{
+		public SetSCPAmountEvent(int sm049Amount, int sm079Amount, int sm096Amount, int sm106Amount, int sm173Amount, int sm457Amount)
+		{
+			SCP049amount = sm049Amount;
+			SCP079amount = sm079Amount;
+			SCP096amount = sm096Amount;
+			SCP106amount = sm106Amount;
+			SCP173amount = sm106Amount;
+			SCP457amount = sm457Amount;
+		}
+
+		public int SCP049amount { get; set; }
+
+		public int SCP079amount { get; set; }
+
+		public int SCP096amount { get; set; }
+
+		public int SCP106amount { get; set; }
+
+		public int SCP173amount { get; set; }
+
+		public int SCP457amount { get; set; }
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSetSCPAmount)handler).OnSetSCPAmount(this);
+		}
+	}
 }
