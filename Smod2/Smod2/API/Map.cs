@@ -12,6 +12,7 @@ namespace Smod2.API
 		public abstract List<Door> GetDoors();
 		public abstract List<PocketDimensionExit> GetPocketDimensionExits();
 		public abstract Dictionary<Vector, Vector> GetElevatorTeleportPoints();
+		public abstract void Shake();
 	}
 
 	public abstract class Door
