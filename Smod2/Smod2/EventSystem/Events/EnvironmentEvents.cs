@@ -65,4 +65,49 @@ namespace Smod2.Events
 		}
 	}
 
+    public abstract class DecontamitationEvent : Event
+    {
+        public DecontamitationEvent(float timeLeft)
+        {
+            this.TimeLeft = timeLeft;
+            this.Cancel = false;
+        }
+
+        public float TimeLeft { get; set; }
+        public bool Cancel { get; set; }
+    }
+
+    public class DecontaminationStartEvent : DecontamitationEvent
+    {
+        public DecontaminationStartEvent(float timeLeft, bool isResumed) : base(timeLeft)
+        {
+            IsResumed = isResumed;
+        }
+
+        public bool IsResumed { get; set; }
+        public override void ExecuteHandler(IEventHandler handler)
+        {
+            ((IEventHandlerDecontaminationStatCountdown)handler).OnStartCountdown(this);
+        }
+    }
+
+    public class DecontaminationStopEvent : DecontamitationEvent
+    {
+        public DecontaminationStopEvent(float timeLeft) : base(timeLeft)
+        {
+        }
+
+        public override void ExecuteHandler(IEventHandler handler)
+        {
+            ((IEventHandlerDecontaminationStopCountdown)handler).OnStopCountdown(this);
+        }
+    }
+
+    public class DecontaminationDecontaminateEvent : Event
+    {
+        public override void ExecuteHandler(IEventHandler handler)
+        {
+            ((IEventHandlerDecontaminationDecontaminate)handler).OnDecontaminate();
+        }
+    }
 }

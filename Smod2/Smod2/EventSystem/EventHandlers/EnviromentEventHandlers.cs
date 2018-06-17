@@ -32,4 +32,26 @@ namespace Smod2.EventHandlers
 		void OnDetonate();
 	}
 
+    public interface IEventHandlerDecontaminationStatCountdown : IEventHandler //Before the countdown is started
+    {
+        /// <summary>  
+        ///  This is the event handler for when the warhead starts counting down, isResumed is false if its the initial count down. Note: activator can be null
+        /// </summary> 
+        void OnStartCountdown(DecontaminationStartEvent ev);
+    }
+    public interface IEventHandlerDecontaminationStopCountdown : IEventHandler //Before the countdown is stopped
+    {
+        /// <summary>  
+        ///  This is the event handler for when the warhead stops counting down.
+        /// </summary> 
+        void OnStopCountdown(DecontaminationStopEvent ev);
+    }
+    public interface IEventHandlerDecontaminationDecontaminate : IEventHandler
+    {
+        /// <summary>  
+        ///  This is the event handler for when the warhead is about to detonate (so before it actually triggers)
+        /// </summary> 
+        void OnDecontaminate();
+    }
+
 }
