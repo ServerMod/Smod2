@@ -70,21 +70,19 @@ namespace Smod2.Events
         public DecontamitationEvent(float timeLeft)
         {
             this.TimeLeft = timeLeft;
-            this.Cancel = false;
         }
 
         public float TimeLeft { get; set; }
-        public bool Cancel { get; set; }
     }
 
     public class DecontaminationStartEvent : DecontamitationEvent
     {
-        public DecontaminationStartEvent(float timeLeft, bool isResumed) : base(timeLeft)
+        public DecontaminationStartEvent(float timeLeft, bool isActive) : base(timeLeft)
         {
-            IsResumed = isResumed;
+            IsActive = isActive;
         }
 
-        public bool IsResumed { get; set; }
+        public bool IsActive { get; set; }
         public override void ExecuteHandler(IEventHandler handler)
         {
             ((IEventHandlerDecontaminationStartCountdown)handler).OnStartCountdown(this);
