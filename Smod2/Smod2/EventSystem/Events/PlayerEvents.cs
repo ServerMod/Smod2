@@ -149,12 +149,15 @@ namespace Smod2.Events
 
 	public class PlayerSetRoleEvent : PlayerEvent
 	{
-		public PlayerSetRoleEvent(Player player, TeamRole teamRole) : base(player)
+		public PlayerSetRoleEvent(Player player, TeamRole teamRole, Role role) : base(player)
 		{
 			TeamRole = teamRole;
+			Role = role;
 		}
 
-		public TeamRole TeamRole { get; set; }
+		public Role Role { get; set; }
+
+		public TeamRole TeamRole { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
