@@ -26,11 +26,11 @@ namespace Smod2.EventHandlers
 		void OnSetRoleMaxHP(SetRoleMaxHPEvent ev);
 	}
 
-	public interface IEventHandlerSetSCPAmount : IEventHandler
+	public interface IEventHandlerSetSCPConfig : IEventHandler
 	{
 		/// <summary>  
-		/// Called when the amount of SCP is being set. This happens every round.
+		/// Called when the configs of SCPs are being set. This happens every round.
 		/// <summary>  
-		void OnSetSCPAmount(SetSCPAmountEvent ev);
+		void OnSetSCPConfig(SetSCPConfigEvent ev);
 	}
 }
