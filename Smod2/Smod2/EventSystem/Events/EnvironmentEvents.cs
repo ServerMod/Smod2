@@ -87,7 +87,7 @@ namespace Smod2.Events
         public bool IsResumed { get; set; }
         public override void ExecuteHandler(IEventHandler handler)
         {
-            ((IEventHandlerDecontaminationStatCountdown)handler).OnStartCountdown(this);
+            ((IEventHandlerDecontaminationStartCountdown)handler).OnStartCountdown(this);
         }
     }
 
