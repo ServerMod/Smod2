@@ -86,7 +86,6 @@ bypass_server_command_whitelist | Boolean | False | Allows anybody with access t
 filler_team_id | Integer | 4 | If the team spawn queue is shorter than the max player count, this team number will be used for the rest of the players when they spawn
 item_cleanup | Seconds | -1 | Cleans up items after the specified amount of time
 nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname contains anything in this list
-~~pd_exit_count~~ | Integer | 1 | The amount of exits to the pocket dimension
 remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
 replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
 add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
@@ -136,6 +135,14 @@ SCP914_<rough/coarse/1_to_1/fine/very_fine>_change_class | RDictionary | **Empty
 SCP914_in_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value before their class is changed
 SCP914_out_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value after their class is changed
 
+### Pocket Dimension Options
+Config Option | Value Type | Default Value | Description
+--- | :---: | :---: | ---
+pd_exit_count | Integer | 2 | The amount of exits to the Pocket Dimension
+pd_random_exit | Boolean | False | If true, players will be teleported to a random place after escaping from Pocket Dimension
+pd_random_exit_ignore_rids | List | **Empty** | The list of RoomIDs that won't be used when pd_random_exit is enabled
+pd_refresh_exit | Boolean | False | Randomly refresh the exit of Pocket Dimension after it's used
+
 ### Class Based
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
@@ -148,7 +155,7 @@ SCP049-2_HP | Integer | 400 | Sets the starting HP for SCP-049-2
 SCP079_HP | Integer | 100 | Sets the starting HP for SCP-079
 SCP096_HP | Integer | 2000 | Sets the starting HP for SCP-096
 SCP106_HP | Integer | 700 | Sets the starting HP for SCP-106
-SCP173_HP | Integer | 2000 | Sets the starting HP for SCP-173
+SCP173_HP | Integer | 3200 | Sets the starting HP for SCP-173
 ~~SCP457_HP~~ | Integer | 700 | Sets the starting HP for SCP-457
 CLASSD_HP | Integer | 100 | Sets the starting HP for Class Ds
 SCIENTIST_HP | Integer | 100 | Sets the starting HP for Scientists

@@ -101,4 +101,20 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		void OnIntercom(PlayerIntercomEvent ev);
 	}
+
+	public interface IEventHandlerPocketDimensionExit: IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player escapes from Pocket Demension
+		/// <summary>  
+		void OnPocketDimensionExit(PlayerPocketDimensionExitEvent ev);
+	}
+
+	public interface IEventHandlerPocketDimensionEnter: IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player enters Pocket Demension
+		/// <summary>  
+		void OnPocketDimensionEnter(PlayerPocketDimensionEnterEvent ev);
+	}
 }

@@ -35,7 +35,7 @@ namespace Smod2.Events
 		}
 
         private Round round;
-		public Round Round { get; }
+		public Round Round { get => round; }
 		private ROUND_END_STATUS status;
 		public ROUND_END_STATUS Status { get => status; }
 
@@ -80,7 +80,6 @@ namespace Smod2.Events
 		}
 	}
 
-
 	public class CheckRoundEndEvent : ServerEvent
 	{
 		public CheckRoundEndEvent(Server server, Round round) : base(server)
@@ -89,7 +88,7 @@ namespace Smod2.Events
 		}
 
 		private Round round;
-		public Round Round { get; }
+		public Round Round { get => round; }
 		public ROUND_END_STATUS Status { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -98,4 +97,15 @@ namespace Smod2.Events
 		}
 	}
 
+	public class WaitingForPlayersEvent : ServerEvent
+	{
+		public WaitingForPlayersEvent(Server server) : base(server)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerWaitingForPlayers)handler).OnWaitingForPlayers(this);
+		}
+	}
 }

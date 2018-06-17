@@ -158,7 +158,9 @@ namespace Smod2.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
+			Player.CallSetRoleEvent = false;
 			((IEventHandlerSetRole)handler).OnSetRole(this);
+			Player.CallSetRoleEvent = true;
 		}
 	}
 
@@ -177,11 +179,15 @@ namespace Smod2.Events
 
 	public class PlayerDoorAccessEvent : PlayerEvent
 	{
-		public bool Destroy { get; set; }
+		public Door Door { get => door; }
 		public bool Allow { get; set; }
+		public bool Destroy { get; set; }
 
-		public PlayerDoorAccessEvent(Player player) : base(player)
+		private Door door;
+
+		public PlayerDoorAccessEvent(Player player, Door door) : base(player)
 		{
+			this.door = door;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -204,6 +210,40 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerIntercom)handler).OnIntercom(this);
+		}
+	}
+
+	public class PlayerPocketDimensionExitEvent : PlayerEvent
+	{
+		public Vector ExitPosition { get; set; }
+
+		public PlayerPocketDimensionExitEvent(Player player, Vector exitPosition) : base(player)
+		{
+			ExitPosition = exitPosition;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPocketDimensionExit)handler).OnPocketDimensionExit(this);
+		}
+	}
+
+	public class PlayerPocketDimensionEnterEvent : PlayerEvent
+	{
+		public float Damage { get; set; }
+		public Vector LastPosition { get; }
+		public Vector TargetPosition { get; set; }
+
+		public PlayerPocketDimensionEnterEvent(Player player, float damage, Vector lastPosition, Vector targetPosition) : base(player)
+		{
+			Damage = damage;
+			LastPosition = lastPosition;
+			TargetPosition = targetPosition;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPocketDimensionEnter)handler).OnPocketDimensionEnter(this);
 		}
 	}
 }
