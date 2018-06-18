@@ -108,4 +108,16 @@ namespace Smod2.Events
 			((IEventHandlerWaitingForPlayers)handler).OnWaitingForPlayers(this);
 		}
 	}
+
+	public class RoundRestartEvent : ServerEvent
+	{
+		public RoundRestartEvent(Server server) : base(server)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerRoundRestart)handler).OnRoundRestart(this);
+		}
+	}
 }

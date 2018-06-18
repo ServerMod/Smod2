@@ -49,5 +49,13 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnWaitingForPlayers(WaitingForPlayersEvent ev);
 	}
+
+	public interface IEventHandlerRoundRestart : IEventHandler
+	{
+		/// <summary>  
+		///  This event handler will call when the server is about to restart
+		/// </summary> 
+		void OnRoundRestart(RoundRestartEvent ev);
+	}
 }
 
