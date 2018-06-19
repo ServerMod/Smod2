@@ -126,6 +126,11 @@ Config Option | Value Type | Default Value | Description
 auto_warhead_start | Seconds | -1 | Automatically activated the nuke after the specified amount of time has elapsed (-1 disables this feature)
 auto_warhead_start_lock | Boolean | False | Automatically prevents the warhead detonation from being cancelled when it's automatically started
 
+### Decontamination Options
+Config Option | Value Type | Default Value | Description
+--- | :---: | :---: | ---
+decontamination_time | Minutes | 11.74 | The time before LCZ is locked and decontaminated
+
 ### SCP-914 Options
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
@@ -139,8 +144,7 @@ SCP914_out_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty**
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 pd_exit_count | Integer | 2 | The amount of exits to the Pocket Dimension
-pd_random_exit | Boolean | False | If true, players will be teleported to a random place after escaping from Pocket Dimension
-pd_random_exit_ignore_rids | List | **Empty** | The list of RoomIDs that won't be used when pd_random_exit is enabled
+pd_random_exit_rids | List | **Empty** | The list of RoomIDs that players will be randomly teleported to after escaping from Pocket Dimension
 pd_refresh_exit | Boolean | False | Randomly refresh the exit of Pocket Dimension after it's used
 
 ### Class Based
