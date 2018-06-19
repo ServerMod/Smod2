@@ -16,7 +16,6 @@ namespace Smod2.API
 		public abstract string IpAddress { get; }
 		public abstract Round Round { get; }
 		public abstract Map Map { get; }
-		public abstract Enviroment Enviroment { get; }
 		public abstract int NumPlayers { get; }
 		public abstract int MaxPlayers { get; set; }
 		public abstract bool Verified { get; }

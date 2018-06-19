@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\Enviroment.cs" />
     <Compile Include="API\Map.cs" />
     <Compile Include="API\UserGroup.cs" />
     <Compile Include="API\Vector.cs" />
