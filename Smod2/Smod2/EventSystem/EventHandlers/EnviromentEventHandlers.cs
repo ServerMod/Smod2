@@ -32,4 +32,26 @@ namespace Smod2.EventHandlers
 		void OnDetonate();
 	}
 
+    public interface IEventHandlerDecontaminationStartCountdown : IEventHandler //Before the countdown is started
+    {
+        /// <summary>  
+        ///  This is the event handler for when the decontamination process starts counting down
+        /// </summary> 
+        void OnStartCountdown(DecontaminationStartEvent ev);
+    }
+    public interface IEventHandlerDecontaminationStopCountdown : IEventHandler //Before the countdown is stopped
+    {
+        /// <summary>  
+        ///  This is the event handler for when the decontamination stops counting down.
+        /// </summary> 
+        void OnStopCountdown(DecontaminationStopEvent ev);
+    }
+    public interface IEventHandlerDecontaminationDecontaminate : IEventHandler
+    {
+        /// <summary>  
+        ///  This is the event handler for when the decontamination process is about to decontaminate (so before it actually triggers)
+        /// </summary> 
+        void OnDecontaminate();
+    }
+
 }
