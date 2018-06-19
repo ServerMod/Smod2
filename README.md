@@ -60,7 +60,7 @@ Bolded config options are ones that are in the vanilla game
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 allow_incompatible | Boolean | False | Allow the server to run an incompatible version of ServerMod
-auto_round_restart_time | Seconds | 10 | The time before the next round starts when a round ends
+**auto_round_restart_time** | Seconds | 10 | The time before the next round starts when a round ends
 server_frame_rate | Integer | 60 | The framerate that a server runs at
 show_on_serverlist | Boolean | True | If your server is verified, this shows it on the server list
 sm_debug | Boolean | False | Print more verbose debug messages for debugging
