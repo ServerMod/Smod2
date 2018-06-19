@@ -79,7 +79,6 @@ dedicated_slot_file_name | String | Reserved Slots.txt | The file name to use fo
 ~~dedicated_slot_ips~~ | List | **Empty** | A list of the IPs of players to allow into the reserved slots **(Depricated, use "Reserved Slots.txt" instead, scroll down for the usage)**
 reserved_slots_simulate_full | Boolean | False | For debugging, this simulates the server being full, so only players with reserved slots can **(Do not enable this if you don't know what you're doing)**
 ~~disable_badges~~ | Boolean | False | If true, admins will not have the admin badge on your server. **(DEPRICATED, use "hidden" as badge color in remote admin config instead)**
-**disable_decontamination** | Boolean | False | Enables / Disables Light Containment Zone decontamination
 enable_ra_server_commands | Boolean | True | Enables / Disables running console commands through text based Remote Admin
 server_command_whitelist | List | **Empty** | A list of SteamID64s for the users allowed to run console commands through text based Remote Admin (Whitelist is used by default even if you don't specify it)
 bypass_server_command_whitelist | Boolean | False | Allows anybody with access to text based Remote Admin to run console commands
@@ -129,6 +128,7 @@ auto_warhead_start_lock | Boolean | False | Automatically prevents the warhead d
 ### Decontamination Options
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
+**disable_decontamination** | Boolean | False | Enables / Disables Light Containment Zone decontamination
 decontamination_time | Minutes | 11.74 | The time before LCZ is locked and decontaminated
 
 ### SCP-914 Options
