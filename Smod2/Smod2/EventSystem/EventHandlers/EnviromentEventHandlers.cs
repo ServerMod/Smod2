@@ -32,4 +32,11 @@ namespace Smod2.EventHandlers
 		void OnDetonate();
 	}
 
+	public interface IEventHandlerLCZDecontaminate : IEventHandler
+	{ 
+		/// <summary>  
+		///  This is the event handler for when the LCZ is decontaminated
+		/// </summary> 
+		void OnDecontaminate();
+	}
 }

@@ -65,4 +65,12 @@ namespace Smod2.Events
 		}
 	}
 
+	public class LCZDecontaminateEvent : Event
+	{
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerLCZDecontaminate)handler).OnDecontaminate();
+		}
+	}
+
 }

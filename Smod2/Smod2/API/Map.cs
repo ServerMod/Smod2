@@ -13,6 +13,8 @@ namespace Smod2.API
 		public abstract List<PocketDimensionExit> GetPocketDimensionExits();
 		public abstract Dictionary<Vector, Vector> GetElevatorTeleportPoints();
 		public abstract void Shake();
+		public abstract bool WarheadDetonated { get; }
+		public abstract bool LCZDecontaminated { get; }
 	}
 
 	public abstract class Door
