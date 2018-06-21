@@ -120,4 +120,19 @@ namespace Smod2.Events
 			((IEventHandlerRoundRestart)handler).OnRoundRestart(this);
 		}
 	}
+
+	public class SetServerNameEvent : ServerEvent
+	{
+		public SetServerNameEvent(Server server, string ServerName) : base(server)
+		{
+			this.ServerName = ServerName;
+		}
+
+		public string ServerName;
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSetServerName)handler).OnSetServerName(this);
+		}
+	}
 }

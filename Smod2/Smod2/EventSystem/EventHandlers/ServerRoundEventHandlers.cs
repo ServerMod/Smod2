@@ -57,5 +57,13 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnRoundRestart(RoundRestartEvent ev);
 	}
+
+	public interface IEventHandlerSetServerName : IEventHandler
+	{
+		/// <summary>  
+		///  This event handler will call when the server name is set
+		/// </summary> 
+		void OnSetServerName(SetServerNameEvent ev);
+	}
 }
 
