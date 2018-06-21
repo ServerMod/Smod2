@@ -144,15 +144,15 @@ SCP914_out_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty**
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 pd_exit_count | Integer | 2 | The amount of exits to the Pocket Dimension
-pd_random_exit_rids | List | **Empty** | The list of RoomIDs that players will be randomly teleported to after escaping from Pocket Dimension
+pd_random_exit_rids | RList | **Empty** | The list of RoomIDs that players will be randomly teleported to after escaping from Pocket Dimension
 pd_refresh_exit | Boolean | False | Randomly refresh the exit of Pocket Dimension after it's used
+**SCP106_cleanup** | Boolean | False | Stops items and ragdolls from spawning in the pocket dimension
 
 ### Class Based
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 no_scp079_first | Boolean | True | Computer (SCP-079) will never be the first scp in a game
 173_door_starting_cooldown | Seconds | 25 | The time before SCP-173's door can be opened
-**SCP106_cleanup** | Boolean | False | Stops items and ragdolls from spawning in the pocket dimension
 maximum_MTF_respawn_amount | Integer | 15 | The maximum amount of MTF that can be respawned in a single respawn wave
 SCP049_HP | Integer | 1200 | Sets the starting HP for SCP-049
 SCP049-2_HP | Integer | 400 | Sets the starting HP for SCP-049-2
