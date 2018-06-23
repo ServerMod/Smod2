@@ -79,6 +79,7 @@ namespace Smod2.API
 		public abstract object GetGameObject();
 		public abstract UserGroup GetUserGroup();
 		public abstract string[] RunCommand(string command, string[] args);
-
+		public abstract bool GetGodmode();
+		public abstract void SetGodmode(bool godmode);
 	}
 }
