@@ -14,13 +14,19 @@ namespace Smod2
 	{
 		public static readonly int SMOD_MAJOR = 3;
 		public static readonly int SMOD_MINOR = 1;
-		public static readonly int SMOD_REVISION = 5;
+		public static readonly int SMOD_REVISION = 6;
+		public static readonly string SMOD_BUILD = "A";
 
 		private static readonly string DEPENDENCY_FOLDER = "dependencies";
 
 		public static String GetSmodVersion()
 		{
 			return String.Format("{0}.{1}.{2}", SMOD_MAJOR, SMOD_MINOR, SMOD_REVISION);
+		}
+
+		public static String GetSmodBuild()
+		{
+			return SMOD_BUILD;
 		}
 
 		private Dictionary<string, Plugin> enabledPlugins;
