@@ -62,6 +62,7 @@ namespace Smod2.API
 		public abstract Vector GetPosition();
 		public abstract void Teleport(Vector pos);
 		public abstract void SetRank(string color = "", string text = "", string group = "");
+		public abstract string GetRankName();
 		public abstract void Disconnect();
 		public abstract void Disconnect(string message);
 		public abstract void Ban(int duration);
