@@ -216,6 +216,21 @@ namespace Smod2.Events
 		}
 	}
 
+	public class PlayerIntercomCooldownCheckEvent : PlayerEvent
+	{
+		public float CurrentCooldown { get; set; }
+
+		public PlayerIntercomCooldownCheckEvent(Player player, float currCooldownTime) : base(player)
+		{
+			CurrentCooldown = currCooldownTime;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerIntercomCooldownCheck)handler).OnIntercomCooldownCheck(this);
+		}
+	}
+
 	public class PlayerPocketDimensionExitEvent : PlayerEvent
 	{
 		public Vector ExitPosition { get; set; }

@@ -102,6 +102,14 @@ namespace Smod2.EventHandlers
 		void OnIntercom(PlayerIntercomEvent ev);
 	}
 
+	public interface IEventHandlerIntercomCooldownCheck : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player attempts to use intercom. This happens before the cooldown check.
+		/// <summary>  
+		void OnIntercomCooldownCheck(PlayerIntercomCooldownCheckEvent ev);
+	}
+
 	public interface IEventHandlerPocketDimensionExit: IEventHandler
 	{
 		/// <summary>  
