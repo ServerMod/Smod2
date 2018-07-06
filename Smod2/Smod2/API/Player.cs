@@ -10,7 +10,10 @@ namespace Smod2.API
 		SCP_049_2,
 		NUKE,
 		WALL,
-		TESLA, // Tesla and Grenade
+		DECONT, // Decontamination
+		TESLA, // Tesla
+		FRAG, // Frag grenade
+		SCP_939,
 		SCP_173,
 		SCP_106,
 		CONTAIN,

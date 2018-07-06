@@ -14,8 +14,8 @@ namespace Smod2
 	{
 		public static readonly int SMOD_MAJOR = 3;
 		public static readonly int SMOD_MINOR = 1;
-		public static readonly int SMOD_REVISION = 6;
-		public static readonly string SMOD_BUILD = "C";
+		public static readonly int SMOD_REVISION = 7;
+		public static readonly string SMOD_BUILD = "A";
 
 		private static readonly string DEPENDENCY_FOLDER = "dependencies";
 
