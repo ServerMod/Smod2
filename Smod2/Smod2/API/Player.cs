@@ -53,6 +53,7 @@ namespace Smod2.API
 		public abstract TeamRole TeamRole { get; set; }
 		public abstract string Name { get; }
 		public abstract string IpAddress { get; }
+		public abstract int PlayerId { get; }
 		public abstract string SteamId { get; }
 
 		public abstract void Kill(DamageType type = DamageType.NUKE);
