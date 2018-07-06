@@ -50,5 +50,7 @@
 		public abstract ItemType ItemType { get; }
 		public abstract void Remove();
 		public abstract void Drop();
+		public abstract Vector GetPosition();
+		public abstract void SetPosition(Vector pos);
 	}
 }
