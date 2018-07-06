@@ -31,7 +31,9 @@
 		NTF_COMMANDER = 12,
 		NTF_CADET = 13,
 		TUTORIAL = 14,
-		FACILITY_GUARD = 15
+		FACILITY_GUARD = 15,
+		SCP_939_53 = 16,
+		SCP_939_89 = 17
 	}
 
 	public abstract class TeamRole
