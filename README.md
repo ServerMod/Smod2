@@ -69,18 +69,15 @@ sm_tracking | Boolean | True | Appends the ServerMod version to your server name
 ~~master_server_to_contact~~ | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists **(DEPRICATED, USE "secondary_servers_to_contact")**
 secondary_servers_to_contact | List | **Empty** | The master servers to push data to, this is used for private server lists
 start_round_timer | Seconds | 20 | The amount of time before the round auto-starts (when queueing for a round)
+sm_floating_items_everyone | Boolean | False | Make everyone's items float when they're dropped (includes items spawned on the map in the beginning)
+sm_floating_items_steamids | List | **Empty** | A list of SteamID64s for the players that should have their items float when dropped
 
 ### Administration / Gameplay
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
-dedicated_slots | Integer | **Number of IPs in** `Reserved Slots.txt` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
-dedicated_slot_location | String | \[appdata\]/SCP Secret Laboratory | The directory that the Reserved Slots file should be
-dedicated_slot_file_name | String | Reserved Slots.txt | The file name to use for the Reserved Slots file
-~~dedicated_slot_ips~~ | List | **Empty** | A list of the IPs of players to allow into the reserved slots **(Depricated, use "Reserved Slots.txt" instead, scroll down for the usage)**
-reserved_slots_simulate_full | Boolean | False | For debugging, this simulates the server being full, so only players with reserved slots can **(Do not enable this if you don't know what you're doing)**
 ~~disable_badges~~ | Boolean | False | If true, admins will not have the admin badge on your server. **(DEPRICATED, use "hidden" as badge color in remote admin config instead)**
 enable_ra_server_commands | Boolean | True | Enables / Disables running console commands through text based Remote Admin
-server_command_whitelist | List | **Empty** | A list of SteamID64s for the users allowed to run console commands through text based Remote Admin (Whitelist is used by default even if you don't specify it)
+server_command_whitelist | List | **Empty** | A list of SteamID64s for the users allowed to run console commands through text based Remote Admin (Whitelist is used by default even if you don't specify it), as of ServerMod 3.1.7 this now also supports rank ids (for example, "owner, admin, moderator")
 bypass_server_command_whitelist | Boolean | False | Allows anybody with access to text based Remote Admin to run console commands
 filler_team_id | Integer | 4 | If the team spawn queue is shorter than the max player count, this team number will be used for the rest of the players when they spawn
 item_cleanup | Seconds | -1 | Cleans up items after the specified amount of time
@@ -88,15 +85,32 @@ nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname c
 remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
 replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
 add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
-**scp_grenade_multiplier** | Float | 1.0 | The multiplier for the amount of damage grenades do to SCPs
-**human_grenade_multiplier** | Float | 0.7 | The multiplier for the amount of damage grenades do to humans
+~~**scp_grenade_multiplier**~~ | Float | 1.0 | The multiplier for the amount of damage grenades do to SCPs
+~~**human_grenade_multiplier**~~ | Float | 0.7 | The multiplier for the amount of damage grenades do to humans
 disable_blood_on_screen | Boolean | False | Disable the blood effect on player's screen
 
 #### Reserved Slots
+Config Option | Value Type | Default Value | Description
+--- | :---: | :---: | ---
+~~dedicated_slots~~ | Integer | **Number of IPs in** `Reserved Slots.txt` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
+reserved_slots | Integer | **Number of IPs in** `Reserved Slots.txt` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
+~~dedicated_slot_location~~ | String | \[appdata\]/SCP Secret Laboratory | The directory that the Reserved Slots file should be
+~~dedicated_slot_file_name~~ | String | Reserved Slots.txt | The file name to use for the Reserved Slots file
+reserved_slots_location | String | \[appdata\]/SCP Secret Laboratory | The directory that the Reserved Slots file should be
+reserved_slots_file_name | String | Reserved Slots.txt | The file name to use for the Reserved Slots file
+~~dedicated_slot_ips~~ | List | **Empty** | A list of the IPs of players to allow into the reserved slots **(Depricated, use "Reserved Slots.txt" instead, scroll down for the usage)**
+reserved_slots_simulate_full | Boolean | False | For debugging, this simulates the server being full, so only players with reserved slots can **(Do not enable this if you don't know what you're doing)**
+reserved_slots_comment_symbol | String | // | The comment symbol to prefer out of the available options, you can also set a custom one if you'd like, the default available symbols are "//" and "#"
+
 How to use the new Reserved Slots:
 In the new "Reserved Slots.txt" file in the SCP AppData location, you put one SteamID or IP per line, and you can end each line with a comment using "//". If you want to use both an IP and SteamID, you put the IP, a semicolon (";"), then the SteamID
 
 Everything following and including the "//" is optional
+
+Update as of ServerMod 3.1.6:
+As of now, formatting will be less enforced, there can now be empty lines, commented out lines, and multiple comment symbols
+
+For comment symbols, the current default is "//" or "#", you can add your own using the `reserved_slots_comment_symbol` config option
 
 Example Usage:
 ```
@@ -106,10 +120,6 @@ Example Usage:
 127.0.0.1;22222222222222222
 127.0.0.1;11111111111111111
 ```
-
-Known bugs:
-
-Server might crash when first creating "Reserved Slots.txt", just restart the server if this happens and it shouldn't happen again.
 
 ### Player Management
 Config Option | Value Type | Default Value | Description
@@ -135,11 +145,11 @@ decontamination_time | Minutes | 11.74 | The time before LCZ is locked and decon
 ### SCP-914 Options
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
-SCP914_teleport_players | Boolean | True | Moves players in SCP-914's input area to the output area
-SCP914_keep_health | Boolean | True | Keep the same health when a player moves from SCP-914's input area to the output area and the class is changed
-SCP914_<rough/coarse/1_to_1/fine/very_fine>_change_class | RDictionary | **Empty** | Changes a player's class from the first specified class to the second specified class when they're teleported to SCP-914's output area
-SCP914_in_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value before their class is changed
-SCP914_out_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value after their class is changed
+scp914_teleport_players | Boolean | True | Moves players in SCP-914's input area to the output area
+scp914_keep_health | Boolean | True | Keep the same health when a player moves from SCP-914's input area to the output area and the class is changed
+scp914_<rough/coarse/1_to_1/fine/very_fine>_change_class | RDictionary | **Empty** | Changes a player's class from the first specified class to the second specified class when they're teleported to SCP-914's output area
+scp914_in_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value before their class is changed
+scp914_out_<rough/coarse/1_to_1/fine/very_fine>_damage | RDictionary | **Empty** | Damages a player by the second specified value when the class matches the first specified value after their class is changed and if they're in the output area
 
 ### Pocket Dimension Options
 Config Option | Value Type | Default Value | Description
@@ -147,7 +157,7 @@ Config Option | Value Type | Default Value | Description
 pd_exit_count | Integer | 2 | The amount of exits to the Pocket Dimension
 pd_random_exit_rids | RList | **Empty** | The list of RoomIDs that players will be randomly teleported to after escaping from Pocket Dimension
 pd_refresh_exit | Boolean | False | Randomly refresh the exit of Pocket Dimension after it's used
-**SCP106_cleanup** | Boolean | False | Stops items and ragdolls from spawning in the pocket dimension
+**scp106_cleanup** | Boolean | False | Stops items and ragdolls from spawning in the pocket dimension
 
 ### Class Based
 Config Option | Value Type | Default Value | Description
@@ -155,39 +165,45 @@ Config Option | Value Type | Default Value | Description
 no_scp079_first | Boolean | True | Computer (SCP-079) will never be the first scp in a game
 173_door_starting_cooldown | Seconds | 25 | The time before SCP-173's door can be opened
 maximum_MTF_respawn_amount | Integer | 15 | The maximum amount of MTF that can be respawned in a single respawn wave
-SCP049_HP | Integer | 1200 | Sets the starting HP for SCP-049
-SCP049-2_HP | Integer | 400 | Sets the starting HP for SCP-049-2
-SCP079_HP | Integer | 100 | Sets the starting HP for SCP-079
-SCP096_HP | Integer | 2000 | Sets the starting HP for SCP-096
-SCP106_HP | Integer | 700 | Sets the starting HP for SCP-106
-SCP173_HP | Integer | 3200 | Sets the starting HP for SCP-173
-~~SCP457_HP~~ | Integer | 700 | Sets the starting HP for SCP-457
-CLASSD_HP | Integer | 100 | Sets the starting HP for Class Ds
-SCIENTIST_HP | Integer | 100 | Sets the starting HP for Scientists
-CI_HP | Integer | 100 | Sets the starting HP for Chaos Insurgency
-NTFG_HP | Integer | 100 | Sets the starting HP for NTF Guards
-NTFSCIENTIST_HP | Integer | 120 | Sets the starting HP for NTF Scientists
-NTFL_HP | Integer | 120 | Sets the starting HP for NTF Lieutenants
-NTFC_HP | Integer | 150 | Sets the starting HP for NTF Commanders
-FACILITYGUARD_HP | Integer | 100 | Sets the starting HP for Facility Guards
+scp049_hp | Integer | 1200 | Sets the starting HP for SCP-049
+scp049-2_hp | Integer | 400 | Sets the starting HP for SCP-049-2
+scp079_hp | Integer | 100 | Sets the starting HP for SCP-079
+scp096_hp | Integer | 2000 | Sets the starting HP for SCP-096
+scp106_hp | Integer | 700 | Sets the starting HP for SCP-106
+scp173_hp | Integer | 3200 | Sets the starting HP for SCP-173
+~~scp457_hp~~ | Integer | 700 | Sets the starting HP for SCP-457
+scp939_53_hp | Integer | 700 | Sets the starting HP for SCP-949-53
+scp939_89_hp | Integer | 700 | Sets the starting HP for SCP-949-89 (Or SCP-949-109 as on the forceclass tab)
+classd_hp | Integer | 100 | Sets the starting HP for Class Ds
+scientist_hp | Integer | 100 | Sets the starting HP for Scientists
+ci_hp | Integer | 100 | Sets the starting HP for Chaos Insurgency
+ntfg_hp | Integer | 100 | Sets the starting HP for NTF Guards
+ntfscientist_hp | Integer | 120 | Sets the starting HP for NTF Scientists
+ntfl_hp | Integer | 120 | Sets the starting HP for NTF Lieutenants
+ntfc_hp | Integer | 150 | Sets the starting HP for NTF Commanders
+facilityguard_hp | Integer | 100 | Sets the starting HP for Facility Guards
 force_disable_enable | Boolean | False | Overrides game's default class ban value with chosen values **(USE OF THIS IS NOT RECOMMENDED)**
-SCP049_DISABLE | Boolean | False | Disables SCP-049
-SCP079_DISABLE | Boolean | True | Disables SCP-079
-SCP096_DISABLE | Boolean | False | Disables SCP-096
-SCP106_DISABLE | Boolean | False | Disables SCP-106
-SCP173_DISABLE | Boolean | False | Disables SCP-173
-~~SCP457_DISABLE~~ | Boolean | True | Disables SCP-457
-SCP049_AMOUNT | Integer | 1 | Max amount of SCP-049 that can be spawned in randomly
-SCP079_AMOUNT | Integer | 1 | Max amount of SCP-079 that can be spawned in randomly
-SCP096_AMOUNT | Integer | 1 | Max amount of SCP-096 that can be spawned in randomly
-SCP106_AMOUNT | Integer | 1 | Max amount of SCP-106 that can be spawned in randomly
-SCP173_AMOUNT | Integer | 1 | Max amount of SCP-173 that can be spawned in randomly
-~~SCP457_AMOUNT~~ | Integer | 1 | Max amount of SCP-457 that can be spawned in randomly
+scp049_disable | Boolean | False | Disables SCP-049
+scp079_disable | Boolean | True | Disables SCP-079
+scp096_disable | Boolean | False | Disables SCP-096
+scp106_disable | Boolean | False | Disables SCP-106
+scp173_disable | Boolean | False | Disables SCP-173
+~~scp457_disable~~ | Boolean | True | Disables SCP-457
+scp939_53_disable | Boolean | False | Disables SCP-939-53
+scp939_89_disable | Boolean | False | Disables SCP-949-89 (Or SCP-949-109 as on the forceclass tab)
+scp049_amount | Integer | 1 | Max amount of SCP-049 that can be spawned in randomly
+scp079_amount | Integer | 1 | Max amount of SCP-079 that can be spawned in randomly
+scp096_amount | Integer | 1 | Max amount of SCP-096 that can be spawned in randomly
+scp106_amount | Integer | 1 | Max amount of SCP-106 that can be spawned in randomly
+scp173_amount | Integer | 1 | Max amount of SCP-173 that can be spawned in randomly
+~~scp457_amount~~ | Integer | 1 | Max amount of SCP-457 that can be spawned in randomly
+scp939_53_amount | Integer | 1 | Max amount of SCP-939-53 that can be spawned in randomly
+scp939_89_amount | Integer | 1 | Max amount of SCP-949-89 (Or SCP-949-109 as on the forceclass tab) that can be spawned in randomly
 
 ### Smart Class Picker (All in Vanilla Game)
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
-**smart_class_picker** | Boolean | False | Enables/Disables Smart Class Picker
+**smart_class_picker** | Boolean | True | Enables/Disables Smart Class Picker
 **smart_cp_starting_weight** | Integer | 6 | The weight a class starts out with
 **smart_cp_weight_min** | Integer | 1 | The minimum weight a class can have
 **smart_cp_weight_max** | Integer | 11 | The maximum weight a class can have
