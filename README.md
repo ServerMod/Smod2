@@ -64,7 +64,7 @@ allow_incompatible | Boolean | False | Allow the server to run an incompatible v
 server_frame_rate | Integer | 60 | The framerate that a server runs at
 show_on_serverlist | Boolean | True | If your server is verified, this shows it on the server list
 sm_debug | Boolean | False | Print more verbose debug messages for debugging
-sm_server_name | String | **Dynamic** | server name in a separate option, defaults to the value of server_name (You'd use this if you don't want variables showing up in your server name when ServerMod isn't working)
+sm_server_name | String | **Dynamic** | server name in a separate option, defaults to the value of server_name (You'd use server_name if you don't want variables showing up in your server name when ServerMod isn't working)
 sm_tracking | Boolean | True | Appends the ServerMod version to your server name, this is for tracking how many servers are running ServerMod
 ~~master_server_to_contact~~ | String | https://hubertmoszka.pl/authenticator.php | The master server to push data to, this is used for private server lists **(DEPRICATED, USE "secondary_servers_to_contact")**
 secondary_servers_to_contact | List | **Empty** | The master servers to push data to, this is used for private server lists
@@ -92,10 +92,10 @@ disable_blood_on_screen | Boolean | False | Disable the blood effect on player's
 #### Reserved Slots
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
-~~dedicated_slots~~ | Integer | **Number of IPs in** `Reserved Slots.txt` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
+~~dedicated_slots~~ | Integer | **Number of IPs in** `Reserved Slots.txt` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)** **(Depricated, use "reserved_slots" instead)**
 reserved_slots | Integer | **Number of IPs in** `Reserved Slots.txt` | The number of slots above the maximum to reserve for certain players **(REQUIRES RESTART)**
-~~dedicated_slot_location~~ | String | \[appdata\]/SCP Secret Laboratory | The directory that the Reserved Slots file should be
-~~dedicated_slot_file_name~~ | String | Reserved Slots.txt | The file name to use for the Reserved Slots file
+~~dedicated_slot_location~~ | String | \[appdata\]/SCP Secret Laboratory | The directory that the Reserved Slots file should be **(Depricated, use "reserved_slots_location" instead)**
+~~dedicated_slot_file_name~~ | String | Reserved Slots.txt | The file name to use for the Reserved Slots file **(Depricated, use "reserved_slots_file_name" instead)**
 reserved_slots_location | String | \[appdata\]/SCP Secret Laboratory | The directory that the Reserved Slots file should be
 reserved_slots_file_name | String | Reserved Slots.txt | The file name to use for the Reserved Slots file
 ~~dedicated_slot_ips~~ | List | **Empty** | A list of the IPs of players to allow into the reserved slots **(Depricated, use "Reserved Slots.txt" instead, scroll down for the usage)**
