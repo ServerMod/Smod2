@@ -85,8 +85,8 @@ nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname c
 remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
 replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
 add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' loot
-~~**scp_grenade_multiplier**~~ | Float | 1.0 | The multiplier for the amount of damage grenades do to SCPs
-~~**human_grenade_multiplier**~~ | Float | 0.7 | The multiplier for the amount of damage grenades do to humans
+**scp_grenade_multiplier** | Float | 1.0 | The multiplier for the amount of damage grenades do to SCPs
+**human_grenade_multiplier** | Float | 0.7 | The multiplier for the amount of damage grenades do to humans
 disable_blood_on_screen | Boolean | False | Disable the blood effect on player's screen
 
 #### Reserved Slots
