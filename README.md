@@ -165,15 +165,15 @@ Config Option | Value Type | Default Value | Description
 no_scp079_first | Boolean | True | Computer (SCP-079) will never be the first scp in a game
 173_door_starting_cooldown | Seconds | 25 | The time before SCP-173's door can be opened
 maximum_MTF_respawn_amount | Integer | 15 | The maximum amount of MTF that can be respawned in a single respawn wave
-scp049_hp | Integer | 1200 | Sets the starting HP for SCP-049
+scp049_hp | Integer | 1700 | Sets the starting HP for SCP-049
 scp049-2_hp | Integer | 400 | Sets the starting HP for SCP-049-2
 scp079_hp | Integer | 100 | Sets the starting HP for SCP-079
 scp096_hp | Integer | 2000 | Sets the starting HP for SCP-096
-scp106_hp | Integer | 700 | Sets the starting HP for SCP-106
+scp106_hp | Integer | 650 | Sets the starting HP for SCP-106
 scp173_hp | Integer | 3200 | Sets the starting HP for SCP-173
 ~~scp457_hp~~ | Integer | 700 | Sets the starting HP for SCP-457
-scp939_53_hp | Integer | 700 | Sets the starting HP for SCP-949-53
-scp939_89_hp | Integer | 700 | Sets the starting HP for SCP-949-89 (Or SCP-949-109 as on the forceclass tab)
+scp939_53_hp | Integer | 2200 | Sets the starting HP for SCP-949-53
+scp939_89_hp | Integer | 2200 | Sets the starting HP for SCP-949-89 (Or SCP-949-109 as on the forceclass tab)
 classd_hp | Integer | 100 | Sets the starting HP for Class Ds
 scientist_hp | Integer | 100 | Sets the starting HP for Scientists
 ci_hp | Integer | 100 | Sets the starting HP for Chaos Insurgency
