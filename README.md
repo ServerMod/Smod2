@@ -172,8 +172,8 @@ scp096_hp | Integer | 2000 | Sets the starting HP for SCP-096
 scp106_hp | Integer | 650 | Sets the starting HP for SCP-106
 scp173_hp | Integer | 3200 | Sets the starting HP for SCP-173
 ~~scp457_hp~~ | Integer | 700 | Sets the starting HP for SCP-457
-scp939_53_hp | Integer | 2200 | Sets the starting HP for SCP-949-53
-scp939_89_hp | Integer | 2200 | Sets the starting HP for SCP-949-89 (Or SCP-949-109 as on the forceclass tab)
+scp939_53_hp | Integer | 2200 | Sets the starting HP for SCP-939-53
+scp939_89_hp | Integer | 2200 | Sets the starting HP for SCP-939-89 (Or SCP-939-109 as on the forceclass tab)
 classd_hp | Integer | 100 | Sets the starting HP for Class Ds
 scientist_hp | Integer | 100 | Sets the starting HP for Scientists
 ci_hp | Integer | 100 | Sets the starting HP for Chaos Insurgency
@@ -190,7 +190,7 @@ scp106_disable | Boolean | False | Disables SCP-106
 scp173_disable | Boolean | False | Disables SCP-173
 ~~scp457_disable~~ | Boolean | True | Disables SCP-457
 scp939_53_disable | Boolean | False | Disables SCP-939-53
-scp939_89_disable | Boolean | False | Disables SCP-949-89 (Or SCP-949-109 as on the forceclass tab)
+scp939_89_disable | Boolean | False | Disables SCP-939-89 (Or SCP-939-109 as on the forceclass tab)
 scp049_amount | Integer | 1 | Max amount of SCP-049 that can be spawned in randomly
 scp079_amount | Integer | 1 | Max amount of SCP-079 that can be spawned in randomly
 scp096_amount | Integer | 1 | Max amount of SCP-096 that can be spawned in randomly
@@ -198,7 +198,7 @@ scp106_amount | Integer | 1 | Max amount of SCP-106 that can be spawned in rando
 scp173_amount | Integer | 1 | Max amount of SCP-173 that can be spawned in randomly
 ~~scp457_amount~~ | Integer | 1 | Max amount of SCP-457 that can be spawned in randomly
 scp939_53_amount | Integer | 1 | Max amount of SCP-939-53 that can be spawned in randomly
-scp939_89_amount | Integer | 1 | Max amount of SCP-949-89 (Or SCP-949-109 as on the forceclass tab) that can be spawned in randomly
+scp939_89_amount | Integer | 1 | Max amount of SCP-939-89 (Or SCP-939-109 as on the forceclass tab) that can be spawned in randomly
 
 ### Smart Class Picker (All in Vanilla Game)
 Config Option | Value Type | Default Value | Description

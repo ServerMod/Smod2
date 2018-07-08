@@ -52,5 +52,7 @@
 		public abstract void Drop();
 		public abstract Vector GetPosition();
 		public abstract void SetPosition(Vector pos);
+		public abstract void SetKinematic(bool doPhysics);
+		public abstract bool GetKinematic();
 	}
 }
