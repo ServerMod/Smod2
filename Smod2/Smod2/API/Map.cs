@@ -15,6 +15,7 @@ namespace Smod2.API
 		public abstract void Shake();
 		public abstract bool WarheadDetonated { get; }
 		public abstract bool LCZDecontaminated { get; }
+		public abstract void SpawnItem(ItemType type, Vector pos);
 	}
 
 	public abstract class Door
