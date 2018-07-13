@@ -97,7 +97,7 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerIntercom : IEventHandler
 	{
 		/// <summary>  
-		/// Called when a player uses intercom
+		/// Called when a player attempts to use intercom.
 		/// <summary>  
 		void OnIntercom(PlayerIntercomEvent ev);
 	}
@@ -124,5 +124,13 @@ namespace Smod2.EventHandlers
 		/// Called when a player enters Pocket Demension
 		/// <summary>  
 		void OnPocketDimensionEnter(PlayerPocketDimensionEnterEvent ev);
+	}
+
+	public interface IEventHandlerThrowGrenade : IEventHandler
+	{
+		/// <summary>  
+		/// Called after a player throws a grenade
+		/// <summary>  
+		void OnThrowGrenade(PlayerThrowGrenadeEvent ev);
 	}
 }

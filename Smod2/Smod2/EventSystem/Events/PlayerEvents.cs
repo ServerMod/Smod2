@@ -203,11 +203,13 @@ namespace Smod2.Events
 	{
 		public float SpeechTime { get; set; }
 		public float CooldownTime { get; set; }
+		public bool AllowSpeech { get; set; }
 
-		public PlayerIntercomEvent(Player player, float speechTime, float cooldownTime) : base(player)
+		public PlayerIntercomEvent(Player player, float speechTime, float cooldownTime, bool allowSpeech) : base(player)
 		{
 			SpeechTime = speechTime;
 			CooldownTime = cooldownTime;
+			AllowSpeech = allowSpeech;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -262,6 +264,25 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerPocketDimensionEnter)handler).OnPocketDimensionEnter(this);
+		}
+	}
+
+	public class PlayerThrowGrenadeEvent : PlayerEvent
+	{
+		public ItemType GrenadeType { get; }
+		public Vector Direction { get; }
+		public bool SlowThrow { get; }
+
+		public PlayerThrowGrenadeEvent(Player player, ItemType grenadeType, Vector direction, bool slowThrow) : base(player)
+		{
+			this.GrenadeType = grenadeType;
+			this.Direction = direction;
+			this.SlowThrow = slowThrow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerThrowGrenade)handler).OnThrowGrenade(this);
 		}
 	}
 }
