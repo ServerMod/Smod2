@@ -7,7 +7,7 @@ The latest release can be found here: [Release link](https://github.com/Grover-c
 You can join our Discord here: https://discord.gg/8nvmMTr
 
 ## ServerMod Installation:
-To install via SteamCMD(https://developer.valvesoftware.com/wiki/SteamCMD) (includes the base game and ServerMod):
+To install via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) (includes the base game and ServerMod):
 1. Download SteamCMD.
 2. Open a command window.
 3. Type: SteamCMD +login anonymous +force_install_dir <install dir> +app_update 786920 validate +quit
