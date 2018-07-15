@@ -10,7 +10,7 @@ You can join our Discord here: https://discord.gg/8nvmMTr
 To install via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) (includes the base game and ServerMod):
 1. Download SteamCMD.
 2. Open a command window.
-3. Type: SteamCMD +login anonymous +force_install_dir <install dir> +app_update 786920 validate +quit
+3. Type: SteamCMD +login anonymous +force_install_dir /your/install/location +app_update 786920 validate +quit
 
 To install manually:
 1. Navigate to your SCP Secret Lab folder.
