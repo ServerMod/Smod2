@@ -86,5 +86,6 @@ namespace Smod2.API
 		public abstract string[] RunCommand(string command, string[] args);
 		public abstract bool GetGodmode();
 		public abstract void SetGodmode(bool godmode);
+		public abstract Vector GetRotation();
 	}
 }
