@@ -161,6 +161,7 @@ Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 pd_exit_count | Integer | 2 | The amount of exits to the Pocket Dimension
 pd_random_exit_rids | RList | **Empty** | The list of RoomIDs that players will be randomly teleported to after escaping from Pocket Dimension
+pd_random_exit_rids_after_decontamination | RList | **Empty** | The list of RoomIDs that players will be randomly teleported to after LCZ decontamination
 pd_refresh_exit | Boolean | False | Randomly refresh the exit of Pocket Dimension after it's used
 **scp106_cleanup** | Boolean | False | Stops items and ragdolls from spawning in the pocket dimension
 
