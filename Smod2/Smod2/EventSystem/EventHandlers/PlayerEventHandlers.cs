@@ -126,6 +126,14 @@ namespace Smod2.EventHandlers
 		void OnPocketDimensionEnter(PlayerPocketDimensionEnterEvent ev);
 	}
 
+	public interface IEventHandlerPocketDimensionDie : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player enters the wrong way of Pocket Demension. This happens before the player is killed.
+		/// <summary>  
+		void OnPocketDimensionDie(PlayerPocketDimensionDieEvent ev);
+	}
+
 	public interface IEventHandlerThrowGrenade : IEventHandler
 	{
 		/// <summary>  

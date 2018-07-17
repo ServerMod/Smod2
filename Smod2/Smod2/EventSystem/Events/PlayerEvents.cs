@@ -267,6 +267,21 @@ namespace Smod2.Events
 		}
 	}
 
+	public class PlayerPocketDimensionDieEvent : PlayerEvent
+	{
+		public bool Die { get; set; }
+
+		public PlayerPocketDimensionDieEvent(Player player, bool die) : base(player)
+		{
+			Die = die;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPocketDimensionDie)handler).OnPocketDimensionDie(this);
+		}
+	}
+
 	public class PlayerThrowGrenadeEvent : PlayerEvent
 	{
 		public ItemType GrenadeType { get; }
