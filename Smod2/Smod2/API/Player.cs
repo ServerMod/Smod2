@@ -87,5 +87,6 @@ namespace Smod2.API
 		public abstract bool GetGodmode();
 		public abstract void SetGodmode(bool godmode);
 		public abstract Vector GetRotation();
+		public abstract void SendConsoleMessage(string message, string color = "green");
 	}
 }
