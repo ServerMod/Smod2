@@ -205,6 +205,8 @@ scp173_amount | Integer | 1 | Max amount of SCP-173 that can be spawned in rando
 ~~scp457_amount~~ | Integer | 1 | Max amount of SCP-457 that can be spawned in randomly
 scp939_53_amount | Integer | 1 | Max amount of SCP-939-53 that can be spawned in randomly
 scp939_89_amount | Integer | 1 | Max amount of SCP-939-89 (Or SCP-939-109 as on the forceclass tab) that can be spawned in randomly
+scp_healing_duration | Seconds | -1 | Heal SCPs who haven't moved and got hurt in a specified amount of time
+scp_healing_health | Integer | 100 | The amount of HP that SCPs will recover
 
 ### Smart Class Picker (All in Vanilla Game)
 Config Option | Value Type | Default Value | Description
