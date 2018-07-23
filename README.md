@@ -86,6 +86,7 @@ server_command_whitelist | List | **Empty** | A list of SteamID64s for the users
 bypass_server_command_whitelist | Boolean | False | Allows anybody with access to text based Remote Admin to run console commands
 filler_team_id | Integer | 4 | If the team spawn queue is shorter than the max player count, this team number will be used for the rest of the players when they spawn
 item_cleanup | Seconds | -1 | Cleans up items after the specified amount of time
+ragdoll_cleanup | Seconds | -1 | Cleans up ragdolls after the specified amount of time
 nickname_filter | List | **Empty** | Automatically kicks anyone who's nickname contains anything in this list
 remove_item_loot | RList | **Empty** | Removes all instances of the specified item ID from all lockers
 replace_item_loot | RDictionary | **Empty** | Replaces all instances of the specified item ID from all lockers with the second specified item ID
