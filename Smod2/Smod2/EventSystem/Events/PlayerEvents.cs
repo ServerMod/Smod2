@@ -300,4 +300,48 @@ namespace Smod2.Events
 			((IEventHandlerThrowGrenade)handler).OnThrowGrenade(this);
 		}
 	}
+
+	public class PlayerInfectedEvent : PlayerEvent
+	{
+		public float Damage { get; set; }
+		public Player Attacker { get; }
+		public float InfectTime { get; set; }
+
+		public PlayerInfectedEvent(Player player, float damage, Player attacker, float infectTime) : base(player)
+		{
+			this.Damage = damage;
+			this.Attacker = attacker;
+			this.InfectTime = infectTime;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerInfected)handler).OnPlayerInfected(this);
+		}
+	}
+
+	public class PlayerSpawnRagdollEvent : PlayerEvent
+	{
+		public Role Role { get; set; }
+		public Vector Position { get; set; }
+		public Vector Rotation { get; set; }
+		public Player Attacker { get; }
+		public DamageType DamageType { get; set; }
+		public bool AllowRecall { get; set; }
+
+		public PlayerSpawnRagdollEvent(Player player, Role role, Vector position, Vector rotation, Player attacker, DamageType damageType, bool allowRecall) : base(player)
+		{
+			this.Role = role;
+			this.Position = position;
+			this.Rotation = rotation;
+			this.Attacker = attacker;
+			this.DamageType = damageType;
+			this.AllowRecall = allowRecall;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSpawnRagdoll)handler).OnSpawnRagdoll(this);
+		}
+	}
 }

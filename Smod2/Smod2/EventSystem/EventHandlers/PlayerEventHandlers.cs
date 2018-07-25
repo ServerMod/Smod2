@@ -141,4 +141,20 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		void OnThrowGrenade(PlayerThrowGrenadeEvent ev);
 	}
+
+	public interface IEventHandlerInfected : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player is cured by SCP-049
+		/// <summary>  
+		void OnPlayerInfected(PlayerInfectedEvent ev);
+	}
+
+	public interface IEventHandlerSpawnRagdoll : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a ragdoll is spawned
+		/// <summary>  
+		void OnSpawnRagdoll(PlayerSpawnRagdollEvent ev);
+	}
 }
