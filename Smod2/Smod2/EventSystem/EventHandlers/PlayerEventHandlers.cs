@@ -157,4 +157,20 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		void OnSpawnRagdoll(PlayerSpawnRagdollEvent ev);
 	}
+
+	public interface IEventHandlerLure : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player enters FemurBreaker
+		/// <summary> 
+		void OnLure(PlayerLureEvent ev);
+	}
+
+	public interface IEventHandlerContain106 : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player presses the button to contain SCP-106
+		/// <summary>
+		void OnContain106(PlayerContain106Event ev);
+	}
 }

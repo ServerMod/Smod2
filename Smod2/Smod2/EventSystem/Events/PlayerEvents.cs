@@ -344,4 +344,34 @@ namespace Smod2.Events
 			((IEventHandlerSpawnRagdoll)handler).OnSpawnRagdoll(this);
 		}
 	}
+
+	public class PlayerLureEvent : PlayerEvent
+	{
+		public bool AllowContain { get; set; }
+
+		public PlayerLureEvent(Player player, bool allowContain) : base(player)
+		{
+			this.AllowContain = allowContain;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerLure)handler).OnLure(this);
+		}
+	}
+
+	public class PlayerContain106Event : PlayerEvent
+	{
+		public Player[] SCP106s { get; }
+
+		public PlayerContain106Event(Player player, Player[] scp106s) : base(player)
+		{
+			this.SCP106s = scp106s;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerContain106)handler).OnContain106(this);
+		}
+	}
 }
