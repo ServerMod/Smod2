@@ -31,6 +31,13 @@ namespace Smod2
 		{
 			eventManager.AddEventHandler(this, eventType, handler, priority);
 		}
+		public void AddCommands(string[] commands, ICommandHandler handler)
+		{
+			foreach (string command in commands)
+			{
+				this.AddCommand(command, handler);
+			}
+		}
 
 		public void AddCommand(string command, ICommandHandler handler)
 		{
