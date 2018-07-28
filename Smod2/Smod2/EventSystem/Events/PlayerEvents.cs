@@ -363,10 +363,12 @@ namespace Smod2.Events
 	public class PlayerContain106Event : PlayerEvent
 	{
 		public Player[] SCP106s { get; }
+		public bool ActivateContainment { get; set; }
 
-		public PlayerContain106Event(Player player, Player[] scp106s) : base(player)
+		public PlayerContain106Event(Player player, Player[] scp106s, bool activateContainment) : base(player)
 		{
 			this.SCP106s = scp106s;
+			this.ActivateContainment = activateContainment;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
