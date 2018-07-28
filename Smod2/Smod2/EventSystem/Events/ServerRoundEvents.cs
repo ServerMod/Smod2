@@ -135,4 +135,55 @@ namespace Smod2.Events
 			((IEventHandlerSetServerName)handler).OnSetServerName(this);
 		}
 	}
+
+	public class UpdateEvent : Event
+	{
+		public UpdateEvent()
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerUpdate)handler).OnUpdate(this);
+		}
+	}
+
+	public class FixedUpdateEvent : Event
+	{
+		public FixedUpdateEvent()
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerFixedUpdate)handler).OnFixedUpdate(this);
+		}
+	}
+
+	public class LateUpdateEvent : Event
+	{
+		public LateUpdateEvent()
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerLateUpdate)handler).OnLateUpdate(this);
+		}
+	}
+
+	public class SceneChangedEvent : Event
+	{
+		public string SceneName { get; }
+
+		public SceneChangedEvent(string sceneName)
+		{
+			this.SceneName = sceneName;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSceneChanged)handler).OnSceneChanged(this);
+		}
+	}
 }

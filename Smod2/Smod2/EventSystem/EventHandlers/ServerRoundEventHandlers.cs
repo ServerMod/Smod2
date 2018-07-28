@@ -65,5 +65,25 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnSetServerName(SetServerNameEvent ev);
 	}
+
+	public interface IEventHandlerUpdate : IEventHandler
+	{
+		void OnUpdate(UpdateEvent ev);
+	}
+
+	public interface IEventHandlerFixedUpdate : IEventHandler
+	{
+		void OnFixedUpdate(FixedUpdateEvent ev);
+	}
+
+	public interface IEventHandlerLateUpdate : IEventHandler
+	{
+		void OnLateUpdate(LateUpdateEvent ev);
+	}
+
+	public interface IEventHandlerSceneChanged : IEventHandler
+	{
+		void OnSceneChanged(SceneChangedEvent ev);
+	}
 }
 
