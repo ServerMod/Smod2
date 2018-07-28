@@ -26,7 +26,7 @@
 		/// </summary> 
 		public static Vector One
 		{
-			get => new Vector(0, 0, 0);
+			get => new Vector(1, 1, 1);
 		}
 
 		/// <summary>  
