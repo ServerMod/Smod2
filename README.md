@@ -11,7 +11,7 @@ To install via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) (in
 1. Download SteamCMD.
 2. Open a command window.
 3. Type: SteamCMD +login anonymous +force_install_dir /your/install/location +app_update 786920 validate +quit
-(Alternative lazymode for Windows users, open [This link](steam://install/786920) in your browser, it should open the installer.)
+ - (Alternative lazymode for Windows users, open steam://install/786920 in your browser, it should open the installer.)
 
 To install manually:
 1. Navigate to your SCP Secret Lab folder.
