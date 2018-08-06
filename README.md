@@ -77,7 +77,7 @@ secondary_servers_to_contact | List | **Empty** | The master servers to push dat
 start_round_timer | Seconds | 20 | The amount of time before the round auto-starts (when queueing for a round)
 sm_floating_items_everyone | Boolean | False | Make everyone's items float when they're dropped (includes items spawned on the map in the beginning)
 sm_floating_items_steamids | List | **Empty** | A list of SteamID64s for the players that should have their items float when dropped
-start_round_minimum_players | int | 2 | Minimum playercount for starting the countdown before the round starts.
+start_round_minimum_players | Integer | 2 | Minimum playercount for starting the countdown before the round starts.
 
 ### Administration / Gameplay
 Config Option | Value Type | Default Value | Description
