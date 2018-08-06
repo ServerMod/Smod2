@@ -28,6 +28,7 @@ namespace Smod2.API
 		public abstract float LockCooldown { get; set; }
 		public abstract Vector Position { get; }
 		public abstract string Name { get; }
+		public abstract string Permission { get; }
 	}
 
 	public enum PocketDimensionExitType

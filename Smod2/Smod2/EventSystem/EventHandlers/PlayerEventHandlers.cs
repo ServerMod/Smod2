@@ -173,4 +173,44 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnContain106(PlayerContain106Event ev);
 	}
+
+	public interface IEventHandlerMedkitUse : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player uses Medkit
+		/// <summary>
+		void OnMedkitUse(PlayerMedkitUseEvent ev);
+	}
+
+	public interface IEventHandlerShoot : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player shoots
+		/// <summary>
+		void OnShoot(PlayerShootEvent ev);
+	}
+
+	public interface IEventHandler106CreatePortal : IEventHandler
+	{
+		/// <summary>  
+		/// Called when SCP-106 creates a portal
+		/// <summary>
+		void On106CreatePortal(Player106CreatePortalEvent ev);
+	}
+
+	public interface IEventHandler106Teleport : IEventHandler
+	{
+		/// <summary>  
+		/// Called when SCP-106 teleports through portals
+		/// <summary>
+		void On106Teleport(Player106TeleportEvent ev);
+	}
+
+	public interface IEventHandlerElevatorUse : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player uses an elevator
+		/// <summary>
+		void OnElevatorUse(PlayerElevatorUseEvent ev);
+	}
 }

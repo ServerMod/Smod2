@@ -203,13 +203,11 @@ namespace Smod2.Events
 	{
 		public float SpeechTime { get; set; }
 		public float CooldownTime { get; set; }
-		public bool AllowSpeech { get; set; }
 
-		public PlayerIntercomEvent(Player player, float speechTime, float cooldownTime, bool allowSpeech) : base(player)
+		public PlayerIntercomEvent(Player player, float speechTime, float cooldownTime) : base(player)
 		{
 			SpeechTime = speechTime;
 			CooldownTime = cooldownTime;
-			AllowSpeech = allowSpeech;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -374,6 +372,85 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerContain106)handler).OnContain106(this);
+		}
+	}
+
+	public class PlayerMedkitUseEvent : PlayerEvent
+	{
+		public int RecoverHealth { get; set; }
+
+		public PlayerMedkitUseEvent(Player player, int recoverHealth) : base(player)
+		{
+			this.RecoverHealth = recoverHealth;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerMedkitUse)handler).OnMedkitUse(this);
+		}
+	}
+
+	public class PlayerShootEvent : PlayerEvent
+	{
+		public Player Target { get; }
+		public DamageType Weapon { get; }
+
+		public PlayerShootEvent(Player player, Player target, DamageType weapon) : base(player)
+		{
+			this.Target = target;
+			this.Weapon = weapon;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerShoot)handler).OnShoot(this);
+		}
+	}
+
+	public class Player106CreatePortalEvent : PlayerEvent
+	{
+		public Vector Position { get; set; }
+
+		public Player106CreatePortalEvent(Player player, Vector position) : base(player)
+		{
+			this.Position = position;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler106CreatePortal)handler).On106CreatePortal(this);
+		}
+	}
+
+	public class Player106TeleportEvent : PlayerEvent
+	{
+		public Vector Position { get; set; }
+
+		public Player106TeleportEvent(Player player, Vector position) : base(player)
+		{
+			this.Position = position;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler106Teleport)handler).On106Teleport(this);
+		}
+	}
+
+	public class PlayerElevatorUseEvent : PlayerEvent
+	{
+		public Vector ElevatorPosition { get; }
+		public bool AllowUse { get; set; }
+
+		public PlayerElevatorUseEvent(Player player, Vector elevatorPosition, bool allowUse) : base(player)
+		{
+			this.ElevatorPosition = elevatorPosition;
+			this.AllowUse = allowUse;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerElevatorUse)handler).OnElevatorUse(this);
 		}
 	}
 }
