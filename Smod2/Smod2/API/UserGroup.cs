@@ -4,6 +4,6 @@
 	{
 		public abstract string Name { get; }
 		public abstract string Color { get; }
-		public abstract int Permissions { get; }
+		public abstract ulong Permissions { get; }
 	}
 }
