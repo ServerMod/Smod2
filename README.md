@@ -8,16 +8,37 @@ You can join our Discord here: https://discord.gg/8nvmMTr
 
 ## ServerMod Installation:
 To install via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) (includes the base game and ServerMod):
-1. Download SteamCMD.
-2. Open a command window.
-3. Type: SteamCMD +login anonymous +force_install_dir /your/install/location +app_update 786920 validate +quit
- - (Alternative lazymode for Windows users, open steam://install/786920 in your browser, it should open the installer.)
+1. Download SteamCMD, and extract it to a new folder. Be aware that it will fill the folder with its own files.
+2. Create a text file to be used as the install script (uncomment one of the "app_update" lines):
+```
+@ShutdownOnFailedCommand 1
+@NoPromptForPassword 1
+login anonymous
+force_install_dir "your/desired/install location/here"
+//app_update 786920 validate //uncomment this line if you want the stable branch
+//app_update 786920 -beta beta validate //uncomment this line if you want the beta branch
+quit
+```
+3. Create a batch file or shortcut to run SteamCMD: `steamcmd +runscript "path/to/install script.txt"`
+4. Run the batch file or shortcut. If SteamCMD reports that " @ShutdownOnFailedCommand" is an unknown command, make sure that the text file is not saved with UTF-8 Signature / Unicode BOM (Byte-Order Mark). A batch file likewise won't work if saved that way.
+
+To install via Steam Library:
+1. Open your Library in Steam.
+2. In the upper left is a search box. In that box, click the word "GAMES" and change it to "TOOLS".
+3. Search for SCP. You should see "SCP: Secret Laboratory ServerMod".
+4. If you want the stable branch, just install what you see. If you want the beta branch, right click it, "Properties", "Betas", select the beta in the dropdown, then install it.
+
+To install via Steam URI (on Windows with Steam installed):
+1. Launch `steam://install/786920-beta` (using "Run", File Explorer address bar, or web browser address bar)
+2. This installs the stable branch by default. If you want the beta branch, you'll need to follow the directions using the Steam Library, which can still be done after installing it this way.
 
 To install manually:
-1. Navigate to your SCP Secret Lab folder.
-2. Go into SCPSL_Data/Managed/
-3. Make a backup of Assembly-CSharp.dll
-4. Replace Assembly-CSharp.dll with the one in the releases tab and copy Smod2.dll from the releases tab into the same folder.
+1. Download Assembly-CSharp.dll and Smod2.dll from the [latest release](https://github.com/Grover-c13/Smod2/releases/latest) or from some other release in the [releases tab](https://github.com/Grover-c13/Smod2/releases).
+2. Navigate to your SCP Secret Lab folder. For example, `"C:\Program Files\Steam\steamapps\common\SCP Secret Laboratory\"`
+3. Create a **copy** of this directory somewhere else. ServerMod needs its own directory. Installing it in the same directory from which you play the game will prevent the game from working properly.
+4. Inside the resulting new directory, navigate to `"SCPSL_Data\Managed\"`
+5. Remove Assembly-CSharp.dll (you can delete it, or rename it as a backup if you want).
+6. Copy the downloaded Assembly-CSharp.dll and Smod2.dll into that folder.
 
 ## Server Name Variables
 Currently supported variables (place in your servers name):
