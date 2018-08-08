@@ -44,7 +44,7 @@ To install manually:
 4. Back up Assembly-CSharp.dll (either by renaming it or moving it somewhere).
 5. Copy the downloaded Assembly-CSharp.dll and Smod2.dll into that folder.
 6. Remove steam_appid.txt in the install folder. This causes you to show up as playing SCPSL on steam & can prevent you from launching client.
-  - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
+   - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
 
 ## Server Name Variables
 Currently supported variables (place in your servers name):
