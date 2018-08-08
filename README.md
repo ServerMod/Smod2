@@ -33,7 +33,9 @@ quit
 1. Install SteamCMD, either by package manager (for instance `sudo apt-get install steamcmd`), or by downloading it manually by following the instructions of the Linux section [here](https://developer.valvesoftware.com/wiki/SteamCMD).
 
 2. Create a new file and name it `update.sh` and put the following text into it:
-```
+```bash
+# !/bin/bash
+
 # The latest version of the game that supports ServerMod, with ServerMod and MultiAdmin pre-installed
 # steamcmd +login anonymous +force_install_dir /enter/absolute/path/here +app_update 786920 validate +quit
 
