@@ -8,7 +8,6 @@ You can join our Discord here: https://discord.gg/8nvmMTr
 
 ## ServerMod Installation:
 
-### Test
 To install via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) (includes the base game and ServerMod):
 1. Download SteamCMD, and extract it to a new folder. Be aware that it will fill the folder with its own files.
 2. Create a text file to be used as the install script (uncomment one of the "app_update" lines):
@@ -29,10 +28,14 @@ To install via Steam Library:
 2. In the upper left is a search box. In that box, click the word "GAMES" and change it to "TOOLS".
 3. Search for SCP. You should see "SCP: Secret Laboratory ServerMod".
 4. If you want the stable branch, just install what you see. If you want the beta branch, right click it, "Properties", "Betas", select the beta in the dropdown, then install it.
+5. Remove steam_appid.txt in the install folder. This causes you to show up as playing SCPSL on steam & can prevent you from launching client.
+   - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
 
 To install via Steam URI (on Windows with Steam installed):
 1. Launch `steam://install/786920` (using "Run", File Explorer address bar, or web browser address bar)
 2. This installs the stable branch by default. If you want the beta branch, you'll need to follow the directions using the Steam Library, which can still be done after installing it this way.
+3. Remove steam_appid.txt in the install folder. This causes you to show up as playing SCPSL on steam & can prevent you from launching client.
+   - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
 
 **If you use any of these three methods, you will have to manually run MultiAdmin, not launch it directly through steam.**
 
