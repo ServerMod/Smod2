@@ -29,7 +29,7 @@ To install via Steam Library:
 4. If you want the stable branch, just install what you see. If you want the beta branch, right click it, "Properties", "Betas", select the beta in the dropdown, then install it.
 
 To install via Steam URI (on Windows with Steam installed):
-1. Launch `steam://install/786920-beta` (using "Run", File Explorer address bar, or web browser address bar)
+1. Launch `steam://install/786920` (using "Run", File Explorer address bar, or web browser address bar)
 2. This installs the stable branch by default. If you want the beta branch, you'll need to follow the directions using the Steam Library, which can still be done after installing it this way.
 
 To install manually:
