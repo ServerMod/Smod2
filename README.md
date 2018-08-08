@@ -7,6 +7,8 @@ The latest release can be found here: [Release link](https://github.com/Grover-c
 You can join our Discord here: https://discord.gg/8nvmMTr
 
 ## ServerMod Installation:
+
+### Test
 To install via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) (includes the base game and ServerMod):
 1. Download SteamCMD, and extract it to a new folder. Be aware that it will fill the folder with its own files.
 2. Create a text file to be used as the install script (uncomment one of the "app_update" lines):
@@ -32,13 +34,15 @@ To install via Steam URI (on Windows with Steam installed):
 1. Launch `steam://install/786920` (using "Run", File Explorer address bar, or web browser address bar)
 2. This installs the stable branch by default. If you want the beta branch, you'll need to follow the directions using the Steam Library, which can still be done after installing it this way.
 
+**If you use any of these three methods, you will have to manually run MultiAdmin, not launch it directly through steam. If you launch it through steam.**
+
 To install manually:
 1. Download Assembly-CSharp.dll and Smod2.dll from the [latest release](https://github.com/Grover-c13/Smod2/releases/latest) or from some other release in the [releases tab](https://github.com/Grover-c13/Smod2/releases).
 2. Navigate to your SCP Secret Lab folder. For example, `"C:\Program Files\Steam\steamapps\common\SCP Secret Laboratory\"`
-3. Create a **copy** of this directory somewhere else. ServerMod needs its own directory. Installing it in the same directory from which you play the game will prevent the game from working properly.
-4. Inside the resulting new directory, navigate to `"SCPSL_Data\Managed\"`
-5. Remove Assembly-CSharp.dll (you can delete it, or rename it as a backup if you want).
-6. Copy the downloaded Assembly-CSharp.dll and Smod2.dll into that folder.
+  2.1 If you also play the game on this system, create a **copy** of this directory somewhere else. ServerMod needs its own directory. Installing it in the same directory from which you play the game will prevent the game from working properly.
+3. Inside the resulting new directory, navigate to `"SCPSL_Data\Managed\"`
+4. Back up Assembly-CSharp.dll (either by renaming it or moving it somewhere).
+5. Copy the downloaded Assembly-CSharp.dll and Smod2.dll into that folder.
 
 ## Server Name Variables
 Currently supported variables (place in your servers name):
