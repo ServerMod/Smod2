@@ -39,7 +39,7 @@ To install via Steam URI (on Windows with Steam installed):
 To install manually:
 1. Download Assembly-CSharp.dll and Smod2.dll from the [latest release](https://github.com/Grover-c13/Smod2/releases/latest) or from some other release in the [releases tab](https://github.com/Grover-c13/Smod2/releases).
 2. Navigate to your SCP Secret Lab folder. For example, `"C:\Program Files\Steam\steamapps\common\SCP Secret Laboratory\"`
- - If you also play the game on this system, create a **copy** of this directory somewhere else. ServerMod needs its own directory. Installing it in the same directory from which you play the game will prevent the game from working properly.
+   - If you also play the game on this system, create a **copy** of this directory somewhere else. ServerMod needs its own directory. Installing it in the same directory from which you play the game will prevent the game from working properly.
 3. Inside the resulting new directory, navigate to `"SCPSL_Data\Managed\"`
 4. Back up Assembly-CSharp.dll (either by renaming it or moving it somewhere).
 5. Copy the downloaded Assembly-CSharp.dll and Smod2.dll into that folder.
