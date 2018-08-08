@@ -34,7 +34,7 @@ To install via Steam URI (on Windows with Steam installed):
 1. Launch `steam://install/786920` (using "Run", File Explorer address bar, or web browser address bar)
 2. This installs the stable branch by default. If you want the beta branch, you'll need to follow the directions using the Steam Library, which can still be done after installing it this way.
 
-**If you use any of these three methods, you will have to manually run MultiAdmin, not launch it directly through steam. If you launch it through steam.**
+**If you use any of these three methods, you will have to manually run MultiAdmin, not launch it directly through steam.**
 
 To install manually:
 1. Download Assembly-CSharp.dll and Smod2.dll from the [latest release](https://github.com/Grover-c13/Smod2/releases/latest) or from some other release in the [releases tab](https://github.com/Grover-c13/Smod2/releases).
