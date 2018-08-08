@@ -48,7 +48,7 @@ quit
 # The latest beta version of the game, without ServerMod
 # steamcmd +login "steam-username" "steam-password" +force_install_dir /enter/absolute/path/here +app_update 700330 -beta beta_linux validate +quit
 ```
-3. Remove the `#` infront of the line you want to use. I included the base game downloads too so you can quickly switch to the unmodded game while ServerMod is outdated after a game update. If you installed SteamCMD manually, you have to put the path to it instead of `steamcmd` at the start of the line.
+3. Remove the `#` infront of the line you want to use. I included the base game downloads too so you can quickly switch to the unmodded game while ServerMod is outdated after a game update. If you installed SteamCMD manually, you have to put the path to it's directory instead of `steamcmd` at the start of the line.
 
 4. Run the script file using `sh update.sh`. If there is an error you may have to make it executable by using `chmod 777 update.sh` or if you are using FileZilla, right click on the script and give it all file permissions.
 
