@@ -60,7 +60,7 @@ namespace Smod2.Events
 				if (typeof(IEventHandler).IsAssignableFrom(intfce))
 				{
 					plugin.Debug("Adding event handler for " + intfce.Name);
-					AddEventHandler(plugin, intfce, handler, Priority.Normal);
+					AddEventHandler(plugin, intfce, handler, priority);
 				}
 			}
 		}
