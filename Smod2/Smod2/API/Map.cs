@@ -16,6 +16,11 @@ namespace Smod2.API
 		public abstract bool WarheadDetonated { get; }
 		public abstract bool LCZDecontaminated { get; }
 		public abstract void SpawnItem(ItemType type, Vector position, Vector rotation);
+		/// <summary>  
+		/// Note: When FemurBreaker is enabled, SCP-106 can't be contained. This might break the lure configs and mechanism.
+		/// </summary> 
+		public abstract void FemurBreaker(bool enable);
+		public abstract List<Elevator> GetElevators();
 	}
 
 	public abstract class Door
@@ -29,6 +34,33 @@ namespace Smod2.API
 		public abstract Vector Position { get; }
 		public abstract string Name { get; }
 		public abstract string Permission { get; }
+	}
+
+	public enum ElevatorType
+	{
+		LiftA = 0,
+		LiftB = 1,
+		GateA = 2,
+		GateB = 3,
+		WarheadRoom = 4,
+		SCP049Chamber = 5
+	}
+
+	public enum ElevatorStatus
+	{
+		Up,
+		Down,
+		Moving
+	}
+
+	public abstract class Elevator
+	{
+		public abstract ElevatorType ElevatorType { get; }
+		public abstract ElevatorStatus ElevatorStatus { get; }
+		public abstract void Use();
+		public abstract bool Locked { get; set; }
+		public abstract bool Lockable { get; set; }
+		public abstract float MovingSpeed { get; set; }
 	}
 
 	public enum PocketDimensionExitType

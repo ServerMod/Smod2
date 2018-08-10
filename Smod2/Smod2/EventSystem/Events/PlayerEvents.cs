@@ -439,11 +439,13 @@ namespace Smod2.Events
 
 	public class PlayerElevatorUseEvent : PlayerEvent
 	{
+		public Elevator Elevator { get; }
 		public Vector ElevatorPosition { get; }
 		public bool AllowUse { get; set; }
 
-		public PlayerElevatorUseEvent(Player player, Vector elevatorPosition, bool allowUse) : base(player)
+		public PlayerElevatorUseEvent(Player player, Elevator elevator, Vector elevatorPosition, bool allowUse) : base(player)
 		{
+			this.Elevator = elevator;
 			this.ElevatorPosition = elevatorPosition;
 			this.AllowUse = allowUse;
 		}
