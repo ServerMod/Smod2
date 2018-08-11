@@ -36,14 +36,16 @@ namespace Smod2.Events
 
 	public class PlayerDeathEvent : PlayerEvent
 	{
-		public PlayerDeathEvent(Player player, Player killer, bool spawnRagdoll): base(player)
+		public PlayerDeathEvent(Player player, Player killer, bool spawnRagdoll, DamageType damageType): base(player)
 		{
 			Killer = killer;
 			SpawnRagdoll = spawnRagdoll;
+			DamageType = damageType;
 		}
 
 		public Player Killer { get; }
 		public bool SpawnRagdoll { get; set; }
+		public DamageType DamageType { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
