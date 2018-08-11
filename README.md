@@ -8,9 +8,13 @@ You can join our Discord here: https://discord.gg/8nvmMTr
 
 ## ServerMod Installation:
 
-To install via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) (includes the base game and ServerMod):
-1. Download SteamCMD, and extract it to a new folder. Be aware that it will fill the folder with its own files.
-2. Create a text file to be used as the install script (uncomment one of the "app_update" lines):
+### SteamCMD (Recommended)
+
+**Windows:**
+
+1. Download [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD), and extract it to a new folder. Be aware that it will fill the folder with its own files.
+
+2. Create a shell script (.sh) to be used as the install script (uncomment one of the "app_update" lines):
 ```
 @ShutdownOnFailedCommand 1
 @NoPromptForPassword 1
@@ -21,9 +25,34 @@ force_install_dir "your/desired/install location/here"
 quit
 ```
 3. Create a batch file or shortcut to run SteamCMD: `steamcmd +runscript "path/to/install script.txt"`
+
 4. Run the batch file or shortcut. If SteamCMD reports that " @ShutdownOnFailedCommand" is an unknown command, make sure that the text file is not saved with UTF-8 Signature / Unicode BOM (Byte-Order Mark). A batch file likewise won't work if saved that way.
 
-To install via Steam Library:
+**Linux:**
+
+1. Install SteamCMD, either by package manager (for instance `sudo apt-get install steamcmd`), or by downloading it manually by following the instructions of the Linux section [here](https://developer.valvesoftware.com/wiki/SteamCMD).
+
+2. Create a new file and name it `update.sh` and put the following text into it:
+```bash
+# !/bin/bash
+
+# The latest version of the game that supports ServerMod, with ServerMod and MultiAdmin pre-installed
+# steamcmd +login anonymous +force_install_dir /enter/absolute/path/here +app_update 786920 validate +quit
+
+# The latest version of the base game that works with the ServerMod beta version, with ServerMod Beta pre-installed
+# steamcmd +login anonymous +force_install_dir /enter/absolute/path/here +app_update 786920 -beta beta validate +quit
+
+# The latest version of the game, without ServerMod
+# steamcmd +login "steam-username" "steam-password" +force_install_dir /enter/absolute/path/here +app_update 700330 -beta linux validate +quit
+
+# The latest beta version of the game, without ServerMod
+# steamcmd +login "steam-username" "steam-password" +force_install_dir /enter/absolute/path/here +app_update 700330 -beta beta_linux validate +quit
+```
+3. Remove the `#` infront of the line you want to use. I included the base game downloads too so you can quickly switch to the unmodded game while ServerMod is outdated after a game update. If you installed SteamCMD manually, you have to put the path to it's directory instead of `steamcmd` at the start of the line.
+
+4. Run the script file using `sh update.sh`. If there is an error you may have to make it executable by using `chmod 777 update.sh` or if you are using FileZilla, right click on the script and give it all file permissions.
+
+### To install via Steam Library:
 1. Open your Library in Steam.
 2. In the upper left is a search box. In that box, click the word "GAMES" and change it to "TOOLS".
 3. Search for SCP. You should see "SCP: Secret Laboratory ServerMod".
@@ -31,15 +60,15 @@ To install via Steam Library:
 5. Remove steam_appid.txt in the install folder. This causes you to show up as playing SCPSL on steam & can prevent you from launching client.
    - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
 
-To install via Steam URI (on Windows with Steam installed):
+### To install via Steam URI (on Windows with Steam installed):
 1. Launch `steam://install/786920` (using "Run", File Explorer address bar, or web browser address bar)
 2. This installs the stable branch by default. If you want the beta branch, you'll need to follow the directions using the Steam Library, which can still be done after installing it this way.
 3. Remove steam_appid.txt in the install folder. This causes you to show up as playing SCPSL on steam & can prevent you from launching client.
    - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
 
-**If you use any of these three methods, you will have to manually run MultiAdmin, not launch it directly through steam.**
+**If you use any of the above methods, you will have to manually run MultiAdmin, not launch it directly through steam.**
 
-To install manually:
+### To install manually:
 1. Download Assembly-CSharp.dll and Smod2.dll from the [latest release](https://github.com/Grover-c13/Smod2/releases/latest) or from some other release in the [releases tab](https://github.com/Grover-c13/Smod2/releases).
 2. Navigate to your SCP Secret Lab folder. For example, `"C:\Program Files\Steam\steamapps\common\SCP Secret Laboratory\"`
    - If you also play the game on this system, create a **copy** of this directory somewhere else. ServerMod needs its own directory. Installing it in the same directory from which you play the game will prevent the game from working properly.
@@ -47,7 +76,7 @@ To install manually:
 4. Back up Assembly-CSharp.dll (either by renaming it or moving it somewhere).
 5. Copy the downloaded Assembly-CSharp.dll and Smod2.dll into that folder.
 6. Remove steam_appid.txt in the install folder. This causes you to show up as playing SCPSL on steam & can prevent you from launching client.
-   - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
+- Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
 
 ## Server Name Variables
 Currently supported variables (place in your servers name):
