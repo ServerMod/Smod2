@@ -40,12 +40,12 @@ namespace Smod2.Events
 		{
 			Killer = killer;
 			SpawnRagdoll = spawnRagdoll;
-            DamageType = damageType;
-        }
+			DamageType = damageType;
+		}
 
 		public Player Killer { get; }
 		public bool SpawnRagdoll { get; set; }
-        public DamageType DamageType { get; }
+		public DamageType DamageType { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
