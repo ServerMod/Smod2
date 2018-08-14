@@ -33,12 +33,15 @@ namespace Smod2.Events
 
 	public class WarheadStartEvent : WarheadEvent
 	{
-        public WarheadStartEvent(Player activator, float timeLeft, bool isResumed): base(activator, timeLeft)
+        public WarheadStartEvent(Player activator, float timeLeft, bool isResumed, bool openDoorsAfter): base(activator, timeLeft)
         {
             IsResumed = isResumed;
-        }
+			OpenDoorsAfter = openDoorsAfter;
+
+		}
 
         public bool IsResumed { get; set; }
+		public bool OpenDoorsAfter { get; set; }
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerWarheadStartCountdown)handler).OnStartCountdown(this);

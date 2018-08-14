@@ -28,7 +28,7 @@ namespace Smod2.EventSystem.Events
 			SpawnChaos = isCI;
 		}
 
-		public List<Player> PlayerList { get; }
+		public List<Player> PlayerList { get; set; }
 
 		public bool SpawnChaos { get; set; }
 
