@@ -14,7 +14,7 @@ You can join our Discord here: https://discord.gg/8nvmMTr
 
 1. Download [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD), and extract it to a new folder. Be aware that it will fill the folder with its own files.
 
-2. Create a shell script (.sh) to be used as the install script (uncomment one of the "app_update" lines):
+2. Create a text file (.txt) to be used as the install script (uncomment one of the "app_update" lines):
 ```
 @ShutdownOnFailedCommand 1
 @NoPromptForPassword 1
