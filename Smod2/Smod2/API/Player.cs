@@ -90,5 +90,6 @@ namespace Smod2.API
 		public abstract void SendConsoleMessage(string message, string color = "green");
 		public abstract void Infect(float time);
 		public abstract void ThrowGrenade(ItemType grenadeType, bool isCustomDirection, Vector direction, bool isEnvironmentallyTriggered, Vector position, bool isCustomForce, float throwForce, bool slowThrow = false);
+		public abstract bool GetBypassMode();
 	}
 }
