@@ -92,5 +92,6 @@ namespace Smod2.API
 		public abstract void ThrowGrenade(ItemType grenadeType, bool isCustomDirection, Vector direction, bool isEnvironmentallyTriggered, Vector position, bool isCustomForce, float throwForce, bool slowThrow = false);
 		public abstract bool GetBypassMode();
 		public abstract string GetAuthToken();
+		public abstract void HideTag(bool enable);
 	}
 }
