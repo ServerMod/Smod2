@@ -61,6 +61,7 @@ namespace Smod2.API
 		public abstract bool Locked { get; set; }
 		public abstract bool Lockable { get; set; }
 		public abstract float MovingSpeed { get; set; }
+		public abstract List<Vector> GetPositions();
 	}
 
 	public enum PocketDimensionExitType
