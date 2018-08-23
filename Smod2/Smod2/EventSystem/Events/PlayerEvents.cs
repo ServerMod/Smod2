@@ -457,4 +457,21 @@ namespace Smod2.Events
 			((IEventHandlerElevatorUse)handler).OnElevatorUse(this);
 		}
 	}
+
+	public class PlayerHandcuffEvent : PlayerEvent
+	{
+		public Player Target { get; }
+		public bool Handcuffed { get; set; }
+
+		public PlayerHandcuffEvent(Player player, Player target, bool handcuffed) : base(player)
+		{
+			this.Target = target;
+			this.Handcuffed = handcuffed;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerHandcuff)handler).OnHandcuff(this);
+		}
+	}
 }

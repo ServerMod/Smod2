@@ -213,4 +213,12 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnElevatorUse(PlayerElevatorUseEvent ev);
 	}
+
+	public interface IEventHandlerHandcuff : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player handcuffs/releases another player
+		/// <summary>
+		void OnHandcuff(PlayerHandcuffEvent ev);
+	}
 }
