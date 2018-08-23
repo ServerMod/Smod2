@@ -137,6 +137,7 @@ start_round_timer | Seconds | 20 | The amount of time before the round auto-star
 sm_floating_items_everyone | Boolean | False | Make everyone's items float when they're dropped (includes items spawned on the map in the beginning)
 sm_floating_items_steamids | List | **Empty** | A list of SteamID64s for the players that should have their items float when dropped
 start_round_minimum_players | Integer | 2 | Minimum playercount for starting the countdown before the round starts.
+window_health | Float | 30.0 | Sets the HP of breakable windows. If the amount is less than zero, windows can't be broken.
 
 ### Administration / Gameplay
 Config Option | Value Type | Default Value | Description
