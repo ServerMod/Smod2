@@ -271,6 +271,7 @@ scp939_89_amount | Integer | 1 | Max amount of SCP-939-89 (Or SCP-939-109 as on 
 scp_healing_duration | Seconds | -1 | Heal SCPs who haven't moved and got hurt in a specified amount of time
 scp_healing_health | Integer | 100 | The amount of HP that SCPs will recover
 scp106_lure_amount | Integer | 1 | The amount of lures required to contain SCP-106
+scp106_lure_team | List | 1, 2, 3, 4, 6 | Teams that are allowed to use femur breaker
 
 ### Smart Class Picker (All in Vanilla Game)
 Config Option | Value Type | Default Value | Description
