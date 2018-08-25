@@ -25,7 +25,8 @@ namespace Smod2.API
 		E11_STANDARD_RIFLE,
 		P90,
 		MP7,
-		LOGICER // Chaos Gun
+		LOGICER, // Chaos Gun
+		RAGDOLLLESS
 	}
 
 	public enum UserRank
