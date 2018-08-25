@@ -156,6 +156,8 @@ add_item_loot | RList | **Empty** | Adds the specified item ID to all lockers' l
 **scp_grenade_multiplier** | Float | 1.0 | The multiplier for the amount of damage grenades do to SCPs
 **human_grenade_multiplier** | Float | 0.7 | The multiplier for the amount of damage grenades do to humans
 disable_blood_on_screen | Boolean | False | Disable the blood effect on player's screen
+nuke_cleanup | Boolean | False | Deletes all items underground after the nuke goes off
+scp106_lure_team | List | 1,2,3,4,6 | Teams that will be killed and counted as a sacrifice for the Femur Breaker
 
 #### Reserved Slots
 Config Option | Value Type | Default Value | Description
