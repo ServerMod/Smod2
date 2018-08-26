@@ -5,6 +5,7 @@ namespace Smod2
 {
 	public interface IConfigFile
 	{
+		string GetConfigPath();
 		int GetIntValue(string key, int def, bool randomValues = false);
 		float GetFloatValue(string key, float def, bool randomValues = false);
 		string GetStringValue(string key, string def, bool randomValues = false);
