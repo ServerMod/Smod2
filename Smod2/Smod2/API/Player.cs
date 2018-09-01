@@ -94,5 +94,9 @@ namespace Smod2.API
 		public abstract bool GetBypassMode();
 		public abstract string GetAuthToken();
 		public abstract void HideTag(bool enable);
+		/// <summary>  
+		/// Get SCP-106's portal position. Returns zero if Player is not SCP-106 or SCP-106 hasn't created one.
+		/// </summary> 
+		public abstract Vector Get106Portal();
 	}
 }
