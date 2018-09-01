@@ -58,13 +58,13 @@ quit
 3. Search for SCP. You should see "SCP: Secret Laboratory ServerMod".
 4. If you want the stable branch, just install what you see. If you want the beta branch, right click it, "Properties", "Betas", select the beta in the dropdown, then install it.
 5. Remove steam_appid.txt in the install folder. This causes you to show up as playing SCPSL on steam & can prevent you from launching client.
-   - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
+   - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting. This does however spam a lot of errors, so it's not recommended.
 
 ### To install via Steam URI (on Windows with Steam installed):
 1. Launch `steam://install/786920` (using "Run", File Explorer address bar, or web browser address bar)
 2. This installs the stable branch by default. If you want the beta branch, you'll need to follow the directions using the Steam Library, which can still be done after installing it this way.
 3. Remove steam_appid.txt in the install folder. This causes you to show up as playing SCPSL on steam & can prevent you from launching client.
-   - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
+   - Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting. This does however spam a lot of errors, so it's not recommended.
 
 **If you use any of the above methods, you will have to manually run MultiAdmin, not launch it directly through steam.**
 
@@ -76,7 +76,7 @@ quit
 4. Back up Assembly-CSharp.dll (either by renaming it or moving it somewhere).
 5. Copy the downloaded Assembly-CSharp.dll and Smod2.dll into that folder.
 6. Remove steam_appid.txt in the install folder. This causes you to show up as playing SCPSL on steam & can prevent you from launching client.
-- Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting.
+- Optionally, remove discord-rpc.dll from `"SCPSL_Data\Plugins\"`. This prevents showing up as playing the game on Discord while hosting. This does however spam a lot of errors, so it's not recommended.
 
 ## Server Name Variables
 Currently supported variables (place in your servers name):
