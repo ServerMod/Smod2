@@ -5,6 +5,7 @@ using Smod2.Config;
 using Smod2.Events;
 using System.Collections.Generic;
 using Smod2.EventHandlers;
+using Smod2.Lang;
 
 namespace Smod2
 {
@@ -55,6 +56,25 @@ namespace Smod2
 		public void AddConfig(ConfigSetting setting)
 		{
 			ConfigManager.Manager.RegisterConfig(this, setting);
+		}
+
+		public void AddTranslation(LangSetting setting)
+		{
+			LangManager.Manager.RegisterTranslation(this, setting);
+		}
+
+		private void CheckLangRegistered(string key)
+		{
+			if (!LangManager.Manager.IsRegistered(this, key))
+			{
+				this.Warn("Trying to access a lang setting that isnt registered to the plugin, this is bad practice.");
+			}
+		}
+
+		public string GetTranslation(string key)
+		{
+			CheckLangRegistered(key.ToUpper());
+			return LangManager.Manager.GetTranslation(key);
 		}
 
 		private void CheckConfigRegistered(string key)

@@ -68,6 +68,8 @@
     <Compile Include="API\Server.cs" />
     <Compile Include="EventSystem\Events\AdminEvents.cs" />
     <Compile Include="EventSystem\Events\TeamEvents.cs" />
+    <Compile Include="LangManager\LangSetting.cs" />
+    <Compile Include="LangManager\LangManager.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginManager.cs" />
