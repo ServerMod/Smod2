@@ -29,7 +29,7 @@
 			}
 		}
 
-		public LangSetting(string tag, string defaultText, string filename = "ServerMod")
+		public LangSetting(string key, string defaultText, string filename = "ServerMod")
 		{
 			this.key = key.ToUpper();
 			this.defaultText = defaultText;

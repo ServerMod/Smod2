@@ -44,7 +44,7 @@ namespace Smod2
 				if (!keyvalue.ContainsKey(setting.Key))
 				{
 					keyvalue.Add(setting.Key, setting.Default);
-					File.AppendAllText(Directory.GetCurrentDirectory() + "/../sm_translations/" + setting.Filename + ".txt", setting.Key + " = " + setting.Default + System.Environment.NewLine);
+					File.AppendAllText(Directory.GetCurrentDirectory() + "/./sm_translations/" + setting.Filename + ".txt", setting.Key + " = " + setting.Default + System.Environment.NewLine);
 				}
 				else
 				{
@@ -68,8 +68,14 @@ namespace Smod2
 
 		public LangManager()
 		{
-			DirectoryInfo dir = new DirectoryInfo(Directory.GetCurrentDirectory() + "/../sm_translations/");
-			foreach (FileInfo file in dir.GetFiles(".txt"))
+			string smTranslationPath = Directory.GetCurrentDirectory() + "/./sm_translations/";
+			if (!Directory.Exists(smTranslationPath))
+			{
+				Directory.CreateDirectory(smTranslationPath);
+			}
+
+			DirectoryInfo dir = new DirectoryInfo(smTranslationPath);
+			foreach (FileInfo file in dir.GetFiles("*.txt"))
 			{
 				foreach (string line in File.ReadAllLines(file.FullName))
 				{

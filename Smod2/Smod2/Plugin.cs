@@ -67,7 +67,7 @@ namespace Smod2
 		{
 			if (!LangManager.Manager.IsRegistered(this, key))
 			{
-				this.Warn("Trying to access a lang setting that isnt registered to the plugin, this is bad practice.");
+				this.Warn("Trying to access a lang setting [" + key + "] that isnt registered to the plugin, this is bad practice.");
 			}
 		}
 
