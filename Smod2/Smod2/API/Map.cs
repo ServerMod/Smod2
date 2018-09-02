@@ -22,6 +22,7 @@ namespace Smod2.API
 		public abstract void FemurBreaker(bool enable);
 		public abstract List<Elevator> GetElevators();
 		public abstract void SetIntercomContent(IntercomStatus intercomStatus, string content);
+		public abstract string GetIntercomContent(IntercomStatus intercomStatus);
 	}
 
 	public abstract class Door
