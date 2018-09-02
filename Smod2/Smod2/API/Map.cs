@@ -21,6 +21,7 @@ namespace Smod2.API
 		/// </summary> 
 		public abstract void FemurBreaker(bool enable);
 		public abstract List<Elevator> GetElevators();
+		public abstract void SetIntercomContent(IntercomStatus intercomStatus, string content);
 	}
 
 	public abstract class Door
@@ -51,6 +52,13 @@ namespace Smod2.API
 		Up,
 		Down,
 		Moving
+	}
+
+	public enum IntercomStatus
+	{
+		Ready = 0,
+		Transmitting = 1,
+		Restarting = 2
 	}
 
 	public abstract class Elevator
