@@ -33,4 +33,12 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		void OnSetSCPConfig(SetSCPConfigEvent ev);
 	}
+
+	public interface IEventHandlerSetNTFUnitName : IEventHandler
+	{
+		/// <summary>  
+		/// Called when the name of NTF unit is about to be set. This happens when NTF units respawn.
+		/// <summary>  
+		void OnSetNTFUnitName(SetNTFUnitNameEvent ev);
+	}
 }

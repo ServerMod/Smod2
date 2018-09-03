@@ -112,4 +112,19 @@ namespace Smod2.EventSystem.Events
 			((IEventHandlerSetSCPConfig)handler).OnSetSCPConfig(this);
 		}
 	}
+
+	public class SetNTFUnitNameEvent : Event
+	{
+		public SetNTFUnitNameEvent(string unit)
+		{
+			this.Unit = unit;
+		}
+
+		public string Unit { get; set; }
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSetNTFUnitName)handler).OnSetNTFUnitName(this);
+		}
+	}
 }
