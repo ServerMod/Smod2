@@ -23,6 +23,7 @@ namespace Smod2.API
 		public abstract List<Elevator> GetElevators();
 		public abstract void SetIntercomContent(IntercomStatus intercomStatus, string content);
 		public abstract string GetIntercomContent(IntercomStatus intercomStatus);
+		public abstract List<TeslaGate> GetTeslaGates();
 	}
 
 	public abstract class Door
@@ -36,6 +37,13 @@ namespace Smod2.API
 		public abstract Vector Position { get; }
 		public abstract string Name { get; }
 		public abstract string Permission { get; }
+	}
+
+	public abstract class TeslaGate
+	{
+		public abstract void Activate();
+		public abstract float TriggerDistance { get; set; }
+		public abstract Vector Position { get; }
 	}
 
 	public enum ElevatorType

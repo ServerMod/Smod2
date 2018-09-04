@@ -474,4 +474,21 @@ namespace Smod2.Events
 			((IEventHandlerHandcuff)handler).OnHandcuff(this);
 		}
 	}
+
+	public class PlayerTriggerTeslaEvent : PlayerEvent
+	{
+		public TeslaGate TeslaGate { get; }
+		public bool Triggerable { get; set; }
+
+		public PlayerTriggerTeslaEvent(Player player, TeslaGate teslaGate, bool triggerable) : base(player)
+		{
+			this.TeslaGate = teslaGate;
+			this.Triggerable = triggerable;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerTriggerTesla)handler).OnPlayerTriggerTesla(this);
+		}
+	}
 }

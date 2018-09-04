@@ -221,4 +221,12 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnHandcuff(PlayerHandcuffEvent ev);
 	}
+
+	public interface IEventHandlerPlayerTriggerTesla : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player triggers a tesla gate
+		/// <summary>
+		void OnPlayerTriggerTesla(PlayerTriggerTeslaEvent ev);
+	}
 }
