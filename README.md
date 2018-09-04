@@ -159,6 +159,7 @@ disable_blood_on_screen | Boolean | False | Disable the blood effect on player's
 nuke_cleanup | Boolean | False | Deletes all items underground after the nuke goes off
 scp106_lure_amount | Integer | 1 | The amount of lures required to contain SCP-106
 scp106_lure_team | List | 1,2,3,4,6 | Teams that will be killed and counted as a sacrifice for the Femur Breaker
+tesla_triggerable_team | List | 1,2,3,4,6 | Teams that can trigger tesla gates
 
 #### Reserved Slots
 Config Option | Value Type | Default Value | Description
