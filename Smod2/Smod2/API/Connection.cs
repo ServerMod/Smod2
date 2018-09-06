@@ -4,5 +4,6 @@
 	{
 		public abstract string IpAddress { get; }
 		public abstract void Disconnect();
+		public abstract bool IsBanned { get; }
 	}
 }
