@@ -491,4 +491,19 @@ namespace Smod2.Events
 			((IEventHandlerPlayerTriggerTesla)handler).OnPlayerTriggerTesla(this);
 		}
 	}
+
+	public class PlayerSCP914ChangeKnobEvent : PlayerEvent
+	{
+		public KnobSetting KnobSetting { get; set; }
+
+		public PlayerSCP914ChangeKnobEvent(Player player, KnobSetting knobSetting) : base(player)
+		{
+			this.KnobSetting = knobSetting;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSCP914ChangeKnob)handler).OnSCP914ChangeKnob(this);
+		}
+	}
 }

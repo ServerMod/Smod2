@@ -229,4 +229,12 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnPlayerTriggerTesla(PlayerTriggerTeslaEvent ev);
 	}
+
+	public interface IEventHandlerSCP914ChangeKnob : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player changes the knob of SCP-914
+		/// <summary>
+		void OnSCP914ChangeKnob(PlayerSCP914ChangeKnobEvent ev);
+	}
 }
