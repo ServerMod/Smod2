@@ -249,22 +249,18 @@ namespace Smod2
 
 		public void LoadDirectoryPlugins(String pluginDirectory)
 		{
-			string[] dirs = Directory.GetDirectories(pluginDirectory);
-			foreach (string directory in dirs)
+			string dependency_folder = pluginDirectory + DEPENDENCY_FOLDER;
+			if (Directory.Exists(dependency_folder))
 			{
-				string dependency_folder = directory + "/" + DEPENDENCY_FOLDER;
-				if (Directory.Exists(dependency_folder))
+				string[] dependencies = Directory.GetFiles(dependency_folder);
+				foreach (String dependency in dependencies)
 				{
-					string[] dependencies = Directory.GetFiles(dependency_folder);
-					foreach(String dependency in dependencies)
+					if (dependency.Contains(".dll"))
 					{
 						Logger.Info("PLUGIN_LOADER", "Loading plugin dependency: " + dependency);
 						try
 						{
-							if (dependency.Contains(".dll"))
-							{
-								this.LoadAssembly(dependency);
-							}
+							this.LoadAssembly(dependency);
 						}
 						catch (Exception e)
 						{
@@ -273,13 +269,11 @@ namespace Smod2
 							Logger.Debug("PLUGIN_LOADER", e.StackTrace);
 						}
 					}
-				} 
-				else
-				{
-					Logger.Debug("PLUGIN_LOADER", "No dependencies for directory: " + directory);
 				}
-
-				LoadPluginAssemblies(directory);
+			}
+			else
+			{
+				Logger.Debug("PLUGIN_LOADER", "No dependencies for directory: " + dependency_folder);
 			}
 		}
 
