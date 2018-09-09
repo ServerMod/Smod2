@@ -161,6 +161,19 @@ scp106_lure_amount | Integer | 1 | The amount of lures required to contain SCP-1
 scp106_lure_team | List | 1,2,3,4,6 | Teams that will be killed and counted as a sacrifice for the Femur Breaker
 tesla_triggerable_team | List | 1,2,3,4,6 | Teams that can trigger tesla gates
 
+### Badge system
+Config Option | Value Type | Default Value | Description
+--- | :---: | :---: | ---
+hide_global_badges | Boolean | False | This will hide all global badges by default and prevent people from reenabling them on your server. The people will still have their global badges and as such will keep their RA access unless you disabled it for their role
+disable_global_badges | Boolean | False | This will disable all global badge functionality. **As this includes global ban team, enabling this will cause your server to get delisted as it breaks the Verified Server agreement**
+hide_management_badges_by_default | Boolean | False | This will hide **Management** global badges when they join your server. They can reenable them with `gtag` in console
+hide_staff_badges_by_default | Boolean | False | This will hide **Staff** global badges when they join your server. They can reenable them with `gtag` in console
+hide_patreon_badges_by_default | Boolean | False | This will hide **Patreon & Event** global badges when they join your server. They can reenable them with `gtag` in console
+block_gtag_management_badges | Boolean | False | This will prevent **Management** from showing their badge with `gtag` after it's been hidden. This will not hide it when they join.
+block_gtag_banteam_badges | Boolean | False | This will prevent **Global Ban Team** from showing their badge with `gtag` after it's been hidden. This will not hide it when they join.
+block_gtag_staff_badges | Boolean | False | This will prevent **Staff** from showing their badge with `gtag` after it's been hidden. This will not hide it when they join.
+block_gtag_patreon_badges | Boolean | False | This will prevent **Patreon & Event** from showing their badge with `gtag` after it's been hidden. This will not hide it when they join.
+
 #### Reserved Slots
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
