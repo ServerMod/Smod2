@@ -7,26 +7,27 @@ namespace Smod2.API
 	{
 		NONE,
 		LURE,
-		SCP_049_2,
 		NUKE,
 		WALL,
 		DECONT, // Decontamination
 		TESLA, // Tesla
-		FRAG, // Frag grenade
-		SCP_939,
-		SCP_173,
-		SCP_106,
-		CONTAIN,
-		SCP_096,
-		SCP_049,
-		POCKET,
 		FALLDOWN,
+		FLYING,
+		CONTAIN,
+		POCKET,
+		RAGDOLLLESS,
 		COM15,
-		E11_STANDARD_RIFLE,
 		P90,
+		E11_STANDARD_RIFLE,
 		MP7,
 		LOGICER, // Chaos Gun
-		RAGDOLLLESS
+		FRAG, // Frag grenade
+		SCP_049,
+		SCP_049_2,
+		SCP_096,
+		SCP_106,
+		SCP_173,
+		SCP_939
 	}
 
 	public enum UserRank
