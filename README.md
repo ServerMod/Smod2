@@ -142,7 +142,6 @@ window_health | Float | 30.0 | Sets the HP of breakable windows. If the amount i
 ### Administration / Gameplay
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
-~~disable_badges~~ | Boolean | False | If true, admins will not have the admin badge on your server. **(DEPRICATED, use "hidden" as badge color in remote admin config instead)**
 enable_ra_server_commands | Boolean | True | Enables / Disables running console commands through text based Remote Admin
 server_command_whitelist | List | **Empty** | A list of SteamID64s for the users allowed to run console commands through text based Remote Admin (Whitelist is used by default even if you don't specify it), as of ServerMod 3.1.7 this now also supports rank ids (for example, "owner, admin, moderator")
 bypass_server_command_whitelist | Boolean | False | Allows anybody with access to text based Remote Admin to run console commands
@@ -164,6 +163,7 @@ tesla_triggerable_team | List | 1,2,3,4,6 | Teams that can trigger tesla gates
 ### Badge system
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
+~~disable_badges~~ | Boolean | False | If true, admins will not have the admin badge on your server. **(DEPRICATED, use "hidden" as badge color in remote admin config instead and enable hide_global_badges for global badges)**
 hide_global_badges | Boolean | False | This will hide all global badges by default and prevent people from reenabling them on your server. The people will still have their global badges and as such will keep their RA access unless you disabled it for their role
 disable_global_badges | Boolean | False | This will disable all global badge functionality. **As this includes global ban team, enabling this will cause your server to get delisted as it breaks the Verified Server agreement**
 hide_management_badges_by_default | Boolean | False | This will hide **Management** global badges when they join your server. They can reenable them with `gtag` in console
