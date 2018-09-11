@@ -1,5 +1,6 @@
 ﻿using Smod2.API;
 using Smod2.EventHandlers;
+using System.Collections.Generic;
 
 namespace Smod2.Events
 {
@@ -151,17 +152,17 @@ namespace Smod2.Events
 
 	public class PlayerSetRoleEvent : PlayerEvent
 	{
-		public PlayerSetRoleEvent(Player player, TeamRole teamRole, Role role, int[] items, bool defaultItem = true) : base(player)
+		public PlayerSetRoleEvent(Player player, TeamRole teamRole, Role role, List<ItemType> items, bool usingDefaultItem = true) : base(player)
 		{
 			TeamRole = teamRole;
 			Role = role;
 			Items = items;
-			DefaultItem = defaultItem;
+			UsingDefaultItem = usingDefaultItem;
 		}
 
-		public int[] Items { get; set; }
+		public List<ItemType> Items { get; set; }
 
-		public bool DefaultItem { get; set; }
+		public bool UsingDefaultItem { get; set; }
 
 		public Role Role { get; set; }
 
