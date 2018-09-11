@@ -458,20 +458,18 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PlayerHandcuffEvent : PlayerEvent
+	public class PlayerHandcuffedEvent : PlayerEvent
 	{
-		public Player Target { get; }
 		public bool Handcuffed { get; set; }
 
-		public PlayerHandcuffEvent(Player player, Player target, bool handcuffed) : base(player)
+		public PlayerHandcuffedEvent(Player player, bool handcuffed) : base(player)
 		{
-			this.Target = target;
 			this.Handcuffed = handcuffed;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerHandcuff)handler).OnHandcuff(this);
+			((IEventHandlerHandcuffed)handler).OnHandcuffed(this);
 		}
 	}
 
