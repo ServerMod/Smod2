@@ -290,6 +290,27 @@ scp939_89_amount | Integer | 1 | Max amount of SCP-939-89 (Or SCP-939-109 as on 
 scp_healing_duration | Seconds | -1 | Heal SCPs who haven't moved and got hurt in a specified amount of time
 scp_healing_health | Integer | 100 | The amount of HP that SCPs will recover
 
+### Default Items
+Config Option | Value Type | Default Value | Description
+--- | :---: | :---: | ---
+default_item_scp173 | RList | **Empty** | 
+default_item_classd | RList | **Empty** | 
+default_item_scp106 | RList | **Empty** | 
+default_item_ntfscientist | RList | 7, 20, 19, 25, 12, 14 | 
+default_item_scp049 | RList | **Empty** | 
+default_item_scientist | RList | 1, 14 | 
+default_item_scp079 | RList | **Empty** | 
+default_item_ci | RList | 10, 24, 14 | 
+default_item_scp096 | RList | **Empty** | 
+default_item_scp049_2 | RList | **Empty** | 
+default_item_lieutenant | RList | 7, 20, 19, 25, 12, 27, 26 | 
+default_item_commander | RList | 8, 20, 19, 25, 12, 27, 26 | 
+default_item_cadet | RList | 5, 21, 19, 12, 26 | 
+default_item_tutorial | RList | **Empty** | 
+default_item_guard | RList | 4, 23, 14, 19, 27, 12, 26 | 
+default_item_939_53 | RList | **Empty** | 
+default_item_939_89 | RList | **Empty** | 
+
 ### Smart Class Picker (All in Vanilla Game)
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
