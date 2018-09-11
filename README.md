@@ -138,6 +138,8 @@ sm_floating_items_everyone | Boolean | False | Make everyone's items float when 
 sm_floating_items_steamids | List | **Empty** | A list of SteamID64s for the players that should have their items float when dropped
 start_round_minimum_players | Integer | 2 | Minimum playercount for starting the countdown before the round starts.
 window_health | Float | 30.0 | Sets the HP of breakable windows. If the amount is less than zero, windows can't be broken.
+set_role_ignore_lite | Boolean | false | Allow you to spawn before round start
+allow_multiple_auth | Boolean | false | Allow multiple players with the same authentication token to connect
 
 ### Administration / Gameplay
 Config Option | Value Type | Default Value | Description
