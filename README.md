@@ -167,7 +167,7 @@ Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
 ~~disable_badges~~ | Boolean | False | If true, admins will not have the admin badge on your server. **(DEPRICATED, use "hidden" as badge color in remote admin config instead and enable hide_global_badges for global badges)**
 hide_global_badges | Boolean | False | This will hide all global badges by default and prevent people from reenabling them on your server. Although it is hidden, it is not *DISABLED* and as such, they maintain access to RA panel according to settings in your RA config.
-disable_global_badges | Boolean | False | This will disable all global badge functionality. **As this includes Global Ban team, enabling this will cause your server to get delisted as it breaks the Verified Server agreement. _Only enable this if your server isn't Verified_ **
+disable_global_badges | Boolean | False | This will disable all global badge functionality. **As this includes Global Ban team, enabling this will cause your server to get delisted as it breaks the Verified Server agreement. _Only enable this if your server isn't Verified_**
 hide_management_badges_by_default | Boolean | False | This will hide **Management** global badges when they join your server. They can reenable them with `gtag` in console
 hide_staff_badges_by_default | Boolean | False | This will hide **Staff** global badges when they join your server. They can reenable them with `gtag` in console
 hide_patreon_badges_by_default | Boolean | False | This will hide **Patreon & Event** global badges when they join your server. They can reenable them with `gtag` in console
