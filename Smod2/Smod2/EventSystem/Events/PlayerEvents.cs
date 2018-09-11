@@ -151,14 +151,17 @@ namespace Smod2.Events
 
 	public class PlayerSetRoleEvent : PlayerEvent
 	{
-		public PlayerSetRoleEvent(Player player, TeamRole teamRole, Role role, int[] items) : base(player)
+		public PlayerSetRoleEvent(Player player, TeamRole teamRole, Role role, int[] items, bool defaultItem = true) : base(player)
 		{
 			TeamRole = teamRole;
 			Role = role;
 			Items = items;
+			DefaultItem = defaultItem;
 		}
 
 		public int[] Items { get; set; }
+
+		public bool DefaultItem { get; set; }
 
 		public Role Role { get; set; }
 
