@@ -24,6 +24,8 @@ namespace Smod2.API
 		public abstract void SetIntercomContent(IntercomStatus intercomStatus, string content);
 		public abstract string GetIntercomContent(IntercomStatus intercomStatus);
 		public abstract List<TeslaGate> GetTeslaGates();
+		public abstract void AnnounceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter);
+		public abstract void AnnounceScpKill(string scpNumber, Player killer = null);
 	}
 
 	public abstract class Door
