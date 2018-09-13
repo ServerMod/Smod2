@@ -66,7 +66,7 @@ namespace Smod2.API
 		public abstract int GetAmmo(AmmoType type);
 		public abstract void SetAmmo(AmmoType type, int amount);
 		public abstract Vector GetPosition();
-		public abstract void Teleport(Vector pos);
+		public abstract void Teleport(Vector pos, bool unstuck = true);
 		public abstract void SetRank(string color = "", string text = "", string group = "");
 		public abstract string GetRankName();
 		public abstract void Disconnect();
