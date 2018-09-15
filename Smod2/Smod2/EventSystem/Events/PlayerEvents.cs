@@ -469,9 +469,12 @@ namespace Smod2.Events
 	{
 		public bool Handcuffed { get; set; }
 
-		public PlayerHandcuffedEvent(Player player, bool handcuffed) : base(player)
+		public Player Owner { get; set; }
+
+		public PlayerHandcuffedEvent(Player player, bool handcuffed, Player owner) : base(player)
 		{
 			this.Handcuffed = handcuffed;
+			this.Owner = owner;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
