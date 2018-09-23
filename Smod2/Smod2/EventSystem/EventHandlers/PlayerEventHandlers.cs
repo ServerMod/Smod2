@@ -30,6 +30,14 @@ namespace Smod2.EventHandlers
 		void OnPlayerPickupItem(PlayerPickupItemEvent ev);
 	}
 
+	public interface IEventHandlerPlayerPickupItemLate : IEventHandler
+	{
+		/// <summary>  
+		/// This is called after a player picks up an item.
+		/// </summary> 
+		void OnPlayerPickupItemLate(PlayerPickupItemLateEvent ev);
+	}
+
 	public interface IEventHandlerPlayerDropItem : IEventHandler
 	{
 		/// <summary>  

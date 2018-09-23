@@ -80,6 +80,21 @@ namespace Smod2.Events
 		}
 	}
 
+	public class PlayerPickupItemLateEvent : PlayerEvent
+	{
+		public Item Item { get; }
+
+		public PlayerPickupItemLateEvent(Player player, Item item) : base(player)
+		{
+			this.Item = item;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerPickupItemLate)handler).OnPlayerPickupItemLate(this);
+		}
+	}
+
 	public class PlayerDropItemEvent : PlayerItemEvent
 	{
 		public PlayerDropItemEvent(Player player, Item item, ItemType change, bool allow) : base(player, item, change, allow)
