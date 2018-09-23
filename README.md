@@ -311,6 +311,14 @@ default_item_guard | RList | 4, 23, 14, 19, 27, 12, 26 |
 default_item_939_53 | RList | **Empty** | 
 default_item_939_89 | RList | **Empty** | 
 
+### Spawn Protect
+Config Option | Value Type | Default Value | Description
+--- | :---: | :---: | ---
+spawn_protect_disable | Boolean | True | Whether disable Spawn Protect
+spawn_protect_time | Seconds | 30 | Time before the player is not invincible
+spawn_protect_team | List | 1, 2 | Team(s) that will be spawn-protected
+spawn_protect_allow_dmg | Boolean | True | Whether the spawn-protected player can damage others
+
 ### Smart Class Picker (All in Vanilla Game)
 Config Option | Value Type | Default Value | Description
 --- | :---: | :---: | ---
