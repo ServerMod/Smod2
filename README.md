@@ -216,6 +216,8 @@ teleport_unstuck_protection | Boolean | True | Prevent players from getting stuc
 ~~last_movement_timeout~~ | Seconds | 30 | After this amount of time without a player sending any movement, they will be kicked (still sends movement if they're standing still, so this isn't anti-afk)
 ~~rejected_movement_limit~~ | Integer | -1 | The amount of movements detected by the anti-cheat as invalid before a player is kicked, the detection count increases per invalid movement and decreases per valid movement
 ~~sm_onplayerjoin_tries_timeout~~ | Integer | 50 | The amount of tries before the OnPlayerJoin event gives up on executing for a player (to prevent it constantly running if a player disconnects before it's run)
+antifly_enable | Boolean | True | Whether enable AntiFly
+antifly_kill_player | Boolean | False | Whether AntiFly kills players
 
 ### Warhead Options
 Config Option | Value Type | Default Value | Description
