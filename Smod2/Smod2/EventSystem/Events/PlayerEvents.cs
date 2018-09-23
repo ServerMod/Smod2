@@ -514,4 +514,19 @@ namespace Smod2.Events
 			((IEventHandlerSCP914ChangeKnob)handler).OnSCP914ChangeKnob(this);
 		}
 	}
+
+	public class PlayerRadioSwitchEvent : PlayerEvent
+	{
+		public RadioStatus ChangeTo { get; set; }
+
+		public PlayerRadioSwitchEvent(Player player, RadioStatus changeTo) : base(player)
+		{
+			this.ChangeTo = changeTo;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerRadioSwitch)handler).OnPlayerRadioSwitch(this);
+		}
+	}
 }

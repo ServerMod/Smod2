@@ -237,4 +237,12 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnSCP914ChangeKnob(PlayerSCP914ChangeKnobEvent ev);
 	}
+
+	public interface IEventHandlerRadioSwitch : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player changes the status of their radio
+		/// <summary>
+		void OnPlayerRadioSwitch(PlayerRadioSwitchEvent ev);
+	}
 }

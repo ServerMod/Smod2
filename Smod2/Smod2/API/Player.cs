@@ -47,6 +47,15 @@ namespace Smod2.API
 		DROPPED_9 = 2 // COM15, P90 (Type 2)
 	}
 
+	public enum RadioStatus
+	{
+		CLOSE = 0,
+		SHORT_RANGE = 1,
+		MEDIUM_RANGE = 2,
+		LONG_RANGE = 3,
+		ULTRA_RANGE = 4
+	}
+
 	public abstract class Player : ICommandSender
 	{
 		internal bool CallSetRoleEvent { get; set; }
@@ -57,6 +66,7 @@ namespace Smod2.API
 		public abstract string IpAddress { get; }
 		public abstract int PlayerId { get; }
 		public abstract string SteamId { get; }
+		public abstract RadioStatus RadioStatus { get; set; }
 
 		public abstract void Kill(DamageType type = DamageType.NUKE);
 		public abstract int GetHealth();
@@ -99,5 +109,6 @@ namespace Smod2.API
 		/// Get SCP-106's portal position. Returns zero if Player is not SCP-106 or SCP-106 hasn't created one.
 		/// </summary> 
 		public abstract Vector Get106Portal();
+		public abstract void SetRadioBattery(int battery);
 	}
 }
