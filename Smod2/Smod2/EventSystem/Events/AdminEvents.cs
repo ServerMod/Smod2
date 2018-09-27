@@ -34,7 +34,7 @@ namespace Smod2.Events
 		public Player Player { get; set; }
 		public Player Admin { get; set; }
 		public int Duration { get; set; }
-		string Reason { get; set; }
+		public string Reason { get; set; }
 		public string Result { get; set; }
 		public bool AllowBan { get; set; }
 
