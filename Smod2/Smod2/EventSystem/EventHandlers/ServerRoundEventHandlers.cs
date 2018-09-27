@@ -68,21 +68,33 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerUpdate : IEventHandler
 	{
+		/// <summary>  
+		///  This event handler will call every server tick
+		/// </summary> 
 		void OnUpdate(UpdateEvent ev);
 	}
 
 	public interface IEventHandlerFixedUpdate : IEventHandler
 	{
+		/// <summary>  
+		///  This event handler will call every server tick at a fixed rate (0.02)
+		/// </summary> 
 		void OnFixedUpdate(FixedUpdateEvent ev);
 	}
 
 	public interface IEventHandlerLateUpdate : IEventHandler
 	{
+		/// <summary>  
+		///  This event handler will call after OnUpdate
+		/// </summary> 
 		void OnLateUpdate(LateUpdateEvent ev);
 	}
 
 	public interface IEventHandlerSceneChanged : IEventHandler
 	{
+		/// <summary>  
+		///  This event handler will call when the server scene changes
+		/// </summary> 
 		void OnSceneChanged(SceneChangedEvent ev);
 	}
 }
