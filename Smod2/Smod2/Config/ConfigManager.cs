@@ -52,7 +52,6 @@ namespace Smod2
 					isRegistered = true;
 				}
 			}
-
 			return isRegistered;
 		}
 
@@ -72,7 +71,6 @@ namespace Smod2
 			{
 				PluginManager.Manager.Logger.Warn("DEFAULT_CONFIG_RESOLVER", "Default setting for config " + key + " does not exist");
 			}
-
 			return def;
 		}
 
@@ -220,7 +218,6 @@ namespace Smod2
 						break;
 				}
 			}
-
 			return false;
 		}
 
@@ -281,11 +278,9 @@ namespace Smod2
 						updated_list.Add(secondary_setting_plugin);
 					}
 				}
-
 				pair.Value.Clear();
 				pair.Value.AddRange(updated_list);
 			}
 		}
-
 	}
 }
