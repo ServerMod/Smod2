@@ -10,7 +10,7 @@ namespace Smod2.Events
 	public enum Priority {Highest = 100, High = 80, Normal = 50, Low = 20, Lowest = 0};
 
 	public class EventManager
-    {
+	{
 		private static EventManager singleton;
 		
 		public static EventManager Manager
