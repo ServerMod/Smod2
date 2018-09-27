@@ -18,29 +18,28 @@ namespace Smod2.Events
 
 	public abstract class WarheadEvent : Event
 	{
-        public WarheadEvent(Player player, float timeLeft)
-        {
-            this.player = player;
-            this.TimeLeft = timeLeft;
-            this.Cancel = false;
-        }
+		public WarheadEvent(Player player, float timeLeft)
+		{
+			this.player = player;
+			this.TimeLeft = timeLeft;
+			this.Cancel = false;
+		}
 
 		public float TimeLeft { get; set; }
-        private Player player;
-        public Player Activator { get => player; }
-        public bool Cancel { get; set; }
+		private Player player;
+		public Player Activator { get => player; }
+		public bool Cancel { get; set; }
 	}
 
 	public class WarheadStartEvent : WarheadEvent
 	{
-        public WarheadStartEvent(Player activator, float timeLeft, bool isResumed, bool openDoorsAfter): base(activator, timeLeft)
-        {
-            IsResumed = isResumed;
+		public WarheadStartEvent(Player activator, float timeLeft, bool isResumed, bool openDoorsAfter): base(activator, timeLeft)
+		{
+			IsResumed = isResumed;
 			OpenDoorsAfter = openDoorsAfter;
-
 		}
 
-        public bool IsResumed { get; set; }
+		public bool IsResumed { get; set; }
 		public bool OpenDoorsAfter { get; set; }
 		public override void ExecuteHandler(IEventHandler handler)
 		{
@@ -50,11 +49,11 @@ namespace Smod2.Events
 
 	public class WarheadStopEvent : WarheadEvent
 	{
-        public WarheadStopEvent(Player player, float timeLeft) : base(player, timeLeft)
-        {
-        }
+		public WarheadStopEvent(Player player, float timeLeft) : base(player, timeLeft)
+		{
+		}
 
-        public override void ExecuteHandler(IEventHandler handler)
+		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerWarheadStopCountdown)handler).OnStopCountdown(this);
 		}
