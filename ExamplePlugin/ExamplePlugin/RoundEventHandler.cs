@@ -25,9 +25,9 @@ namespace Smod.TestPlugin
 			plugin.Info("Players: " + ev.Server.GetPlayers().Count);
 			foreach (Player player in ev.Server.GetPlayers())
 			{
-			// Print the player info and then their class info
-			plugin.Info(player.ToString());
-			plugin.Info(player.TeamRole.ToString());
+				// Print the player info and then their class info
+				plugin.Info(player.ToString());
+				plugin.Info(player.TeamRole.ToString());
 			}
 		}
 	}
