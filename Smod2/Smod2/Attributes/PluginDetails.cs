@@ -2,8 +2,8 @@
 
 namespace Smod2.Attributes
 {
-    public class PluginDetails : Attribute
-    {
+	public class PluginDetails : Attribute
+	{
 		public int SmodMajor;
 		public int SmodMinor;
 		public int SmodRevision;
@@ -12,5 +12,5 @@ namespace Smod2.Attributes
 		public string author;
 		public string description;
 		public string version;
-    }
+	}
 }
