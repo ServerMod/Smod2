@@ -6,35 +6,33 @@ using Smod2.Events;
 
 namespace Smod.TestPlugin
 {
-    class LottoItemHandler : IEventHandlerPlayerPickupItem
-    {
-        private Plugin plugin;
-        Random rnd;
+	class LottoItemHandler : IEventHandlerPlayerPickupItem
+	{
+		private Plugin plugin;
+		Random rnd;
 
-        public LottoItemHandler(Plugin plugin)
-        {
-            rnd = new Random();
-            this.plugin = plugin;
-        }
+		public LottoItemHandler(Plugin plugin)
+		{
+		rnd = new Random();
+		this.plugin = plugin;
+		}
 
-        public void OnPlayerPickupItem(PlayerPickupItemEvent ev)
-        {
-            plugin.Info(ev.Player.Name + " picked up item " + ev.Item.ItemType);
-            if (ev.Item.ItemType == ItemType.COIN)
-            {
-                double luckyValue = rnd.NextDouble();
-                if (luckyValue > 0.8)
-                {
+		public void OnPlayerPickupItem(PlayerPickupItemEvent ev)
+		{
+			plugin.Info(ev.Player.Name + " picked up item " + ev.Item.ItemType);
+			if (ev.Item.ItemType == ItemType.COIN)
+			{
+				double luckyValue = rnd.NextDouble();
+				if (luckyValue > 0.8)
+				{
 					ev.Player.Kill();
 				}
 
-                if (luckyValue < 0.1)
-                {
+				if (luckyValue < 0.1)
+				{
 					ev.ChangeTo = ItemType.MICROHID;
-                }
-   
-            }
-        }
-
-    }
+				}
+			}
+		}
+	}
 }
