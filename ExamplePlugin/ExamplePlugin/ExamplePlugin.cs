@@ -33,7 +33,7 @@ namespace ExamplePlugin
 			// Register Events
 			this.AddEventHandlers(new RoundEventHandler(this));
 			// Register with priority (need to specify the handler type
-            this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.Highest);
+			this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.Highest);
 			// Register Commands
 			this.AddCommand("hello", new HelloWorldCommand(this));
 			// Register config settings
