@@ -60,11 +60,11 @@ namespace Smod2.Events
 		{
 			Item = item;
 			Allow = allow;
-            ChangeTo = change;
+			ChangeTo = change;
 		}
 
 		public Item Item { get; set; }
-        public ItemType ChangeTo { get; set; }
+		public ItemType ChangeTo { get; set; }
 		public bool Allow { get; set; }
 	}
 

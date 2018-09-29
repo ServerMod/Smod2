@@ -30,11 +30,11 @@ namespace Smod2.Events
 	{
 		public RoundEndEvent(Server server, Round round, ROUND_END_STATUS status) : base(server)
 		{
-            this.round = round;
+			this.round = round;
 			this.status = status;
 		}
 
-        private Round round;
+		private Round round;
 		public Round Round { get => round; }
 		private ROUND_END_STATUS status;
 		public ROUND_END_STATUS Status { get => status; }
