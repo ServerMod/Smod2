@@ -6,6 +6,7 @@ using Smod2.Events;
 using System.Collections.Generic;
 using Smod2.EventHandlers;
 using Smod2.Lang;
+using Smod2.API;
 
 namespace Smod2
 {
@@ -19,6 +20,8 @@ namespace Smod2
 
 		public readonly EventManager eventManager = EventManager.Manager;
 		public readonly PluginManager pluginManager = PluginManager.Manager;
+		public readonly Server server = PluginManager.Manager.Server;
+		public readonly Round round = PluginManager.Manager.Server.Round;
 		public abstract void Register();
 		public abstract void OnEnable();
 		public abstract void OnDisable();
