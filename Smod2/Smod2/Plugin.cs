@@ -20,8 +20,8 @@ namespace Smod2
 
 		public readonly EventManager eventManager = EventManager.Manager;
 		public readonly PluginManager pluginManager = PluginManager.Manager;
-		public readonly Server server = PluginManager.Manager.Server;
-		public readonly Round round = PluginManager.Manager.Server.Round;
+		public Server Server => PluginManager.Manager.Server;
+		public Round Round => PluginManager.Manager.Server.Round;
 		public abstract void Register();
 		public abstract void OnEnable();
 		public abstract void OnDisable();
