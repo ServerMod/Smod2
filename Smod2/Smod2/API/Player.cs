@@ -92,7 +92,7 @@ namespace Smod2.API
 		public abstract bool HasItem(ItemType type);
 		public abstract int GetItemIndex(ItemType type);
 		public abstract bool IsHandcuffed();
-		public abstract void ChangeRole(Role role, bool full = true, bool spawnTeleport = true);
+		public abstract void ChangeRole(Role role, bool full = true, bool spawnTeleport = true, bool spawnProtect = true);
 		public abstract object GetGameObject();
 		public abstract UserGroup GetUserGroup();
 		public abstract string[] RunCommand(string command, string[] args);
