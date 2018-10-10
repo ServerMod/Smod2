@@ -20,5 +20,6 @@ namespace Smod2.API
 		public abstract int SCPStart { get; }
 		public abstract int GrenadeKills { get; }
 		public abstract bool WarheadDetonated { get; }
+		public abstract int CiAlive { get; }
 	}
 }
