@@ -68,7 +68,6 @@ namespace Smod2.API
 		public abstract string SteamId { get; }
 		public abstract RadioStatus RadioStatus { get; set; }
 		public abstract bool OverwatchMode { get; set; }
-		public abstract bool GhostMode { get; set; }
 
 		public abstract void Kill(DamageType type = DamageType.NUKE);
 		public abstract int GetHealth();
@@ -114,5 +113,7 @@ namespace Smod2.API
 		public abstract void SetRadioBattery(int battery);
 		public abstract void HandcuffPlayer(Player playerToHandcuff);
 		public abstract void RemoveHandcuffs();
+		public abstract bool GetGhostMode();
+		public abstract void SetGhostMode(bool ghostMode, bool visibleToSpec = true);
 	}
 }
