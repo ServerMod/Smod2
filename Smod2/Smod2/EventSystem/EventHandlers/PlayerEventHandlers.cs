@@ -253,4 +253,12 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnPlayerRadioSwitch(PlayerRadioSwitchEvent ev);
 	}
+
+	public interface IEventHandlerMakeNoise : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player makes noise
+		/// <summary>
+		void OnMakeNoise(PlayerMakeNoiseEvent ev);
+	}
 }

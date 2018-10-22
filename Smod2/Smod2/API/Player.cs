@@ -114,6 +114,6 @@ namespace Smod2.API
 		public abstract void HandcuffPlayer(Player playerToHandcuff);
 		public abstract void RemoveHandcuffs();
 		public abstract bool GetGhostMode();
-		public abstract void SetGhostMode(bool ghostMode, bool visibleToSpec = true);
+		public abstract void SetGhostMode(bool ghostMode, bool visibleToSpec = true, bool visibleWhenTalking = true);
 	}
 }

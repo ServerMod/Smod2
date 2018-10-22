@@ -544,4 +544,16 @@ namespace Smod2.Events
 			((IEventHandlerRadioSwitch)handler).OnPlayerRadioSwitch(this);
 		}
 	}
+
+	public class PlayerMakeNoiseEvent : PlayerEvent
+	{
+		public PlayerMakeNoiseEvent(Player player) : base(player)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerMakeNoise)handler).OnMakeNoise(this);
+		}
+	}
 }
