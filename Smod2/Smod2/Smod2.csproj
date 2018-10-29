@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,7 +50,9 @@
     <Compile Include="Config\ConfigSetting.cs" />
     <Compile Include="Config\IConfigFile.cs" />
     <Compile Include="EventSystem\EventHandlers\EventHandler.cs" />
+    <Compile Include="EventSystem\EventHandlers\ConfigEventHandlers.cs" />
     <Compile Include="EventSystem\Events\EnvironmentEvents.cs" />
+    <Compile Include="EventSystem\Events\ConfigEvents.cs" />
     <Compile Include="EventSystem\Events\ServerRoundEvents.cs" />
     <Compile Include="EventSystem\Events\PlayerEvents.cs" />
     <Compile Include="EventSystem\EventManager.cs" />

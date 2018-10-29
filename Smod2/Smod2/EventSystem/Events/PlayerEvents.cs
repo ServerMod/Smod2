@@ -556,4 +556,19 @@ namespace Smod2.Events
 			((IEventHandlerMakeNoise)handler).OnMakeNoise(this);
 		}
 	}
+
+	public class PlayerRecallZombieEvent: PlayerEvent
+	{
+		bool AllowRecall { get; set; }
+
+		public PlayerRecallZombieEvent(Player player, Player target, bool allowRecall) : base(player)
+		{
+			this.AllowRecall = allowRecall;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerRecallZombie)handler).OnRecallZombie(this);
+		}
+	}
 }
