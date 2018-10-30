@@ -559,10 +559,13 @@ namespace Smod2.Events
 
 	public class PlayerRecallZombieEvent: PlayerEvent
 	{
+		public Player Target { get; }
+
 		public bool AllowRecall { get; set; }
 
 		public PlayerRecallZombieEvent(Player player, Player target, bool allowRecall) : base(player)
 		{
+			this.Target = target;
 			this.AllowRecall = allowRecall;
 		}
 

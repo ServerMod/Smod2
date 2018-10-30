@@ -75,4 +75,21 @@ namespace Smod2.Events
 		}
 	}
 
+	public class SummonVehicleEvent : Event
+	{
+		public bool IsCI { get; set; }
+
+		public bool AllowSummon { get; set; }
+
+		public SummonVehicleEvent(bool isCI, bool allowSummon)
+		{
+			this.IsCI = isCI;
+			this.AllowSummon = allowSummon;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSummonVehicle)handler).OnSummonVehicle(this);
+		}
+	}
 }

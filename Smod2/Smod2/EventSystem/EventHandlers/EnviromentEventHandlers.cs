@@ -39,4 +39,12 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnDecontaminate();
 	}
+
+	public interface IEventHandlerSummonVehicle : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a van/chopper is summoned.
+		/// </summary>  
+		void OnSummonVehicle(SummonVehicleEvent ev);
+	}
 }
