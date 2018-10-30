@@ -239,7 +239,7 @@ namespace Smod2
 			string[] files = Directory.GetFiles(dir);
 			foreach (string file in files)
 			{
-				if (file.Contains(".dll"))
+				if (file.EndsWith(".dll"))
 				{
 					Logger.Debug("PLUGIN_LOADER", file);
 					LoadPluginAssembly(file);
