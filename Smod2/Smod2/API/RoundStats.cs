@@ -6,10 +6,10 @@ namespace Smod2.API
 	{
 		public abstract int NTFAlive { get; }
 		public abstract int ScientistsAlive { get; }
-		public abstract int ScientistsEscaped { get; }
+		public abstract int ScientistsEscaped { get; set; }
 		public abstract int ScientistsDead { get; }
 		public abstract int ScientistsStart { get; }
-		public abstract int ClassDEscaped { get; }
+		public abstract int ClassDEscaped { get; set; }
 		public abstract int ClassDDead { get; }
 		public abstract int ClassDAlive { get; }
 		public abstract int ClassDStart { get; }
