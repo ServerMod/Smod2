@@ -1,6 +1,8 @@
 # ServerMod2
 ServerMod2 is a server side plugin system with a bunch of additional configuration options, bug fixes, security patches and some optimisations built in.
 
+For how to use/configure SMod, go to the [SMOD WIKI](https://github.com/Grover-c13/Smod2/wiki)
+
 The latest release can be found here: [Release link](https://github.com/Grover-c13/Smod2/releases/latest)
 
 ## Discord
