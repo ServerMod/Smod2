@@ -72,6 +72,7 @@ namespace Smod2.API
 	{
 		Muted,
 		Restarting,
+		Transmitting_Admin,
 		Transmitting_Bypass,
 		Transmitting,
 		Ready
