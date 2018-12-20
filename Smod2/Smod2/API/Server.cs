@@ -26,7 +26,7 @@ namespace Smod2.API
 		public abstract List<Connection> GetConnections(string filter = "");
 		public abstract List<TeamRole> GetRoles(string filter = "");
 
-		public abstract string BanSteamId(string username, string steamId, int duration, string reason = "", string issuer = "Server");
-		public abstract string BanIpAddress(string username, string ipAddress, int duration, string reason = "", string issuer = "Server");
+		public abstract bool BanSteamId(string username, string steamId, int duration, string reason = "", string issuer = "Server");
+		public abstract bool BanIpAddress(string username, string ipAddress, int duration, string reason = "", string issuer = "Server");
 	}
 }
