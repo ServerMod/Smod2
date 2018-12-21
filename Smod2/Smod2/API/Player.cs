@@ -68,7 +68,7 @@ namespace Smod2.API
 		public abstract string SteamId { get; }
 		public abstract RadioStatus RadioStatus { get; set; }
 		public abstract bool OverwatchMode { get; set; }
-		public abstract bool DoNotTrack { get; set; }
+		public abstract bool DoNotTrack { get; }
 
 		public abstract void Kill(DamageType type = DamageType.NUKE);
 		public abstract int GetHealth();
