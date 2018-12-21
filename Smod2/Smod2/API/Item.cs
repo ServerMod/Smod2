@@ -32,7 +32,8 @@
 		FLASHBANG = 26,
 		DISARMER = 27,
 		DROPPED_7 = 28,
-		DROPPED_9 = 29
+		DROPPED_9 = 29,
+		USP = 30
 	}
 
 	public enum KnobSetting
