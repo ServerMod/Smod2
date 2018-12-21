@@ -21,6 +21,7 @@ namespace Smod2.API
 		E11_STANDARD_RIFLE,
 		MP7,
 		LOGICER, // Chaos Gun
+		USP,
 		FRAG, // Frag grenade
 		SCP_049,
 		SCP_049_2,
