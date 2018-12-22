@@ -574,4 +574,17 @@ namespace Smod2.Events
 			((IEventHandlerRecallZombie)handler).OnRecallZombie(this);
 		}
 	}
+	
+	
+	public class PlayerCallCommandEvent: PlayerEvent
+	{
+		public PlayerCallCommandEvent(Player player) : base(player)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerCallCommand)handler).OnCallCommand(this);
+		}
+	}
 }
