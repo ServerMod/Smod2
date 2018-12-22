@@ -578,7 +578,7 @@ namespace Smod2.Events
 	
 	public class PlayerCallCommandEvent: PlayerEvent
 	{
-		oublic string ReturnMessage { get; set;}
+		public string ReturnMessage { get; set;}
 		public PlayerCallCommandEvent(Player player, string returnMessage) : base(player)
 		{
 			this.ReturnMessage = returnMessage;
