@@ -579,9 +579,11 @@ namespace Smod2.Events
 	public class PlayerCallCommandEvent: PlayerEvent
 	{
 		public string ReturnMessage { get; set;}
-		public PlayerCallCommandEvent(Player player, string returnMessage) : base(player)
+		public string Command { get; }
+		public PlayerCallCommandEvent(Player player, string command, string returnMessage) : base(player)
 		{
 			this.ReturnMessage = returnMessage;
+			this.Command = command;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
