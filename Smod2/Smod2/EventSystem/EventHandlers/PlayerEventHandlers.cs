@@ -269,4 +269,12 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnRecallZombie(PlayerRecallZombieEvent ev);
 	}
+	
+	public interface IEventHandlerCallCommand : IEventHandler
+	{
+		/// <summary>  
+		/// Called when SCP-049 turns someone into a zombie
+		/// <summary>
+		void OnCallCommand(PlayerCallCommandEvent ev);
+	}
 }
