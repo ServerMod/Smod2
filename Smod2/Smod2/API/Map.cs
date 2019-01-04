@@ -29,6 +29,8 @@ namespace Smod2.API
 		public abstract void AnnounceCustomMessage(string words);
 		public abstract void SetIntercomSpeaker(Player player);
 		public abstract Player GetIntercomSpeaker();
+		public abstract void Broadcast(string message, uint time, bool isMonoSpaced);
+		public abstract void ClearBroadcasts();
 	}
 
 	public abstract class Door
