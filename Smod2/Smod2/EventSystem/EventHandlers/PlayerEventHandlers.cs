@@ -273,8 +273,32 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerCallCommand : IEventHandler
 	{
 		/// <summary>  
-		/// Called when SCP-049 turns someone into a zombie
+		/// Called when a player uses a command that starts with .
 		/// <summary>
 		void OnCallCommand(PlayerCallCommandEvent ev);
+	}
+
+	public interface IEventHandlerReload : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player reloads their weapon
+		/// <summary>
+		void OnReload(PlayerReloadEvent ev);
+	}
+
+	public interface IEventHandlerGrenadeExplosion : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player's grenade explodes
+		/// <summary>
+		void OnGrenadeExplosion(PlayerGrenadeExplosion ev);
+	}
+
+	public interface IEventHandlerGrenadeHitPlayer : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player's grenade hits a player
+		/// <summary>
+		void OnGrenadeHitPlayer(PlayerGrenadeHitPlayer ev);
 	}
 }

@@ -591,4 +591,48 @@ namespace Smod2.Events
 			((IEventHandlerCallCommand)handler).OnCallCommand(this);
 		}
 	}
+
+	public class PlayerReloadEvent : PlayerEvent
+	{
+		public ItemType Weapon { get; }
+		public int Transferred { get; set; }
+		public int ClipAmmoCount { get; set; }
+		public PlayerReloadEvent(Player player, ItemType weapon, int transferred, int clipAmmoCount) : base(player)
+		{
+			this.Weapon = weapon;
+			this.Transferred = transferred;
+			this.ClipAmmoCount = clipAmmoCount;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerReload)handler).OnReload(this);
+		}
+	}
+
+	public class PlayerGrenadeExplosion : PlayerEvent
+	{
+		public PlayerGrenadeExplosion(Player thrower) : base(thrower)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerGrenadeExplosion)handler).OnGrenadeExplosion(this);
+		}
+	}
+
+	public class PlayerGrenadeHitPlayer : PlayerEvent
+	{
+		public Player Victim { get; }
+		public PlayerGrenadeHitPlayer(Player thrower, Player victim) : base(thrower)
+		{
+			Victim = victim;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerGrenadeHitPlayer)handler).OnGrenadeHitPlayer(this);
+		}
+	}
 }

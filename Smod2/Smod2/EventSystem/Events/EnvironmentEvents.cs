@@ -5,10 +5,20 @@ namespace Smod2.Events
 {
 	public class SCP914ActivateEvent : Event
 	{
+		public Player User { get; }
 		public KnobSetting KnobSetting { get; set; }
 		public object[] Inputs { get; set; } //TODO: Proper wrapping API
-		public Vector Intake { get; set; }
-		public Vector Outtake { get; set; }
+		public Vector IntakePos { get; set; }
+		public Vector OutputPos { get; set; }
+
+		public SCP914ActivateEvent(Player user, KnobSetting knobSetting, object[] inputs, Vector intakePos, Vector outputPos)
+		{
+			this.User = user;
+			this.KnobSetting = knobSetting;
+			this.Inputs = inputs;
+			this.IntakePos = intakePos;
+			this.OutputPos = outputPos;
+		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
