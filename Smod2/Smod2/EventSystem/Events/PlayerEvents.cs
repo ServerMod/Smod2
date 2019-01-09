@@ -595,13 +595,19 @@ namespace Smod2.Events
 	public class PlayerReloadEvent : PlayerEvent
 	{
 		public ItemType Weapon { get; }
-		public int Transferred { get; set; }
-		public int ClipAmmoCount { get; set; }
-		public PlayerReloadEvent(Player player, ItemType weapon, int transferred, int clipAmmoCount) : base(player)
+		public int AmmoRemoved { get; set; }
+		public int FutureClipAmmoCount { get; set; }
+		public int NormalMaxClipSize { get; }
+		public int CurrentClipAmmoCount { get; }
+		public int CurrentAmmoTotal { get; }
+		public PlayerReloadEvent(Player player, ItemType weapon, int ammoRemoved, int clipAmmoCount, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal) : base(player)
 		{
 			this.Weapon = weapon;
-			this.Transferred = transferred;
+			this.AmmoRemoved = ammoRemoved;
 			this.ClipAmmoCount = clipAmmoCount;
+			this.NormalMaxClipSize = normalMaxClipSize
+			this.CurrentClipAmmoCount = currentClipAmmoCount
+			this.CurrentAmmoTotal = currentAmmoTotal;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
