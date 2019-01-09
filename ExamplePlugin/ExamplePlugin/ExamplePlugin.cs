@@ -1,5 +1,4 @@
-﻿using Smod.TestPlugin;
-using Smod2;
+﻿using Smod2;
 using Smod2.Attributes;
 using Smod2.EventHandlers;
 using Smod2.Events;
@@ -11,7 +10,7 @@ namespace ExamplePlugin
 		name = "Test",
 		description = "Example plugin",
 		id = "courtney.example.plugin",
-		version = "3.0",
+		version = "1.0",
 		SmodMajor = 3,
 		SmodMinor = 0,
 		SmodRevision = 0
@@ -20,24 +19,27 @@ namespace ExamplePlugin
 	{
 		public override void OnDisable()
 		{
+			this.Info(this.Details.name + " was disabled ):");
 		}
 
 		public override void OnEnable()
 		{
-			this.Info("Example Plugin has loaded :)");
-			this.Info("Config value: " + this.GetConfigString("test"));
+			this.Info(this.Details.name + " has loaded :)");
+			this.Info("Config value: " + this.GetConfigString("myConfigKey"));
 		}
 
 		public override void Register()
 		{
-			// Register Events
+			// Register multiple events
 			this.AddEventHandlers(new RoundEventHandler(this));
-			// Register with priority (need to specify the handler type
-			this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.Highest);
+			//Register multiple events with Low Priority
+			this.AddEventHandlers(new MultipleEventsExample(this), Priority.Low);
+			// Register with priority (need to specify the handler type)
+			this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.High);
 			// Register Commands
 			this.AddCommand("hello", new HelloWorldCommand(this));
 			// Register config settings
-			this.AddConfig(new Smod2.Config.ConfigSetting("test", "yes", Smod2.Config.SettingType.STRING, true, "test"));
+			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", Smod2.Config.SettingType.STRING, true, "This is a description"));
 		}
 	}
 }
