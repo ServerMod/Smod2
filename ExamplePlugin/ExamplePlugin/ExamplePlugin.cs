@@ -34,11 +34,11 @@ namespace ExamplePlugin
 			this.AddEventHandlers(new RoundEventHandler(this));
 			//Register multiple events with Low Priority
 			this.AddEventHandlers(new MultipleEventsExample(this), Priority.Low);
-			// Register with priority (need to specify the handler type)
+			// Register single event with priority (need to specify the handler type)
 			this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.High);
-			// Register Commands
+			// Register Command(s)
 			this.AddCommand("hello", new HelloWorldCommand(this));
-			// Register config settings
+			// Register config setting(s)
 			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", Smod2.Config.SettingType.STRING, true, "This is a description"));
 		}
 	}
