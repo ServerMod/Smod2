@@ -596,15 +596,15 @@ namespace Smod2.Events
 	{
 		public ItemType Weapon { get; }
 		public int AmmoRemoved { get; set; }
-		public int FutureClipAmmoCount { get; set; }
+		public int ClipAmmoCountAfterReload { get; set; }
 		public int NormalMaxClipSize { get; }
 		public int CurrentClipAmmoCount { get; }
 		public int CurrentAmmoTotal { get; }
-		public PlayerReloadEvent(Player player, ItemType weapon, int ammoRemoved, int clipAmmoCount, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal) : base(player)
+		public PlayerReloadEvent(Player player, ItemType weapon, int ammoRemoved, int clipAmmoCountAfterReload, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal) : base(player)
 		{
 			this.Weapon = weapon;
 			this.AmmoRemoved = ammoRemoved;
-			this.ClipAmmoCount = clipAmmoCount;
+			this.ClipAmmoCountAfterReload = clipAmmoCountAfterReload;
 			this.NormalMaxClipSize = normalMaxClipSize
 			this.CurrentClipAmmoCount = currentClipAmmoCount
 			this.CurrentAmmoTotal = currentAmmoTotal;
