@@ -605,8 +605,8 @@ namespace Smod2.Events
 			this.Weapon = weapon;
 			this.AmmoRemoved = ammoRemoved;
 			this.ClipAmmoCountAfterReload = clipAmmoCountAfterReload;
-			this.NormalMaxClipSize = normalMaxClipSize
-			this.CurrentClipAmmoCount = currentClipAmmoCount
+			this.NormalMaxClipSize = normalMaxClipSize;
+			this.CurrentClipAmmoCount = currentClipAmmoCount;
 			this.CurrentAmmoTotal = currentAmmoTotal;
 		}
 
