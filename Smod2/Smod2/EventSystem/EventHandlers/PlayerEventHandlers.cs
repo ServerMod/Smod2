@@ -313,7 +313,7 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerGeneratorAccess : IEventHandler
 	{
 		/// <summary>
-		/// Called when a player attempts to open/close a generator
+		/// Called when a player attempts to open/close a generator.
 		/// </summary>
 		void OnGeneratorAccess(PlayerGeneratorAccessEvent ev);
 	}
@@ -321,7 +321,7 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerGeneratorInsertTablet : IEventHandler
 	{
 		/// <summary>
-		/// Called when a player puts a tablet in or ejects the tablet
+		/// Called when a player puts a tablet in or ejects the tablet.
 		/// </summary>
 		void OnGeneratorInsertTablet(PlayerGeneratorInsertTabletEvent ev);
 	}
@@ -329,7 +329,7 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerGeneratorEjectTablet : IEventHandler
 	{
 		/// <summary>
-		/// Called when a player puts a tablet in or ejects the tablet
+		/// Called when a player puts a tablet in or ejects the tablet.
 		/// </summary>
 		void OnGeneratorEjectTablet(PlayerGeneratorEjectTabletEvent ev);
 	}
