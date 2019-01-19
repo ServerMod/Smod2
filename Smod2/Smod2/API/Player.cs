@@ -57,6 +57,21 @@ namespace Smod2.API
 		ULTRA_RANGE = 4
 	}
 
+	public enum ExperienceType
+	{
+		KILL_ASSIST_CLASSD = 0,
+		KILL_ASSIST_CHAOS_INSURGENCY = 1,
+		KILL_ASSIST_NINETAILFOX = 2,
+		KILL_ASSIST_SCIENTIST = 3,
+		KILL_ASSIST_SCP = 4,
+		KILL_ASSIST_OTHER = 5,
+		USE_DOOR = 6,
+		USE_LOCKDOWN = 7,
+		USE_TESLAGATE = 8,
+		USE_ELEVATOR = 9,
+		CHEAT = 10
+	}
+
 	public abstract class Player : ICommandSender
 	{
 		internal bool CallSetRoleEvent { get; set; }
@@ -70,6 +85,7 @@ namespace Smod2.API
 		public abstract RadioStatus RadioStatus { get; set; }
 		public abstract bool OverwatchMode { get; set; }
 		public abstract bool DoNotTrack { get; }
+		public abstract Scp079Data Scp079Data { get; }
 
 		public abstract void Kill(DamageType type = DamageType.NUKE);
 		public abstract int GetHealth();
@@ -119,5 +135,25 @@ namespace Smod2.API
 		public abstract void RemoveHandcuffs();
 		public abstract bool GetGhostMode();
 		public abstract void SetGhostMode(bool ghostMode, bool visibleToSpec = true, bool visibleWhenTalking = true);
+	}
+
+	public abstract class Scp079Data
+	{
+		public abstract float Exp { get; set; }
+		public abstract int ExpToLevelUp { get; set; }
+		public abstract int Level { get; set; }
+
+		public abstract float AP { get; set; }
+		public abstract float APPerSecond { get; set; }
+		public abstract float MaxAP { get; set; }
+
+		public abstract float CameraYaw { get; }
+		public abstract float CameraPitch { get; }
+
+		public abstract Door[] GetLockedDoors();
+		public abstract bool Unlock(Door door);
+		public abstract void SetCameraRotation(float yaw, float pitch);
+		public abstract void ShowNotEnoughMana(float current, float needed);
+		public abstract void ShowGainExp(ExperienceType expType);
 	}
 }
