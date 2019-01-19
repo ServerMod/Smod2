@@ -102,4 +102,29 @@ namespace Smod2.API
 		public abstract PocketDimensionExitType ExitType { get; set; }
 		public abstract Vector Position { get; }
 	}
+
+    public enum GeneratorType
+    {
+        EntranceCheckpoint = 0,
+        HCZArmory = 1,
+        ServerRoom = 2,
+        MicroHID = 3,
+        Nuke = 4,
+        SCP049 = 5,
+        SCP079 = 6,
+        SCP096 = 7,
+        SCP106 = 8,
+        SCP939 = 9
+    }
+
+    public abstract class Generator
+    {
+        public abstract bool Open { get; set; }
+        public abstract bool Locked { get; set; }
+        public abstract bool HasTablet { get; set; }
+        public abstract bool Engaged { get; set; }
+        public abstract GeneratorType Type { get; }
+        public abstract float TimeLeft { get; set; }
+        public abstract Vector Position { get; }
+    }
 }
