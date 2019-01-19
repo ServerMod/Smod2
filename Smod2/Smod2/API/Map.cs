@@ -106,16 +106,16 @@ namespace Smod2.API
 
     public enum GeneratorType
     {
-        EntranceCheckpoint = 0,
-        HCZArmory = 1,
-        ServerRoom = 2,
-        MicroHID = 3,
-        Nuke = 4,
-        SCP049 = 5,
-        SCP079 = 6,
-        SCP096 = 7,
-        SCP106 = 8,
-        SCP939 = 9
+        ENTRANCE_CHECKPOINT = 0,
+        HCZ_ARMORY = 1,
+        SERVER_ROOM = 2,
+        MICROHID = 3,
+        NUKE = 4,
+        SCP_049 = 5,
+        SCP_079 = 6,
+        SCP_096 = 7,
+        SCP_106 = 8,
+        SCP_939 = 9
     }
 
     public abstract class Generator
