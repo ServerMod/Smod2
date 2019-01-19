@@ -1,12 +1,15 @@
 ﻿using Smod2.Commands;
+using Smod2.API;
 
 namespace ExamplePlugin
 {
 	class HelloWorldCommand : ICommandHandler
 	{
-		private ExamplePlugin plugin;
+		private readonly ExamplePlugin plugin;
+
 		public HelloWorldCommand(ExamplePlugin plugin)
 		{
+			//Constructor passing plugin refrence to this class
 			this.plugin = plugin;
 		}
 
@@ -24,6 +27,8 @@ namespace ExamplePlugin
 
 		public string[] OnCall(ICommandSender sender, string[] args)
 		{
+			//Will be null if command was called by server console
+			Player caller = sender as Player;
 			// This will print 3 lines in console.
 			return new string[] { "Hello World!", "My name is example plugin.", "thank you for listening, good bye!" };
 		}
