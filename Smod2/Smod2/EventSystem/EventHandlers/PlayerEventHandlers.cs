@@ -334,14 +334,6 @@ namespace Smod2.EventHandlers
         void OnGeneratorEjectTablet(PlayerGeneratorEjectTabletEvent ev);
     }
 
-    public interface IEventHandlerGeneratorFinish : IEventHandler
-    {
-        /// <summary>
-        /// Called when a player puts a tablet in or ejects the tablet
-        /// </summary>
-        void OnGeneratorFinish(PlayerGeneratorFinishEvent ev);
-    }
-
     public interface IEventHandler079Door : IEventHandler
     {
         /// <summary>
