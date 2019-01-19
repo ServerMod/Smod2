@@ -371,7 +371,7 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		/// Called when a player's SCP-079 experience is added to.
 		/// </summary>
-		void On079AddExperience(Player079AddExpEvent ev);
+		void On079AddExp(Player079AddExpEvent ev);
 	}
 
 	public interface IEventHandler079LevelUp : IEventHandler

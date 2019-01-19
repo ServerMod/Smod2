@@ -785,7 +785,7 @@ namespace Smod2.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandler079AddExp)handler).On079AddExperience(this);
+			((IEventHandler079AddExp)handler).On079AddExp(this);
 		}
 	}
 
