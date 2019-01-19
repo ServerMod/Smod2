@@ -771,4 +771,46 @@ namespace Smod2.Events
 			((IEventHandler079TeslaGate)handler).On079TeslaGate(this);
 		}
 	}
+
+	public class Player079AddExpEvent : PlayerEvent
+	{
+		public ExperienceType ExperienceType { get; }
+		public float ExpToAdd { get; set; }
+
+		public Player079AddExpEvent(Player player, ExperienceType experienceType, float expToAdd) : base(player)
+		{
+			ExperienceType = experienceType;
+			ExpToAdd = expToAdd;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079AddExp)handler).On079AddExperience(this);
+		}
+	}
+
+	public class Player079LevelUpEvent : PlayerEvent
+	{
+		public Player079LevelUpEvent(Player player) : base(player) { }
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079LevelUp)handler).On079LevelUp(this);
+		}
+	}
+
+	public class Player079UnlockDoorsEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+
+		public Player079UnlockDoorsEvent(Player player, bool allow) : base(player)
+		{
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079UnlockDoors)handler).On079UnlockDoors(this);
+		}
+	}
 }

@@ -365,4 +365,28 @@ namespace Smod2.EventHandlers
 		/// </summary>
 		void On079TeslaGate(Player079TeslaGateEvent ev);
 	}
+
+	public interface IEventHandler079AddExp : IEventHandler
+	{
+		/// <summary>
+		/// Called when a player's SCP-079 experience is added to.
+		/// </summary>
+		void On079AddExperience(Player079AddExpEvent ev);
+	}
+
+	public interface IEventHandler079LevelUp : IEventHandler
+	{
+		/// <summary>
+		/// Called when a player's SCP-079 level is incremented.
+		/// </summary>
+		void On079LevelUp(Player079LevelUpEvent ev);
+	}
+
+	public interface IEventHandler079UnlockDoors : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 unlocks all doors.
+		/// </summary>
+		void On079UnlockDoors(Player079UnlockDoorsEvent ev);
+	}
 }
