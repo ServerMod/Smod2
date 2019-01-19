@@ -102,4 +102,19 @@ namespace Smod2.Events
 			((IEventHandlerSummonVehicle)handler).OnSummonVehicle(this);
 		}
 	}
+
+	public class GeneratorFinishEvent : Event
+	{
+		public Generator Generator { get; }
+
+		public GeneratorFinishEvent(Generator generator)
+		{
+			Generator = generator;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerGeneratorFinish)handler).OnGeneratorFinish(this);
+		}
+	}
 }

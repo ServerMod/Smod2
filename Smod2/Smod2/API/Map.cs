@@ -12,6 +12,7 @@ namespace Smod2.API
 		public abstract List<Door> GetDoors();
 		public abstract List<PocketDimensionExit> GetPocketDimensionExits();
 		public abstract Dictionary<Vector, Vector> GetElevatorTeleportPoints();
+		public abstract Generator[] GetGenerators();
 		public abstract void Shake();
 		public abstract bool WarheadDetonated { get; }
 		public abstract bool LCZDecontaminated { get; }
@@ -100,6 +101,31 @@ namespace Smod2.API
 	public abstract class PocketDimensionExit
 	{
 		public abstract PocketDimensionExitType ExitType { get; set; }
+		public abstract Vector Position { get; }
+	}
+
+	public enum GeneratorType
+	{
+		ENTRANCE_CHECKPOINT = 0,
+		HCZ_ARMORY = 1,
+		SERVER_ROOM = 2,
+		MICROHID = 3,
+		NUKE = 4,
+		SCP_049 = 5,
+		SCP_079 = 6,
+		SCP_096 = 7,
+		SCP_106 = 8,
+		SCP_939 = 9
+	}
+
+	public abstract class Generator
+	{
+		public abstract bool Open { get; set; }
+		public abstract bool Locked { get; set; }
+		public abstract bool HasTablet { get; set; }
+		public abstract bool Engaged { get; set; }
+		public abstract GeneratorType Type { get; }
+		public abstract float TimeLeft { get; set; }
 		public abstract Vector Position { get; }
 	}
 }

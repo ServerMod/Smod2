@@ -641,4 +641,134 @@ namespace Smod2.Events
 			((IEventHandlerGrenadeHitPlayer)handler).OnGrenadeHitPlayer(this);
 		}
 	}
+
+	public class PlayerGeneratorUnlockEvent : PlayerEvent
+	{
+		public Generator Generator { get; }
+		public bool Allow { get; set; }
+
+		public PlayerGeneratorUnlockEvent(Player player, Generator generator) : base(player)
+		{
+			Generator = generator;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerGeneratorUnlock)handler).OnGeneratorUnlock(this);
+		}
+	}
+
+	public class PlayerGeneratorAccessEvent : PlayerEvent
+	{
+		public Generator Generator { get; }
+		public bool Allow { get; set; }
+
+		public PlayerGeneratorAccessEvent(Player player, Generator generator) : base(player)
+		{
+			Generator = generator;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerGeneratorAccess)handler).OnGeneratorAccess(this);
+		}
+	}
+
+	public class PlayerGeneratorInsertTabletEvent : PlayerEvent
+	{
+		public Generator Generator { get; }
+		public bool Allow { get; set; }
+		public bool RemoveTablet { get; set; }
+
+		public PlayerGeneratorInsertTabletEvent(Player player, Generator generator) : base(player)
+		{
+			Generator = generator;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerGeneratorInsertTablet)handler).OnGeneratorInsertTablet(this);
+		}
+	}
+
+	public class PlayerGeneratorEjectTabletEvent : PlayerEvent
+	{
+		public Generator Generator { get; }
+		public bool Allow { get; set; }
+		public bool SpawnTablet { get; set; }
+
+		public PlayerGeneratorEjectTabletEvent(Player player, Generator generator) : base(player)
+		{
+			Generator = generator;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerGeneratorEjectTablet)handler).OnGeneratorEjectTablet(this);
+		}
+	}
+
+	public class Player079DoorEvent : PlayerEvent
+	{
+		public Door Door { get; }
+		public bool Allow { get; set; }
+
+		public Player079DoorEvent(Player player, Door door) : base(player)
+		{
+			Door = door;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079Door)handler).On079Door(this);
+		}
+	}
+
+	public class Player079LockEvent : PlayerEvent
+	{
+		public Door Door { get; }
+		public bool Allow { get; set; }
+
+		public Player079LockEvent(Player player, Door door) : base(player)
+		{
+			Door = door;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079Lock)handler).On079Lock(this);
+		}
+	}
+
+	public class Player079ElevatorEvent : PlayerEvent
+	{
+		public Elevator Elevator { get; }
+		public bool Allow { get; set; }
+
+		public Player079ElevatorEvent(Player player, Elevator elevator) : base(player)
+		{
+			Elevator = elevator;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079Elevator)handler).On079Elevator(this);
+		}
+	}
+
+	public class Player079TeslaGateEvent : PlayerEvent
+	{
+		public TeslaGate TeslaGate { get; }
+		public bool Allow { get; set; }
+
+		public Player079TeslaGateEvent(Player player, TeslaGate teslaGate) : base(player)
+		{
+			TeslaGate = teslaGate;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079TeslaGate)handler).On079TeslaGate(this);
+		}
+	}
 }

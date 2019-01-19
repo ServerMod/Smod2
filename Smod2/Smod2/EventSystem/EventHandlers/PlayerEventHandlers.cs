@@ -301,4 +301,68 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnGrenadeHitPlayer(PlayerGrenadeHitPlayer ev);
 	}
+
+	public interface IEventHandlerGeneratorUnlock : IEventHandler
+	{
+		/// <summary>
+		/// Called when a player attempts to unlock a generator.
+		/// </summary>
+		void OnGeneratorUnlock(PlayerGeneratorUnlockEvent ev);
+	}
+
+	public interface IEventHandlerGeneratorAccess : IEventHandler
+	{
+		/// <summary>
+		/// Called when a player attempts to open/close a generator.
+		/// </summary>
+		void OnGeneratorAccess(PlayerGeneratorAccessEvent ev);
+	}
+
+	public interface IEventHandlerGeneratorInsertTablet : IEventHandler
+	{
+		/// <summary>
+		/// Called when a player puts a tablet in or ejects the tablet.
+		/// </summary>
+		void OnGeneratorInsertTablet(PlayerGeneratorInsertTabletEvent ev);
+	}
+
+	public interface IEventHandlerGeneratorEjectTablet : IEventHandler
+	{
+		/// <summary>
+		/// Called when a player puts a tablet in or ejects the tablet.
+		/// </summary>
+		void OnGeneratorEjectTablet(PlayerGeneratorEjectTabletEvent ev);
+	}
+
+	public interface IEventHandler079Door : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 opens/closes doors.
+		/// </summary>
+		void On079Door(Player079DoorEvent ev);
+	}
+
+	public interface IEventHandler079Lock : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 locks/unlocks doors.
+		/// </summary>
+		void On079Lock(Player079LockEvent ev);
+	}
+
+	public interface IEventHandler079Elevator : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 sends an elevator up/down.
+		/// </summary>
+		void On079Elevator(Player079ElevatorEvent ev);
+	}
+
+	public interface IEventHandler079TeslaGate : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 triggers a tesla gate.
+		/// </summary>
+		void On079TeslaGate(Player079TeslaGateEvent ev);
+	}
 }
