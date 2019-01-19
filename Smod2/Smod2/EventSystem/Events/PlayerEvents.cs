@@ -674,21 +674,6 @@ namespace Smod2.Events
         }
     }
 
-    public class PlayerGeneratorFinishEvent : PlayerEvent
-    {
-        public Generator Generator { get; }
-
-        public PlayerGeneratorFinishEvent(Player player, Generator generator) : base(player)
-        {
-            Generator = generator;
-        }
-
-        public override void ExecuteHandler(IEventHandler handler)
-        {
-            ((IEventHandlerGeneratorFinish)handler).OnGeneratorFinish(this);
-        }
-    }
-
     public class PlayerGeneratorInsertTabletEvent : PlayerEvent
     {
         public Generator Generator { get; }

@@ -53,6 +53,6 @@ namespace Smod2.EventHandlers
         /// <summary>
         /// Called when a generator becomes engaged.
         /// </summary>
-        void OnGeneratorFinish(PlayerGeneratorFinishEvent ev);
+        void OnGeneratorFinish(GeneratorFinishEvent ev);
     }
 }
