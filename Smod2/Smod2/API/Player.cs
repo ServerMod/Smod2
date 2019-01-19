@@ -151,9 +151,9 @@ namespace Smod2.API
 		public abstract float CameraPitch { get; }
 
 		public abstract Door[] GetLockedDoors();
+		public abstract void Lock(Door door);
 		public abstract bool Unlock(Door door);
-		public abstract void SetCameraRotation(float yaw, float pitch);
-		public abstract void ShowNotEnoughMana(float current, float needed);
 		public abstract void ShowGainExp(ExperienceType expType);
+		public abstract void ShowLevelUp(int level);
 	}
 }
