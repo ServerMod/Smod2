@@ -103,18 +103,18 @@ namespace Smod2.Events
 		}
 	}
 
-    public class GeneratorFinishEvent : Event
-    {
-        public Generator Generator { get; }
+	public class GeneratorFinishEvent : Event
+	{
+		public Generator Generator { get; }
 
-        public GeneratorFinishEvent(Generator generator)
-        {
-            Generator = generator;
-        }
+		public GeneratorFinishEvent(Generator generator)
+		{
+			Generator = generator;
+		}
 
-        public override void ExecuteHandler(IEventHandler handler)
-        {
-            ((IEventHandlerGeneratorFinish)handler).OnGeneratorFinish(this);
-        }
-    }
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerGeneratorFinish)handler).OnGeneratorFinish(this);
+		}
+	}
 }

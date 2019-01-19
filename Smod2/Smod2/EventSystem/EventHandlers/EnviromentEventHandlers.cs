@@ -48,11 +48,11 @@ namespace Smod2.EventHandlers
 		void OnSummonVehicle(SummonVehicleEvent ev);
 	}
 
-    public interface IEventHandlerGeneratorFinish : IEventHandler
-    {
-        /// <summary>
-        /// Called when a generator becomes engaged.
-        /// </summary>
-        void OnGeneratorFinish(GeneratorFinishEvent ev);
-    }
+	public interface IEventHandlerGeneratorFinish : IEventHandler
+	{
+		/// <summary>
+		/// Called when a generator becomes engaged.
+		/// </summary>
+		void OnGeneratorFinish(GeneratorFinishEvent ev);
+	}
 }
