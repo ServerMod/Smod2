@@ -45,6 +45,7 @@ namespace Smod2.API
 		public abstract Vector Position { get; }
 		public abstract string Name { get; }
 		public abstract string Permission { get; }
+		public abstract object GetComponent();
 	}
 
 	public abstract class TeslaGate
