@@ -389,4 +389,12 @@ namespace Smod2.EventHandlers
 		/// </summary>
 		void On079UnlockDoors(Player079UnlockDoorsEvent ev);
 	}
+
+	public interface IEventHandler079SwitchCamera : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 teleports to a new camera.
+		/// </summary>
+		void On079SwitchCamera(Player079SwitchCameraEvent ev);
+	}
 }

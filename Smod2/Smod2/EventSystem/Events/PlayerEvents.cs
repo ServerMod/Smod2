@@ -813,4 +813,23 @@ namespace Smod2.Events
 			((IEventHandler079UnlockDoors)handler).On079UnlockDoors(this);
 		}
 	}
+
+	public class Player079SwitchCameraEvent : PlayerEvent
+	{
+		public Vector Camera { get; set; }
+		public bool Allow { get; set; }
+		public float ExpDrain { get; set; }
+
+		public Player079SwitchCameraEvent(Player player, Vector camera, bool allow, float expDrain) : base(player)
+		{
+			Camera = camera;
+			Allow = allow;
+			ExpDrain = expDrain;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079SwitchCamera)handler).On079SwitchCamera(this);
+		}
+	}
 }
