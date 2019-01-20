@@ -130,19 +130,11 @@ namespace Smod2.API
 		public abstract float TimeLeft { get; set; }
 		public abstract Vector Position { get; }
 	}
-
-	public enum ZoneType
-	{
-		UNDEFINED = -1,
-		LCZ = 0,
-		HCZ = 1
-	}
-
+	
 	public abstract class Room
 	{
 		public abstract string ZoneName { get; }
-		public abstract ZoneType Zone { get; }
-		public abstract string Name { get; }
+		public abstract string RoomName { get; }
 
 		public abstract void FlickerLights();
 	}
