@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Smod2.API;
 
 namespace Smod2.API
 {
@@ -50,9 +49,10 @@ namespace Smod2.API
 
 	public abstract class TeslaGate
 	{
-		public abstract void Activate();
+		public abstract void Activate(bool instant = false);
 		public abstract float TriggerDistance { get; set; }
 		public abstract Vector Position { get; }
+		public abstract object GetComponent();
 	}
 
 	public enum ElevatorType
@@ -107,6 +107,7 @@ namespace Smod2.API
 
 	public enum GeneratorType
 	{
+		UNDEFINED = -1,
 		ENTRANCE_CHECKPOINT = 0,
 		HCZ_ARMORY = 1,
 		SERVER_ROOM = 2,
@@ -128,5 +129,21 @@ namespace Smod2.API
 		public abstract GeneratorType Type { get; }
 		public abstract float TimeLeft { get; set; }
 		public abstract Vector Position { get; }
+	}
+
+	public enum ZoneType
+	{
+		UNDEFINED = -1,
+		LCZ = 0,
+		HCZ = 1
+	}
+
+	public abstract class Room
+	{
+		public abstract string ZoneName { get; }
+		public abstract ZoneType Zone { get; }
+		public abstract string Name { get; }
+
+		public abstract void FlickerLights();
 	}
 }
