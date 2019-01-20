@@ -149,7 +149,7 @@ namespace Smod2.API
 		public abstract float Pitch { get; }
 		public abstract Vector Position { get; }
 		public abstract Room Speaker { get; set; }
-		public abstract Vector Camera { get; set; }
+		public abstract Vector Camera { get; } //todo: implement api object
 
 		public abstract Door[] GetLockedDoors();
 		public abstract void Lock(Door door);
