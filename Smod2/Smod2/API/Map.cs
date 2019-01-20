@@ -12,6 +12,7 @@ namespace Smod2.API
 		public abstract List<PocketDimensionExit> GetPocketDimensionExits();
 		public abstract Dictionary<Vector, Vector> GetElevatorTeleportPoints();
 		public abstract Generator[] GetGenerators();
+		public abstract List<Room> Get079InteractionRooms(Scp079InteractionType type);
 		public abstract void Shake();
 		public abstract bool WarheadDetonated { get; }
 		public abstract bool LCZDecontaminated { get; }
@@ -105,19 +106,56 @@ namespace Smod2.API
 		public abstract Vector Position { get; }
 	}
 
-	public enum GeneratorType
+	public enum ZoneType
 	{
 		UNDEFINED = -1,
-		ENTRANCE_CHECKPOINT = 0,
+		LCZ = 0,
+		HCZ = 1,
+		ENTRANCE = 2
+	}
+
+	public enum RoomType
+	{
+		UNDEFINED = -1,
+		WC00 = 11,
+		SCP_914 = 17,
+		AIRLOCK_00 = 22,
+		AIRLOCK_01 = 23,
+		CHECKPOINT_A = 20,
+		CHECKPOINT_B = 19,
 		HCZ_ARMORY = 1,
 		SERVER_ROOM = 2,
 		MICROHID = 3,
 		NUKE = 4,
+		SCP_012 = 12,
 		SCP_049 = 5,
 		SCP_079 = 6,
 		SCP_096 = 7,
 		SCP_106 = 8,
-		SCP_939 = 9
+		SCP_372 = 13,
+		SCP_939 = 9,
+		ENTRANCE_CHECKPOINT = 0,
+		PC = 10,
+		GATE_A = 14,
+		GATE_B = 15,
+		CAFE = 16,
+		UPSTAIRS = 21,
+		INTERCOM = 18
+	}
+
+	public enum Scp079InteractionType
+	{
+		SPEAKER = 4,
+		ELEVATOR = 7
+	}
+
+	public abstract class Room
+	{
+		public abstract ZoneType ZoneType { get; }
+		public abstract RoomType RoomType { get; }
+
+		public abstract void FlickerLights();
+		public abstract string[] GetGameName();
 	}
 
 	public abstract class Generator
@@ -126,16 +164,8 @@ namespace Smod2.API
 		public abstract bool Locked { get; set; }
 		public abstract bool HasTablet { get; set; }
 		public abstract bool Engaged { get; set; }
-		public abstract GeneratorType Type { get; }
 		public abstract float TimeLeft { get; set; }
 		public abstract Vector Position { get; }
-	}
-	
-	public abstract class Room
-	{
-		public abstract string ZoneName { get; }
-		public abstract string RoomName { get; }
-
-		public abstract void FlickerLights();
+		public abstract Room Room { get; }
 	}
 }
