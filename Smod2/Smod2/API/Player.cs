@@ -145,9 +145,10 @@ namespace Smod2.API
 		public abstract float AP { get; set; }
 		public abstract float APPerSecond { get; set; }
 		public abstract float MaxAP { get; set; }
+		public abstract float SpeakerAPPerSecond { get; set; }
+		public abstract float LockedDoorAPPerSecond { get; set; }
 		public abstract float Yaw { get; }
 		public abstract float Pitch { get; }
-		public abstract Vector Position { get; }
 		public abstract Room Speaker { get; set; }
 		public abstract Vector Camera { get; } //todo: implement api object
 
