@@ -108,39 +108,39 @@ namespace Smod2.API
 
 	public enum ZoneType
 	{
-		UNDEFINED = -1,
-		LCZ = 0,
-		HCZ = 1,
-		ENTRANCE = 2
+		UNDEFINED = 0,
+		LCZ = 1,
+		HCZ = 2,
+		ENTRANCE = 3
 	}
 
 	public enum RoomType
 	{
-		UNDEFINED = -1,
-		WC00 = 11,
-		SCP_914 = 17,
-		AIRLOCK_00 = 22,
-		AIRLOCK_01 = 23,
-		CHECKPOINT_A = 20,
-		CHECKPOINT_B = 19,
-		HCZ_ARMORY = 1,
-		SERVER_ROOM = 2,
-		MICROHID = 3,
-		NUKE = 4,
-		SCP_012 = 12,
-		SCP_049 = 5,
-		SCP_079 = 6,
-		SCP_096 = 7,
-		SCP_106 = 8,
-		SCP_372 = 13,
-		SCP_939 = 9,
-		ENTRANCE_CHECKPOINT = 0,
-		PC = 10,
-		GATE_A = 14,
-		GATE_B = 15,
-		CAFE = 16,
-		UPSTAIRS = 21,
-		INTERCOM = 18
+		UNDEFINED = 0,
+		WC00 = 1,
+		SCP_914 = 2,
+		AIRLOCK_00 = 3,
+		AIRLOCK_01 = 4,
+		CHECKPOINT_A = 5,
+		CHECKPOINT_B = 6,
+		HCZ_ARMORY = 7,
+		SERVER_ROOM = 8,
+		MICROHID = 9,
+		NUKE = 10,
+		SCP_012 = 11,
+		SCP_049 = 12,
+		SCP_079 = 13,
+		SCP_096 = 14,
+		SCP_106 = 15,
+		SCP_372 = 16,
+		SCP_939 = 17,
+		ENTRANCE_CHECKPOINT = 18,
+		PC = 19,
+		GATE_A = 20,
+		GATE_B = 21,
+		CAFE = 22,
+		UPSTAIRS = 23,
+		INTERCOM = 24
 	}
 
 	public enum Scp079InteractionType
