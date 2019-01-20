@@ -712,10 +712,13 @@ namespace Smod2.Events
 	{
 		public Door Door { get; }
 		public bool Allow { get; set; }
+		public float ExpDrain { get; set; }
 
-		public Player079DoorEvent(Player player, Door door) : base(player)
+		public Player079DoorEvent(Player player, Door door, bool allow, float expDrain) : base(player)
 		{
 			Door = door;
+			Allow = allow;
+			ExpDrain = expDrain;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -728,10 +731,13 @@ namespace Smod2.Events
 	{
 		public Door Door { get; }
 		public bool Allow { get; set; }
+		public float ExpDrain { get; set; }
 
-		public Player079LockEvent(Player player, Door door) : base(player)
+		public Player079LockEvent(Player player, Door door, bool allow, float expDrain) : base(player)
 		{
 			Door = door;
+			Allow = allow;
+			ExpDrain = expDrain;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -744,10 +750,13 @@ namespace Smod2.Events
 	{
 		public Elevator Elevator { get; }
 		public bool Allow { get; set; }
+		public float ExpDrain { get; set; }
 
-		public Player079ElevatorEvent(Player player, Elevator elevator) : base(player)
+		public Player079ElevatorEvent(Player player, Elevator elevator, bool allow, float expDrain) : base(player)
 		{
 			Elevator = elevator;
+			Allow = allow;
+			ExpDrain = expDrain;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -760,10 +769,13 @@ namespace Smod2.Events
 	{
 		public TeslaGate TeslaGate { get; }
 		public bool Allow { get; set; }
+		public float ExpDrain { get; set; }
 
-		public Player079TeslaGateEvent(Player player, TeslaGate teslaGate) : base(player)
+		public Player079TeslaGateEvent(Player player, TeslaGate teslaGate, bool allow, float expDrain) : base(player)
 		{
 			TeslaGate = teslaGate;
+			Allow = allow;
+			ExpDrain = expDrain;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -814,13 +826,13 @@ namespace Smod2.Events
 		}
 	}
 
-	public class Player079SwitchCameraEvent : PlayerEvent
+	public class Player079CameraTeleportEvent : PlayerEvent
 	{
 		public Vector Camera { get; set; }
 		public bool Allow { get; set; }
 		public float ExpDrain { get; set; }
 
-		public Player079SwitchCameraEvent(Player player, Vector camera, bool allow, float expDrain) : base(player)
+		public Player079CameraTeleportEvent(Player player, Vector camera, bool allow, float expDrain) : base(player)
 		{
 			Camera = camera;
 			Allow = allow;
@@ -829,7 +841,81 @@ namespace Smod2.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandler079SwitchCamera)handler).On079SwitchCamera(this);
+			((IEventHandler079CameraTeleport)handler).On079CameraTeleport(this);
+		}
+	}
+
+	public class Player079StartSpeakerEvent : PlayerEvent
+	{
+		public Room Room { get; }
+		public bool Allow { get; set; }
+		public float ExpDrain { get; set; }
+
+		public Player079StartSpeakerEvent(Player player, Room room, bool allow, float expDrain) : base(player)
+		{
+			Room = room;
+			Allow = allow;
+			ExpDrain = expDrain;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079StartSpeaker)handler).On079StartSpeaker(this);
+		}
+	}
+
+	public class Player079StopSpeakerEvent : PlayerEvent
+	{
+		public Room Room { get; }
+		public bool Allow { get; set; }
+
+		public Player079StopSpeakerEvent(Player player, Room room, bool allow) : base(player)
+		{
+			Room = room;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079StopSpeaker)handler).On079StopSpeaker(this);
+		}
+	}
+
+	public class Player079LockdownEvent : PlayerEvent
+	{
+		public Room Room { get; }
+		public bool Allow { get; set; }
+		public float ExpDrain { get; set; }
+
+		public Player079LockdownEvent(Player player, Room room, bool allow, float expDrain) : base(player)
+		{
+			Room = room;
+			Allow = allow;
+			ExpDrain = expDrain;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079Lockdown)handler).On079Lockdown(this);
+		}
+	}
+
+	public class Player079ElevatorTeleportEvent : PlayerEvent
+	{
+		public Vector Camera { get; }
+		public bool Allow { get; set; }
+		public float ExpDrain { get; set; }
+
+		public Player079ElevatorTeleportEvent(Player player, Vector camera, bool allow, float expDrain) : base(player)
+		{
+			Camera = camera;
+			Allow = allow;
+			ExpDrain = expDrain;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079ElevatorTeleport)handler).On079ElevatorTeleport(this);
 		}
 	}
 }
