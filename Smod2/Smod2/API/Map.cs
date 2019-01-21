@@ -132,27 +132,38 @@ namespace Smod2.API
 		SCP_079 = 13,
 		SCP_096 = 14,
 		SCP_106 = 15,
+		SCP_173 = 30,
 		SCP_372 = 16,
 		SCP_939 = 17,
 		ENTRANCE_CHECKPOINT = 18,
-		PC = 19,
+		TESLA_GATE = 33,
+		PC_SMALL = 19,
+		PC_LARGE = 23,
 		GATE_A = 20,
 		GATE_B = 21,
 		CAFE = 22,
-		UPSTAIRS = 23,
-		INTERCOM = 24
+		INTERCOM = 24,
+		DR_L = 31,
+		STRAIGHT = 25,
+		CURVE = 26,
+		T_INTERSECTION = 27,
+		X_INTERSECTION = 28,
+		LCZ_ARMORY = 29,
+		CLASS_D_CELLS = 32
 	}
 
 	public enum Scp079InteractionType
 	{
-		SPEAKER = 4,
-		ELEVATOR = 7
+		CAMERA = 0,
+		SPEAKER = 4
 	}
 
 	public abstract class Room
 	{
 		public abstract ZoneType ZoneType { get; }
 		public abstract RoomType RoomType { get; }
+		public abstract int GenericID { get; }
+		public abstract Vector Position { get; }
 
 		public abstract void FlickerLights();
 		public abstract string[] GetGameName();
