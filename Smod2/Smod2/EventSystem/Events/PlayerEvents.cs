@@ -647,9 +647,10 @@ namespace Smod2.Events
 		public Generator Generator { get; }
 		public bool Allow { get; set; }
 
-		public PlayerGeneratorUnlockEvent(Player player, Generator generator) : base(player)
+		public PlayerGeneratorUnlockEvent(Player player, Generator generator, bool allow) : base(player)
 		{
 			Generator = generator;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -663,9 +664,10 @@ namespace Smod2.Events
 		public Generator Generator { get; }
 		public bool Allow { get; set; }
 
-		public PlayerGeneratorAccessEvent(Player player, Generator generator) : base(player)
+		public PlayerGeneratorAccessEvent(Player player, Generator generator, bool allow) : base(player)
 		{
 			Generator = generator;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -680,9 +682,11 @@ namespace Smod2.Events
 		public bool Allow { get; set; }
 		public bool RemoveTablet { get; set; }
 
-		public PlayerGeneratorInsertTabletEvent(Player player, Generator generator) : base(player)
+		public PlayerGeneratorInsertTabletEvent(Player player, Generator generator, bool allow, bool removeTablet) : base(player)
 		{
 			Generator = generator;
+			Allow = allow;
+			RemoveTablet = removeTablet;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -697,9 +701,11 @@ namespace Smod2.Events
 		public bool Allow { get; set; }
 		public bool SpawnTablet { get; set; }
 
-		public PlayerGeneratorEjectTabletEvent(Player player, Generator generator) : base(player)
+		public PlayerGeneratorEjectTabletEvent(Player player, Generator generator, bool allow, bool spawnTablet) : base(player)
 		{
 			Generator = generator;
+			Allow = allow;
+			SpawnTablet = spawnTablet;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
