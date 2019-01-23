@@ -166,7 +166,7 @@ namespace Smod2.API
 		public abstract Vector Position { get; }
 
 		public abstract void FlickerLights();
-		public abstract string[] GetGameName();
+		public abstract string[] GetObjectName();
 	}
 
 	public abstract class Generator
