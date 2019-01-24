@@ -132,24 +132,24 @@ namespace Smod2.API
 		SCP_079 = 13,
 		SCP_096 = 14,
 		SCP_106 = 15,
-		SCP_173 = 30,
-		SCP_372 = 16,
-		SCP_939 = 17,
-		ENTRANCE_CHECKPOINT = 18,
-		TESLA_GATE = 33,
-		PC_SMALL = 19,
-		PC_LARGE = 23,
-		GATE_A = 20,
-		GATE_B = 21,
-		CAFE = 22,
-		INTERCOM = 24,
-		DR_L = 31,
-		STRAIGHT = 25,
-		CURVE = 26,
-		T_INTERSECTION = 27,
-		X_INTERSECTION = 28,
-		LCZ_ARMORY = 29,
-		CLASS_D_CELLS = 32
+		SCP_173 = 16,
+		SCP_372 = 17,
+		SCP_939 = 18,
+		ENTRANCE_CHECKPOINT = 19,
+		TESLA_GATE = 20,
+		PC_SMALL = 21,
+		PC_LARGE = 22,
+		GATE_A = 23,
+		GATE_B = 24,
+		CAFE = 25,
+		INTERCOM = 26,
+		DR_L = 27,
+		STRAIGHT = 28,
+		CURVE = 29,
+		T_INTERSECTION = 30,
+		X_INTERSECTION = 31,
+		LCZ_ARMORY = 32,
+		CLASS_D_CELLS = 33
 	}
 
 	public enum Scp079InteractionType
@@ -164,6 +164,7 @@ namespace Smod2.API
 		public abstract RoomType RoomType { get; }
 		public abstract int GenericID { get; }
 		public abstract Vector Position { get; }
+		public abstract Vector SpeakerPosition { get; }
 
 		public abstract void FlickerLights();
 		public abstract string[] GetObjectName();
