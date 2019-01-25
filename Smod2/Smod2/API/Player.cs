@@ -151,10 +151,10 @@ namespace Smod2.API
 		public abstract float Pitch { get; }
 		public abstract Room Speaker { get; set; }
 		public abstract Vector Camera { get; } //todo: implement api object
+		public abstract IReadOnlyList<Door> LockedDoors { get; }
 
-		public abstract Door[] GetLockedDoors();
 		public abstract void Lock(Door door);
-		public abstract bool Unlock(Door door);
+		public abstract void Unlock(Door door);
 		public abstract void TriggerTesla(TeslaGate tesla);
 		public abstract void Lockdown(Room room);
 		public abstract void SetCamera(Vector position, bool lookAt = false);
