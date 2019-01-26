@@ -647,9 +647,10 @@ namespace Smod2.Events
 		public Generator Generator { get; }
 		public bool Allow { get; set; }
 
-		public PlayerGeneratorUnlockEvent(Player player, Generator generator) : base(player)
+		public PlayerGeneratorUnlockEvent(Player player, Generator generator, bool allow) : base(player)
 		{
 			Generator = generator;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -663,9 +664,10 @@ namespace Smod2.Events
 		public Generator Generator { get; }
 		public bool Allow { get; set; }
 
-		public PlayerGeneratorAccessEvent(Player player, Generator generator) : base(player)
+		public PlayerGeneratorAccessEvent(Player player, Generator generator, bool allow) : base(player)
 		{
 			Generator = generator;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -680,9 +682,11 @@ namespace Smod2.Events
 		public bool Allow { get; set; }
 		public bool RemoveTablet { get; set; }
 
-		public PlayerGeneratorInsertTabletEvent(Player player, Generator generator) : base(player)
+		public PlayerGeneratorInsertTabletEvent(Player player, Generator generator, bool allow, bool removeTablet) : base(player)
 		{
 			Generator = generator;
+			Allow = allow;
+			RemoveTablet = removeTablet;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -697,9 +701,11 @@ namespace Smod2.Events
 		public bool Allow { get; set; }
 		public bool SpawnTablet { get; set; }
 
-		public PlayerGeneratorEjectTabletEvent(Player player, Generator generator) : base(player)
+		public PlayerGeneratorEjectTabletEvent(Player player, Generator generator, bool allow, bool spawnTablet) : base(player)
 		{
 			Generator = generator;
+			Allow = allow;
+			SpawnTablet = spawnTablet;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -712,10 +718,13 @@ namespace Smod2.Events
 	{
 		public Door Door { get; }
 		public bool Allow { get; set; }
+		public float APDrain { get; set; }
 
-		public Player079DoorEvent(Player player, Door door) : base(player)
+		public Player079DoorEvent(Player player, Door door, bool allow, float apDrain) : base(player)
 		{
 			Door = door;
+			Allow = allow;
+			APDrain = apDrain;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -728,10 +737,13 @@ namespace Smod2.Events
 	{
 		public Door Door { get; }
 		public bool Allow { get; set; }
+		public float APDrain { get; set; }
 
-		public Player079LockEvent(Player player, Door door) : base(player)
+		public Player079LockEvent(Player player, Door door, bool allow, float apDrain) : base(player)
 		{
 			Door = door;
+			Allow = allow;
+			APDrain = apDrain;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -744,10 +756,13 @@ namespace Smod2.Events
 	{
 		public Elevator Elevator { get; }
 		public bool Allow { get; set; }
+		public float APDrain { get; set; }
 
-		public Player079ElevatorEvent(Player player, Elevator elevator) : base(player)
+		public Player079ElevatorEvent(Player player, Elevator elevator, bool allow, float apDrain) : base(player)
 		{
 			Elevator = elevator;
+			Allow = allow;
+			APDrain = apDrain;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -760,15 +775,155 @@ namespace Smod2.Events
 	{
 		public TeslaGate TeslaGate { get; }
 		public bool Allow { get; set; }
+		public float APDrain { get; set; }
 
-		public Player079TeslaGateEvent(Player player, TeslaGate teslaGate) : base(player)
+		public Player079TeslaGateEvent(Player player, TeslaGate teslaGate, bool allow, float apDrain) : base(player)
 		{
 			TeslaGate = teslaGate;
+			Allow = allow;
+			APDrain = apDrain;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandler079TeslaGate)handler).On079TeslaGate(this);
+		}
+	}
+
+	public class Player079AddExpEvent : PlayerEvent
+	{
+		public ExperienceType ExperienceType { get; }
+		public float ExpToAdd { get; set; }
+
+		public Player079AddExpEvent(Player player, ExperienceType experienceType, float expToAdd) : base(player)
+		{
+			ExperienceType = experienceType;
+			ExpToAdd = expToAdd;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079AddExp)handler).On079AddExp(this);
+		}
+	}
+
+	public class Player079LevelUpEvent : PlayerEvent
+	{
+		public Player079LevelUpEvent(Player player) : base(player) { }
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079LevelUp)handler).On079LevelUp(this);
+		}
+	}
+
+	public class Player079UnlockDoorsEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+
+		public Player079UnlockDoorsEvent(Player player, bool allow) : base(player)
+		{
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079UnlockDoors)handler).On079UnlockDoors(this);
+		}
+	}
+
+	public class Player079CameraTeleportEvent : PlayerEvent
+	{
+		public Vector Camera { get; set; }
+		public bool Allow { get; set; }
+		public float APDrain { get; set; }
+
+		public Player079CameraTeleportEvent(Player player, Vector camera, bool allow, float apDrain) : base(player)
+		{
+			Camera = camera;
+			Allow = allow;
+			APDrain = apDrain;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079CameraTeleport)handler).On079CameraTeleport(this);
+		}
+	}
+
+	public class Player079StartSpeakerEvent : PlayerEvent
+	{
+		public Room Room { get; }
+		public bool Allow { get; set; }
+		public float APDrain { get; set; }
+
+		public Player079StartSpeakerEvent(Player player, Room room, bool allow, float apDrain) : base(player)
+		{
+			Room = room;
+			Allow = allow;
+			APDrain = apDrain;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079StartSpeaker)handler).On079StartSpeaker(this);
+		}
+	}
+
+	public class Player079StopSpeakerEvent : PlayerEvent
+	{
+		public Room Room { get; }
+		public bool Allow { get; set; }
+
+		public Player079StopSpeakerEvent(Player player, Room room, bool allow) : base(player)
+		{
+			Room = room;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079StopSpeaker)handler).On079StopSpeaker(this);
+		}
+	}
+
+	public class Player079LockdownEvent : PlayerEvent
+	{
+		public Room Room { get; }
+		public bool Allow { get; set; }
+		public float APDrain { get; set; }
+
+		public Player079LockdownEvent(Player player, Room room, bool allow, float apDrain) : base(player)
+		{
+			Room = room;
+			Allow = allow;
+			APDrain = apDrain;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079Lockdown)handler).On079Lockdown(this);
+		}
+	}
+
+	public class Player079ElevatorTeleportEvent : PlayerEvent
+	{
+		public Vector Camera { get; }
+		public Elevator Elevator { get; }
+		public bool Allow { get; set; }
+		public float APDrain { get; set; }
+
+		public Player079ElevatorTeleportEvent(Player player, Vector camera, Elevator elevator, bool allow, float apDrain) : base(player)
+		{
+			Camera = camera;
+			Elevator = elevator;
+			Allow = allow;
+			APDrain = apDrain;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandler079ElevatorTeleport)handler).On079ElevatorTeleport(this);
 		}
 	}
 }

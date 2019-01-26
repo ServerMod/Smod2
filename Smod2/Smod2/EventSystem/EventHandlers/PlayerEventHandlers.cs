@@ -365,4 +365,68 @@ namespace Smod2.EventHandlers
 		/// </summary>
 		void On079TeslaGate(Player079TeslaGateEvent ev);
 	}
+
+	public interface IEventHandler079AddExp : IEventHandler
+	{
+		/// <summary>
+		/// Called when a player's SCP-079 experience is added to.
+		/// </summary>
+		void On079AddExp(Player079AddExpEvent ev);
+	}
+
+	public interface IEventHandler079LevelUp : IEventHandler
+	{
+		/// <summary>
+		/// Called when a player's SCP-079 level is incremented.
+		/// </summary>
+		void On079LevelUp(Player079LevelUpEvent ev);
+	}
+
+	public interface IEventHandler079UnlockDoors : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 unlocks all doors.
+		/// </summary>
+		void On079UnlockDoors(Player079UnlockDoorsEvent ev);
+	}
+
+	public interface IEventHandler079CameraTeleport : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 teleports to a new camera.
+		/// </summary>
+		void On079CameraTeleport(Player079CameraTeleportEvent ev);
+	}
+
+	public interface IEventHandler079StartSpeaker : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 starts using a speaker.
+		/// </summary>
+		void On079StartSpeaker(Player079StartSpeakerEvent ev);
+	}
+
+	public interface IEventHandler079StopSpeaker : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 stops using a speaker.
+		/// </summary>
+		void On079StopSpeaker(Player079StopSpeakerEvent ev);
+	}
+
+	public interface IEventHandler079Lockdown : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 uses the lockdown (warning sign) ability.
+		/// </summary>
+		void On079Lockdown(Player079LockdownEvent ev);
+	}
+
+	public interface IEventHandler079ElevatorTeleport : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-079 uses an elevator to teleport to a new floor.
+		/// </summary>
+		void On079ElevatorTeleport(Player079ElevatorTeleportEvent ev);
+	}
 }

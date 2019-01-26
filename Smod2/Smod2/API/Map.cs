@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Smod2.API;
 
 namespace Smod2.API
 {
@@ -13,6 +12,7 @@ namespace Smod2.API
 		public abstract List<PocketDimensionExit> GetPocketDimensionExits();
 		public abstract Dictionary<Vector, Vector> GetElevatorTeleportPoints();
 		public abstract Generator[] GetGenerators();
+		public abstract List<Room> Get079InteractionRooms(Scp079InteractionType type);
 		public abstract void Shake();
 		public abstract bool WarheadDetonated { get; }
 		public abstract bool LCZDecontaminated { get; }
@@ -45,13 +45,15 @@ namespace Smod2.API
 		public abstract Vector Position { get; }
 		public abstract string Name { get; }
 		public abstract string Permission { get; }
+		public abstract object GetComponent();
 	}
 
 	public abstract class TeslaGate
 	{
-		public abstract void Activate();
+		public abstract void Activate(bool instant = false);
 		public abstract float TriggerDistance { get; set; }
 		public abstract Vector Position { get; }
+		public abstract object GetComponent();
 	}
 
 	public enum ElevatorType
@@ -104,18 +106,68 @@ namespace Smod2.API
 		public abstract Vector Position { get; }
 	}
 
-	public enum GeneratorType
+	public enum ZoneType
 	{
-		ENTRANCE_CHECKPOINT = 0,
-		HCZ_ARMORY = 1,
-		SERVER_ROOM = 2,
-		MICROHID = 3,
-		NUKE = 4,
-		SCP_049 = 5,
-		SCP_079 = 6,
-		SCP_096 = 7,
-		SCP_106 = 8,
-		SCP_939 = 9
+		UNDEFINED = 0,
+		LCZ = 1,
+		HCZ = 2,
+		ENTRANCE = 3
+	}
+
+	public enum RoomType
+	{
+		UNDEFINED = 0,
+		WC00 = 1,
+		SCP_914 = 2,
+		AIRLOCK_00 = 3,
+		AIRLOCK_01 = 4,
+		CHECKPOINT_A = 5,
+		CHECKPOINT_B = 6,
+		HCZ_ARMORY = 7,
+		SERVER_ROOM = 8,
+		MICROHID = 9,
+		NUKE = 10,
+		SCP_012 = 11,
+		SCP_049 = 12,
+		SCP_079 = 13,
+		SCP_096 = 14,
+		SCP_106 = 15,
+		SCP_173 = 16,
+		SCP_372 = 17,
+		SCP_939 = 18,
+		ENTRANCE_CHECKPOINT = 19,
+		TESLA_GATE = 20,
+		PC_SMALL = 21,
+		PC_LARGE = 22,
+		GATE_A = 23,
+		GATE_B = 24,
+		CAFE = 25,
+		INTERCOM = 26,
+		DR_L = 27,
+		STRAIGHT = 28,
+		CURVE = 29,
+		T_INTERSECTION = 30,
+		X_INTERSECTION = 31,
+		LCZ_ARMORY = 32,
+		CLASS_D_CELLS = 33
+	}
+
+	public enum Scp079InteractionType
+	{
+		CAMERA = 0,
+		SPEAKER = 4
+	}
+
+	public abstract class Room
+	{
+		public abstract ZoneType ZoneType { get; }
+		public abstract RoomType RoomType { get; }
+		public abstract int GenericID { get; }
+		public abstract Vector Position { get; }
+		public abstract Vector SpeakerPosition { get; }
+
+		public abstract void FlickerLights();
+		public abstract string[] GetObjectName();
 	}
 
 	public abstract class Generator
@@ -124,8 +176,8 @@ namespace Smod2.API
 		public abstract bool Locked { get; set; }
 		public abstract bool HasTablet { get; set; }
 		public abstract bool Engaged { get; set; }
-		public abstract GeneratorType Type { get; }
 		public abstract float TimeLeft { get; set; }
 		public abstract Vector Position { get; }
+		public abstract Room Room { get; }
 	}
 }
