@@ -75,6 +75,8 @@
     <Compile Include="LangManager\LangSetting.cs" />
     <Compile Include="LangManager\LangManager.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Permissions\IPermissionsHandler.cs" />
+    <Compile Include="Permissions\PermissionsManager.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,6 +7,7 @@ using Smod2.Commands;
 using Smod2.API;
 using Smod2.Logging;
 using Smod2.Events;
+using Smod2.Permissions;
 
 namespace Smod2
 {
@@ -89,7 +90,20 @@ namespace Smod2
 			}
 		}
 
-		private Server server;
+        private PermissionsManager permissionsManager;
+        public PermissionsManager PermissionsManager
+        {
+            get { return permissionsManager; }
+            set
+            {
+                if (permissionsManager == null)
+                {
+                    permissionsManager = value;
+                }
+            }
+        }
+
+        private Server server;
 		public Server Server
 		{
 			get { return server; }
