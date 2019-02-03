@@ -3,7 +3,7 @@
 	public abstract class UserGroup
 	{
 		public abstract string Color { get; }
-		public abstract string Text { get; }
+		public abstract string BadgeText { get; }
 		public abstract ulong Permissions { get; }
 		public abstract bool Cover { get; }
 		public abstract bool HiddenByDefault { get; }
