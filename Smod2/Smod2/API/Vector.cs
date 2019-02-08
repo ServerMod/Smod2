@@ -170,12 +170,12 @@ namespace Smod2.API
 		/// </summary>
 		public static bool operator ==(Vector a, Vector b)
 		{
-			if (a == null)
+			if (Equals(a, null))
 			{
-				return b == null;
+				return Equals(b, null);
 			}
 
-			if (b == null)
+			if (Equals(b, null))
 			{
 				return false;
 			}
