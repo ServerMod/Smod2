@@ -1,4 +1,6 @@
-﻿namespace Smod2.API
+﻿using System;
+
+namespace Smod2.API
 {
 	public class Vector
 	{
@@ -52,5 +54,144 @@
 		///  Shorthand for writing new Vector(-1, 0, 0).
 		/// </summary> 
 		public static Vector Left => new Vector(-1, 0, 0);
+
+		/// <summary>
+		/// Calculates the distance between two vectors.
+		/// </summary>
+		public static float Distance(Vector a, Vector b)
+		{
+			Vector differencec = new Vector(a.x - b.x, a.y - b.y, a.z - b.z);
+			return (float)Math.Sqrt(differencec.x * (double)differencec.x +
+			                        differencec.y * (double)differencec.y +
+			                        differencec.z * (double)differencec.z
+			);
+		}
+
+		/// <summary>
+		/// Linearly interpolates two vectors given a value from 0 to 1.
+		/// </summary>
+		public static Vector Lerp(Vector a, Vector b, float t)
+		{
+			// Clamp between 0 and 1
+			t = Math.Min(t, 1);
+			t = Math.Max(t, 0);
+
+			return new Vector(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t);
+		}
+
+		/// <summary>
+		/// Returns the smaller of the two vectors.
+		/// </summary>
+		public static Vector Min(Vector a, Vector b) => new Vector(Math.Min(a.x, b.x), Math.Min(a.y, b.y), Math.Min(a.z, b.z));
+		/// <summary>
+		/// Returns the larger of the two vectors.
+		/// </summary>
+		public static Vector Max(Vector a, Vector b) => new Vector(Math.Max(a.x, b.x), Math.Max(a.y, b.y), Math.Max(a.z, b.z));
+
+		/// <summary>
+		/// Calculates the magnitude (distance from origin) of a vector.
+		/// </summary>
+		public static float Magnitude(Vector vector)
+		{
+			return (float)Math.Sqrt(vector.x * (double)vector.x + 
+			                        vector.y * (double)vector.y + 
+			                        vector.z * (double)vector.z
+			                        );
+		}
+
+		/// <summary>
+		/// Calculates the square of the magnitude (distance from origin) of a vector.
+		/// </summary>
+		public static float SqrMagnitude(Vector vector)
+		{
+			return (float)(vector.x * (double)vector.x + vector.y * (double)vector.y + vector.z * (double)vector.z);
+		}
+
+		/// <summary>
+		/// Clamps a vector to a range of 0 and 1.
+		/// </summary>
+		public static Vector Normalize(Vector vector)
+		{
+			float num = Magnitude(vector);
+			if (num > 9.99999974737875E-06)
+			{
+				return vector / num;
+			}
+
+			return Zero;
+		}
+
+		public static Vector operator +(Vector a, float b)
+		{
+			return new Vector(a.x + b, a.y + b, a.z + b);
+		}
+		public static Vector operator +(float a, Vector b) => b + a;
+
+		public static Vector operator -(Vector a, float b)
+		{
+			return new Vector(a.x - b, a.y - b, a.z - b);
+		}
+		public static Vector operator -(float a, Vector b) => b - a;
+
+		public static Vector operator *(Vector a, float b)
+		{
+			return new Vector(a.x * b, a.y * b, a.z * b);
+		}
+		public static Vector operator *(float a, Vector b) => b * a;
+
+		public static Vector operator /(Vector a, float b)
+		{
+			return new Vector(a.x / b, a.y / b, a.z / b);
+		}
+		public static Vector operator /(float a, Vector b) => b / a;
+
+		public static Vector operator +(Vector a, Vector b)
+		{
+			return new Vector(a.x + b.x, a.y + b.y, a.z + b.z);
+		}
+
+		public static Vector operator -(Vector a, Vector b)
+		{
+			return new Vector(a.x - b.x, a.y - b.y, a.z - b.z);
+		}
+
+		public static Vector operator *(Vector a, Vector b)
+		{
+			return new Vector(a.x * b.x, a.y * b.y, a.z * b.z);
+		}
+
+		public static Vector operator /(Vector a, Vector b)
+		{
+			return new Vector(a.x / b.x, a.y / b.y, a.z / b.z);
+		}
+
+		/// <summary>
+		/// Performs an value (not reference) equality check of two vectors. Use <see cref="object.Equals(object)"/> for reference checks.
+		/// </summary>
+		public static bool operator ==(Vector a, Vector b)
+		{
+			if (a == null)
+			{
+				return b == null;
+			}
+
+			if (b == null)
+			{
+				return false;
+			}
+
+			return a.x == b.x && a.y == b.y && a.z == b.z;
+		}
+
+		/// <summary>
+		/// Performs an value (not reference) inequality check of two vectors. Use <see cref="object.Equals(object)"/> for reference checks.
+		/// </summary>
+		public static bool operator !=(Vector a, Vector b)
+		{
+			return !(a == b);
+		}
+
+		public override string ToString() => $"({x}, {y}, {z})";
+		public string ToString(string format) => $"({x.ToString(format)}, {y.ToString(format)}, {z.ToString(format)})";
 	}
 }
