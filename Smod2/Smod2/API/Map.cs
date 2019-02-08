@@ -165,6 +165,7 @@ namespace Smod2.API
 		public abstract RoomType RoomType { get; }
 		public abstract int GenericID { get; }
 		public abstract Vector Position { get; }
+		public abstract Vector Forward { get; }
 		public abstract Vector SpeakerPosition { get; }
 
 		public abstract void FlickerLights();
