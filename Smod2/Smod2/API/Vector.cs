@@ -136,7 +136,6 @@ namespace Smod2.API
 		{
 			return new Vector(a.x - b, a.y - b, a.z - b);
 		}
-		public static Vector operator -(float a, Vector b) => b - a;
 
 		public static Vector operator *(Vector a, float b)
 		{
@@ -148,7 +147,6 @@ namespace Smod2.API
 		{
 			return new Vector(a.x / b, a.y / b, a.z / b);
 		}
-		public static Vector operator /(float a, Vector b) => b / a;
 
 		public static Vector operator +(Vector a, Vector b)
 		{
