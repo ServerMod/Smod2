@@ -108,7 +108,7 @@ namespace Smod2.API
 		}
 
 		/// <summary>
-		/// Clamps a vector to a range of 0 and 1.
+		/// Coverts a vector's values to a max of 1.
 		/// </summary>
 		public static Vector Normalize(Vector vector)
 		{
@@ -170,12 +170,12 @@ namespace Smod2.API
 		/// </summary>
 		public static bool operator ==(Vector a, Vector b)
 		{
-			if (Equals(a, null))
+			if (a is null)
 			{
-				return Equals(b, null);
+				return b is null;
 			}
 
-			if (Equals(b, null))
+			if (b is null)
 			{
 				return false;
 			}
@@ -189,6 +189,22 @@ namespace Smod2.API
 		public static bool operator !=(Vector a, Vector b)
 		{
 			return !(a == b);
+		}
+		
+		public override bool Equals(object obj)
+		{
+			return ReferenceEquals(this, obj);
+		}
+		
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				int hashCode = x.GetHashCode();
+				hashCode = (hashCode * 397) ^ y.GetHashCode();
+				hashCode = (hashCode * 397) ^ z.GetHashCode();
+				return hashCode;
+			}
 		}
 
 		public override string ToString() => $"({x}, {y}, {z})";
