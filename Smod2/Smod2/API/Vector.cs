@@ -79,6 +79,11 @@ namespace Smod2.API
 			return new Vector(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t);
 		}
 
+		public static Vector LerpUnclamped(Vector a, Vector b, float t)
+		{
+			return new Vector(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t);
+		}
+
 		/// <summary>
 		/// Returns the smaller of the two vectors.
 		/// </summary>
