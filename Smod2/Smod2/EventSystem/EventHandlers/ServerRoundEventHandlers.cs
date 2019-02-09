@@ -34,6 +34,14 @@ namespace Smod2.EventHandlers
 		void OnDisconnect(DisconnectEvent ev);
 	}
 
+	public interface IEventHandlerLateDisconnect : IEventHandler
+	{
+		/// <summary>  
+		///  This is the event handler for disconnection events after the player has disconnected.
+		/// </summary> 
+		void OnLateDisconnect(LateDisconnectEvent ev);
+	}
+
 	public interface IEventHandlerCheckRoundEnd : IEventHandler
 	{
 		/// <summary>  

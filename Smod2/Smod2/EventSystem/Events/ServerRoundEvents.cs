@@ -80,6 +80,18 @@ namespace Smod2.Events
 		}
 	}
 
+	public class LateDisconnectEvent : ConnectionEvent
+	{
+		public LateDisconnectEvent(Connection connection) : base(connection)
+		{
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerLateDisconnect)handler).OnLateDisconnect(this);
+		}
+	}
+
 	public class CheckRoundEndEvent : ServerEvent
 	{
 		public CheckRoundEndEvent(Server server, Round round) : base(server)

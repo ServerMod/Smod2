@@ -3,16 +3,13 @@ using Smod2.API;
 using Smod2.EventHandlers;
 using Smod2.Events;
 
-namespace Smod.TestPlugin
+namespace ExamplePlugin
 {
 	class RoundEventHandler : IEventHandlerRoundStart, IEventHandlerRoundEnd
 	{
-		private Plugin plugin;
+		private readonly ExamplePlugin plugin;
 
-		public RoundEventHandler(Plugin plugin)
-		{
-			this.plugin = plugin;
-		}
+		public RoundEventHandler(ExamplePlugin plugin) => this.plugin = plugin; //Expression bodies can also be used
 
 		public void OnRoundEnd(RoundEndEvent ev)
 		{
@@ -22,7 +19,7 @@ namespace Smod.TestPlugin
 		public void OnRoundStart(RoundStartEvent ev)
 		{
 			plugin.Info("ROUND START EVENT CALLER");
-			plugin.Info("Players: " + ev.Server.GetPlayers().Count);
+			plugin.Info("Players: " + ev.Server.NumPlayers);
 			foreach (Player player in ev.Server.GetPlayers())
 			{
 				// Print the player info and then their class info
