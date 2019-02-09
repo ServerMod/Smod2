@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Smod2.API
 {
@@ -13,6 +13,10 @@ namespace Smod2.API
 		public abstract Dictionary<Vector, Vector> GetElevatorTeleportPoints();
 		public abstract Generator[] GetGenerators();
 		public abstract Room[] Get079InteractionRooms(Scp079InteractionType type);
+		public abstract List<Room> Get079InteractionRooms(Scp079InteractionType type);
+		public abstract void DetonateWarhead();
+		public abstract void StartWarhead();
+		public abstract void StopWarhead();
 		public abstract void Shake();
 		public abstract bool WarheadDetonated { get; }
 		public abstract bool LCZDecontaminated { get; }
