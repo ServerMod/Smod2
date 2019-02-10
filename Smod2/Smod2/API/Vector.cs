@@ -60,11 +60,8 @@ namespace Smod2.API
 		/// </summary>
 		public static float Distance(Vector a, Vector b)
 		{
-			Vector differencec = new Vector(a.x - b.x, a.y - b.y, a.z - b.z);
-			return (float)Math.Sqrt(differencec.x * (double)differencec.x +
-			                        differencec.y * (double)differencec.y +
-			                        differencec.z * (double)differencec.z
-			);
+			Vector difference = a - b;
+			return Magnitude(difference);
 		}
 
 		/// <summary>
@@ -76,32 +73,37 @@ namespace Smod2.API
 			t = Math.Min(t, 1);
 			t = Math.Max(t, 0);
 
-			return new Vector(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t);
+			return LerpUnclamped(a, b, t);
 		}
 
-		public static Vector LerpUnclamped(Vector a, Vector b, float t)
-		{
-			return new Vector(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t);
-		}
+		public static Vector LerpUnclamped(Vector a, Vector b, float t) => a + (b - a) * t;
 
 		/// <summary>
 		/// Returns the smaller of the two vectors.
 		/// </summary>
-		public static Vector Min(Vector a, Vector b) => new Vector(Math.Min(a.x, b.x), Math.Min(a.y, b.y), Math.Min(a.z, b.z));
+		public static Vector Min(Vector a, Vector b) => 
+			new Vector(
+				Math.Min(a.x, b.x), 
+				Math.Min(a.y, b.y),
+				Math.Min(a.z, b.z)
+				);
+
 		/// <summary>
 		/// Returns the larger of the two vectors.
 		/// </summary>
-		public static Vector Max(Vector a, Vector b) => new Vector(Math.Max(a.x, b.x), Math.Max(a.y, b.y), Math.Max(a.z, b.z));
+		public static Vector Max(Vector a, Vector b) => 
+			new Vector(
+				Math.Max(a.x, b.x), 
+				Math.Max(a.y, b.y), 
+				Math.Max(a.z, b.z)
+				);
 
 		/// <summary>
 		/// Calculates the magnitude (distance from origin) of a vector.
 		/// </summary>
 		public static float Magnitude(Vector vector)
 		{
-			return (float)Math.Sqrt(vector.x * (double)vector.x + 
-			                        vector.y * (double)vector.y + 
-			                        vector.z * (double)vector.z
-			                        );
+			return (float)Math.Sqrt(SqrMagnitude(vector));
 		}
 
 		/// <summary>
@@ -109,7 +111,9 @@ namespace Smod2.API
 		/// </summary>
 		public static float SqrMagnitude(Vector vector)
 		{
-			return (float)(vector.x * (double)vector.x + vector.y * (double)vector.y + vector.z * (double)vector.z);
+			return (float)(Math.Pow(vector.x, 2) +
+			               Math.Pow(vector.y, 2) +
+			               Math.Pow(vector.z, 2));
 		}
 
 		/// <summary>
