@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Smod2.API
 {
@@ -12,7 +12,7 @@ namespace Smod2.API
 		public abstract List<PocketDimensionExit> GetPocketDimensionExits();
 		public abstract Dictionary<Vector, Vector> GetElevatorTeleportPoints();
 		public abstract Generator[] GetGenerators();
-		public abstract List<Room> Get079InteractionRooms(Scp079InteractionType type);
+		public abstract Room[] Get079InteractionRooms(Scp079InteractionType type);
 		public abstract void DetonateWarhead();
 		public abstract void StartWarhead();
 		public abstract void StopWarhead();
@@ -152,7 +152,8 @@ namespace Smod2.API
 		T_INTERSECTION = 30,
 		X_INTERSECTION = 31,
 		LCZ_ARMORY = 32,
-		CLASS_D_CELLS = 33
+		CLASS_D_CELLS = 33,
+		CUBICLES = 34
 	}
 
 	public enum Scp079InteractionType
@@ -167,6 +168,7 @@ namespace Smod2.API
 		public abstract RoomType RoomType { get; }
 		public abstract int GenericID { get; }
 		public abstract Vector Position { get; }
+		public abstract Vector Forward { get; }
 		public abstract Vector SpeakerPosition { get; }
 
 		public abstract void FlickerLights();
@@ -176,11 +178,14 @@ namespace Smod2.API
 	public abstract class Generator
 	{
 		public abstract bool Open { get; set; }
-		public abstract bool Locked { get; set; }
+		public abstract bool Locked { get; }
 		public abstract bool HasTablet { get; set; }
-		public abstract bool Engaged { get; set; }
+		public abstract bool Engaged { get; }
+		public abstract float StartTime { get; }
 		public abstract float TimeLeft { get; set; }
 		public abstract Vector Position { get; }
 		public abstract Room Room { get; }
+
+		public abstract void Unlock();
 	}
 }
