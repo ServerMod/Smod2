@@ -58,11 +58,7 @@ namespace Smod2.API
 		/// <summary>
 		/// Calculates the distance between two vectors.
 		/// </summary>
-		public static float Distance(Vector a, Vector b)
-		{
-			Vector difference = a - b;
-			return Magnitude(difference);
-		}
+		public static float Distance(Vector a, Vector b) => Magnitude(a - b);
 
 		/// <summary>
 		/// Linearly interpolates two vectors given a value from 0 to 1.
@@ -101,20 +97,15 @@ namespace Smod2.API
 		/// <summary>
 		/// Calculates the magnitude (distance from origin) of a vector.
 		/// </summary>
-		public static float Magnitude(Vector vector)
-		{
-			return (float)Math.Sqrt(SqrMagnitude(vector));
-		}
+		public static float Magnitude(Vector vector) => (float)Math.Sqrt(SqrMagnitude(vector));
 
 		/// <summary>
 		/// Calculates the square of the magnitude (distance from origin) of a vector.
 		/// </summary>
-		public static float SqrMagnitude(Vector vector)
-		{
-			return (float)(Math.Pow(vector.x, 2) +
-			               Math.Pow(vector.y, 2) +
-			               Math.Pow(vector.z, 2));
-		}
+		public static float SqrMagnitude(Vector vector) =>
+			(float)(Math.Pow(vector.x, 2) +
+			        Math.Pow(vector.y, 2) +
+			        Math.Pow(vector.z, 2));
 
 		/// <summary>
 		/// Coverts a vector's values to a max of 1.
