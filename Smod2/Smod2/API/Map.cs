@@ -13,7 +13,6 @@ namespace Smod2.API
 		public abstract Dictionary<Vector, Vector> GetElevatorTeleportPoints();
 		public abstract Generator[] GetGenerators();
 		public abstract Room[] Get079InteractionRooms(Scp079InteractionType type);
-		public abstract List<Room> Get079InteractionRooms(Scp079InteractionType type);
 		public abstract void DetonateWarhead();
 		public abstract void StartWarhead();
 		public abstract void StopWarhead();
