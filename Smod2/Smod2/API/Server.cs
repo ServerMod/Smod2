@@ -23,6 +23,8 @@ namespace Smod2.API
 		public abstract string PlayerListTitle { get; set; }
 
 		public abstract List<Player> GetPlayers(string filter = "");
+		public abstract List<Player> GetPlayers(Role role);
+		public abstract List<Player> GetPlayers(Role[] roles);
 		public abstract List<Connection> GetConnections(string filter = "");
 		public abstract List<TeamRole> GetRoles(string filter = "");
 
