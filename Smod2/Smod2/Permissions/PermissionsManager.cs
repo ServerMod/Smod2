@@ -5,7 +5,8 @@ namespace Smod2.Permissions
 {
     public class PermissionsManager
     {
-        private List<IPermissionsHandler> permissionHandlers = new List<IPermissionsHandler>();
+        // TODO: Switch to something with unique members
+        private HashSet<IPermissionsHandler> permissionHandlers = new HashSet<IPermissionsHandler>();
 
         public bool RegisterHandler(IPermissionsHandler handler)
         {
@@ -15,10 +16,14 @@ namespace Smod2.Permissions
                 return false;
             }
 
-            permissionHandlers.Add(handler);
+            if(permissionHandlers.Add(handler))
+            {
+                PluginManager.Manager.Logger.Debug("PERMISSIONS_MANAGER", "Added new permissions handler.");
+                return true;
+            }
 
-            PluginManager.Manager.Logger.Debug("PERMISSIONS_MANAGER", "Added new permissions handler.");
-            return true;
+            PluginManager.Manager.Logger.Warn("PERMISSIONS_MANAGER", "Attempted to add duplicate Permissions Handler.");
+            return false;
         }
 
         public void UnregisterHandler(IPermissionsHandler handler)
