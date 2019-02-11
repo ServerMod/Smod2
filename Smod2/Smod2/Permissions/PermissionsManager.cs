@@ -5,37 +5,39 @@ namespace Smod2.Permissions
 {
     public class PermissionsManager
     {
-        // TODO: Add plugin to remove handlers on plugin disable
-        private List<IPermissionsHandler> permissionHandlers;
+        private List<IPermissionsHandler> permissionHandlers = new List<IPermissionsHandler>();
 
-        bool RegisterHandler(IPermissionsHandler handler)
+        public bool RegisterHandler(IPermissionsHandler handler)
         {
-            if(handler == null)
+            if (handler == null)
             {
-                PluginManager.Manager.Logger.Error("PERMISSIONS_MANAGER","Failed to add Permissions Handler as it was null.");
+                PluginManager.Manager.Logger.Error("PERMISSIONS_MANAGER", "Failed to add Permissions Handler as it was null.");
                 return false;
             }
+
             permissionHandlers.Add(handler);
+
             PluginManager.Manager.Logger.Debug("PERMISSIONS_MANAGER", "Added new permissions handler.");
             return true;
         }
 
-        void UnregisterHandler(IPermissionsHandler handler)
+        public void UnregisterHandler(IPermissionsHandler handler)
         {
             permissionHandlers.Remove(handler);
         }
 
-        bool CheckPermission(Player player, string permissionName)
+        public bool CheckPermission(Player player, string permissionName)
         {
             bool allowed = false;
-            foreach(IPermissionsHandler handler in permissionHandlers)
+            foreach (IPermissionsHandler handler in permissionHandlers)
             {
                 // Checks each permission handler, aborts if this permission node is negative
-                switch(handler.CheckPermission(player, permissionName))
+                switch (handler.CheckPermission(player, permissionName))
                 {
                     case 1:
                         allowed = true;
                         break;
+
                     case -1:
                         return false;
                 }
