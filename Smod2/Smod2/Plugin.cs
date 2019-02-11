@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Smod2.EventHandlers;
 using Smod2.Lang;
 using Smod2.API;
+using Smod2.Permissions;
 
 namespace Smod2
 {
@@ -35,6 +36,7 @@ namespace Smod2
 		{
 			eventManager.AddEventHandler(this, eventType, handler, priority);
 		}
+
 		public void AddCommands(string[] commands, ICommandHandler handler)
 		{
 			foreach (string command in commands)
@@ -55,6 +57,19 @@ namespace Smod2
 				PluginManager.Manager.CommandManager.RegisterCommand(this, command, handler);
 			}
 		}
+
+        public void AddPermissionsHandler(IPermissionsHandler handler)
+        {
+            if (PluginManager.Manager.PermissionsManager == null)
+            {
+                this.Error("Failed to register permissions handler becuase the permissions manager is null");
+            }
+            else
+            {
+                this.Debug(this.Details.name + " registered a permission handler.");
+                PluginManager.Manager.PermissionsManager.RegisterHandler(handler);
+            }
+        }
 
 		public void AddConfig(ConfigSetting setting)
 		{
