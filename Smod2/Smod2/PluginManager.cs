@@ -147,6 +147,7 @@ namespace Smod2
 		{
 			enabledPlugins = new Dictionary<string, Plugin>();
 			disabledPlugins = new Dictionary<string, Plugin>();
+            permissionsManager = new PermissionsManager();
 		}
 
 		public Plugin GetEnabledPlugin(string id)
