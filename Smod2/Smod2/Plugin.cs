@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Smod2.EventHandlers;
 using Smod2.Lang;
 using Smod2.API;
+using Smod2.Piping;
 
 namespace Smod2
 {
@@ -17,6 +18,12 @@ namespace Smod2
 			get;
 			set;
 		}
+
+	    public PluginPipes Pipes
+	    {
+		    get;
+		    internal set;
+	    }
 
 		public readonly EventManager eventManager = EventManager.Manager;
 		public readonly PluginManager pluginManager = PluginManager.Manager;
@@ -215,6 +222,11 @@ namespace Smod2
 
 			return new Dictionary<int, int>();
 		}
+
+	    public void InvokeEvent(string eventName, params object[] args)
+	    {
+		    pluginManager.InvokeEvent(eventName, Details?.id, args);
+	    }
 
 		public void Debug(string message)
 		{

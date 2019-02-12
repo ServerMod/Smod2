@@ -1,7 +1,9 @@
 ﻿using Smod2;
+using Smod2.API;
 using Smod2.Attributes;
 using Smod2.EventHandlers;
 using Smod2.Events;
+using Smod2.Piping;
 
 namespace ExamplePlugin
 {
@@ -17,6 +19,21 @@ namespace ExamplePlugin
 		)]
 	class ExamplePlugin : Plugin
 	{
+		// Hooks to events
+		[EventPipe("dev.plugin.OnNaeNaeDeath")]
+		private void Test(Player player, int whips, int naes)
+		{
+			if (naes > 2)
+			{
+				player.SendConsoleMessage("get nae nae'd");
+			}
+
+			if (whips > 1)
+			{
+				player.SendConsoleMessage("get whipped on");
+			}
+		}
+
 		public override void OnDisable()
 		{
 			this.Info(this.Details.name + " was disabled ):");
@@ -32,8 +49,6 @@ namespace ExamplePlugin
 		{
 			// Register multiple events
 			this.AddEventHandlers(new RoundEventHandler(this));
-			//Register multiple events with Low Priority
-			this.AddEventHandlers(new MultipleEventsExample(this), Priority.Low);
 			// Register single event with priority (need to specify the handler type)
 			this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.High);
 			// Register Command(s)
