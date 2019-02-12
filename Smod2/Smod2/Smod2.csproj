@@ -80,6 +80,8 @@
     <Compile Include="LangManager\LangManager.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Piping\MethodPipeParameter.cs" />
+    <Compile Include="Piping\PipeLink.cs" />
+    <Compile Include="Piping\PipeManager.cs" />
     <Compile Include="Piping\PropertyPipe.cs" />
     <Compile Include="Piping\PluginPipes.cs" />
     <Compile Include="Plugin.cs" />

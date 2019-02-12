@@ -16,7 +16,7 @@ namespace Smod2
 	{
 		public static readonly int SMOD_MAJOR = 3;
 		public static readonly int SMOD_MINOR = 2;
-		public static readonly int SMOD_REVISION = 3;
+		public static readonly int SMOD_REVISION = 4;
 		public static readonly string SMOD_BUILD = "A";
 
 		public static readonly string DEPENDENCY_FOLDER = "dependencies";
@@ -33,7 +33,6 @@ namespace Smod2
 
 		private Dictionary<string, Plugin> enabledPlugins;
 		private Dictionary<string, Plugin> disabledPlugins;
-		private Dictionary<string, List<EventPipe>> events;
 
 		public List<Plugin> EnabledPlugins
 		{
@@ -136,7 +135,6 @@ namespace Smod2
 		{
 			enabledPlugins = new Dictionary<string, Plugin>();
 			disabledPlugins = new Dictionary<string, Plugin>();
-			events = new Dictionary<string, List<EventPipe>>();
 		}
 
 		public Plugin GetEnabledPlugin(string id)
@@ -192,6 +190,7 @@ namespace Smod2
 		{
 			plugin.Info("Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
 			ConfigManager.Manager.RegisterPlugin(plugin);
+			PipeManager.Manager.RegisterPlugin(plugin);
 			plugin.Register();
 			plugin.OnEnable();
 			enabledPlugins.Add(plugin.Details.id, plugin);
@@ -230,6 +229,21 @@ namespace Smod2
 			CommandManager.UnregisterCommands(plugin);
 			disabledPlugins.Add(plugin.Details.id, plugin);
 			ConfigManager.Manager.UnloadPlugin(plugin);
+			PipeManager.Manager.UnregisterPlugin(plugin);
+		}
+
+		public void RegisterPluginsPipes()
+		{
+			foreach (KeyValuePair<string, Plugin> plugin in enabledPlugins)
+			{
+				RegisterPluginPipes(plugin.Value);
+			}
+		}
+
+		public void RegisterPluginPipes(Plugin plugin)
+		{
+			PipeManager.Manager.RegisterLinks(plugin);
+			plugin.PipeRegister();
 		}
 
 		public void LoadPlugins(String dir)
@@ -309,18 +323,6 @@ namespace Smod2
 								else
 								{
 									plugin.Details = details;
-									plugin.Pipes = new PluginPipes(plugin);
-									foreach (EventPipe pipe in plugin.Pipes.GetEvents())
-									{
-										if (events.ContainsKey(pipe.EventName))
-										{
-											events[pipe.EventName].Add(pipe);
-										}
-										else
-										{
-											events.Add(pipe.EventName, new List<EventPipe>{ pipe });
-										}
-									}
 
 									disabledPlugins.Add(details.id, plugin);
 									Logger.Info("PLUGIN_LOADER", "Plugin loaded: " + plugin.ToString());
@@ -346,31 +348,6 @@ namespace Smod2
 				Logger.Error("PLUGIN_LOADER", "Failed to load DLL [" + path + "], is it up to date?");
 				Logger.Debug("PLUGIN_LOADER", e.Message);
 				Logger.Debug("PLUGIN_LOADER", e.StackTrace);
-			}
-		}
-
-		public void InvokeEvent(string eventName, params object[] parameters) => InvokeEvent(eventName, null, parameters);
-		internal void InvokeEvent(string eventName, string source, object[] parameters)
-		{
-			if (eventName == null)
-			{
-				throw new ArgumentNullException(nameof(eventName));
-			}
-
-			if (!events.ContainsKey(eventName))
-			{
-				throw new ArgumentOutOfRangeException(nameof(eventName), $"Event \"{eventName}\" is not registered.");
-			}
-
-			foreach (EventPipe pipe in events[eventName])
-			{
-				// Skip if event pipe is disabled OR specific to one plugin AND the scope is not the same as the invoker
-				if (disabledPlugins.ContainsKey(pipe.Source.Details.id) || pipe.PluginScope != null && !pipe.PluginScope.Contains(source))
-				{
-					continue;
-				}
-
-				pipe.Invoke(parameters, source);
 			}
 		}
 	}

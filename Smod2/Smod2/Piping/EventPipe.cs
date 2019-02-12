@@ -32,7 +32,7 @@ namespace Smod2.Piping
 			base.Init(source, info);
 		}
 
-		internal void Invoke(object[] parameters, string source)
+		public void Invoke(object[] parameters, string source)
 		{
 			try
 			{
