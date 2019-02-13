@@ -16,7 +16,7 @@ namespace Smod2.Piping
 			{
 				if (Readonly)
 				{
-					throw new InvalidOperationException($"Cannot set field pipe \"{(info.DeclaringType == null ? info.Name : info.DeclaringType.FullName + "." + info.Name)}\". It is readonly.");
+					throw new InvalidOperationException($"Cannot set field pipe {(info.DeclaringType == null ? info.Name : info.DeclaringType.FullName + "." + info.Name)}. It is readonly.");
 				}
 
 				info.SetValue(Source, value);
@@ -25,15 +25,20 @@ namespace Smod2.Piping
 		
 		public bool Readonly { get; private set; }
 
+		public FieldPipe() : this(true) { }
+		public FieldPipe(bool @readonly)
+		{
+			Readonly = @readonly;
+		}
+
 		internal void Init(Plugin source, FieldInfo info)
 		{
 			this.info = info;
 
 			Type = info.FieldType;
-			
-			Readonly = info.IsInitOnly;
+			Readonly = Readonly && info.IsInitOnly;
 
-			base.Init(source, info);
+			base.Init(info.IsStatic ? null : source, info);
 		}
 	}
 }

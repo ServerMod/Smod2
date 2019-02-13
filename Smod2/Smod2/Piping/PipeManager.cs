@@ -80,20 +80,20 @@ namespace Smod2.Piping
 		public void RegisterLinks(Plugin plugin)
 		{
 			Type type = plugin.GetType();
-			FieldInfo[] infos = type.GetFields();
+			FieldInfo[] infos = type.GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
 
 			foreach (FieldInfo info in infos)
 			{
 				PipeLink link = info.GetCustomAttribute<PipeLink>();
 				if (link != null)
 				{
+					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Linking {link.Pipe} of {link.Plugin} to {info.Name} of {plugin.Details.id}");
 					SetPipeLink(plugin, info, link.Plugin, link.Pipe);
 				}
 			}
 		}
-
-		public void InvokeEvent(string eventName, params object[] parameters) => InvokeEvent(eventName, null, parameters);
-		internal void InvokeEvent(string eventName, string source, object[] parameters)
+		
+		internal void InvokeEvent(string eventName, string caller, object[] parameters)
 		{
 			if (eventName == null)
 			{
@@ -108,12 +108,12 @@ namespace Smod2.Piping
 			foreach (EventPipe pipe in events[eventName])
 			{
 				// Skip if event pipe is disabled OR specific to one plugin AND the scope is not the same as the invoker
-				if (PluginManager.Manager.GetDisabledPlugin(pipe.Source.Details.id) == null || pipe.PluginScope != null && !pipe.PluginScope.Contains(source))
+				if (PluginManager.Manager.GetDisabledPlugin(pipe.Source.Details.id) == null || pipe.PluginScope != null && !pipe.PluginScope.Contains(caller))
 				{
 					continue;
 				}
 
-				pipe.Invoke(parameters, source);
+				pipe.Invoke(parameters, caller);
 			}
 		}
 	}

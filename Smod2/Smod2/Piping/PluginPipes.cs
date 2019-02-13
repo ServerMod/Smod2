@@ -11,12 +11,13 @@ namespace Smod2.Piping
 		private readonly Dictionary<string, MethodPipe> methods;
 		private readonly Dictionary<string, EventPipe> events;
 
-		internal PluginPipes(Plugin plugin)
+		public PluginPipes(Plugin plugin)
 		{
 			Type pluginType = plugin.GetType();
+			const BindingFlags flags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
 
 			fields = new Dictionary<string, FieldPipe>();
-			foreach (FieldInfo field in pluginType.GetFields())
+			foreach (FieldInfo field in pluginType.GetFields(flags))
 			{
 				FieldPipe pipe = field.GetCustomAttribute<FieldPipe>();
 				if (pipe != null)
@@ -27,7 +28,7 @@ namespace Smod2.Piping
 			}
 
 			properties = new Dictionary<string, PropertyPipe>();
-			foreach (PropertyInfo property in pluginType.GetProperties())
+			foreach (PropertyInfo property in pluginType.GetProperties(flags))
 			{
 				PropertyPipe pipe = property.GetCustomAttribute<PropertyPipe>();
 				if (pipe != null)
@@ -39,22 +40,25 @@ namespace Smod2.Piping
 
 			methods = new Dictionary<string, MethodPipe>();
 			events = new Dictionary<string, EventPipe>();
-			foreach (MethodInfo method in pluginType.GetMethods())
+			foreach (MethodInfo method in pluginType.GetMethods(flags | BindingFlags.NonPublic))
 			{
-				MethodPipe methodPipe = method.GetCustomAttribute<MethodPipe>();
-				if (methodPipe != null)
+				if (method.IsPublic)
 				{
-					methodPipe.Init(plugin, method);
-					methods.Add(method.Name, methodPipe);
-				}
-				else
-				{
-					EventPipe eventPipe = method.GetCustomAttribute<EventPipe>();
-					if (eventPipe != null)
+					MethodPipe methodPipe = method.GetCustomAttribute<MethodPipe>();
+					if (methodPipe != null)
 					{
-						eventPipe.Init(plugin, method);
-						events.Add(method.Name, eventPipe);
+						methodPipe.Init(plugin, method);
+						methods.Add(method.Name, methodPipe);
+
+						continue;
 					}
+				}
+
+				EventPipe eventPipe = method.GetCustomAttribute<EventPipe>();
+				if (eventPipe != null)
+				{
+					eventPipe.Init(plugin, method);
+					events.Add(method.Name, eventPipe);
 				}
 			}
 		}

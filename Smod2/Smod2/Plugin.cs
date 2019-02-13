@@ -224,7 +224,8 @@ namespace Smod2
 			return new Dictionary<int, int>();
 		}
 
-	    public void InvokeEvent(string eventName, params object[] args)
+	    public void InvokeEvent(string eventName) => InvokeEvent(eventName, null);
+		public void InvokeEvent(string eventName, params object[] args)
 	    {
 		    PipeManager.Manager.InvokeEvent(eventName, Details?.id, args);
 	    }

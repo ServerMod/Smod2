@@ -12,9 +12,31 @@ namespace Smod2.Piping
 
 		public override Type Type { get; protected set; }
 
+		public object Invoke() => Invoke(null);
 		public object Invoke(params object[] parameters)
 		{
-			return info.Invoke(Source, parameters);
+			try
+			{
+				return info.Invoke(Source, parameters);
+			}
+			catch (TargetParameterCountException e)
+			{
+				if (e.TargetSite.Name != "ConvertValues")
+				{
+					throw;
+				}
+
+				throw new TargetParameterCountException($"{pipeParameters.Length} parameters were expected, but {parameters?.Length ?? 0} were supplied.", e);
+			}
+			catch (ArgumentException e)
+			{
+				if (e.TargetSite.Name != "CheckValue")
+				{
+					throw;
+				}
+
+				throw new ArgumentException("Parameter type mismatch. Check the plugin which hosts the method pipe and make sure your arguments types are correct.", e);
+			}
 		}
 
 		public MethodPipeParameter[] GetParameters() => pipeParameters.ToArray();
@@ -29,10 +51,9 @@ namespace Smod2.Piping
 			{
 				pipeParameters[i] = new MethodPipeParameter(parameters[i]);
 			}
-
 			Type = info.ReturnType;
 
-			base.Init(source, info);
+			base.Init(info.IsStatic ? null : source, info);
 		}
 	}
 }
