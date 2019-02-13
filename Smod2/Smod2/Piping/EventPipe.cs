@@ -38,6 +38,8 @@ namespace Smod2.Piping
 
 		internal void Invoke(object[] parameters, string caller)
 		{
+			CheckInit();
+
 			try
 			{
 				info.Invoke(Source, parameters);

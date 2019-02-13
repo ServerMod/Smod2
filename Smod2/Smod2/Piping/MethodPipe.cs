@@ -15,6 +15,8 @@ namespace Smod2.Piping
 		public object Invoke() => Invoke(null);
 		public object Invoke(params object[] parameters)
 		{
+			CheckInit();
+
 			try
 			{
 				return info.Invoke(Source, parameters);

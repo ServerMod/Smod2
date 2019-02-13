@@ -11,9 +11,15 @@ namespace Smod2.Piping
 		public override Type Type { get; protected set; }
 		public object Value
 		{
-			get => info.GetValue(Source);
+			get
+			{
+				CheckInit();
+
+				return info.GetValue(Source);
+			}
 			set
 			{
+				CheckInit();
 				if (Readonly)
 				{
 					throw new InvalidOperationException($"Cannot set field pipe {(info.DeclaringType == null ? info.Name : info.DeclaringType.FullName + "." + info.Name)}. It is readonly.");

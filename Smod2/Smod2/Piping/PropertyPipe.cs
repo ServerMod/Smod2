@@ -13,6 +13,7 @@ namespace Smod2.Piping
 		{
 			get
 			{
+				CheckInit();
 				if (!Gettable)
 				{
 					throw new InvalidOperationException($"Cannot get ungettable property pipe: {(info.DeclaringType == null ? info.Name : info.DeclaringType.FullName + "." + info.Name)}");
@@ -22,6 +23,7 @@ namespace Smod2.Piping
 			}
 			set
 			{
+				CheckInit();
 				if (!Settable)
 				{
 					throw new InvalidOperationException($"Cannot set unsettable property pipe: {(info.DeclaringType == null ? info.Name : info.DeclaringType.FullName + "." + info.Name)}");
