@@ -81,6 +81,25 @@ namespace ExamplePlugin
 			}
 		}
 
+		[FieldPipe]
+		public float killChance;
+
+		private float microChance;
+		[PropertyPipe]
+		public float MicroChance
+		{
+			get
+			{
+				Info("Got MicroChance as " + microChance);
+				return microChance;
+			}
+			set
+			{
+				Info("Set MicroChance to " + value);
+				microChance = value;
+			}
+		}
+
 		// Declares a method usable to other plugins via piping.
 		[MethodPipe]
 		public bool GiveLottoItem(Player player)
@@ -94,6 +113,7 @@ namespace ExamplePlugin
 
 			Server.Map.SpawnItem(ItemType.COIN, player.GetPosition(), Vector.Zero);
 			player.PersonalBroadcast(5, "A coin has been spawned at your feet. Pick it up for a chance to get a Micro HID!", false);
+			InvokeEvent("courtney.example.plugin.OnGiveLottoItem", player);
 
 			return true;
 		}

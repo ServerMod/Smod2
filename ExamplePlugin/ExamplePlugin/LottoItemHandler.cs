@@ -24,7 +24,7 @@ namespace ExamplePlugin
 			if (ev.Item.ItemType == ItemType.COIN)
 			{
 				double luckyValue = random.NextDouble();
-				if (luckyValue > 0.8)
+				if (luckyValue > plugin.killChance)
 				{
 					//20% chance of instantly dying
 					ev.Player.Kill();
@@ -33,7 +33,7 @@ namespace ExamplePlugin
 				if (luckyValue < 0.1)
 				{
 					//10% chance of getting a MicroHID
-					ev.ChangeTo = ItemType.MICROHID;
+					plugin.InvokeEvent("courtney.example.plugin", new[] { ItemType.MICROHID });
 				}
 			}
 		}
