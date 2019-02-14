@@ -7,7 +7,8 @@ namespace Smod2.Piping
 {
 	public class PipeManager
 	{
-		private readonly Dictionary<Type, FieldInfo[]> links;
+		private readonly Dictionary<Type, FieldInfo[]> linkFields;
+		private readonly Dictionary<Type, List<FieldInfo>> linkReferences;
 		private readonly Dictionary<string, List<EventPipe>> events;
 		private readonly Dictionary<Type, Func<PluginPipes, string, object>> pipeGetters;
 
@@ -16,7 +17,8 @@ namespace Smod2.Piping
 
 		public PipeManager()
 		{
-			links = new Dictionary<Type, FieldInfo[]>();
+			linkFields = new Dictionary<Type, FieldInfo[]>();
+			linkReferences = new Dictionary<Type, List<FieldInfo>>();
 			events = new Dictionary<string, List<EventPipe>>();
 			pipeGetters = new Dictionary<Type, Func<PluginPipes, string, object>>
 			{
@@ -49,6 +51,13 @@ namespace Smod2.Piping
 				return;
 			}
 
+			Type targetType = target.GetType();
+			if (!linkReferences.ContainsKey(targetType))
+			{
+				linkReferences.Add(targetType, new List<FieldInfo>());
+			}
+			linkReferences[targetType].Add(info);
+
 			info.SetValue(source, pipeGetters[info.FieldType].Invoke(target.Pipes, pipeName));
 		}
 
@@ -80,13 +89,13 @@ namespace Smod2.Piping
 		public void RegisterLinks(Plugin plugin)
 		{
 			Type type = plugin.GetType();
-			if (links.ContainsKey(type))
+			if (linkFields.ContainsKey(type))
 			{
 				return;
 			}
 
 			FieldInfo[] infos = type.GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-			links.Add(type, infos);
+			linkFields.Add(type, infos);
 
 			foreach (FieldInfo info in infos)
 			{
@@ -102,18 +111,30 @@ namespace Smod2.Piping
 		public void UnregisterLinks(Plugin plugin)
 		{
 			Type type = plugin.GetType();
-			if (!links.ContainsKey(type))
+			if (linkFields.ContainsKey(type))
 			{
-				return;
+				foreach (FieldInfo info in linkFields[type])
+				{
+					PipeLink link = info.GetCustomAttribute<PipeLink>();
+					if (link != null)
+					{
+						PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking {info.Name} of {plugin.Details.id} from {link.Pipe} of {link.Plugin}");
+						info.SetValue(plugin, null);
+					}
+				}
 			}
 
-			foreach (FieldInfo info in links[type])
+			if (linkReferences.ContainsKey(type))
 			{
-				PipeLink link = info.GetCustomAttribute<PipeLink>();
-				if (link != null)
+				PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking all references to {plugin.Details.id}");
+
+				foreach (FieldInfo info in linkReferences[type])
 				{
-					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking {info.Name} of {plugin.Details.id} from {link.Pipe} of {link.Plugin}");
-					info.SetValue(plugin, null);
+					PipeLink link = info.GetCustomAttribute<PipeLink>();
+					if (link != null)
+					{
+						info.SetValue(plugin, null);
+					}
 				}
 			}
 		}
@@ -123,6 +144,11 @@ namespace Smod2.Piping
 			if (eventName == null)
 			{
 				throw new ArgumentNullException(nameof(eventName));
+			}
+
+			if (!events.ContainsKey(eventName))
+			{
+				return;
 			}
 
 			foreach (EventPipe pipe in events[eventName])

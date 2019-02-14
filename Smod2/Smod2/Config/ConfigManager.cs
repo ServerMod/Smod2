@@ -9,6 +9,10 @@ namespace Smod2
 		private Dictionary<string, Plugin> primary_settings_map = new Dictionary<string, Plugin>();
 		private Dictionary<string, List<Plugin>> secondary_settings_map = new Dictionary<string, List<Plugin>>();
 
+		private Dictionary<Plugin, Dictionary<string, ConfigSetting>> disabledSettings = new Dictionary<Plugin, Dictionary<string, ConfigSetting>>();
+		private Dictionary<Plugin, List<string>> disabledPrimarySettingsMap = new Dictionary<Plugin, List<string>>();
+		private Dictionary<Plugin, List<string>> disabledSecondarySettingsMap = new Dictionary<Plugin, List<string>>();
+
 		private static ConfigManager singleton;
 		public static ConfigManager Manager
 		{
@@ -98,9 +102,36 @@ namespace Smod2
 
 		public void RegisterPlugin(Plugin plugin)
 		{
-			if (!settings.ContainsKey(plugin))
+			if (settings.ContainsKey(plugin))
+			{
+				return;
+			}
+
+			if (!disabledSettings.ContainsKey(plugin))
 			{
 				settings.Add(plugin, new Dictionary<string, Config.ConfigSetting>());
+			}
+			else
+			{
+				settings.Add(plugin, disabledSettings[plugin]);
+				disabledSettings.Remove(plugin);
+
+				foreach (string setting in disabledPrimarySettingsMap[plugin])
+				{
+					primary_settings_map.Add(setting, plugin);
+				}
+				disabledPrimarySettingsMap.Remove(plugin);
+
+				foreach (string setting in disabledSecondarySettingsMap[plugin])
+				{
+					if (!secondary_settings_map.ContainsKey(setting))
+					{
+						secondary_settings_map.Add(setting, new List<Plugin>());
+					}
+
+					secondary_settings_map[setting].Add(plugin);
+				}
+				disabledSecondarySettingsMap.Remove(plugin);
 			}
 		}
 
@@ -256,7 +287,19 @@ namespace Smod2
 
 		public void UnloadPlugin(Plugin plugin)
 		{
+			if (!settings.ContainsKey(plugin))
+			{
+				return;
+			}
+
+			disabledSettings.Add(plugin, settings[plugin]);
 			settings.Remove(plugin);
+
+			disabledPrimarySettingsMap.Add(plugin, new List<string>());
+			disabledSecondarySettingsMap.Add(plugin, new List<string>());
+
+			List<string> disabledPrimary = disabledPrimarySettingsMap[plugin];
+			List<string> disabledSecondary = disabledSecondarySettingsMap[plugin];
 
 			var updated_primary_settings_map = new Dictionary<string, Plugin>();
 			foreach (var pair in primary_settings_map)
@@ -264,6 +307,10 @@ namespace Smod2
 				if (plugin != pair.Value)
 				{
 					updated_primary_settings_map.Add(pair.Key, pair.Value);
+				}
+				else
+				{
+					disabledPrimary.Add(pair.Key);
 				}
 			}
 			primary_settings_map = updated_primary_settings_map;
@@ -276,6 +323,10 @@ namespace Smod2
 					if (secondary_setting_plugin != plugin)
 					{
 						updated_list.Add(secondary_setting_plugin);
+					}
+					else
+					{
+						disabledSecondary.Add(pair.Key);
 					}
 				}
 				pair.Value.Clear();
