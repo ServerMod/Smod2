@@ -191,8 +191,10 @@ namespace Smod2
 			plugin.Info("Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
 			PipeManager.Manager.RegisterLinks(plugin);
 			ConfigManager.Manager.RegisterPlugin(plugin);
+			EventManager.Manager.AddSnapshotEventHandlers(plugin);
 
 			plugin.OnEnable();
+			plugin.Enabled = true;
 			enabledPlugins.Add(plugin.Details.id, plugin);
 		}
 
@@ -225,6 +227,7 @@ namespace Smod2
 		public void DisablePlugin(Plugin plugin)
 		{
 			plugin.OnDisable();
+			plugin.Enabled = false;
 			disabledPlugins.Add(plugin.Details.id, plugin);
 			
 			EventManager.Manager.RemoveEventHandlers(plugin);

@@ -25,6 +25,8 @@ namespace Smod2
 		    internal set;
 	    }
 
+	    public bool Enabled { get; internal set; }
+
 		public readonly EventManager eventManager = EventManager.Manager;
 		public readonly PluginManager pluginManager = PluginManager.Manager;
 		public Server Server => PluginManager.Manager.Server;

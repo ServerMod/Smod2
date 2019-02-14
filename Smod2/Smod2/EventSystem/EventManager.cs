@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Smod2.EventHandlers;
@@ -26,13 +27,15 @@ namespace Smod2.Events
 		}
 
 		private static PriorityComparator priorityCompare = new PriorityComparator();
-		Dictionary<Type, List<EventHandlerWrapper>> event_meta;
-		Dictionary<Type, List<IEventHandler>> event_handlers;
+		private Dictionary<Type, List<EventHandlerWrapper>> event_meta;
+		private Dictionary<Type, List<IEventHandler>> event_handlers;
+		private readonly Dictionary<Plugin, Snapshot> snapshots;
 
 		public EventManager()
 		{
 			event_meta = new Dictionary<Type, List<EventHandlerWrapper>>();
 			event_handlers = new Dictionary<Type, List<IEventHandler>>();
+			snapshots = new Dictionary<Plugin, Snapshot>();
 		}
 
 
@@ -64,16 +67,31 @@ namespace Smod2.Events
 			}
 		}
 
-		public void AddEventHandler(Plugin plugin, Type eventType, IEventHandler handler, Priority priority=Priority.Normal)
+		public void AddEventHandler(Plugin plugin, Type eventType, IEventHandler handler, Priority priority = Priority.Normal)
 		{
 			plugin.Debug(string.Format("Adding event handler from: {0} type: {1} priority: {2} handler: {3}", plugin.Details.name, eventType, priority, handler.GetType()));
 			EventHandlerWrapper wrapper = new EventHandlerWrapper(plugin, priority, handler);
 
+			if (!plugin.Enabled)
+			{
+				if (!snapshots.ContainsKey(plugin))
+				{
+					snapshots.Add(plugin, new Snapshot());
+				}
+				snapshots[plugin].Add(eventType, wrapper);
+			}
+
+			AddEventMeta(eventType, wrapper, handler);
+		}
+
+		private void AddEventMeta(Type eventType, EventHandlerWrapper wrapper, IEventHandler handler)
+		{
 			if (!event_meta.ContainsKey(eventType))
 			{
 				event_meta.Add(eventType, new List<EventHandlerWrapper>());
-				event_meta[eventType].Add(wrapper);
 				event_handlers.Add(eventType, new List<IEventHandler>());
+
+				event_meta[eventType].Add(wrapper);
 				event_handlers[eventType].Add(handler);
 			}
 			else
@@ -87,25 +105,42 @@ namespace Smod2.Events
 			}
 		}
 
+		public void AddSnapshotEventHandlers(Plugin plugin)
+		{
+			if (!snapshots.ContainsKey(plugin) || !snapshots[plugin].Active)
+			{
+				return;
+			}
+
+			snapshots[plugin].Active = false;
+			foreach (Snapshot.SnapshotEntry entry in snapshots[plugin])
+			{
+				AddEventMeta(entry.Type, entry.Wrapper, entry.Wrapper.Handler);
+			}
+		}
+
 		public void RemoveEventHandlers(Plugin plugin)
 		{
 			Dictionary<Type, List<EventHandlerWrapper>> new_event_meta = new Dictionary<Type, List<EventHandlerWrapper>>();
 			// loop through the meta dict finding any handlers from this plugin
 			foreach (var meta in event_meta)
 			{
-				List<EventHandlerWrapper> metaList = meta.Value;
 				List<EventHandlerWrapper> newList = new List<EventHandlerWrapper>();
-				foreach (EventHandlerWrapper wrapper in metaList)
+
+				foreach (EventHandlerWrapper wrapper in meta.Value)
 				{
 					if (wrapper.Plugin != plugin)
 					{
 						newList.Add(wrapper);
 					}
 				}
-
-				new_event_meta.Add(meta.Key, newList);
+				
+				if (newList.Count > 0)
+				{
+					new_event_meta.Add(meta.Key, newList);
+				}
 			}
-
+			
 			event_meta = new_event_meta;
 			// rebuild handler list for each type
 			foreach (var meta in event_meta)
@@ -113,6 +148,10 @@ namespace Smod2.Events
 				RebuildHandlerList(meta.Key);
 			}
 
+			if (snapshots.ContainsKey(plugin))
+			{
+				snapshots[plugin].Active = true;
+			}
 		}
 
 		private void RebuildHandlerList(Type eventType)
@@ -159,8 +198,7 @@ namespace Smod2.Events
 		}
 
 	}
-
-
+	
 	public class EventHandlerWrapper
 	{
 		public Priority Priority { get; }
@@ -175,4 +213,37 @@ namespace Smod2.Events
 		}
 	}
 
+	public class Snapshot : IEnumerable
+	{
+		private readonly List<SnapshotEntry> wrappers;
+
+		public bool Active { get; set; }
+
+		public Snapshot()
+		{
+			wrappers = new List<SnapshotEntry>();
+		}
+
+		public void Add(Type type, EventHandlerWrapper wrapper)
+		{
+			wrappers.Add(new SnapshotEntry(type, wrapper));
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return wrappers.GetEnumerator();
+		}
+
+		public class SnapshotEntry
+		{
+			public Type Type { get; }
+			public EventHandlerWrapper Wrapper { get; }
+
+			public SnapshotEntry(Type type, EventHandlerWrapper wrapper)
+			{
+				Type = type;
+				Wrapper = wrapper;
+			}
+		}
+	}
 }
