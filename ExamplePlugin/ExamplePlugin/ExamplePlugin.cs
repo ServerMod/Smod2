@@ -17,7 +17,7 @@ namespace ExamplePlugin
 		SmodMinor = 2,
 		SmodRevision = 4
 		)]
-	class ExamplePlugin : Plugin
+	public class ExamplePlugin : Plugin
 	{
 		// Hooks to event called by any plugin
 		// Hooks can be private as well as public, but all other pipes must be public
@@ -55,10 +55,16 @@ namespace ExamplePlugin
 
 		public override void OnEnable()
 		{
+			// Sets the pipe field to 0.1. Pipes are not accessable in register.
+			if (damageMultiplier != null)
+			{
+				damageMultiplier.Value = 0.1f;
+			}
+
 			this.Info(this.Details.name + " has loaded :)");
 			this.Info("Config value: " + this.GetConfigString("myConfigKey"));
 		}
-
+		
 		public override void Register()
 		{
 			// Register multiple events
@@ -69,16 +75,6 @@ namespace ExamplePlugin
 			this.AddCommand("hello", new HelloWorldCommand(this));
 			// Register config setting(s)
 			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", Smod2.Config.SettingType.STRING, true, "This is a description"));
-		}
-
-		// This is ran after Register
-		public override void PipeRegister()
-		{
-			// Sets the pipe field to 0.1.
-			if (damageMultiplier != null)
-			{
-				damageMultiplier.Value = 0.1f;
-			}
 		}
 
 		[FieldPipe]
@@ -113,7 +109,7 @@ namespace ExamplePlugin
 
 			Server.Map.SpawnItem(ItemType.COIN, player.GetPosition(), Vector.Zero);
 			player.PersonalBroadcast(5, "A coin has been spawned at your feet. Pick it up for a chance to get a Micro HID!", false);
-			InvokeEvent("courtney.example.plugin.OnGiveLottoItem", player);
+			InvokeEvent("OnGiveLottoItem", player);
 
 			return true;
 		}

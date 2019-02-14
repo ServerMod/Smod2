@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Smod2.Piping
 {
 	public class PipeManager
 	{
+		private readonly Dictionary<Type, FieldInfo[]> links;
 		private readonly Dictionary<string, List<EventPipe>> events;
 		private readonly Dictionary<Type, Func<PluginPipes, string, object>> pipeGetters;
 
@@ -17,6 +16,7 @@ namespace Smod2.Piping
 
 		public PipeManager()
 		{
+			links = new Dictionary<Type, FieldInfo[]>();
 			events = new Dictionary<string, List<EventPipe>>();
 			pipeGetters = new Dictionary<Type, Func<PluginPipes, string, object>>
 			{
@@ -31,14 +31,14 @@ namespace Smod2.Piping
 				{
 					typeof(MethodPipe),
 					(pipes, pipeName) => pipes.GetMethod(pipeName)
-				},
+				}
 			};
 		}
 
 		private void SetPipeLink(Plugin source, FieldInfo info, string pluginId, string pipeName)
 		{
-			Plugin plugin = PluginManager.Manager.GetEnabledPlugin(pluginId);
-			if (plugin == null)
+			Plugin target = PluginManager.Manager.GetEnabledPlugin(pluginId);
+			if (target == null)
 			{
 				return;
 			}
@@ -49,7 +49,7 @@ namespace Smod2.Piping
 				return;
 			}
 
-			info.SetValue(source, pipeGetters[info.FieldType].Invoke(plugin.Pipes, pipeName));
+			info.SetValue(source, pipeGetters[info.FieldType].Invoke(target.Pipes, pipeName));
 		}
 
 		public void RegisterPlugin(Plugin plugin)
@@ -80,29 +80,49 @@ namespace Smod2.Piping
 		public void RegisterLinks(Plugin plugin)
 		{
 			Type type = plugin.GetType();
+			if (links.ContainsKey(type))
+			{
+				return;
+			}
+
 			FieldInfo[] infos = type.GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+			links.Add(type, infos);
 
 			foreach (FieldInfo info in infos)
 			{
 				PipeLink link = info.GetCustomAttribute<PipeLink>();
 				if (link != null)
 				{
-					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Linking {link.Pipe} of {link.Plugin} to {info.Name} of {plugin.Details.id}");
+					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Linking {info.Name} of {plugin.Details.id} to {link.Pipe} of {link.Plugin}");
 					SetPipeLink(plugin, info, link.Plugin, link.Pipe);
 				}
 			}
 		}
-		
+
+		public void UnregisterLinks(Plugin plugin)
+		{
+			Type type = plugin.GetType();
+			if (!links.ContainsKey(type))
+			{
+				return;
+			}
+
+			foreach (FieldInfo info in links[type])
+			{
+				PipeLink link = info.GetCustomAttribute<PipeLink>();
+				if (link != null)
+				{
+					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking {info.Name} of {plugin.Details.id} from {link.Pipe} of {link.Plugin}");
+					info.SetValue(plugin, null);
+				}
+			}
+		}
+
 		internal void InvokeEvent(string eventName, string caller, object[] parameters)
 		{
 			if (eventName == null)
 			{
 				throw new ArgumentNullException(nameof(eventName));
-			}
-
-			if (!events.ContainsKey(eventName))
-			{
-				throw new ArgumentOutOfRangeException(nameof(eventName), $"Event \"{eventName}\" is not registered.");
 			}
 
 			foreach (EventPipe pipe in events[eventName])

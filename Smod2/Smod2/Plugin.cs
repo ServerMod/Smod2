@@ -30,7 +30,6 @@ namespace Smod2
 		public Server Server => PluginManager.Manager.Server;
 		public Round Round => PluginManager.Manager.Server.Round;
 		public abstract void Register();
-	    public abstract void PipeRegister();
 		public abstract void OnEnable();
 		public abstract void OnDisable();
 

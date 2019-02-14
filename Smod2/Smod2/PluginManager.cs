@@ -189,9 +189,9 @@ namespace Smod2
 		public void EnablePlugin(Plugin plugin)
 		{
 			plugin.Info("Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
+			PipeManager.Manager.RegisterLinks(plugin);
 			ConfigManager.Manager.RegisterPlugin(plugin);
-			PipeManager.Manager.RegisterPlugin(plugin);
-			plugin.Register();
+
 			plugin.OnEnable();
 			enabledPlugins.Add(plugin.Details.id, plugin);
 		}
@@ -225,25 +225,12 @@ namespace Smod2
 		public void DisablePlugin(Plugin plugin)
 		{
 			plugin.OnDisable();
+			disabledPlugins.Add(plugin.Details.id, plugin);
+			
 			EventManager.Manager.RemoveEventHandlers(plugin);
 			CommandManager.UnregisterCommands(plugin);
-			disabledPlugins.Add(plugin.Details.id, plugin);
 			ConfigManager.Manager.UnloadPlugin(plugin);
 			PipeManager.Manager.UnregisterPlugin(plugin);
-		}
-
-		public void RegisterPluginsPipes()
-		{
-			foreach (KeyValuePair<string, Plugin> plugin in enabledPlugins)
-			{
-				RegisterPluginPipes(plugin.Value);
-			}
-		}
-
-		public void RegisterPluginPipes(Plugin plugin)
-		{
-			PipeManager.Manager.RegisterLinks(plugin);
-			plugin.PipeRegister();
 		}
 
 		public void LoadPlugins(String dir)
@@ -323,6 +310,9 @@ namespace Smod2
 								else
 								{
 									plugin.Details = details;
+									ConfigManager.Manager.RegisterPlugin(plugin);
+									PipeManager.Manager.RegisterPlugin(plugin);
+									plugin.Register();
 
 									disabledPlugins.Add(details.id, plugin);
 									Logger.Info("PLUGIN_LOADER", "Plugin loaded: " + plugin.ToString());

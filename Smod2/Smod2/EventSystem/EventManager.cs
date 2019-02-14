@@ -48,8 +48,7 @@ namespace Smod2.Events
 				} catch (Exception e)
 				{
 					PluginManager.Manager.Logger.Error("Event", "Event Handler: " + handler.GetType().ToString() + " Failed to handle event:" + ev.GetType().ToString());
-					PluginManager.Manager.Logger.Error("Event", e.Message);
-					PluginManager.Manager.Logger.Error("Event", e.StackTrace);
+					PluginManager.Manager.Logger.Error("Event", e.ToString());
 				}
 			}
 		}
@@ -69,6 +68,7 @@ namespace Smod2.Events
 		{
 			plugin.Debug(string.Format("Adding event handler from: {0} type: {1} priority: {2} handler: {3}", plugin.Details.name, eventType, priority, handler.GetType()));
 			EventHandlerWrapper wrapper = new EventHandlerWrapper(plugin, priority, handler);
+
 			if (!event_meta.ContainsKey(eventType))
 			{
 				event_meta.Add(eventType, new List<EventHandlerWrapper>());
@@ -85,7 +85,6 @@ namespace Smod2.Events
 				meta.Reverse();
 				RebuildHandlerList(eventType);
 			}
-
 		}
 
 		public void RemoveEventHandlers(Plugin plugin)
