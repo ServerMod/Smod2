@@ -58,7 +58,7 @@ namespace Smod2.API
 		/// <summary>
 		/// Calculates the distance between two vectors.
 		/// </summary>
-		public static float Distance(Vector a, Vector b) => Magnitude(a - b);
+		public static float Distance(Vector a, Vector b) => (a - b).Magnitude;
 
 		/// <summary>
 		/// Linearly interpolates two vectors given a value from 0 to 1.
@@ -75,7 +75,7 @@ namespace Smod2.API
 		public static Vector LerpUnclamped(Vector a, Vector b, float t) => a + (b - a) * t;
 
 		/// <summary>
-		/// Returns the smaller of the two vectors.
+		/// Returns the smallest values of the two vectors.
 		/// </summary>
 		public static Vector Min(Vector a, Vector b) => 
 			new Vector(
@@ -85,7 +85,7 @@ namespace Smod2.API
 				);
 
 		/// <summary>
-		/// Returns the larger of the two vectors.
+		/// Returns the largest values of the two vectors.
 		/// </summary>
 		public static Vector Max(Vector a, Vector b) => 
 			new Vector(
@@ -97,22 +97,22 @@ namespace Smod2.API
 		/// <summary>
 		/// Calculates the magnitude (distance from origin) of a vector.
 		/// </summary>
-		public static float Magnitude(Vector vector) => (float)Math.Sqrt(SqrMagnitude(vector));
+		public float Magnitude => (float)Math.Sqrt(SqrMagnitude);
 
 		/// <summary>
 		/// Calculates the square of the magnitude (distance from origin) of a vector.
 		/// </summary>
-		public static float SqrMagnitude(Vector vector) =>
-			(float)(Math.Pow(vector.x, 2) +
-			        Math.Pow(vector.y, 2) +
-			        Math.Pow(vector.z, 2));
+		public float SqrMagnitude =>
+			(float)(x * x +
+			        y * y +
+			        z * z);
 
 		/// <summary>
 		/// Coverts a vector's values to a max of 1.
 		/// </summary>
 		public static Vector Normalize(Vector vector)
 		{
-			float num = Magnitude(vector);
+			float num = vector.Magnitude;
 			if (num > 9.99999974737875E-06)
 			{
 				return vector / num;
