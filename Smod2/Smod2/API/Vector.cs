@@ -97,28 +97,28 @@ namespace Smod2.API
 		/// <summary>
 		/// Calculates the magnitude (distance from origin) of a vector.
 		/// </summary>
-		public float Magnitude => (float)Math.Sqrt(SqrMagnitude);
+		public float Magnitude => (float) Math.Sqrt(SqrMagnitude);
 
 		/// <summary>
 		/// Calculates the square of the magnitude (distance from origin) of a vector.
 		/// </summary>
 		public float SqrMagnitude =>
-			(float)(x * x +
-			        y * y +
-			        z * z);
+			x * x +
+			y * y +
+			z * z;
 
 		/// <summary>
 		/// Coverts a vector's values to a max of 1.
 		/// </summary>
-		public static Vector Normalize(Vector vector)
+		public Vector Normalize
 		{
-			float num = vector.Magnitude;
-			if (num > 9.99999974737875E-06)
+			get
 			{
-				return vector / num;
-			}
+				float num = Magnitude;
+				if (num > 9.99999974737875E-06) return this / num;
 
-			return Zero;
+				return Zero;
+			}
 		}
 
 		public static Vector operator +(Vector a, float b)
