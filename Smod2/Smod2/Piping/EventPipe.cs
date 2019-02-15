@@ -23,6 +23,12 @@ namespace Smod2.Piping
 			PluginScope = pluginScope ?? throw new ArgumentNullException(nameof(pluginScope));
 		}
 
+		private void LogException(Exception e)
+		{
+			Source.Error(e.GetType().Name + ": " + e.Message);
+			Source.Error(e.StackTrace);
+		}
+
 		internal void Init(Plugin source, MethodInfo info)
 		{
 			this.info = info;
@@ -52,8 +58,7 @@ namespace Smod2.Piping
 				}
 
 				Source.Error($"Failed to handle event pipe: {EventName} (method: {Name}, caller: {caller}). Possible error: invalid number of parameters");
-				Source.Error(e.Message);
-				Source.Error(e.StackTrace);
+				LogException(e);
 			}
 			catch (ArgumentException e)
 			{
@@ -63,14 +68,12 @@ namespace Smod2.Piping
 				}
 
 				Source.Error($"Failed to handle event pipe: {EventName} (method: {Name}, caller: {caller}). Possible error: invalid type of parameters");
-				Source.Error(e.Message);
-				Source.Error(e.StackTrace);
+				LogException(e);
 			}
 			catch (Exception e)
 			{
 				Source.Error($"Failed to handle event pipe: {EventName} (method: {Name}, caller: {caller})");
-				Source.Error(e.Message);
-				Source.Error(e.StackTrace);
+				LogException(e);
 			}
 		}
 	}

@@ -44,6 +44,11 @@ namespace Smod2.Piping
 			Type = info.FieldType;
 			Readonly = Readonly && info.IsInitOnly;
 
+			if (!info.IsPublic)
+			{
+				PluginManager.Manager.Logger.Warn("PIPE_MANAGER", $"Pipe field {Name} in {Source.Details.id} is not public. This is bad practice.");
+			}
+
 			base.Init(info.IsStatic ? null : source, info);
 		}
 	}

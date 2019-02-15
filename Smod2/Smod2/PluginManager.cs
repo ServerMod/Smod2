@@ -192,9 +192,9 @@ namespace Smod2
 			PipeManager.Manager.RegisterLinks(plugin);
 			ConfigManager.Manager.RegisterPlugin(plugin);
 			EventManager.Manager.AddSnapshotEventHandlers(plugin);
+			CommandManager.ReregisterPlugin(plugin);
 
 			plugin.OnEnable();
-			plugin.Enabled = true;
 			enabledPlugins.Add(plugin.Details.id, plugin);
 		}
 
@@ -227,11 +227,10 @@ namespace Smod2
 		public void DisablePlugin(Plugin plugin)
 		{
 			plugin.OnDisable();
-			plugin.Enabled = false;
 			disabledPlugins.Add(plugin.Details.id, plugin);
-			
-			EventManager.Manager.RemoveEventHandlers(plugin);
+
 			CommandManager.UnregisterCommands(plugin);
+			EventManager.Manager.RemoveEventHandlers(plugin);
 			ConfigManager.Manager.UnloadPlugin(plugin);
 			PipeManager.Manager.UnregisterPlugin(plugin);
 		}

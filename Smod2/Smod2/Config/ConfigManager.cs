@@ -9,9 +9,7 @@ namespace Smod2
 		private Dictionary<string, Plugin> primary_settings_map = new Dictionary<string, Plugin>();
 		private Dictionary<string, List<Plugin>> secondary_settings_map = new Dictionary<string, List<Plugin>>();
 
-		private Dictionary<Plugin, Dictionary<string, ConfigSetting>> disabledSettings = new Dictionary<Plugin, Dictionary<string, ConfigSetting>>();
-		private Dictionary<Plugin, List<string>> disabledPrimarySettingsMap = new Dictionary<Plugin, List<string>>();
-		private Dictionary<Plugin, List<string>> disabledSecondarySettingsMap = new Dictionary<Plugin, List<string>>();
+		private Dictionary<Plugin, SnapshotEntry> disabledPlugins = new Dictionary<Plugin, SnapshotEntry>();
 
 		private static ConfigManager singleton;
 		public static ConfigManager Manager
@@ -107,22 +105,23 @@ namespace Smod2
 				return;
 			}
 
-			if (!disabledSettings.ContainsKey(plugin))
+			if (!disabledPlugins.ContainsKey(plugin))
 			{
 				settings.Add(plugin, new Dictionary<string, Config.ConfigSetting>());
 			}
 			else
 			{
-				settings.Add(plugin, disabledSettings[plugin]);
-				disabledSettings.Remove(plugin);
+				SnapshotEntry snapshots = disabledPlugins[plugin];
+				disabledPlugins.Remove(plugin);
 
-				foreach (string setting in disabledPrimarySettingsMap[plugin])
+				settings.Add(plugin, snapshots.Settings);
+
+				foreach (string setting in snapshots.Primaries)
 				{
 					primary_settings_map.Add(setting, plugin);
 				}
-				disabledPrimarySettingsMap.Remove(plugin);
 
-				foreach (string setting in disabledSecondarySettingsMap[plugin])
+				foreach (string setting in snapshots.Secondaries)
 				{
 					if (!secondary_settings_map.ContainsKey(setting))
 					{
@@ -131,7 +130,6 @@ namespace Smod2
 
 					secondary_settings_map[setting].Add(plugin);
 				}
-				disabledSecondarySettingsMap.Remove(plugin);
 			}
 		}
 
@@ -292,14 +290,9 @@ namespace Smod2
 				return;
 			}
 
-			disabledSettings.Add(plugin, settings[plugin]);
+			SnapshotEntry snapshot = new SnapshotEntry(settings[plugin], new List<string>(), new List<string>());
+			disabledPlugins.Add(plugin, snapshot);
 			settings.Remove(plugin);
-
-			disabledPrimarySettingsMap.Add(plugin, new List<string>());
-			disabledSecondarySettingsMap.Add(plugin, new List<string>());
-
-			List<string> disabledPrimary = disabledPrimarySettingsMap[plugin];
-			List<string> disabledSecondary = disabledSecondarySettingsMap[plugin];
 
 			var updated_primary_settings_map = new Dictionary<string, Plugin>();
 			foreach (var pair in primary_settings_map)
@@ -310,7 +303,7 @@ namespace Smod2
 				}
 				else
 				{
-					disabledPrimary.Add(pair.Key);
+					snapshot.Primaries.Add(pair.Key);
 				}
 			}
 			primary_settings_map = updated_primary_settings_map;
@@ -326,11 +319,25 @@ namespace Smod2
 					}
 					else
 					{
-						disabledSecondary.Add(pair.Key);
+						snapshot.Secondaries.Add(pair.Key);
 					}
 				}
 				pair.Value.Clear();
 				pair.Value.AddRange(updated_list);
+			}
+		}
+
+		private class SnapshotEntry
+		{
+			public Dictionary<string, ConfigSetting> Settings { get; }
+			public List<string> Primaries { get; }
+			public List<string> Secondaries { get; }
+
+			public SnapshotEntry(Dictionary<string, ConfigSetting> settings, List<string> primaries, List<string> secondaries)
+			{
+				Settings = settings;
+				Primaries = primaries;
+				Secondaries = secondaries;
 			}
 		}
 	}

@@ -51,6 +51,11 @@ namespace Smod2.Piping
 			Gettable = Gettable && info.GetMethod != null;
 			Settable = Settable && info.SetMethod != null;
 
+			if (!Gettable && !Settable)
+			{
+				PluginManager.Manager.Logger.Warn("PIPE_MANAGER", $"Pipe property {Name} in {Source.Details.id} has no accessable getter or setter. This is bad practice.");
+			}
+
 			base.Init(source, info);
 		}
 	}

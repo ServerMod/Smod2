@@ -72,13 +72,14 @@ namespace Smod2.Events
 			plugin.Debug(string.Format("Adding event handler from: {0} type: {1} priority: {2} handler: {3}", plugin.Details.name, eventType, priority, handler.GetType()));
 			EventHandlerWrapper wrapper = new EventHandlerWrapper(plugin, priority, handler);
 
-			if (!plugin.Enabled)
+			// If the plugin is not enabled
+			if (PluginManager.Manager.GetEnabledPlugin(plugin.Details?.id) == null)
 			{
 				if (!snapshots.ContainsKey(plugin))
 				{
 					snapshots.Add(plugin, new Snapshot());
 				}
-				snapshots[plugin].Add(eventType, wrapper);
+				snapshots[plugin].Entries.Add(new Snapshot.SnapshotEntry(eventType, wrapper));
 			}
 
 			AddEventMeta(eventType, wrapper, handler);
@@ -113,7 +114,7 @@ namespace Smod2.Events
 			}
 
 			snapshots[plugin].Active = false;
-			foreach (Snapshot.SnapshotEntry entry in snapshots[plugin])
+			foreach (Snapshot.SnapshotEntry entry in snapshots[plugin].Entries)
 			{
 				AddEventMeta(entry.Type, entry.Wrapper, entry.Wrapper.Handler);
 			}
@@ -197,6 +198,28 @@ namespace Smod2.Events
 			}
 		}
 
+		private class Snapshot
+		{
+			public List<SnapshotEntry> Entries { get; private set; }
+			public bool Active { get; set; }
+
+			public Snapshot()
+			{
+				Entries = new List<SnapshotEntry>();
+			}
+
+			public class SnapshotEntry
+			{
+				public Type Type { get; }
+				public EventHandlerWrapper Wrapper { get; }
+
+				public SnapshotEntry(Type type, EventHandlerWrapper wrapper)
+				{
+					Type = type;
+					Wrapper = wrapper;
+				}
+			}
+		}
 	}
 	
 	public class EventHandlerWrapper
@@ -210,40 +233,6 @@ namespace Smod2.Events
 			this.Plugin = plugin;
 			this.Priority = priority;
 			this.Handler = handler;
-		}
-	}
-
-	public class Snapshot : IEnumerable
-	{
-		private readonly List<SnapshotEntry> wrappers;
-
-		public bool Active { get; set; }
-
-		public Snapshot()
-		{
-			wrappers = new List<SnapshotEntry>();
-		}
-
-		public void Add(Type type, EventHandlerWrapper wrapper)
-		{
-			wrappers.Add(new SnapshotEntry(type, wrapper));
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return wrappers.GetEnumerator();
-		}
-
-		public class SnapshotEntry
-		{
-			public Type Type { get; }
-			public EventHandlerWrapper Wrapper { get; }
-
-			public SnapshotEntry(Type type, EventHandlerWrapper wrapper)
-			{
-				Type = type;
-				Wrapper = wrapper;
-			}
 		}
 	}
 }

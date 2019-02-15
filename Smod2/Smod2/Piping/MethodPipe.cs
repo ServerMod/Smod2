@@ -55,6 +55,11 @@ namespace Smod2.Piping
 			}
 			Type = info.ReturnType;
 
+			if (!info.IsPublic)
+			{
+				PluginManager.Manager.Logger.Warn("PIPE_MANAGER", $"Pipe method {Name} in {Source.Details.id} is not public. This is bad practice.");
+			}
+
 			base.Init(info.IsStatic ? null : source, info);
 		}
 	}

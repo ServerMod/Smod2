@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace Smod2.Piping
 {
@@ -23,7 +24,7 @@ namespace Smod2.Piping
 		{
 			if (!initialized)
 			{
-				throw new InvalidOperationException("The pipe member has not fully initialized yet. Use pipes in or after Plugin.PipeRegister");
+				throw new InvalidOperationException($"The pipe member has not fully initialized yet. Use pipes in or after {nameof(Plugin.OnEnable)}");
 			}
 		}
 	}
