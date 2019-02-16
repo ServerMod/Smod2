@@ -19,22 +19,20 @@ namespace Smod2.Piping
 			fields = new Dictionary<string, FieldPipe>();
 			foreach (FieldInfo field in pluginType.GetFields(flags))
 			{
-				FieldPipe pipe = field.GetCustomAttribute<FieldPipe>();
+				PipeField pipe = field.GetCustomAttribute<PipeField>();
 				if (pipe != null)
 				{
-					pipe.Init(plugin, field);
-					fields.Add(field.Name, pipe);
+					fields.Add(field.Name, Create<FieldPipe>(typeof(FieldPipe<>), field.FieldType, plugin, field, pipe));
 				}
 			}
 
 			properties = new Dictionary<string, PropertyPipe>();
 			foreach (PropertyInfo property in pluginType.GetProperties(flags))
 			{
-				PropertyPipe pipe = property.GetCustomAttribute<PropertyPipe>();
+				PipeProperty pipe = property.GetCustomAttribute<PipeProperty>();
 				if (pipe != null)
 				{
-					pipe.Init(plugin, property);
-					properties.Add(property.Name, pipe);
+					properties.Add(property.Name, Create<PropertyPipe>(typeof(PropertyPipe<>), property.PropertyType, plugin, property, pipe));
 				}
 			}
 
@@ -44,23 +42,31 @@ namespace Smod2.Piping
 			{
 				if (method.IsPublic)
 				{
-					MethodPipe methodPipe = method.GetCustomAttribute<MethodPipe>();
-					if (methodPipe != null)
+					PipeMethod pipeMethod = method.GetCustomAttribute<PipeMethod>();
+					if (pipeMethod != null)
 					{
-						methodPipe.Init(plugin, method);
-						methods.Add(method.Name, methodPipe);
+						methods.Add(method.Name, Create<MethodPipe>(typeof(MethodPipe<>), method.ReturnType, plugin, method, pipeMethod));
 
 						continue;
 					}
 				}
 
-				EventPipe eventPipe = method.GetCustomAttribute<EventPipe>();
-				if (eventPipe != null)
+				PipeEvent pipeEvent = method.GetCustomAttribute<PipeEvent>();
+				if (pipeEvent != null)
 				{
-					eventPipe.Init(plugin, method);
-					events.Add(method.Name, eventPipe);
+					events.Add(method.Name, new EventPipe(plugin, method, pipeEvent));
 				}
 			}
+		}
+		
+		private static T Create<T>(Type pipeType, Type returnType, Plugin source, MemberInfo info) where T : MemberPipe
+		{
+			return (T)Activator.CreateInstance(pipeType.MakeGenericType(returnType), source, info);
+		}
+		
+		private static T Create<T>(Type pipeType, Type returnType, Plugin source, MemberInfo info, Attribute pipe) where T : MemberPipe
+		{
+			return (T)Activator.CreateInstance(pipeType.MakeGenericType(returnType), source, info, pipe);
 		}
 
 		private static T[] DuplicateCollection<T>(ICollection<T> collection)

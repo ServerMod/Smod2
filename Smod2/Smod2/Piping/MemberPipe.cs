@@ -3,28 +3,18 @@ using System.Reflection;
 
 namespace Smod2.Piping
 {
-	public abstract class MemberPipe : Attribute
+	public abstract class MemberPipe
 	{
-		private bool initialized;
+		protected readonly Plugin instance;
+		public Plugin Source { get; }
+		public string Name { get; }
+		public Type Type { get; protected set; }
 
-		public Plugin Source { get; private set; }
-		public string Name { get; private set; }
-		public abstract Type Type { get; protected set; }
-
-		protected void Init(Plugin source, MemberInfo info)
+		protected MemberPipe(Plugin source, MemberInfo info, bool @static)
 		{
 			Source = source;
 			Name = info.Name;
-
-			initialized = true;
-		}
-
-		protected void CheckInit()
-		{
-			if (!initialized)
-			{
-				throw new InvalidOperationException($"The pipe member has not fully initialized yet. Use pipes in or after {nameof(Plugin.OnEnable)}");
-			}
+			instance = @static ? null : source;
 		}
 	}
 }

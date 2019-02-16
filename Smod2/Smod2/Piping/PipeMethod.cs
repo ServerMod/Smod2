@@ -5,18 +5,15 @@ using System.Reflection;
 namespace Smod2.Piping
 {
 	[AttributeUsage(AttributeTargets.Method)]
+	public class PipeMethod : Attribute { }
+
 	public class MethodPipe : MemberPipe
 	{
-		private MethodInfo info;
-		private MethodPipeParameter[] pipeParameters;
-
-		public override Type Type { get; protected set; }
-
+		private readonly MethodInfo info;
+		private readonly MethodPipeParameter[] pipeParameters;
 		public object Invoke() => Invoke(null);
 		public object Invoke(params object[] parameters)
 		{
-			CheckInit();
-
 			try
 			{
 				return info.Invoke(Source, parameters);
@@ -40,27 +37,31 @@ namespace Smod2.Piping
 				throw new ArgumentException("Parameter type mismatch. Check the plugin which hosts the method pipe and make sure your arguments types are correct.", e);
 			}
 		}
-
-		public MethodPipeParameter[] GetParameters() => pipeParameters.ToArray();
-
-		internal void Init(Plugin source, MethodInfo info)
+		
+		internal MethodPipe(Plugin source, MethodInfo info) : base(source, info, info.IsStatic)
 		{
 			this.info = info;
 
+			Type = info.ReturnType;
 			ParameterInfo[] parameters = info.GetParameters();
 			pipeParameters = new MethodPipeParameter[parameters.Length];
 			for (int i = 0; i < parameters.Length; i++)
 			{
 				pipeParameters[i] = new MethodPipeParameter(parameters[i]);
 			}
-			Type = info.ReturnType;
 
 			if (!info.IsPublic)
 			{
 				PluginManager.Manager.Logger.Warn("PIPE_MANAGER", $"Pipe method {Name} in {Source.Details.id} is not public. This is bad practice.");
 			}
-
-			base.Init(info.IsStatic ? null : source, info);
 		}
+		
+		public MethodPipeParameter[] GetParameters() => pipeParameters.ToArray();
+	}
+	public class MethodPipe<T> : MethodPipe
+	{
+		public new T Invoke() => Invoke(null);
+		public new T Invoke(params object[] parameters) => (T) base.Invoke(parameters);
+		internal MethodPipe(Plugin source, MethodInfo info) : base(source, info) { }
 	}
 }

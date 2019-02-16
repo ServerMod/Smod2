@@ -25,15 +25,15 @@ namespace Smod2.Piping
 			pipeGetters = new Dictionary<Type, Func<PluginPipes, string, object>>
 			{
 				{
-					typeof(FieldPipe),
+					typeof(PipeField),
 					(pipes, pipeName) => pipes.GetField(pipeName)
 				},
 				{
-					typeof(PropertyPipe),
+					typeof(PipeProperty),
 					(pipes, pipeName) => pipes.GetProperty(pipeName)
 				},
 				{
-					typeof(MethodPipe),
+					typeof(PipeMethod),
 					(pipes, pipeName) => pipes.GetMethod(pipeName)
 				}
 			};
@@ -156,7 +156,7 @@ namespace Smod2.Piping
 			foreach (EventPipe pipe in events[eventName])
 			{
 				// Skip if event pipe is disabled OR specific to one plugin AND the scope is not the same as the invoker
-				if (PluginManager.Manager.GetDisabledPlugin(pipe.Source.Details.id) == null || pipe.PluginScope != null && !pipe.PluginScope.Contains(caller))
+				if (PluginManager.Manager.GetDisabledPlugin(pipe.Source.Details.id) == null || !pipe.GetPluginScope().Contains(caller))
 				{
 					continue;
 				}

@@ -44,10 +44,10 @@
     <Compile Include="API\Map.cs" />
     <Compile Include="API\UserGroup.cs" />
     <Compile Include="API\Vector.cs" />
-    <Compile Include="Piping\EventPipe.cs" />
+    <Compile Include="Piping\PipeEvent.cs" />
     <Compile Include="Piping\MemberPipe.cs" />
-    <Compile Include="Piping\MethodPipe.cs" />
-    <Compile Include="Piping\FieldPipe.cs" />
+    <Compile Include="Piping\PipeMethod.cs" />
+    <Compile Include="Piping\PipeField.cs" />
     <Compile Include="Attributes\PluginDetails.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
@@ -82,7 +82,7 @@
     <Compile Include="Piping\MethodPipeParameter.cs" />
     <Compile Include="Piping\PipeLink.cs" />
     <Compile Include="Piping\PipeManager.cs" />
-    <Compile Include="Piping\PropertyPipe.cs" />
+    <Compile Include="Piping\PipeProperty.cs" />
     <Compile Include="Piping\PluginPipes.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginManager.cs" />
