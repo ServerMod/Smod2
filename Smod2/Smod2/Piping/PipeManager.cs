@@ -7,6 +7,8 @@ namespace Smod2.Piping
 {
 	public class PipeManager
 	{
+		private const BindingFlags AllMembers = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+
 		private readonly Dictionary<Type, FieldInfo[]> linkFields;
 		private readonly Dictionary<Type, List<FieldInfo>> linkReferences;
 		private readonly Dictionary<string, List<EventPipe>> events;
@@ -47,7 +49,7 @@ namespace Smod2.Piping
 
 			if (!pipeGetters.ContainsKey(info.FieldType))
 			{
-				PluginManager.Manager.Logger.Error("PIPE_MANAGER", source + " tried to link to a non-existant pipe type: " + info.FieldType);
+				PluginManager.Manager.Logger.Error("PIPE_MANAGER", $"{info.Name} in {info.DeclaringType?.FullName ?? "namespace"} of {source.Details.id} tried to link to a non-existant pipe type: {info.FieldType}");
 				return;
 			}
 
@@ -94,7 +96,7 @@ namespace Smod2.Piping
 				return;
 			}
 
-			FieldInfo[] infos = type.GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+			FieldInfo[] infos = type.GetFields(AllMembers);
 			linkFields.Add(type, infos);
 
 			foreach (FieldInfo info in infos)
