@@ -179,11 +179,11 @@ namespace Smod2
 
 		public void EnablePlugins()
 		{
-			foreach (var plugin in disabledPlugins)
+			// .ToArray() prevents a collection modified exception (enabling a plugin removes it from disabled plugins)
+			foreach (KeyValuePair<string, Plugin> plugin in disabledPlugins.ToArray())
 			{
 				EnablePlugin(plugin.Value);
 			}
-			disabledPlugins.Clear();
 		}
 
 		public void EnablePlugin(Plugin plugin)
@@ -195,16 +195,17 @@ namespace Smod2
 			CommandManager.ReregisterPlugin(plugin);
 
 			plugin.OnEnable();
+			disabledPlugins.Remove(plugin.Details.id);
 			enabledPlugins.Add(plugin.Details.id, plugin);
 		}
 
 		public void DisablePlugins()
 		{
-			foreach (var plugin in enabledPlugins)
+			// .ToArray() prevents a collection modified exception (disabling a plugin removes it from enabled plugins)
+			foreach (KeyValuePair<string, Plugin> plugin in enabledPlugins.ToArray())
 			{
 				DisablePlugin(plugin.Value);
 			}
-			enabledPlugins.Clear();
 		}
 
 		public void DisablePlugin(String id)
@@ -227,6 +228,7 @@ namespace Smod2
 		public void DisablePlugin(Plugin plugin)
 		{
 			plugin.OnDisable();
+			enabledPlugins.Remove(plugin.Details.id);
 			disabledPlugins.Add(plugin.Details.id, plugin);
 
 			CommandManager.UnregisterCommands(plugin);
@@ -329,8 +331,8 @@ namespace Smod2
 						catch (Exception e)
 						{
 							Logger.Error("PLUGIN_LOADER", "Failed to create instance of plugin " + t + "[" + path + "]");
-							Logger.Debug("PLUGIN_LOADER", e.Message);
-							Logger.Debug("PLUGIN_LOADER", e.StackTrace);
+							Logger.Error("PLUGIN_LOADER", e.GetType().Name + ": " + e.Message);
+							Logger.Error("PLUGIN_LOADER", e.StackTrace);
 						}
 					}
 				}
