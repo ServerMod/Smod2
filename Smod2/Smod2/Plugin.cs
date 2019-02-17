@@ -224,17 +224,17 @@ namespace Smod2
 		}
 
 	    public void InvokeEvent(string eventName) => InvokeEvent(eventName, null);
-	    public void InvokeEvent(string eventName, params object[] args) => InvokeExternalEvent(eventName, Details?.id, args);
+	    public void InvokeEvent(string eventName, params object[] args) => InvokeExternalEvent(Details.id + "." + eventName, args);
 
-	    public void InvokeExternalEvent(string eventName, string pluginId) => InvokeExternalEvent(eventName, pluginId, null);
-	    public void InvokeExternalEvent(string eventName, string pluginId, params object[] args)
+	    public void InvokeExternalEvent(string fullName) => InvokeExternalEvent(fullName, null);
+	    public void InvokeExternalEvent(string fullName, params object[] args)
 	    {
-		    if (eventName == null)
+		    if (fullName == null)
 		    {
-			    throw new ArgumentNullException(nameof(pluginId));
+			    throw new ArgumentNullException(nameof(fullName));
 		    }
 
-		    PipeManager.Manager.InvokeEvent((pluginId == null ? null : pluginId + ".") + eventName, Details?.id, args);
+		    PipeManager.Manager.InvokeEvent(fullName, Details.id, args);
 	    }
 
 		public void Debug(string message)
