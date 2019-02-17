@@ -21,7 +21,7 @@ namespace ExamplePlugin
 	{
 		// Hooks to event called by any plugin
 		// Hooks can be private as well as public, but all other pipes must be public
-		[EventPipe("dev.plugin.OnEpicDeath")]
+		[PipeEvent("dev.plugin.OnEpicDeath")]
 		private void OnEpicDeath(Player player, int whips, int naes)
 		{
 			if (naes > 2)
@@ -36,7 +36,7 @@ namespace ExamplePlugin
 		}
 
 		// Hooks to event called by specific plugins
-		[EventPipe("dev.plugin.OnWhip",
+		[PipeEvent("dev.plugin.OnWhip",
 			"dev.plugin",
 			"hoob.hud")]
 		private void OnWhip(Player player, Player target)
@@ -46,7 +46,7 @@ namespace ExamplePlugin
 
 		// Grabs the "DamageMultiplier" field from the plugin with the ID "dev.plugin", given that the field is a pipe
 		[PipeLink("dev.plugin", "DamageMultiplier")]
-		private FieldPipe damageMultiplier;
+		private FieldPipe<float> damageMultiplier;
 
 		public override void OnDisable()
 		{
@@ -77,11 +77,11 @@ namespace ExamplePlugin
 			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", Smod2.Config.SettingType.STRING, true, "This is a description"));
 		}
 
-		[FieldPipe]
+		[PipeField]
 		public float killChance;
 
 		private float microChance;
-		[PropertyPipe]
+		[PipeProperty]
 		public float MicroChance
 		{
 			get
@@ -97,7 +97,7 @@ namespace ExamplePlugin
 		}
 
 		// Declares a method usable to other plugins via piping.
-		[MethodPipe]
+		[PipeMethod]
 		public bool GiveLottoItem(Player player)
 		{
 			if (player.TeamRole.Team == Team.SPECTATOR || 
