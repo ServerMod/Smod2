@@ -14,8 +14,8 @@ namespace ExamplePlugin
 		id = "courtney.example.plugin",
 		version = "1.0",
 		SmodMajor = 3,
-		SmodMinor = 2,
-		SmodRevision = 4
+		SmodMinor = 3,
+		SmodRevision = 1
 		)]
 	public class ExamplePlugin : Plugin
 	{
