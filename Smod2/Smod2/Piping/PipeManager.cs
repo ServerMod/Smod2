@@ -25,15 +25,15 @@ namespace Smod2.Piping
 			pipeGetters = new Dictionary<Type, Func<PluginPipes, string, object>>
 			{
 				{
-					typeof(PipeField),
+					typeof(FieldPipe),
 					(pipes, pipeName) => pipes.GetField(pipeName)
 				},
 				{
-					typeof(PipeProperty),
+					typeof(PropertyPipe),
 					(pipes, pipeName) => pipes.GetProperty(pipeName)
 				},
 				{
-					typeof(PipeMethod),
+					typeof(MethodPipe),
 					(pipes, pipeName) => pipes.GetMethod(pipeName)
 				}
 			};
@@ -47,10 +47,16 @@ namespace Smod2.Piping
 				return;
 			}
 
-			if (!pipeGetters.ContainsKey(info.FieldType))
+			Type fieldType = info.FieldType;
+			if (!pipeGetters.ContainsKey(fieldType))
 			{
-				PluginManager.Manager.Logger.Error("PIPE_MANAGER", $"{info.Name} in {info.DeclaringType?.FullName ?? "namespace"} of {source.Details.id} tried to link to a non-existant pipe type: {info.FieldType}");
-				return;
+				fieldType = fieldType.BaseType;
+
+				if (fieldType == null || !pipeGetters.ContainsKey(fieldType))
+				{
+					PluginManager.Manager.Logger.Error("PIPE_MANAGER", $"{info.Name} in {info.DeclaringType?.FullName ?? "namespace"} of {source.Details.id} tried to link to a non-existant pipe type: {info.FieldType}");
+					return;	
+				}
 			}
 
 			Type targetType = target.GetType();
@@ -60,7 +66,7 @@ namespace Smod2.Piping
 			}
 			linkReferences[targetType].Add(info);
 
-			info.SetValue(source, pipeGetters[info.FieldType].Invoke(target.Pipes, pipeName));
+			info.SetValue(source, Convert.ChangeType(pipeGetters[fieldType].Invoke(target.Pipes, pipeName), info.FieldType));
 		}
 
 		public void RegisterPlugin(Plugin plugin)
@@ -155,8 +161,15 @@ namespace Smod2.Piping
 
 			foreach (EventPipe pipe in events[eventName])
 			{
-				// Skip if event pipe is disabled OR specific to one plugin AND the scope is not the same as the invoker
-				if (PluginManager.Manager.GetDisabledPlugin(pipe.Source.Details.id) == null || !pipe.GetPluginScope().Contains(caller))
+				// Skip if event pipe is disabled
+				if (PluginManager.Manager.GetDisabledPlugin(pipe.Source.Details.id) != null)
+				{
+					continue;
+				}
+				
+				// Skip if event pipe is specific to certain plugins AND the scope does not contain the invoker
+				string[] pluginScope = pipe.GetPluginScope();
+				if (pluginScope.Length > 0 && !pluginScope.Contains(caller))
 				{
 					continue;
 				}

@@ -45,7 +45,7 @@ namespace Smod2.Piping
 					PipeMethod pipeMethod = method.GetCustomAttribute<PipeMethod>();
 					if (pipeMethod != null)
 					{
-						methods.Add(method.Name, Create<MethodPipe>(typeof(MethodPipe<>), method.ReturnType, plugin, method, pipeMethod));
+						methods.Add(method.Name, Create<MethodPipe>(typeof(MethodPipe<>), method.ReturnType, plugin, method));
 
 						continue;
 					}
@@ -58,15 +58,33 @@ namespace Smod2.Piping
 				}
 			}
 		}
-		
-		private static T Create<T>(Type pipeType, Type returnType, Plugin source, MemberInfo info) where T : MemberPipe
+
+		private static T Create<T>(Type pipeType, Type returnType, params object[] parameters)
 		{
-			return (T)Activator.CreateInstance(pipeType.MakeGenericType(returnType), source, info);
-		}
-		
-		private static T Create<T>(Type pipeType, Type returnType, Plugin source, MemberInfo info, Attribute pipe) where T : MemberPipe
-		{
-			return (T)Activator.CreateInstance(pipeType.MakeGenericType(returnType), source, info, pipe);
+			if (parameters == null)
+			{
+				throw new ArgumentNullException(nameof(parameters));
+			}
+			
+			Type[] types = new Type[parameters.Length];
+			for (int i = 0; i < types.Length; i++)
+			{
+				types[i] = parameters[i].GetType();
+			}
+
+			ConstructorInfo ctor = pipeType.MakeGenericType(returnType).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, CallingConventions.HasThis, types, null);
+			if (ctor == null)
+			{
+				string[] names = new string[types.Length];
+				for (int i = 0; i < types.Length; i++)
+				{
+					names[i] = types[i].Name;
+				}
+				
+				throw new MissingMethodException($"Could not find a constructor of {pipeType.Name} that takes parameter types {string.Join(", ", names)}.");
+			}
+			
+			return (T) ctor.Invoke(parameters);
 		}
 
 		private static T[] DuplicateCollection<T>(ICollection<T> collection)
