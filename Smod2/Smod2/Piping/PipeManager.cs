@@ -9,8 +9,14 @@ namespace Smod2.Piping
 	{
 		private const BindingFlags AllMembers = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
-		private readonly Dictionary<Type, FieldInfo[]> linkFields;
-		private readonly Dictionary<Type, List<FieldInfo>> linkReferences;
+		private readonly List<Plugin> registered;
+		
+		private readonly Dictionary<Plugin, List<FieldInfo>> linkFields;
+		private readonly Dictionary<Plugin, Dictionary<Plugin, List<FieldInfo>>> linkFieldReferences;
+		
+		private readonly Dictionary<Plugin, List<PropertyInfo>> linkProperties;
+		private readonly Dictionary<Plugin, Dictionary<Plugin, List<PropertyInfo>>> linkPropertyReferences;
+		
 		private readonly Dictionary<string, List<EventPipe>> events;
 		private readonly Dictionary<Type, Func<PluginPipes, string, object>> pipeGetters;
 
@@ -19,8 +25,14 @@ namespace Smod2.Piping
 
 		public PipeManager()
 		{
-			linkFields = new Dictionary<Type, FieldInfo[]>();
-			linkReferences = new Dictionary<Type, List<FieldInfo>>();
+			registered = new List<Plugin>();
+			
+			linkFields = new Dictionary<Plugin, List<FieldInfo>>();
+			linkFieldReferences = new Dictionary<Plugin, Dictionary<Plugin, List<FieldInfo>>>();
+			
+			linkProperties = new Dictionary<Plugin, List<PropertyInfo>>();
+			linkPropertyReferences = new Dictionary<Plugin, Dictionary<Plugin, List<PropertyInfo>>>();
+			
 			events = new Dictionary<string, List<EventPipe>>();
 			pipeGetters = new Dictionary<Type, Func<PluginPipes, string, object>>
 			{
@@ -39,6 +51,41 @@ namespace Smod2.Piping
 			};
 		}
 
+		private void SetPipeLink(Plugin source, PropertyInfo info, string pluginId, string pipeName)
+		{
+			Plugin target = PluginManager.Manager.GetEnabledPlugin(pluginId);
+			if (target == null)
+			{
+				return;
+			}
+
+			Type fieldType = info.PropertyType;
+			if (!pipeGetters.ContainsKey(fieldType))
+			{
+				fieldType = fieldType.BaseType;
+
+				if (fieldType == null || !pipeGetters.ContainsKey(fieldType))
+				{
+					PluginManager.Manager.Logger.Error("PIPE_MANAGER", $"{info.Name} of {source.Details.id} tried to link to a non-existant pipe type: {info.PropertyType}");
+					return;	
+				}
+			}
+
+			if (!linkPropertyReferences.ContainsKey(target))
+			{
+				linkPropertyReferences.Add(target, new Dictionary<Plugin, List<PropertyInfo>>());
+			}
+			Dictionary<Plugin, List<PropertyInfo>> references = linkPropertyReferences[target];
+
+			if (!references.ContainsKey(target))
+			{
+				references.Add(target, new List<PropertyInfo>());
+			}
+			references[target].Add(info);
+
+			info.SetValue(source, Convert.ChangeType(pipeGetters[fieldType].Invoke(target.Pipes, pipeName), info.PropertyType));
+		}
+		
 		private void SetPipeLink(Plugin source, FieldInfo info, string pluginId, string pipeName)
 		{
 			Plugin target = PluginManager.Manager.GetEnabledPlugin(pluginId);
@@ -54,24 +101,33 @@ namespace Smod2.Piping
 
 				if (fieldType == null || !pipeGetters.ContainsKey(fieldType))
 				{
-					PluginManager.Manager.Logger.Error("PIPE_MANAGER", $"{info.Name} in {info.DeclaringType?.FullName ?? "namespace"} of {source.Details.id} tried to link to a non-existant pipe type: {info.FieldType}");
+					PluginManager.Manager.Logger.Error("PIPE_MANAGER", $"{info.Name} of {source.Details.id} tried to link to a non-existant pipe type: {info.FieldType}");
 					return;	
 				}
 			}
 
-			Type targetType = target.GetType();
-			if (!linkReferences.ContainsKey(targetType))
+			if (!linkFieldReferences.ContainsKey(target))
 			{
-				linkReferences.Add(targetType, new List<FieldInfo>());
+				linkFieldReferences.Add(target, new Dictionary<Plugin, List<FieldInfo>>());
 			}
-			linkReferences[targetType].Add(info);
+			Dictionary<Plugin, List<FieldInfo>> references = linkFieldReferences[target];
+
+			if (!references.ContainsKey(source))
+			{
+				references.Add(source, new List<FieldInfo>());
+			}
+			references[source].Add(info);
 
 			info.SetValue(source, Convert.ChangeType(pipeGetters[fieldType].Invoke(target.Pipes, pipeName), info.FieldType));
 		}
 
 		public void RegisterPlugin(Plugin plugin)
 		{
-			plugin.Pipes = new PluginPipes(plugin);
+			if (registered.Contains(plugin))
+			{
+				return;
+			}
+			
 			foreach (EventPipe pipe in plugin.Pipes.GetEvents())
 			{
 				if (!events.ContainsKey(pipe.EventName))
@@ -81,10 +137,17 @@ namespace Smod2.Piping
 
 				events[pipe.EventName].Add(pipe);
 			}
+			
+			registered.Add(plugin);
 		}
 
 		public void UnregisterPlugin(Plugin plugin)
 		{
+			if (!registered.Contains(plugin))
+			{
+				return;
+			}
+			
 			foreach (EventPipe pipe in plugin.Pipes.GetEvents())
 			{
 				if (events.ContainsKey(pipe.EventName))
@@ -92,59 +155,129 @@ namespace Smod2.Piping
 					events[pipe.EventName].Remove(pipe);
 				}
 			}
+			
+			UnregisterLinks(plugin);
+			
+			registered.Remove(plugin);
 		}
 
+		public List<string> GetLinkDependencies(Plugin plugin)
+		{
+			Type type = plugin.GetType();
+			List<string> dependencies = new List<string>();
+			
+			foreach (MemberInfo info in type.GetMembers(AllMembers))
+			{
+				PipeLink link = info.GetCustomAttribute<PipeLink>();
+				if (!dependencies.Contains(link.Plugin))
+				{
+					dependencies.Add(link.Plugin);
+				}
+			}
+
+			return dependencies;
+		}
+		
 		public void RegisterLinks(Plugin plugin)
 		{
 			Type type = plugin.GetType();
-			if (linkFields.ContainsKey(type))
-			{
-				return;
-			}
 
-			FieldInfo[] infos = type.GetFields(AllMembers);
-			linkFields.Add(type, infos);
-
-			foreach (FieldInfo info in infos)
+			List<FieldInfo> fields = new List<FieldInfo>();
+			foreach (FieldInfo info in type.GetFields(AllMembers))
 			{
 				PipeLink link = info.GetCustomAttribute<PipeLink>();
 				if (link != null)
 				{
-					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Linking {info.Name} of {plugin.Details.id} to {link.Pipe} of {link.Plugin}");
+					if (info.IsInitOnly)
+					{
+						PluginManager.Manager.Logger.Error("PIPE_MANAGER", $"Pipe link {info.Name} of {plugin.Details.id} is readonly.");
+						continue;
+					}
+					
+					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Linking {info.Name} of {plugin.Details.id} to {link.Pipe} of {link.Plugin}.");
 					SetPipeLink(plugin, info, link.Plugin, link.Pipe);
 				}
 			}
+			linkFields.Add(plugin, fields);
+			
+			List<PropertyInfo> properties = new List<PropertyInfo>();
+			foreach (PropertyInfo info in type.GetProperties(AllMembers))
+			{
+				PipeLink link = info.GetCustomAttribute<PipeLink>();
+				if (link != null)
+				{
+					if (info.SetMethod == null)
+					{
+						PluginManager.Manager.Logger.Error("PIPE_MANAGER", $"Pipe link {info.Name} of {plugin.Details.id} has no setter.");
+						continue;
+					}
+					
+					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Linking {info.Name} of {plugin.Details.id} to {link.Pipe} of {link.Plugin}.");
+					SetPipeLink(plugin, info, link.Plugin, link.Pipe);
+				}
+			}
+			linkProperties.Add(plugin, properties);
 		}
 
 		public void UnregisterLinks(Plugin plugin)
 		{
-			Type type = plugin.GetType();
-			if (linkFields.ContainsKey(type))
+			foreach (FieldInfo info in linkFields[plugin])
 			{
-				foreach (FieldInfo info in linkFields[type])
+				PipeLink link = info.GetCustomAttribute<PipeLink>();
+				if (link != null)
 				{
-					PipeLink link = info.GetCustomAttribute<PipeLink>();
-					if (link != null)
+					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking {info.Name} of {plugin.Details.id} from {link.Pipe} of {link.Plugin}");
+					info.SetValue(plugin, null);
+				}
+			}
+			linkFields.Remove(plugin);
+			
+			foreach (PropertyInfo info in linkProperties[plugin])
+			{
+				PipeLink link = info.GetCustomAttribute<PipeLink>();
+				if (link != null)
+				{
+					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking {info.Name} of {plugin.Details.id} from {link.Pipe} of {link.Plugin}");
+					info.SetValue(plugin, null);
+				}
+			}
+			linkProperties.Remove(plugin);
+
+			if (linkFieldReferences.ContainsKey(plugin))
+			{
+				PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking all field references to {plugin.Details.id}");
+
+				foreach (KeyValuePair<Plugin, List<FieldInfo>> infos in linkFieldReferences[plugin])
+				{
+					foreach (FieldInfo info in infos.Value)
 					{
-						PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking {info.Name} of {plugin.Details.id} from {link.Pipe} of {link.Plugin}");
-						info.SetValue(plugin, null);
+						PipeLink link = info.GetCustomAttribute<PipeLink>();
+						if (link != null)
+						{
+							info.SetValue(infos.Key, null);
+						}	
 					}
 				}
 			}
-
-			if (linkReferences.ContainsKey(type))
+			linkFieldReferences.Remove(plugin);
+			
+			if (linkPropertyReferences.ContainsKey(plugin))
 			{
-				PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking all references to {plugin.Details.id}");
+				PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Unlinking all property references to {plugin.Details.id}");
 
-				foreach (FieldInfo info in linkReferences[type])
+				foreach (KeyValuePair<Plugin, List<PropertyInfo>> infos in linkPropertyReferences[plugin])
 				{
-					PipeLink link = info.GetCustomAttribute<PipeLink>();
-					if (link != null)
+					foreach (PropertyInfo info in infos.Value)
 					{
-						info.SetValue(plugin, null);
+						PipeLink link = info.GetCustomAttribute<PipeLink>();
+						if (link != null)
+						{
+							info.SetValue(infos.Key, null);
+						}	
 					}
 				}
 			}
+			linkPropertyReferences.Remove(plugin);
 		}
 
 		internal void InvokeEvent(string eventName, string caller, object[] parameters)

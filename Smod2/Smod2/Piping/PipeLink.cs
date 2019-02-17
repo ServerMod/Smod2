@@ -2,7 +2,7 @@
 
 namespace Smod2.Piping
 {
-	[AttributeUsage(AttributeTargets.Field)]
+	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 	public class PipeLink : Attribute
 	{
 		public string Plugin { get; }

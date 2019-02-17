@@ -9,6 +9,7 @@ using Smod2.API;
 using Smod2.Logging;
 using Smod2.Events;
 using Smod2.Piping;
+using static Smod2.PluginManager;
 
 namespace Smod2
 {
@@ -149,6 +150,11 @@ namespace Smod2
 			return plugin;
 		}
 
+		public Plugin GetPlugin(string id)
+		{
+			return GetEnabledPlugin(id) ?? GetDisabledPlugin(id);
+		}
+
 		public List<Plugin> FindEnabledPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
@@ -177,6 +183,29 @@ namespace Smod2
 			return matching;
 		}
 
+		public List<Plugin> FindPlugins(string name)
+		{
+			List<Plugin> matching = new List<Plugin>();
+			
+			foreach (var plugin in enabledPlugins.Values)
+			{
+				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
+				{
+					matching.Add(plugin);
+				}
+			}
+			
+			foreach (var plugin in disabledPlugins.Values)
+			{
+				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
+				{
+					matching.Add(plugin);
+				}
+			}
+
+			return matching;
+		}
+
 		public void EnablePlugins()
 		{
 			// .ToArray() prevents a collection modified exception (enabling a plugin removes it from disabled plugins)
@@ -188,15 +217,32 @@ namespace Smod2
 
 		public void EnablePlugin(Plugin plugin)
 		{
-			plugin.Info("Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
+			if (enabledPlugins.ContainsValue(plugin))
+			{
+				return;
+			}
+			
+			Manager.Logger.Info("PLUGIN_MANAGER", "Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
+			
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering pipe exports");
+			PipeManager.Manager.RegisterPlugin(plugin); // In case it got disabled
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering pipe imports");
 			PipeManager.Manager.RegisterLinks(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering configs");
 			ConfigManager.Manager.RegisterPlugin(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading event snapshot");
 			EventManager.Manager.AddSnapshotEventHandlers(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading command snapshot");
 			CommandManager.ReregisterPlugin(plugin);
 
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Invoking OnEnable");
 			plugin.OnEnable();
+			
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Altering dictionaries");
 			disabledPlugins.Remove(plugin.Details.id);
 			enabledPlugins.Add(plugin.Details.id, plugin);
+			
+			Manager.Logger.Info("PLUGIN_MANAGER", "Enabled plugin  " + plugin.Details.name + " " + plugin.Details.version);
 		}
 
 		public void DisablePlugins()
@@ -227,14 +273,29 @@ namespace Smod2
 
 		public void DisablePlugin(Plugin plugin)
 		{
-			plugin.OnDisable();
+			if (disabledPlugins.ContainsValue(plugin))
+			{
+				return;
+			}
+			
+			Manager.Logger.Info("PLUGIN_MANAGER", "Disabling plugin " + plugin.Details.name + " " + plugin.Details.version);
+			
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Altering dictionaries");
 			enabledPlugins.Remove(plugin.Details.id);
 			disabledPlugins.Add(plugin.Details.id, plugin);
+			
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Invoking OnDisable");
+			plugin.OnDisable();
 
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading commands");
 			CommandManager.UnregisterCommands(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading event handlers");
 			EventManager.Manager.RemoveEventHandlers(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading configs");
 			ConfigManager.Manager.UnloadPlugin(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading pipe imports/exports");
 			PipeManager.Manager.UnregisterPlugin(plugin);
+			Manager.Logger.Info("PLUGIN_MANAGER", "Disabled plugin " + plugin.Details.name + " " + plugin.Details.version);
 		}
 
 		public void LoadPlugins(String dir)
@@ -314,6 +375,7 @@ namespace Smod2
 								else
 								{
 									plugin.Details = details;
+									plugin.Pipes = new PluginPipes(plugin);
 									ConfigManager.Manager.RegisterPlugin(plugin);
 									PipeManager.Manager.RegisterPlugin(plugin);
 									plugin.Register();

@@ -28,22 +28,18 @@ namespace Smod2.Events
 
 		private static PriorityComparator priorityCompare = new PriorityComparator();
 		private Dictionary<Type, List<EventHandlerWrapper>> event_meta;
-		private Dictionary<Type, List<IEventHandler>> event_handlers;
 		private readonly Dictionary<Plugin, Snapshot> snapshots;
 
 		public EventManager()
 		{
 			event_meta = new Dictionary<Type, List<EventHandlerWrapper>>();
-			event_handlers = new Dictionary<Type, List<IEventHandler>>();
 			snapshots = new Dictionary<Plugin, Snapshot>();
 		}
 
 
-		public void HandleEvent<T>(Event ev)
+		public void HandleEvent<T>(Event ev) where T : IEventHandler
 		{
-			var list = this.GetEventHandlers<T>();
-
-			foreach(IEventHandler handler in list)
+			foreach(T handler in GetEventHandlers<T>())
 			{
 				try
 				{
@@ -89,11 +85,10 @@ namespace Smod2.Events
 		{
 			if (!event_meta.ContainsKey(eventType))
 			{
-				event_meta.Add(eventType, new List<EventHandlerWrapper>());
-				event_handlers.Add(eventType, new List<IEventHandler>());
-
-				event_meta[eventType].Add(wrapper);
-				event_handlers[eventType].Add(handler);
+				event_meta.Add(eventType, new List<EventHandlerWrapper>
+				{
+					wrapper
+				});
 			}
 			else
 			{
@@ -102,7 +97,6 @@ namespace Smod2.Events
 				// Doing this stuff on register instead of when the event is called for events that trigger lots (OnUpdate etc)
 				meta.Sort(priorityCompare);
 				meta.Reverse();
-				RebuildHandlerList(eventType);
 			}
 		}
 
@@ -143,11 +137,6 @@ namespace Smod2.Events
 			}
 			
 			event_meta = new_event_meta;
-			// rebuild handler list for each type
-			foreach (var meta in event_meta)
-			{
-				RebuildHandlerList(meta.Key);
-			}
 
 			if (snapshots.ContainsKey(plugin))
 			{
@@ -155,36 +144,19 @@ namespace Smod2.Events
 			}
 		}
 
-		private void RebuildHandlerList(Type eventType)
+
+		public List<T> GetEventHandlers<T>() where T : IEventHandler
 		{
-			List<EventHandlerWrapper> meta = event_meta[eventType];
-			List<IEventHandler> handlers = new List<IEventHandler>();
-			foreach (EventHandlerWrapper metaDetails in meta)
+			List<T> events = new List<T>();
+			if (event_meta.ContainsKey(typeof(T)))
 			{
-				handlers.Add(metaDetails.Handler);
-			}
-
-			if (event_handlers.ContainsKey(eventType))
-			{
-				event_handlers[eventType] = handlers;
-			}
-			else
-			{
-				event_handlers.Add(eventType, handlers);
-			}
-		}
-
-
-		public List<T> GetEventHandlers<T>()
-		{
-			List<T> events;
-			if (event_handlers.ContainsKey(typeof(T)))
-			{
-				events = event_handlers[typeof(T)].Cast<T>().ToList();
-			}
-			else
-			{
-				events = new List<T>();
+				foreach (EventHandlerWrapper wrapper in event_meta[typeof(T)])
+				{
+					if (wrapper.Handler is T tHandler)
+					{
+						events.Add(tHandler);
+					}
+				}
 			}
 
 			return events;
