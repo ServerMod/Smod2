@@ -145,7 +145,7 @@ namespace Smod2
 
 		public Plugin GetDisabledPlugin(string id)
 		{
-			enabledPlugins.TryGetValue(id, out Plugin plugin);
+			disabledPlugins.TryGetValue(id, out Plugin plugin);
 			return plugin;
 		}
 
@@ -166,7 +166,7 @@ namespace Smod2
 		public List<Plugin> FindDisabledPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
-			foreach (var plugin in enabledPlugins.Values)
+			foreach (var plugin in disabledPlugins.Values)
 			{
 				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
 				{
