@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Smod2.EventHandlers;
 using Smod2.Lang;
 using Smod2.API;
+using Smod2.Logging;
 using Smod2.Piping;
 
 namespace Smod2
@@ -16,7 +17,7 @@ namespace Smod2
 		public PluginDetails Details
 		{
 			get;
-			set;
+			internal set;
 		}
 
 	    public PluginPipes Pipes
@@ -25,8 +26,16 @@ namespace Smod2
 		    internal set;
 	    }
 
+	    [Obsolete("Use EventManager instead.")]
 		public readonly EventManager eventManager = EventManager.Manager;
+		public EventManager EventManager => EventManager.Manager;
+		[Obsolete("Use PluginManager instead.")]
 		public readonly PluginManager pluginManager = PluginManager.Manager;
+		public PluginManager PluginManager => PluginManager.Manager;
+		public LangManager LangManager => LangManager.Manager;
+		public ConfigManager ConfigManager => ConfigManager.Manager;
+		public ICommandManager CommandManager => PluginManager.CommandManager;
+		public Logger Logger => PluginManager.Logger;
 		public Server Server => PluginManager.Manager.Server;
 		public Round Round => PluginManager.Manager.Server.Round;
 		public abstract void Register();
@@ -35,12 +44,12 @@ namespace Smod2
 
 		public void AddEventHandlers(IEventHandler handler, Priority priority = Priority.Normal)
 		{
-			eventManager.AddEventHandlers(this, handler, priority);
+			EventManager.AddEventHandlers(this, handler, priority);
 		}
 
 		public void AddEventHandler(Type eventType, IEventHandler handler, Priority priority=Priority.Normal)
 		{
-			eventManager.AddEventHandler(this, eventType, handler, priority);
+			EventManager.AddEventHandler(this, eventType, handler, priority);
 		}
 		public void AddCommands(string[] commands, ICommandHandler handler)
 		{
@@ -52,30 +61,30 @@ namespace Smod2
 
 		public void AddCommand(string command, ICommandHandler handler)
 		{
-			if (PluginManager.Manager.CommandManager == null)
+			if (PluginManager.CommandManager == null)
 			{
 				this.Error("Failed to register command handler becuase the command manager is null");
 			}
 			else
 			{
 				this.Debug("Command handler registered for command " + command);
-				PluginManager.Manager.CommandManager.RegisterCommand(this, command, handler);
+				PluginManager.CommandManager.RegisterCommand(this, command, handler);
 			}
 		}
 
 		public void AddConfig(ConfigSetting setting)
 		{
-			ConfigManager.Manager.RegisterConfig(this, setting);
+			ConfigManager.RegisterConfig(this, setting);
 		}
 
 		public void AddTranslation(LangSetting setting)
 		{
-			LangManager.Manager.RegisterTranslation(this, setting);
+			LangManager.RegisterTranslation(this, setting);
 		}
 
 		private void CheckLangRegistered(string key)
 		{
-			if (!LangManager.Manager.IsRegistered(this, key))
+			if (!LangManager.IsRegistered(this, key))
 			{
 				this.Warn("Trying to access a lang setting [" + key + "] that isnt registered to the plugin, this is bad practice.");
 			}
@@ -84,12 +93,12 @@ namespace Smod2
 		public string GetTranslation(string key)
 		{
 			CheckLangRegistered(key.ToUpper());
-			return LangManager.Manager.GetTranslation(key);
+			return LangManager.GetTranslation(key);
 		}
 
 		private void CheckConfigRegistered(string key)
 		{
-			if (!ConfigManager.Manager.IsRegistered(this, key))
+			if (!ConfigManager.IsRegistered(this, key))
 			{
 				this.Warn("Trying to access a config setting that isnt registered to the plugin, this is bad practice.");
 			}
@@ -99,13 +108,10 @@ namespace Smod2
 		{
 			CheckConfigRegistered(key.ToUpper());
 
-			string def;
-			if (ConfigManager.Manager.ResolveDefault(key.ToUpper()) is string)
+			if (ConfigManager.ResolveDefault(key.ToUpper()) is string def)
 			{
-				def = (string) ConfigManager.Manager.ResolveDefault(key.ToUpper());
-
-				bool randomValues = (ConfigManager.Manager.ResolvePrimary(key.ToUpper()) != null ? ConfigManager.Manager.ResolvePrimary(key.ToUpper()).RandomizedValue : false);
-				return ConfigManager.Manager.Config.GetStringValue(key.ToUpper(), def: def, randomValues: randomValues);
+				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				return ConfigManager.Config.GetStringValue(key.ToUpper(), def, randomValues);
 			}
 
 			return "";
@@ -115,13 +121,10 @@ namespace Smod2
 		{
 			CheckConfigRegistered(key.ToUpper());
 
-			int def;
-			if (ConfigManager.Manager.ResolveDefault(key.ToUpper()) is int)
+			if (ConfigManager.ResolveDefault(key.ToUpper()) is int def)
 			{
-				def = (int)ConfigManager.Manager.ResolveDefault(key.ToUpper());
-
-				bool randomValues = (ConfigManager.Manager.ResolvePrimary(key.ToUpper()) != null ? ConfigManager.Manager.ResolvePrimary(key.ToUpper()).RandomizedValue : false);
-				return ConfigManager.Manager.Config.GetIntValue(key.ToUpper(), def: def, randomValues: randomValues);
+				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				return ConfigManager.Config.GetIntValue(key.ToUpper(), def, randomValues);
 			}
 
 			return -1;
@@ -131,13 +134,10 @@ namespace Smod2
 		{
 			CheckConfigRegistered(key.ToUpper());
 
-			float def;
-			if (ConfigManager.Manager.ResolveDefault(key.ToUpper()) is float)
+			if (ConfigManager.ResolveDefault(key.ToUpper()) is float def)
 			{
-				def = (float) ConfigManager.Manager.ResolveDefault(key.ToUpper());
-
-				bool randomValues = (ConfigManager.Manager.ResolvePrimary(key.ToUpper()) != null ? ConfigManager.Manager.ResolvePrimary(key.ToUpper()).RandomizedValue : false);
-				return ConfigManager.Manager.Config.GetFloatValue(key.ToUpper(), def: def, randomValues: randomValues);
+				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				return ConfigManager.Config.GetFloatValue(key.ToUpper(), def, randomValues);
 			}
 
 			return -1;
@@ -147,13 +147,10 @@ namespace Smod2
 		{
 			CheckConfigRegistered(key.ToUpper());
 
-			bool def;
-			if (ConfigManager.Manager.ResolveDefault(key.ToUpper()) is bool)
+			if (ConfigManager.ResolveDefault(key.ToUpper()) is bool def)
 			{
-				def = (bool) ConfigManager.Manager.ResolveDefault(key.ToUpper());
-
-				bool randomValues = (ConfigManager.Manager.ResolvePrimary(key.ToUpper()) != null ? ConfigManager.Manager.ResolvePrimary(key.ToUpper()).RandomizedValue : false);
-				return ConfigManager.Manager.Config.GetBoolValue(key.ToUpper(), def: def, randomValues: randomValues);
+				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				return ConfigManager.Config.GetBoolValue(key.ToUpper(), def, randomValues);
 			}
 
 			return false;
@@ -163,13 +160,10 @@ namespace Smod2
 		{
 			CheckConfigRegistered(key.ToUpper());
 
-			string[] def;
-			if (ConfigManager.Manager.ResolveDefault(key.ToUpper()) is string[])
+			if (ConfigManager.ResolveDefault(key.ToUpper()) is string[] def)
 			{
-				def = (string[]) ConfigManager.Manager.ResolveDefault(key.ToUpper());
-
-				bool randomValues = (ConfigManager.Manager.ResolvePrimary(key.ToUpper()) != null ? ConfigManager.Manager.ResolvePrimary(key.ToUpper()).RandomizedValue : false);
-				return ConfigManager.Manager.Config.GetListValue(key.ToUpper(), def: def, randomValues: randomValues);
+				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				return ConfigManager.Config.GetListValue(key.ToUpper(), def, randomValues);
 			}
 
 			return new string[] { };
@@ -179,13 +173,10 @@ namespace Smod2
 		{
 			CheckConfigRegistered(key.ToUpper());
 
-			int[] def;
-			if (ConfigManager.Manager.ResolveDefault(key.ToUpper()) is int[])
+			if (ConfigManager.ResolveDefault(key.ToUpper()) is int[] def)
 			{
-				def = (int[]) ConfigManager.Manager.ResolveDefault(key.ToUpper());
-
-				bool randomValues = (ConfigManager.Manager.ResolvePrimary(key.ToUpper()) != null ? ConfigManager.Manager.ResolvePrimary(key.ToUpper()).RandomizedValue : false);
-				return ConfigManager.Manager.Config.GetIntListValue(key.ToUpper(), def: def, randomValues: randomValues);
+				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				return ConfigManager.Config.GetIntListValue(key.ToUpper(), def, randomValues);
 			}
 
 			return new int[] { };
@@ -195,13 +186,10 @@ namespace Smod2
 		{
 			CheckConfigRegistered(key.ToUpper());
 
-			Dictionary<string, string> def;
-			if (ConfigManager.Manager.ResolveDefault(key.ToUpper()) is Dictionary<string, string>)
+			if (ConfigManager.ResolveDefault(key.ToUpper()) is Dictionary<string, string> def)
 			{
-				def = (Dictionary<string, string>) ConfigManager.Manager.ResolveDefault(key.ToUpper());
-
-				bool randomValues = (ConfigManager.Manager.ResolvePrimary(key.ToUpper()) != null ? ConfigManager.Manager.ResolvePrimary(key.ToUpper()).RandomizedValue : false);
-				return ConfigManager.Manager.Config.GetDictValue(key.ToUpper(), def: def, randomValues: randomValues);
+				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				return ConfigManager.Config.GetDictValue(key.ToUpper(), def, randomValues);
 			}
 
 			return new Dictionary<string, string>();
@@ -211,13 +199,10 @@ namespace Smod2
 		{
 			CheckConfigRegistered(key.ToUpper());
 
-			Dictionary<int, int> def;
-			if (ConfigManager.Manager.ResolveDefault(key.ToUpper()) is Dictionary<int, int>)
+			if (ConfigManager.ResolveDefault(key.ToUpper()) is Dictionary<int, int> def)
 			{
-				def = (Dictionary<int, int>) ConfigManager.Manager.ResolveDefault(key.ToUpper());
-
-				bool randomValues = (ConfigManager.Manager.ResolvePrimary(key.ToUpper()) != null ? ConfigManager.Manager.ResolvePrimary(key.ToUpper()).RandomizedValue : false);
-				return ConfigManager.Manager.Config.GetIntDictValue(key.ToUpper(), def: def, randomValues: randomValues);
+				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				return ConfigManager.Config.GetIntDictValue(key.ToUpper(), def, randomValues);
 			}
 
 			return new Dictionary<int, int>();
