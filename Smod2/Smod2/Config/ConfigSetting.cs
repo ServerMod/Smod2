@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Smod2.Config
 {
@@ -16,87 +17,46 @@ namespace Smod2.Config
 
 	public class ConfigSetting
 	{
-		private string key;
-		public string Key
-		{
-			get
-			{
-				return key;
-			}
-		}
+		public string Key { get; }
 
-		private object defaultValue;
-		public object Default
-		{
-			get
-			{
-				return defaultValue;
-			}
-		}
+		public object Default { get; }
 
-		private bool randomized;
-		public bool RandomizedValue
-		{
-			get
-			{
-				return randomized;
-			}
-		}
+		public bool RandomizedValue { get; }
 
-		private SettingType configType;
-		public SettingType ConfigValueType
-		{
-			get
-			{
-				return configType;
-			}
-		}
+		public bool PrimaryUser { get; }
 
-		private bool primaryUser;
-		public bool PrimaryUser
-		{
-			get
-			{
-				return primaryUser;
-			}
-		}
+		public string Description { get; }
 
-		private string description;
-		public string Description
+		private ConfigSetting(string key, object defaultValue, bool randomized, bool primaryUser, string description)
 		{
-			get
-			{
-				return description;
-			}
+			this.Key = key.ToUpper();
+			this.Default = defaultValue;
+			this.RandomizedValue = randomized;
+			this.PrimaryUser = primaryUser;
+			this.Description = description;
 		}
-
-		public ConfigSetting(string key, object defaultValue, bool randomized, SettingType type,  bool primaryUser, string description)
-		{
-			this.key = key.ToUpper();
-			this.defaultValue = defaultValue;
-			this.randomized = randomized;
-			this.configType = type;
-			this.primaryUser = primaryUser;
-			this.description = description;
-		}
+		[Obsolete("Use the constructor without SettingType.")]
+		public ConfigSetting(string key, object defaultValue, bool randomized, SettingType type,  bool primaryUser, string description) : this(key, defaultValue, randomized, primaryUser, description) { }
 		
-		public ConfigSetting(string key, bool defaultValue, bool randomized, bool primaryUser, string description) : this(key, defaultValue, randomized, SettingType.BOOL, primaryUser, description) { }
-		public ConfigSetting(string key, string defaultValue, bool randomized, bool primaryUser, string description) : this(key, defaultValue, randomized, SettingType.STRING, primaryUser, description) { }
-		public ConfigSetting(string key, string[] defaultValue, bool randomized, bool primaryUser, string description) : this(key, defaultValue, randomized, SettingType.LIST, primaryUser, description) { }
-		public ConfigSetting(string key, int defaultValue, bool randomized, bool primaryUser, string description) : this(key, defaultValue, randomized, SettingType.NUMERIC, primaryUser, description) { }
-		public ConfigSetting(string key, int[] defaultValue, bool randomized, bool primaryUser, string description) : this(key, defaultValue, randomized, SettingType.NUMERIC_LIST, primaryUser, description) { }
-		public ConfigSetting(string key, float defaultValue, bool randomized, bool primaryUser, string description) : this(key, defaultValue, randomized, SettingType.FLOAT, primaryUser, description) { }
-		public ConfigSetting(string key, Dictionary<string, string> defaultValue, bool randomized, bool primaryUser, string description) : this(key, defaultValue, randomized, SettingType.DICTIONARY, primaryUser, description) { }
-		public ConfigSetting(string key, Dictionary<int, int> defaultValue, bool randomized, bool primaryUser, string description) : this(key, defaultValue, randomized, SettingType.NUMERIC_DICTIONARY, primaryUser, description) { }
+		public ConfigSetting(string key, bool defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
+		public ConfigSetting(string key, string defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
+		public ConfigSetting(string key, string[] defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
+		public ConfigSetting(string key, int defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
+		public ConfigSetting(string key, int[] defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
+		public ConfigSetting(string key, float defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
+		public ConfigSetting(string key, Dictionary<string, string> defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
+		public ConfigSetting(string key, Dictionary<int, int> defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
 
+		private ConfigSetting(string key, object defaultValue, bool primaryUser, string description) : this(key, defaultValue, false, primaryUser, description) { }
+		[Obsolete("Use the constructor without SettingType.")]
 		public ConfigSetting(string key, object defaultValue, SettingType type, bool primaryUser, string description) : this(key, defaultValue, false, type, primaryUser, description) { }
-		public ConfigSetting(string key, bool defaultValue, bool primaryUser, string description) : this(key, defaultValue, SettingType.BOOL, primaryUser, description) { }
-		public ConfigSetting(string key, string defaultValue, bool primaryUser, string description) : this(key, defaultValue, SettingType.STRING, primaryUser, description) { }
-		public ConfigSetting(string key, string[] defaultValue, bool primaryUser, string description) : this(key, defaultValue, SettingType.LIST, primaryUser, description) { }
-		public ConfigSetting(string key, int defaultValue, bool primaryUser, string description) : this(key, defaultValue, SettingType.NUMERIC, primaryUser, description) { }
-		public ConfigSetting(string key, int[] defaultValue, bool primaryUser, string description) : this(key, defaultValue, SettingType.NUMERIC_LIST, primaryUser, description) { }
-		public ConfigSetting(string key, float defaultValue, bool primaryUser, string description) : this(key, defaultValue, SettingType.FLOAT, primaryUser, description) { }
-		public ConfigSetting(string key, Dictionary<string, string> defaultValue, bool primaryUser, string description) : this(key, defaultValue, SettingType.DICTIONARY, primaryUser, description) { }
-		public ConfigSetting(string key, Dictionary<int, int> defaultValue, bool primaryUser, string description) : this(key, defaultValue, SettingType.NUMERIC_DICTIONARY, primaryUser, description) { }
+		public ConfigSetting(string key, bool defaultValue, bool primaryUser, string description) : this(key, (object)defaultValue, primaryUser, description) { }
+		public ConfigSetting(string key, string defaultValue, bool primaryUser, string description) : this(key, (object)defaultValue, primaryUser, description) { }
+		public ConfigSetting(string key, string[] defaultValue, bool primaryUser, string description) : this(key, (object)defaultValue, primaryUser, description) { }
+		public ConfigSetting(string key, int defaultValue, bool primaryUser, string description) : this(key, (object)defaultValue, primaryUser, description) { }
+		public ConfigSetting(string key, int[] defaultValue, bool primaryUser, string description) : this(key, (object)defaultValue, primaryUser, description) { }
+		public ConfigSetting(string key, float defaultValue, bool primaryUser, string description) : this(key, (object)defaultValue, primaryUser, description) { }
+		public ConfigSetting(string key, Dictionary<string, string> defaultValue, bool primaryUser, string description) : this(key, (object)defaultValue, primaryUser, description) { }
+		public ConfigSetting(string key, Dictionary<int, int> defaultValue, bool primaryUser, string description) : this(key, (object)defaultValue, primaryUser, description) { }
 	}
 }
