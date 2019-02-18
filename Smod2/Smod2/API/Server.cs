@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using Smod2.Commands;
 
 namespace Smod2.API
@@ -18,7 +19,9 @@ namespace Smod2.API
 		public abstract Map Map { get; }
 		public abstract int NumPlayers { get; }
 		public abstract int MaxPlayers { get; set; }
+		[Obsolete("Nonfunctional", true)]
 		public abstract bool Verified { get; } //Not used whatsoever. Only kept to prevent plugins to have to be recompiled
+		[Obsolete("Nonfunctional", true)]
 		public abstract bool Visible { get; set; } //Not used whatsoever. Only kept to prevent plugins to have to be recompiled
 		public abstract string PlayerListTitle { get; set; }
 
