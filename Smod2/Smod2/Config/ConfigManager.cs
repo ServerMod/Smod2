@@ -300,6 +300,36 @@ namespace Smod2
 			return true;
 		}
 
+		private void SetFieldToDefault(Plugin plugin, FieldInfo field, string key)
+		{
+			field.SetValue(plugin, ResolveSetting(plugin, key).Default);
+		}
+
+		public void UnregisterConfig(Plugin plugin, string key)
+		{
+			if (!settings.ContainsKey(plugin))
+			{
+				return;
+			}
+			
+			settings[plugin].Remove(key);
+			// If the secondary map does not contain the config entry or if the plugin was not registered to it, remove the primary entry.
+			if (!secondary_settings_map.ContainsKey(key) || !secondary_settings_map[key].Remove(plugin))
+			{
+				primary_settings_map.Remove(key);
+			}
+
+			if (configFields.ContainsKey(plugin))
+			{
+				Dictionary<string, FieldInfo> fields = configFields[plugin];
+				if (fields.ContainsKey(key))
+				{
+					SetFieldToDefault(plugin, fields[key], key);
+					fields.Remove(key);
+				}
+			}
+		}
+
 		public void UnloadPlugin(Plugin plugin)
 		{
 			if (!settings.ContainsKey(plugin))
@@ -348,7 +378,7 @@ namespace Smod2
 			{
 				foreach (KeyValuePair<string, FieldInfo> configOption in configFields[plugin])
 				{
-					configOption.Value.SetValue(plugin, ResolveSetting(plugin, configOption.Key).Default);
+					SetFieldToDefault(plugin, configOption.Value, configOption.Key);
 				}
 			}
 		}
