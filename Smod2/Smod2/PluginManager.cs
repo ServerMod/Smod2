@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using Smod2.Attributes;
 using Smod2.Commands;
@@ -9,10 +8,19 @@ using Smod2.API;
 using Smod2.Logging;
 using Smod2.Events;
 using Smod2.Piping;
-using static Smod2.PluginManager;
 
 namespace Smod2
 {
+	[Flags]
+	public enum SearchFlags
+	{
+		NAME = 1 << 0,
+		AUTHOR = 1 << 1,
+		ID = 1 << 2,
+		DESCRIPTION = 1 << 3,
+		VERSION = 1 << 4
+	}
+	
 	public class PluginManager
 	{
 		public static readonly int SMOD_MAJOR = 3;
@@ -155,6 +163,89 @@ namespace Smod2
 			return GetEnabledPlugin(id) ?? GetDisabledPlugin(id);
 		}
 
+		
+		private List<Plugin> GetPluginsOfSearchable(IEnumerable<Plugin> searchable, string query, SearchFlags flags)
+		{
+			if (query == null)
+			{
+				throw new ArgumentNullException(nameof(query));
+			}
+			
+			Array searchFlags = Enum.GetValues(typeof(SearchFlags));
+			List<Plugin> plugins = new List<Plugin>();
+			foreach (Plugin plugin in searchable)
+			{
+				if (plugin.Details == null)
+				{
+					continue;
+				}
+
+				foreach (SearchFlags flag in searchFlags)
+				{
+					// Don't check for match if flag is not specified in flags.
+					if ((flags & flag) != flag)
+					{
+						continue;
+					}
+
+					bool match;
+					switch (flags)
+					{
+						case SearchFlags.ID:
+							match = plugin.Details.id == query;
+							break;
+					
+						case SearchFlags.NAME:
+							match = plugin.Details.name == query;
+							break;
+					
+						case SearchFlags.AUTHOR:
+							match = plugin.Details.author == query;
+							break;
+					
+						case SearchFlags.VERSION:
+							match = plugin.Details.version == query;
+							break;
+					
+						case SearchFlags.DESCRIPTION:
+							match = plugin.Details.description?.Length / 3 <= query.Length && plugin.Details.description.Contains(query);
+							break;
+						
+						// It should never get here but it won't compile otherwise.
+						default:
+							match = false;
+							break;
+					}
+
+					if (match)
+					{
+						plugins.Add(plugin);
+						break;
+					}
+				}
+			}
+
+			return plugins;
+		}
+
+		public List<Plugin> GetEnabledPlugins(string query, SearchFlags flags) => GetPluginsOfSearchable(enabledPlugins.Values, query, flags);
+		public List<Plugin> GetDisabledPlugins(string query, SearchFlags flags) => GetPluginsOfSearchable(disabledPlugins.Values, query, flags);
+
+		public List<Plugin> GetMatchingPlugins(string query, SearchFlags flags)
+		{
+			List<Plugin> plugins = GetPluginsOfSearchable(enabledPlugins.Values, query, flags);
+			foreach (Plugin plugin in GetPluginsOfSearchable(disabledPlugins.Values, query, flags))
+			{
+				if (!plugins.Contains(plugin))
+				{
+					plugins.Add(plugin);
+				}
+			}
+
+			return plugins;
+		}
+
+		[Obsolete("Use GetEnabledPlugins instead.")]
 		public List<Plugin> FindEnabledPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
@@ -169,6 +260,7 @@ namespace Smod2
 			return matching;
 		}
 
+		[Obsolete("Use GetDisabledPlugins instead.")]
 		public List<Plugin> FindDisabledPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
@@ -183,6 +275,7 @@ namespace Smod2
 			return matching;
 		}
 
+		[Obsolete("Use GetMatchingPlugins instead.")]
 		public List<Plugin> FindPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
@@ -208,10 +301,13 @@ namespace Smod2
 
 		public void EnablePlugins()
 		{
-			// .ToArray() prevents a collection modified exception (enabling a plugin removes it from disabled plugins)
-			foreach (KeyValuePair<string, Plugin> plugin in disabledPlugins.ToArray())
+			// Converting to array is required because disabledPlugins is modified when a plugin is enabled.
+			Plugin[] plugins = new Plugin[disabledPlugins.Count];
+			disabledPlugins.Values.CopyTo(plugins, 0);
+			
+			foreach (Plugin plugin in plugins)
 			{
-				EnablePlugin(plugin.Value);
+				EnablePlugin(plugin);
 			}
 		}
 
@@ -247,10 +343,12 @@ namespace Smod2
 
 		public void DisablePlugins()
 		{
-			// .ToArray() prevents a collection modified exception (disabling a plugin removes it from enabled plugins)
-			foreach (KeyValuePair<string, Plugin> plugin in enabledPlugins.ToArray())
+			Plugin[] plugins = new Plugin[disabledPlugins.Count];
+			disabledPlugins.Values.CopyTo(plugins, 0);
+			
+			foreach (Plugin plugin in plugins)
 			{
-				DisablePlugin(plugin.Value);
+				DisablePlugin(plugin);
 			}
 		}
 
