@@ -27,7 +27,7 @@ namespace Smod2.Config
 
 		public string Description { get; }
 
-		private ConfigSetting(string key, object defaultValue, bool randomized, bool primaryUser, string description)
+		internal ConfigSetting(string key, object defaultValue, bool randomized, bool primaryUser, string description)
 		{
 			Key = key.ToUpper();
 			Default = defaultValue;

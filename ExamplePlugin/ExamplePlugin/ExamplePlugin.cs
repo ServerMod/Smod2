@@ -1,6 +1,7 @@
 ﻿using Smod2;
 using Smod2.API;
 using Smod2.Attributes;
+using Smod2.Config;
 using Smod2.EventHandlers;
 using Smod2.Events;
 using Smod2.Piping;
@@ -12,6 +13,7 @@ namespace ExamplePlugin
 		name = "Test",
 		description = "Example plugin",
 		id = "courtney.example.plugin",
+		configPrefix = "ep",
 		version = "1.0",
 		SmodMajor = 3,
 		SmodMinor = 3,
@@ -48,6 +50,9 @@ namespace ExamplePlugin
 		[PipeLink("dev.plugin", "DamageMultiplier")]
 		private FieldPipe<float> damageMultiplier;
 
+		[ConfigOption] 
+		internal float myAwesomenessScore = 1f;
+
 		public override void OnDisable()
 		{
 			this.Info(this.Details.name + " was disabled ):");
@@ -73,8 +78,8 @@ namespace ExamplePlugin
 			this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.High);
 			// Register Command(s)
 			this.AddCommand("hello", new HelloWorldCommand(this));
-			// Register config setting(s)
-			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", Smod2.Config.SettingType.STRING, true, "This is a description"));
+			// Register config setting(s) on runtime
+			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", true, "This is a description"));
 		}
 
 		[PipeField]
