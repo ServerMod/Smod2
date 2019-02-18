@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Smod2.Commands;
 
@@ -24,6 +24,7 @@ namespace Smod2.API
 		[Obsolete("Nonfunctional", true)]
 		public abstract bool Visible { get; set; } //Not used whatsoever. Only kept to prevent plugins to have to be recompiled
 		public abstract string PlayerListTitle { get; set; }
+		public abstract string AppFolder { get; }
 
 		public abstract List<Player> GetPlayers(string filter = "");
 		public abstract List<Player> GetPlayers(Role role);
