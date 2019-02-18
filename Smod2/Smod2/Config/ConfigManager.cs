@@ -152,17 +152,17 @@ namespace Smod2
 			}
 			else
 			{
-				SnapshotEntry snapshots = disabledPlugins[plugin];
+				SnapshotEntry snapshot = disabledPlugins[plugin];
 				disabledPlugins.Remove(plugin);
 
-				settings.Add(plugin, snapshots.Settings);
+				settings.Add(plugin, snapshot.Settings);
 
-				foreach (string setting in snapshots.Primaries)
+				foreach (string setting in snapshot.Primaries)
 				{
 					primary_settings_map.Add(setting, plugin);
 				}
 
-				foreach (string setting in snapshots.Secondaries)
+				foreach (string setting in snapshot.Secondaries)
 				{
 					if (!secondary_settings_map.ContainsKey(setting))
 					{
@@ -171,6 +171,8 @@ namespace Smod2
 
 					secondary_settings_map[setting].Add(plugin);
 				}
+				
+				configFields.Add(plugin, snapshot.Fields);
 			}
 		}
 
@@ -337,9 +339,10 @@ namespace Smod2
 				return;
 			}
 
-			SnapshotEntry snapshot = new SnapshotEntry(settings[plugin], new List<string>(), new List<string>());
+			SnapshotEntry snapshot = new SnapshotEntry(settings[plugin], new List<string>(), new List<string>(), configFields.ContainsKey(plugin) ? configFields[plugin] : new Dictionary<string, FieldInfo>());
 			disabledPlugins.Add(plugin, snapshot);
 			settings.Remove(plugin);
+			configFields.Remove(plugin);
 
 			var updated_primary_settings_map = new Dictionary<string, Plugin>();
 			foreach (var pair in primary_settings_map)
@@ -388,12 +391,14 @@ namespace Smod2
 			public Dictionary<string, ConfigSetting> Settings { get; }
 			public List<string> Primaries { get; }
 			public List<string> Secondaries { get; }
+			public Dictionary<string, FieldInfo> Fields { get; }
 
-			public SnapshotEntry(Dictionary<string, ConfigSetting> settings, List<string> primaries, List<string> secondaries)
+			public SnapshotEntry(Dictionary<string, ConfigSetting> settings, List<string> primaries, List<string> secondaries, Dictionary<string, FieldInfo> fields)
 			{
 				Settings = settings;
 				Primaries = primaries;
 				Secondaries = secondaries;
+				Fields = fields;
 			}
 		}
 	}
