@@ -29,11 +29,11 @@ namespace Smod2.Config
 
 		private ConfigSetting(string key, object defaultValue, bool randomized, bool primaryUser, string description)
 		{
-			this.Key = key.ToUpper();
-			this.Default = defaultValue;
-			this.RandomizedValue = randomized;
-			this.PrimaryUser = primaryUser;
-			this.Description = description;
+			Key = key.ToUpper();
+			Default = defaultValue;
+			RandomizedValue = randomized;
+			PrimaryUser = primaryUser;
+			Description = description;
 		}
 		[Obsolete("Use the constructor without SettingType.")]
 		public ConfigSetting(string key, object defaultValue, bool randomized, SettingType type,  bool primaryUser, string description) : this(key, defaultValue, randomized, primaryUser, description) { }
