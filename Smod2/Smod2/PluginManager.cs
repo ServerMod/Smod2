@@ -504,5 +504,13 @@ namespace Smod2
 				Logger.Debug("PLUGIN_LOADER", e.StackTrace);
 			}
 		}
+
+		public void RefreshConfigAttributes()
+		{
+			foreach (Plugin plugin in enabledPlugins.Values)
+			{
+				ConfigManager.Manager.RefreshAttributes(plugin);
+			}
+		}
 	}
 }

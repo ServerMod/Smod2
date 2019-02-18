@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Smod2.EventHandlers;
 
 namespace Smod2.Events
@@ -69,7 +67,7 @@ namespace Smod2.Events
 			EventHandlerWrapper wrapper = new EventHandlerWrapper(plugin, priority, handler);
 
 			// If the plugin is not enabled
-			if (PluginManager.Manager.GetEnabledPlugin(plugin.Details?.id) == null)
+			if (PluginManager.Manager.GetEnabledPlugin(plugin.Details.id) == null)
 			{
 				if (!snapshots.ContainsKey(plugin))
 				{

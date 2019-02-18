@@ -11,6 +11,7 @@ namespace Smod2.Attributes
 		public string name;
 		public string author;
 		public string description;
+		public string configPrefix;
 		public string version;
 	}
 }

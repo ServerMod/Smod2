@@ -114,7 +114,7 @@ namespace Smod2
 				return ConfigManager.Config.GetStringValue(key.ToUpper(), def, randomValues);
 			}
 
-			return "";
+			return string.Empty;
 		}
 
 		public int GetConfigInt(string key)
@@ -166,7 +166,7 @@ namespace Smod2
 				return ConfigManager.Config.GetListValue(key.ToUpper(), def, randomValues);
 			}
 
-			return new string[] { };
+			return new string[0];
 		}
 
 		public int[] GetConfigIntList(string key)
@@ -179,7 +179,7 @@ namespace Smod2
 				return ConfigManager.Config.GetIntListValue(key.ToUpper(), def, randomValues);
 			}
 
-			return new int[] { };
+			return new int[0];
 		}
 
 		public Dictionary<string, string> GetConfigDict(string key)

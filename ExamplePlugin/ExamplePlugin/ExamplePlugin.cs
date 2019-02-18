@@ -1,6 +1,7 @@
 ﻿using Smod2;
 using Smod2.API;
 using Smod2.Attributes;
+using Smod2.Config;
 using Smod2.EventHandlers;
 using Smod2.Events;
 using Smod2.Piping;
@@ -12,6 +13,7 @@ namespace ExamplePlugin
 		name = "Test",
 		description = "Example plugin",
 		id = "courtney.example.plugin",
+		configPrefix = "ep",
 		version = "1.0",
 		SmodMajor = 3,
 		SmodMinor = 3,
@@ -19,34 +21,32 @@ namespace ExamplePlugin
 		)]
 	public class ExamplePlugin : Plugin
 	{
-		// Hooks to event called by any plugin
-		// Hooks can be private as well as public, but all other pipes must be public
-		[PipeEvent("dev.plugin.OnEpicDeath")]
-		private void OnEpicDeath(Player player, int whips, int naes)
-		{
-			if (naes > 2)
-			{
-				player.SendConsoleMessage("get nae nae'd");
-			}
+		[PipeField]
+		public float killChance;
 
-			if (whips > 1)
+		private float microChance;
+		[PipeProperty]
+		public float MicroChance
+		{
+			get
 			{
-				player.SendConsoleMessage("get whipped on");
+				Info("Got MicroChance as " + microChance);
+				return microChance;
+			}
+			set
+			{
+				Info("Set MicroChance to " + value);
+				microChance = value;
 			}
 		}
-
-		// Hooks to event called by specific plugins
-		[PipeEvent("dev.plugin.OnWhip",
-			"dev.plugin",
-			"hoob.hud")]
-		private void OnWhip(Player player, Player target)
-		{
-			player.SendConsoleMessage("You were whipped on by " + target.Name);
-		}
-
+		
 		// Grabs the "DamageMultiplier" field from the plugin with the ID "dev.plugin", given that the field is a pipe
 		[PipeLink("dev.plugin", "DamageMultiplier")]
 		private FieldPipe<float> damageMultiplier;
+
+		// Registers config setting EP_MY_AWESOMENESS_SCORE with a default of 1 on intialization.
+		[ConfigOption] 
+		internal float myAwesomenessScore = 1f;
 
 		public override void OnDisable()
 		{
@@ -73,28 +73,34 @@ namespace ExamplePlugin
 			this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.High);
 			// Register Command(s)
 			this.AddCommand("hello", new HelloWorldCommand(this));
-			// Register config setting(s)
-			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", Smod2.Config.SettingType.STRING, true, "This is a description"));
+			// Registers config at runtime (in this case it is in Register, so it is on initialization)
+			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", true, "This is a description"));
 		}
+		
+		// Hooks to event called by any plugin
+        // Hooks can be private as well as public, but all other pipes must be public
+        [PipeEvent("dev.plugin.OnEpicDeath")]
+        private void OnEpicDeath(Player player, int whips, int naes)
+        {
+            if (naes > 2)
+            {
+                player.SendConsoleMessage("get nae nae'd");
+            }
 
-		[PipeField]
-		public float killChance;
+            if (whips > 1)
+            {
+                player.SendConsoleMessage("get whipped on");
+            }
+        }
 
-		private float microChance;
-		[PipeProperty]
-		public float MicroChance
-		{
-			get
-			{
-				Info("Got MicroChance as " + microChance);
-				return microChance;
-			}
-			set
-			{
-				Info("Set MicroChance to " + value);
-				microChance = value;
-			}
-		}
+        // Hooks to event called by specific plugins
+        [PipeEvent("dev.plugin.OnWhip",
+            "dev.plugin",
+            "hoob.hud")]
+        private void OnWhip(Player player, Player target)
+        {
+            player.SendConsoleMessage("You were whipped on by " + target.Name);
+        }
 
 		// Declares a method usable to other plugins via piping.
 		[PipeMethod]
