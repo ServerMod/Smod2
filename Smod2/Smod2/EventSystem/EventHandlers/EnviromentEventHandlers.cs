@@ -29,6 +29,12 @@ namespace Smod2.EventHandlers
 	{
 		void OnChangeLever(WarheadChangeLeverEvent ev);
 	}
+
+	public interface IEventHandlerWarheadKeycardAccess : IEventHandler
+	{
+		void OnWarheadKeycardAccess(WarheadKeycardAccessEvent ev);
+	}
+	
 	public interface IEventHandlerWarheadDetonate : IEventHandler
 	{
 		/// <summary>  

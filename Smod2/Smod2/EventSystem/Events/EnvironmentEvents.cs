@@ -69,7 +69,6 @@ namespace Smod2.Events
 		}
 	}
 	
-	// Not really sure why warhead (which have players) is in EnvironmentEvents but ok
 	public class WarheadChangeLeverEvent : Event
 	{
 		public Player Player { get; }
@@ -84,6 +83,23 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerWarheadChangeLever)handler).OnChangeLever(this);
+		}
+	}
+
+	public class WarheadKeycardAccessEvent : Event
+	{
+		public Player Player { get; }
+		public bool Allow { get; set; }
+
+		public WarheadKeycardAccessEvent(Player player, bool allow)
+		{
+			Player = player;
+			Allow = allow;
+		}
+		
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerWarheadKeycardAccess)handler).OnWarheadKeycardAccess(this);
 		}
 	}
 
