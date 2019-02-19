@@ -68,6 +68,24 @@ namespace Smod2.Events
 			((IEventHandlerWarheadStopCountdown)handler).OnStopCountdown(this);
 		}
 	}
+	
+	// Not really sure why warhead (which have players) is in EnvironmentEvents but ok
+	public class WarheadChangeLeverEvent : Event
+	{
+		public Player Player { get; }
+		public bool Allow { get; set; }
+
+		public WarheadChangeLeverEvent(Player player)
+		{
+			Player = player;
+			Allow = true;
+		}
+		
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerWarheadChangeLever)handler).OnChangeLever(this);
+		}
+	}
 
 	public class WarheadDetonateEvent : Event
 	{

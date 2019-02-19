@@ -24,6 +24,11 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnStopCountdown(WarheadStopEvent ev);
 	}
+
+	public interface IEventHandlerWarheadChangeLever : IEventHandler
+	{
+		void OnChangeLever(WarheadChangeLeverEvent ev);
+	}
 	public interface IEventHandlerWarheadDetonate : IEventHandler
 	{
 		/// <summary>  
