@@ -176,24 +176,6 @@ namespace Smod2
 			}
 		}
 
-		private static string ToUpperSnakeCase(string otherCase)
-		{
-			string snakeCase = "";
-			for (int i = 0; i < otherCase.Length; i++)
-			{
-				if (i > 0 && char.IsUpper(otherCase[i]) && otherCase[i - 1] != '_')
-				{
-					snakeCase += "_" + otherCase[i];
-				}
-				else
-				{
-					snakeCase += char.ToUpper(otherCase[i]);	
-				}
-			}
-
-			return snakeCase;
-		}
-
 		public void RegisterAttributes(Plugin plugin)
 		{
 			Type type = plugin.GetType();
@@ -204,7 +186,7 @@ namespace Smod2
 				ConfigOption configOption = field.GetCustomAttribute<ConfigOption>();
 				if (configOption != null)
 				{
-					string key = configOption.Key ?? ToUpperSnakeCase(field.Name);
+					string key = configOption.Key ?? PluginManager.ToUpperSnakeCase(field.Name);
 					
 					string prefix = plugin.Details.configPrefix;
 					if (prefix == null)

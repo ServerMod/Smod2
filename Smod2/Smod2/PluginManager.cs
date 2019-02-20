@@ -326,6 +326,8 @@ namespace Smod2
 			PipeManager.Manager.RegisterLinks(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering configs");
 			ConfigManager.Manager.RegisterPlugin(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering langs");
+			LangManager.Manager.RegisterPlugin(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading event snapshot");
 			EventManager.Manager.AddSnapshotEventHandlers(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading command snapshot");
@@ -391,6 +393,8 @@ namespace Smod2
 			EventManager.Manager.RemoveEventHandlers(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading configs");
 			ConfigManager.Manager.UnloadPlugin(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading translations");
+			LangManager.Manager.UnregisterPlugin(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading pipe imports/exports");
 			PipeManager.Manager.UnregisterPlugin(plugin);
 			Manager.Logger.Info("PLUGIN_MANAGER", "Disabled plugin " + plugin.Details.name + " " + plugin.Details.version);
@@ -474,8 +478,11 @@ namespace Smod2
 								{
 									plugin.Details = details;
 									plugin.Pipes = new PluginPipes(plugin);
+									
 									ConfigManager.Manager.RegisterPlugin(plugin);
+									LangManager.Manager.RegisterPlugin(plugin);
 									PipeManager.Manager.RegisterPlugin(plugin);
+									
 									plugin.Register();
 
 									disabledPlugins.Add(details.id, plugin);
@@ -504,12 +511,31 @@ namespace Smod2
 				Logger.Debug("PLUGIN_LOADER", e.StackTrace);
 			}
 		}
+		
+		public static string ToUpperSnakeCase(string otherCase)
+		{
+			string snakeCase = "";
+			for (int i = 0; i < otherCase.Length; i++)
+			{
+				if (i > 0 && char.IsUpper(otherCase[i]) && otherCase[i - 1] != '_')
+				{
+					snakeCase += "_" + otherCase[i];
+				}
+				else
+				{
+					snakeCase += char.ToUpper(otherCase[i]);	
+				}
+			}
 
-		public void RefreshConfigAttributes()
+			return snakeCase;
+		}
+
+		public void RefreshPluginAttributes()
 		{
 			foreach (Plugin plugin in enabledPlugins.Values)
 			{
 				ConfigManager.Manager.RefreshAttributes(plugin);
+				LangManager.Manager.RefreshAttributes(plugin);
 			}
 		}
 	}

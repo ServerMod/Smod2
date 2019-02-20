@@ -45,6 +45,7 @@
     <Compile Include="API\UserGroup.cs" />
     <Compile Include="API\Vector.cs" />
     <Compile Include="Config\ConfigOption.cs" />
+    <Compile Include="LangManager\LangOption.cs" />
     <Compile Include="Piping\PipeEvent.cs" />
     <Compile Include="Piping\MemberPipe.cs" />
     <Compile Include="Piping\PipeMethod.cs" />

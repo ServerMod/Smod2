@@ -4,6 +4,7 @@ using Smod2.Attributes;
 using Smod2.Config;
 using Smod2.EventHandlers;
 using Smod2.Events;
+using Smod2.Lang;
 using Smod2.Piping;
 
 namespace ExamplePlugin
@@ -14,6 +15,7 @@ namespace ExamplePlugin
 		description = "Example plugin",
 		id = "courtney.example.plugin",
 		configPrefix = "ep",
+		langFile = "exampleplugin",
 		version = "1.0",
 		SmodMajor = 3,
 		SmodMinor = 3,
@@ -48,6 +50,9 @@ namespace ExamplePlugin
 		[ConfigOption] 
 		internal float myAwesomenessScore = 1f;
 
+		[LangOption] 
+		internal string configValueMessage = "Config value: "; 
+
 		public override void OnDisable()
 		{
 			this.Info(this.Details.name + " was disabled ):");
@@ -62,7 +67,6 @@ namespace ExamplePlugin
 			}
 
 			this.Info(this.Details.name + " has loaded :)");
-			this.Info("Config value: " + this.GetConfigString("myConfigKey"));
 		}
 		
 		public override void Register()
@@ -75,6 +79,8 @@ namespace ExamplePlugin
 			this.AddCommand("hello", new HelloWorldCommand(this));
 			// Registers config at runtime (in this case it is in Register, so it is on initialization)
 			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", true, "This is a description"));
+			// Register lang at runtime (in this case it is in Register, so it is on initialization)
+			this.AddTranslation(new LangSetting("myLangKey", "MyDefaultValue", "exampleplugin"));
 		}
 		
 		// Hooks to event called by any plugin
