@@ -21,7 +21,15 @@ namespace Smod2.Piping
 		public object Value
 		{
 			get => info.GetValue(instance);
-			set => info.SetValue(instance, value);
+			set
+			{
+				if (Readonly)
+				{
+					throw new InvalidOperationException($"Cannot set readonly field pipe: {(info.DeclaringType == null ? info.Name : info.DeclaringType.FullName + "." + info.Name)}");
+				}
+				
+				info.SetValue(instance, value);
+			}
 		}
 		
 		public bool Readonly { get; }
