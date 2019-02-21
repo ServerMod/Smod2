@@ -46,12 +46,13 @@ namespace ExamplePlugin
 		[PipeLink("dev.plugin", "DamageMultiplier")]
 		private FieldPipe<float> damageMultiplier;
 
-		// Registers config setting EP_MY_AWESOMENESS_SCORE with a default of 1 on intialization.
-		[ConfigOption] 
-		internal float myAwesomenessScore = 1f;
+		// Registers config setting EP_MY_AWESOMENESS_SCORE with a default of 1 on intialization
+		[ConfigOption]
+		public readonly float myAwesomenessScore = 1f;
 
+		// Registers lang setting CONFIG_VALUE in exampleplugin with a default of "Config value: " on initialization
 		[LangOption] 
-		internal string configValueMessage = "Config value: "; 
+		public readonly string _configValue = "Config value: "; 
 
 		public override void OnDisable()
 		{

@@ -201,12 +201,6 @@ namespace Smod2
 						continue;
 					}
 					
-					if (field.IsInitOnly)
-					{
-						PluginManager.Manager.Logger.Error("CONFIG_MANAGER", $"{plugin} is trying to register attribute config {field.Name}, but the field is readonly.");
-						continue;
-					}
-					
 					if (!RegisterConfig(plugin, new ConfigSetting(prefix + "_" + key, field.GetValue(plugin), configOption.Randomized, configOption.PrimaryUser, configOption.Description)))
 					{
 						// Failed register so it should not be registered to refresh every round restart.

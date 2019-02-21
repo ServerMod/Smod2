@@ -14,7 +14,7 @@ namespace ExamplePlugin
 		public void OnWaitingForPlayers(WaitingForPlayersEvent ev)
 		{
 			plugin.Info("Awesomeness score: " + plugin.myAwesomenessScore);
-			plugin.Info(plugin.configValueMessage + plugin.GetConfigString("myConfigKey"));
+			plugin.Info(plugin._configValue + plugin.GetConfigString("myConfigKey"));
 		}
 
 		public void OnRoundEnd(RoundEndEvent ev)

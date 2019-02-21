@@ -149,12 +149,6 @@ namespace Smod2
 						continue;
 					}
 					
-					if (field.IsInitOnly)
-					{
-						PluginManager.Manager.Logger.Error("LANG_MANAGER", $"{plugin} is trying to register attribute lang {field.Name}, but the field is readonly.");
-						continue;
-					}
-					
 					if (!RegisterTranslation(plugin, new LangSetting(key, (string) field.GetValue(plugin),  file)))
 					{
 						// Failed register so it should not be registered to refresh every round restart.

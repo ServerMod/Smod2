@@ -517,6 +517,11 @@ namespace Smod2
 			string snakeCase = "";
 			for (int i = 0; i < otherCase.Length; i++)
 			{
+				if (snakeCase.Length == 0 && otherCase[i] == '_')
+				{
+					continue;
+				}
+				
 				if (i > 0 && char.IsUpper(otherCase[i]) && otherCase[i - 1] != '_')
 				{
 					snakeCase += "_" + otherCase[i];

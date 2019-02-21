@@ -147,12 +147,6 @@ namespace Smod2.Piping
 				PipeLink link = info.GetCustomAttribute<PipeLink>();
 				if (link != null)
 				{
-					if (info.IsInitOnly)
-					{
-						PluginManager.Manager.Logger.Error("PIPE_MANAGER", $"Pipe link {info.Name} of {plugin.Details.id} is readonly.");
-						continue;
-					}
-					
 					PluginManager.Manager.Logger.Debug("PIPE_MANAGER", $"Linking {info.Name} of {plugin.Details.id} to {link.Pipe} of {link.Plugin}.");
 					SetPipeLink(plugin, info, link.Plugin, link.Pipe);
 				}
