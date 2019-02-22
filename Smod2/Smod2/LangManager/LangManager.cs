@@ -204,6 +204,7 @@ namespace Smod2
 					}
 
 					keyvalue[0] = keyvalue[0].Trim();
+					keyvalue[1] = keyvalue[1].TrimStart();
 					// If the value contains a colon in it, make sure it isn't cut off
 					if (keyvalue.Length > 2)
 					{
