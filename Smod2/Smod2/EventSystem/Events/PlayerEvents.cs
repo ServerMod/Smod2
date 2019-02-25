@@ -275,12 +275,14 @@ namespace Smod2.Events
 		public float Damage { get; set; }
 		public Vector LastPosition { get; }
 		public Vector TargetPosition { get; set; }
+		public Player Attacker { get; }
 
-		public PlayerPocketDimensionEnterEvent(Player player, float damage, Vector lastPosition, Vector targetPosition) : base(player)
+		public PlayerPocketDimensionEnterEvent(Player player, float damage, Vector lastPosition, Vector targetPosition, Player attacker) : base(player)
 		{
 			Damage = damage;
 			LastPosition = lastPosition;
 			TargetPosition = targetPosition;
+			Attacker = attacker;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)

@@ -18,8 +18,8 @@ namespace Smod2.API
 		public abstract Map Map { get; }
 		public abstract int NumPlayers { get; }
 		public abstract int MaxPlayers { get; set; }
-		public abstract bool Verified { get; }
-		public abstract bool Visible { get; set; }
+		public abstract bool Verified { get; } //Not used whatsoever. Only kept to prevent plugins to have to be recompiled
+		public abstract bool Visible { get; set; } //Not used whatsoever. Only kept to prevent plugins to have to be recompiled
 		public abstract string PlayerListTitle { get; set; }
 
 		public abstract List<Player> GetPlayers(string filter = "");
