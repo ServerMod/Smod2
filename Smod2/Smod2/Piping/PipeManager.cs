@@ -56,7 +56,11 @@ namespace Smod2.Piping
 			Type fieldType = info.FieldType;
 			if (!pipeGetters.ContainsKey(fieldType))
 			{
-				fieldType = fieldType.BaseType;
+				// Set type of field to the base (non-generic type) if the generic is a MemberPipe
+				if (typeof(MemberPipe).IsAssignableFrom(fieldType))
+				{
+					fieldType = fieldType.BaseType;
+				}
 
 				if (fieldType == null || !pipeGetters.ContainsKey(fieldType))
 				{

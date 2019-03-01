@@ -110,7 +110,8 @@ namespace Smod2
 
 			if (ConfigManager.ResolveDefault(key.ToUpper()) is string def)
 			{
-				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				ConfigSetting setting = ConfigManager.ResolvePrimary(key.ToUpper());
+				bool randomValues = setting?.RandomizedValue ?? false;
 				return ConfigManager.Config.GetStringValue(key.ToUpper(), def, randomValues);
 			}
 
@@ -123,7 +124,8 @@ namespace Smod2
 
 			if (ConfigManager.ResolveDefault(key.ToUpper()) is int def)
 			{
-				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				ConfigSetting setting = ConfigManager.ResolvePrimary(key.ToUpper());
+				bool randomValues = setting?.RandomizedValue ?? false;
 				return ConfigManager.Config.GetIntValue(key.ToUpper(), def, randomValues);
 			}
 
@@ -136,7 +138,8 @@ namespace Smod2
 
 			if (ConfigManager.ResolveDefault(key.ToUpper()) is float def)
 			{
-				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				ConfigSetting setting = ConfigManager.ResolvePrimary(key.ToUpper());
+				bool randomValues = setting?.RandomizedValue ?? false;
 				return ConfigManager.Config.GetFloatValue(key.ToUpper(), def, randomValues);
 			}
 
@@ -149,7 +152,8 @@ namespace Smod2
 
 			if (ConfigManager.ResolveDefault(key.ToUpper()) is bool def)
 			{
-				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				ConfigSetting setting = ConfigManager.ResolvePrimary(key.ToUpper());
+				bool randomValues = setting?.RandomizedValue ?? false;
 				return ConfigManager.Config.GetBoolValue(key.ToUpper(), def, randomValues);
 			}
 
@@ -162,7 +166,8 @@ namespace Smod2
 
 			if (ConfigManager.ResolveDefault(key.ToUpper()) is string[] def)
 			{
-				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				ConfigSetting setting = ConfigManager.ResolvePrimary(key.ToUpper());
+				bool randomValues = setting?.RandomizedValue ?? false;
 				return ConfigManager.Config.GetListValue(key.ToUpper(), def, randomValues);
 			}
 
@@ -175,7 +180,8 @@ namespace Smod2
 
 			if (ConfigManager.ResolveDefault(key.ToUpper()) is int[] def)
 			{
-				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				ConfigSetting setting = ConfigManager.ResolvePrimary(key.ToUpper());
+				bool randomValues = setting?.RandomizedValue ?? false;
 				return ConfigManager.Config.GetIntListValue(key.ToUpper(), def, randomValues);
 			}
 
@@ -188,7 +194,8 @@ namespace Smod2
 
 			if (ConfigManager.ResolveDefault(key.ToUpper()) is Dictionary<string, string> def)
 			{
-				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				ConfigSetting setting = ConfigManager.ResolvePrimary(key.ToUpper());
+				bool randomValues = setting?.RandomizedValue ?? false;
 				return ConfigManager.Config.GetDictValue(key.ToUpper(), def, randomValues);
 			}
 
@@ -201,7 +208,8 @@ namespace Smod2
 
 			if (ConfigManager.ResolveDefault(key.ToUpper()) is Dictionary<int, int> def)
 			{
-				bool randomValues = ConfigManager.ResolvePrimary(key.ToUpper()) != null && ConfigManager.ResolvePrimary(key.ToUpper()).RandomizedValue;
+				ConfigSetting setting = ConfigManager.ResolvePrimary(key.ToUpper());
+				bool randomValues = setting?.RandomizedValue ?? false;
 				return ConfigManager.Config.GetIntDictValue(key.ToUpper(), def, randomValues);
 			}
 

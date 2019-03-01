@@ -8,7 +8,13 @@ namespace Smod2
 {
 	public class ConfigManager
 	{
-		private readonly Dictionary<Type, Func<Plugin, string, object>> typeGetters = new Dictionary<Type, Func<Plugin, string, object>>
+		private Dictionary<Plugin, Dictionary<string, ConfigSetting>> settings = new Dictionary<Plugin, Dictionary<string, ConfigSetting>>();
+		private Dictionary<string, Plugin> primary_settings_map = new Dictionary<string, Plugin>();
+		private Dictionary<string, List<Plugin>> secondary_settings_map = new Dictionary<string, List<Plugin>>();
+		private readonly Dictionary<Plugin, Dictionary<string, FieldInfo>> configFields = new Dictionary<Plugin, Dictionary<string, FieldInfo>>();
+		private readonly Dictionary<Plugin, SnapshotEntry> disabledPlugins = new Dictionary<Plugin, SnapshotEntry>();
+		
+		internal readonly Dictionary<Type, Func<Plugin, string, object>> typeGetters = new Dictionary<Type, Func<Plugin, string, object>>
 		{
 			{
 				typeof(bool),
@@ -43,13 +49,8 @@ namespace Smod2
 				(plugin, key) => plugin.GetConfigIntDict(key)
 			}
 		};
-		
-		private Dictionary<Plugin, Dictionary<string, ConfigSetting>> settings = new Dictionary<Plugin, Dictionary<string, ConfigSetting>>();
-		private Dictionary<string, Plugin> primary_settings_map = new Dictionary<string, Plugin>();
-		private Dictionary<string, List<Plugin>> secondary_settings_map = new Dictionary<string, List<Plugin>>();
-		private readonly Dictionary<Plugin, Dictionary<string, FieldInfo>> configFields = new Dictionary<Plugin, Dictionary<string, FieldInfo>>();
-		
-		private readonly Dictionary<Plugin, SnapshotEntry> disabledPlugins = new Dictionary<Plugin, SnapshotEntry>();
+
+		internal Random random = new Random();
 
 		private static ConfigManager singleton;
 		public static ConfigManager Manager
@@ -194,13 +195,36 @@ namespace Smod2
 						PluginManager.Manager.Logger.Error("CONFIG_MANAGER",  $"{plugin} is trying to register attribute config {field.Name}, but does not have {nameof(PluginDetails.configPrefix)} in its {nameof(PluginDetails)} set.");
 						return;
 					}
-					
+
+					if (field.FieldType.GetGenericTypeDefinition() == typeof(LiveConfig<>))
+					{
+						Type configType = field.FieldType.GenericTypeArguments[0];
+						if (!typeGetters.ContainsKey(configType))
+						{
+							PluginManager.Manager.Logger.Error("CONFIG_MANAGER", $"{plugin} is trying to register live attribute config {field.Name}, but the type ({configType}) is not a config-allowed type.");
+							field.SetValue(plugin, null);
+							continue;
+						}
+
+						LiveConfig liveConfig = (LiveConfig) field.GetValue(plugin);
+						if (!RegisterConfig(plugin, new ConfigSetting(prefix + "_" + key, liveConfig.DefaultValue, configOption.Randomized, configOption.PrimaryUser, configOption.Description)))
+						{
+							// Failed register so it should not be set.
+							field.SetValue(plugin, null);
+							continue;
+						}
+
+						liveConfig.ManagerInit(key, plugin);
+						
+						continue;
+					}
+
 					if (!typeGetters.ContainsKey(field.FieldType))
 					{
 						PluginManager.Manager.Logger.Error("CONFIG_MANAGER", $"{plugin} is trying to register attribute config {field.Name}, but the type ({field.FieldType}) is not a config-allowed type.");
 						continue;
 					}
-					
+
 					if (!RegisterConfig(plugin, new ConfigSetting(prefix + "_" + key, field.GetValue(plugin), configOption.Randomized, configOption.PrimaryUser, configOption.Description)))
 					{
 						// Failed register so it should not be registered to refresh every round restart.

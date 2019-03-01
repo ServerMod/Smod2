@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Smod2.Config
 {
+	[Obsolete("Use ConfigSetting.Default.GetType() instead.", true)]
 	public enum SettingType
 	{
 		NUMERIC,
@@ -38,14 +39,8 @@ namespace Smod2.Config
 		[Obsolete("Use the constructor without SettingType.")]
 		public ConfigSetting(string key, object defaultValue, bool randomized, SettingType type,  bool primaryUser, string description) : this(key, defaultValue, randomized, primaryUser, description) { }
 		
-		public ConfigSetting(string key, bool defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
+		// All the randomized stuff goes here because random stuff cant be formatted by anything but strings
 		public ConfigSetting(string key, string defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
-		public ConfigSetting(string key, string[] defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
-		public ConfigSetting(string key, int defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
-		public ConfigSetting(string key, int[] defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
-		public ConfigSetting(string key, float defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
-		public ConfigSetting(string key, Dictionary<string, string> defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
-		public ConfigSetting(string key, Dictionary<int, int> defaultValue, bool randomized, bool primaryUser, string description) : this(key, (object)defaultValue, randomized, primaryUser, description) { }
 
 		private ConfigSetting(string key, object defaultValue, bool primaryUser, string description) : this(key, defaultValue, false, primaryUser, description) { }
 		[Obsolete("Use the constructor without SettingType.")]

@@ -50,6 +50,9 @@ namespace ExamplePlugin
 		[ConfigOption]
 		public readonly float myAwesomenessScore = 1f;
 
+		[ConfigOption(true, true)]
+		public readonly LiveConfig<int> customRint = new LiveConfig<int>("{2%0|1}");
+
 		// Registers lang setting CONFIG_VALUE in exampleplugin with a default of "Config value: " on initialization
 		[LangOption] 
 		public readonly string _configValue = "Config value: "; 
