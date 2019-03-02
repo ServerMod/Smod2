@@ -221,7 +221,7 @@ namespace Smod2
 					}
 					else
 					{
-						this.keyvalue.Add(key, keyvalue[1].Substring(1));
+						this.keyvalue.Add(key, keyvalue[1]);
 						PluginManager.Manager.Logger.Debug("LANG_MANAGER", line);
 					}
 				}
