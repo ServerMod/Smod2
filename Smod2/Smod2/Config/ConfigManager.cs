@@ -196,7 +196,7 @@ namespace Smod2
 						return;
 					}
 
-					if (field.FieldType.GetGenericTypeDefinition() == typeof(LiveConfig<>))
+					if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(LiveConfig<>))
 					{
 						Type configType = field.FieldType.GenericTypeArguments[0];
 						if (!typeGetters.ContainsKey(configType))
@@ -206,15 +206,16 @@ namespace Smod2
 							continue;
 						}
 
+						string realKey = prefix + "_" + key;
 						LiveConfig liveConfig = (LiveConfig) field.GetValue(plugin);
-						if (!RegisterConfig(plugin, new ConfigSetting(prefix + "_" + key, liveConfig.DefaultValue, configOption.Randomized, configOption.PrimaryUser, configOption.Description)))
+						if (!RegisterConfig(plugin, new ConfigSetting(realKey, liveConfig.DefaultValue, configOption.Randomized, configOption.PrimaryUser, configOption.Description)))
 						{
 							// Failed register so it should not be set.
 							field.SetValue(plugin, null);
 							continue;
 						}
 
-						liveConfig.ManagerInit(key, plugin);
+						liveConfig.ManagerInit(realKey, plugin);
 						
 						continue;
 					}

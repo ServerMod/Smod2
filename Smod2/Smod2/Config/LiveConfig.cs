@@ -4,11 +4,11 @@ namespace Smod2.Config
 {
 	public class LiveConfig
 	{
-		public string DefaultValue { get; }
+		public object DefaultValue { get; }
 		public string Key { get; private set; }
 		public Plugin Owner { get; private set; }
 
-		protected LiveConfig(string defaultValue)
+		protected LiveConfig(object defaultValue)
 		{
 			DefaultValue = defaultValue;
 		}
@@ -36,6 +36,8 @@ namespace Smod2.Config
 	{
 		private readonly Type type;
 		
+		public new T DefaultValue { get; }
+		
 		public T Value
 		{
 			get
@@ -49,9 +51,10 @@ namespace Smod2.Config
 			}
 		}
 		
-		public LiveConfig(string defaultValue) : base(defaultValue)
+		public LiveConfig(T defaultValue) : base(defaultValue)
 		{
 			type = typeof(T);
+			DefaultValue = defaultValue;
 		}
 
 		public static implicit operator T(LiveConfig<T> config) => config.Value;
