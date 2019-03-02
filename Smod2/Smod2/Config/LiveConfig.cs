@@ -2,7 +2,7 @@ using System;
 
 namespace Smod2.Config
 {
-	public class LiveConfig
+	public abstract class LiveConfig
 	{
 		public object DefaultValue { get; }
 		public string Key { get; private set; }
@@ -34,7 +34,7 @@ namespace Smod2.Config
 	
 	public class LiveConfig<T> : LiveConfig
 	{
-		private readonly Type type;
+		private readonly Func<Plugin, string, object> getter;
 		
 		public new T DefaultValue { get; }
 		
@@ -47,13 +47,19 @@ namespace Smod2.Config
 					throw new InvalidOperationException($"{nameof(ConfigManager)} has not initialized this live config.");
 				}
 				
-				return (T) ConfigManager.Manager.typeGetters[type].Invoke(Owner, Key);
+				return (T) getter.Invoke(Owner, Key);
 			}
 		}
 		
 		public LiveConfig(T defaultValue) : base(defaultValue)
 		{
-			type = typeof(T);
+			Type type = typeof(T);
+			if (!ConfigManager.Manager.typeGetters.ContainsKey(type))
+			{
+				throw new InvalidOperationException($"{type} is not a valid config type.");
+			}
+			
+			getter = ConfigManager.Manager.typeGetters[type];
 			DefaultValue = defaultValue;
 		}
 

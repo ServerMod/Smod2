@@ -198,14 +198,6 @@ namespace Smod2
 
 					if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(LiveConfig<>))
 					{
-						Type configType = field.FieldType.GenericTypeArguments[0];
-						if (!typeGetters.ContainsKey(configType))
-						{
-							PluginManager.Manager.Logger.Error("CONFIG_MANAGER", $"{plugin} is trying to register live attribute config {field.Name}, but the type ({configType}) is not a config-allowed type.");
-							field.SetValue(plugin, null);
-							continue;
-						}
-
 						string realKey = prefix + "_" + key;
 						LiveConfig liveConfig = (LiveConfig) field.GetValue(plugin);
 						if (!RegisterConfig(plugin, new ConfigSetting(realKey, liveConfig.DefaultValue, configOption.Randomized, configOption.PrimaryUser, configOption.Description)))
