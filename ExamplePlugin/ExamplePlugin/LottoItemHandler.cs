@@ -26,7 +26,7 @@ namespace ExamplePlugin
 				double luckyValue = random.NextDouble();
 				
 				// Chance of instantly dying
-				if (luckyValue > plugin.killChance)
+				if (luckyValue < plugin.killChance)
 				{
 					ev.Player.Kill();
 				}
@@ -40,7 +40,9 @@ namespace ExamplePlugin
 					ItemType item = itemPtr[0];
 					
 					// lottoItemCount is automatically read and converted to an int. This gives the item lottoItemCount times to the player.
-					for (int i = 0; i < plugin.lottoItemCount; i++)
+					int count = plugin.lottoItemCount;
+					plugin.Info($"{nameof(plugin.lottoItemCount)} is {count}");
+					for (int i = 0; i < count; i++)
 					{
 						ev.Player.GiveItem(item);
 					}

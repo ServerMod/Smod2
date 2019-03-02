@@ -51,7 +51,7 @@ namespace ExamplePlugin
 		public readonly float myAwesomenessScore = 1f;
 
 		[ConfigOption(true, true)]
-		public readonly LiveConfig<int> lottoItemCount = new LiveConfig<int>("{2%0|1}");
+		public readonly LiveConfig<int> lottoItemCount = new LiveConfig<int>(1);
 
 		// Registers lang setting CONFIG_VALUE in exampleplugin with a default of "Config value: " on initialization
 		[LangOption] 
@@ -84,7 +84,7 @@ namespace ExamplePlugin
 			// Register Command(s)
 			this.AddCommand("hello", new HelloWorldCommand(this));
 			// Registers config at runtime (in this case it is in Register, so it is on initialization)
-			this.AddConfig(new Smod2.Config.ConfigSetting("myConfigKey", "MyDefaultValue", true, "This is a description"));
+			this.AddConfig(new ConfigSetting("myConfigKey", "MyDefaultValue", true, "This is a description"));
 			// Register lang at runtime (in this case it is in Register, so it is on initialization)
 			this.AddTranslation(new LangSetting("myLangKey", "MyDefaultValue", "exampleplugin"));
 		}
