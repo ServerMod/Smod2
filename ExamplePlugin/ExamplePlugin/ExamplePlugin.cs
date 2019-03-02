@@ -51,7 +51,7 @@ namespace ExamplePlugin
 		public readonly float myAwesomenessScore = 1f;
 
 		[ConfigOption(true, true)]
-		public readonly LiveConfig<int> customRint = new LiveConfig<int>("{2%0|1}");
+		public readonly LiveConfig<int> lottoItemCount = new LiveConfig<int>("{2%0|1}");
 
 		// Registers lang setting CONFIG_VALUE in exampleplugin with a default of "Config value: " on initialization
 		[LangOption] 
@@ -64,7 +64,7 @@ namespace ExamplePlugin
 
 		public override void OnEnable()
 		{
-			// Sets the pipe field to 0.1. Pipes are not accessable in register.
+			// Sets the pipe field to 0.1 if it exists. Pipes are not accessable in register.
 			if (damageMultiplier != null)
 			{
 				damageMultiplier.Value = 0.1f;
@@ -75,6 +75,8 @@ namespace ExamplePlugin
 		
 		public override void Register()
 		{
+			killChance = 0.2f;
+			
 			// Register multiple events
 			this.AddEventHandlers(new RoundEventHandler(this));
 			// Register single event with priority (need to specify the handler type)
