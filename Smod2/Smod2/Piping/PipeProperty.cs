@@ -69,5 +69,7 @@ namespace Smod2.Piping
 			set => base.Value = value;
 		}
 		internal PropertyPipe(Plugin source, PropertyInfo info, PipeProperty pipe) : base(source, info, pipe) { }
+		
+		public static implicit operator T(PropertyPipe<T> pipe) => pipe.Value;
 	}
 }

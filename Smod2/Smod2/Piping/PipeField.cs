@@ -59,5 +59,7 @@ namespace Smod2.Piping
 		}
 		
 		internal FieldPipe(Plugin source, FieldInfo info, PipeField pipe) : base(source, info, pipe) { }
+
+		public static implicit operator T(FieldPipe<T> pipe) => pipe.Value;
 	}
 }
