@@ -7,6 +7,15 @@ namespace Smod2.Permissions
     {
         private HashSet<IPermissionsHandler> permissionHandlers = new HashSet<IPermissionsHandler>();
 
+        private readonly DefaultPermissionsHandler defaultPermissionsHandler = new DefaultPermissionsHandler();
+
+        public PermissionsManager()
+        {
+            // Immediately registers the default permissions handler
+            RegisterHandler(defaultPermissionsHandler);
+        }
+
+        // Used by permission plugins to register themselves as permission handlers
         public bool RegisterHandler(IPermissionsHandler handler)
         {
             if (handler == null)
@@ -47,6 +56,43 @@ namespace Smod2.Permissions
             }
             // True if any permission handler returns positively and none return negatively
             return allowed;
+        }
+    }
+
+    // Plugins can register permissions which are given to everyone by default. Permission plugins can still counter these by returing a negative permission.
+    public class DefaultPermissionsHandler : IPermissionsHandler
+    {
+        private HashSet<string> defaultPerms = new HashSet<string>();
+
+        public short CheckPermission(Player player, string permissionName)
+        {
+            if (defaultPerms.Contains(permissionName))
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        public bool AddPermission(string permissionName)
+        {
+            if(permissionName == null || permissionName == "")
+            {
+                PluginManager.Manager.Logger.Warn("PERMISSIONS_MANAGER", "Attempted to add default permission but it was empty or null.");
+                return false;
+            }
+            PluginManager.Manager.Logger.Debug("PERMISSIONS_MANAGER", "Added default permission '" + permissionName + "'.");
+            return defaultPerms.Add(permissionName);
+        }
+
+        public bool RemovePermission(string permissionName)
+        {
+            if (permissionName == null || permissionName == "")
+            {
+                PluginManager.Manager.Logger.Warn("PERMISSIONS_MANAGER", "Attempted to remove default permission but string was empty or null.");
+                return false;
+            }
+            PluginManager.Manager.Logger.Debug("PERMISSIONS_MANAGER", "Removed default permission '" + permissionName + "'.");
+            return defaultPerms.Remove(permissionName);
         }
     }
 }
