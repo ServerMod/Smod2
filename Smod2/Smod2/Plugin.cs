@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Smod2.Attributes;
 using Smod2.Commands;
 using Smod2.Config;
@@ -49,7 +49,7 @@ namespace Smod2
 		{
 			if (PluginManager.Manager.CommandManager == null)
 			{
-				this.Error("Failed to register command handler becuase the command manager is null");
+				this.Error("Failed to register command handler because the command manager is null");
 			}
 			else
 			{
@@ -62,7 +62,7 @@ namespace Smod2
         {
             if (PluginManager.Manager.PermissionsManager == null)
             {
-                this.Error("Failed to register permissions handler becuase the permissions manager is null");
+                this.Error("Failed to register permissions handler because the permissions manager is null");
             }
             else
             {
@@ -75,7 +75,7 @@ namespace Smod2
         {
             if (PluginManager.Manager.PermissionsManager == null)
             {
-                this.Error("Failed to remove permissions handler becuase the permissions manager is null");
+                this.Error("Failed to remove permissions handler because the permissions manager is null");
             }
             else
             {
@@ -98,7 +98,7 @@ namespace Smod2
 		{
 			if (!LangManager.Manager.IsRegistered(this, key))
 			{
-				this.Warn("Trying to access a lang setting [" + key + "] that isnt registered to the plugin, this is bad practice.");
+				this.Warn("Trying to access a lang setting [" + key + "] that isn't registered to the plugin, this is bad practice.");
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace Smod2
 		{
 			if (!ConfigManager.Manager.IsRegistered(this, key))
 			{
-				this.Warn("Trying to access a config setting that isnt registered to the plugin, this is bad practice.");
+				this.Warn("Trying to access a config setting that isn't registered to the plugin, this is bad practice.");
 			}
 		}
 

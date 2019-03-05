@@ -1,4 +1,4 @@
-﻿using Smod2.API;
+using Smod2.API;
 
 namespace Smod2.Permissions
 {
@@ -10,7 +10,7 @@ namespace Smod2.Permissions
         /// <param name="player">The player to check the permission of.</param>
         /// <param name="permissionName">The name of the permission to check.</param>
         /// <returns>
-        /// -1 for negative permission. (Same as 0 but stops other handlers from allowing it)
+        /// -1 for negative permission. (Stops other handlers from allowing it)
         /// 0 for no permission.
         /// 1 for positive permission.
         /// </returns>
