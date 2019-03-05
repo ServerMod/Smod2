@@ -1,4 +1,4 @@
-using Smod2.API;
+﻿using Smod2.API;
 using System.Collections.Generic;
 
 namespace Smod2.Permissions
@@ -36,6 +36,17 @@ namespace Smod2.Permissions
         public void UnregisterHandler(IPermissionsHandler handler)
         {
             permissionHandlers.Remove(handler);
+        }
+
+        // Used by plugins to specicy permissions which should be given to everyone by default
+        public bool RegisterDefaultPermission(string permissionName)
+        {
+            return defaultPermissionsHandler.AddPermission(permissionName);
+        }
+
+        public bool UnregisterDefaultPermission(string permissionName)
+        {
+            return defaultPermissionsHandler.AddPermission(permissionName);
         }
 
         public bool CheckPermission(Player player, string permissionName)

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Smod2.Attributes;
 using Smod2.Commands;
 using Smod2.Config;
@@ -82,6 +82,24 @@ namespace Smod2
                 this.Debug(this.Details.name + " unregistered a permission handler.");
                 PluginManager.Manager.PermissionsManager.UnregisterHandler(handler);
             }
+        }
+
+        public void RegisterDefaultPermission(string permissionName)
+        {
+            if (PluginManager.Manager.PermissionsManager == null)
+            {
+                this.Error("Failed to register default permission because the permissions manager is null");
+            }
+            PluginManager.Manager.PermissionsManager.RegisterDefaultPermission(permissionName);
+        }
+
+        public void UnregisterDefaultPermission(string permissionName)
+        {
+            if (PluginManager.Manager.PermissionsManager == null)
+            {
+                this.Error("Failed to unregister default permission because the permissions manager is null");
+            }
+            PluginManager.Manager.PermissionsManager.UnregisterDefaultPermission(permissionName);
         }
 
         public void AddConfig(ConfigSetting setting)
