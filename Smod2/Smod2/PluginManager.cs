@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -321,11 +321,11 @@ namespace Smod2
 			Manager.Logger.Info("PLUGIN_MANAGER", "Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
 			
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering pipe exports");
-			PipeManager.Manager.RegisterPlugin(plugin); // In case it got disabled
+			if (!PipeManager.Manager.IsRegistered(plugin)) PipeManager.Manager.RegisterPlugin(plugin); // In case it got disabled
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering pipe imports");
 			PipeManager.Manager.RegisterLinks(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering configs");
-			ConfigManager.Manager.RegisterPlugin(plugin);
+			if (!ConfigManager.Manager.IsRegistered(plugin)) ConfigManager.Manager.RegisterPlugin(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering langs");
 			LangManager.Manager.RegisterPlugin(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading event snapshot");

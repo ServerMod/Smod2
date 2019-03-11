@@ -44,6 +44,8 @@ namespace Smod2.Piping
 				}
 			};
 		}
+
+		public bool IsRegistered(Plugin plugin) => registered.Contains(plugin);
 		
 		private void SetPipeLink(Plugin source, FieldInfo info, string pluginId, string pipeName)
 		{
@@ -88,7 +90,7 @@ namespace Smod2.Piping
 		{
 			if (registered.Contains(plugin))
 			{
-				return;
+				throw new InvalidOperationException($"The plugin is already registered to PipeManager.");
 			}
 			
 			foreach (EventPipe pipe in plugin.Pipes.GetEvents())

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Smod2.Attributes;
@@ -78,6 +78,8 @@ namespace Smod2
 			}
 		}
 
+		public bool IsRegistered(Plugin plugin) => settings.ContainsKey(plugin);
+
 		public bool IsRegistered(Plugin plugin, string key)
 		{
 			bool isRegistered = false;
@@ -143,7 +145,7 @@ namespace Smod2
 		{
 			if (settings.ContainsKey(plugin))
 			{
-				return;
+				throw new InvalidOperationException($"The plugin is already registered to ConfigManager.");
 			}
 
 			if (!disabledPlugins.ContainsKey(plugin))
