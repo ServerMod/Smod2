@@ -90,37 +90,37 @@ namespace ExamplePlugin
 		}
 		
 		// Hooks to event called by any plugin
-        // Hooks can be private as well as public, but all other pipes must be public
-        [PipeEvent("dev.plugin.OnEpicDeath")]
-        private void OnEpicDeath(Player player, int whips, int naes)
-        {
-            if (naes > 2)
-            {
-                player.SendConsoleMessage("get nae nae'd");
-            }
+		// Hooks can be private as well as public, but all other pipes must be public
+		[PipeEvent("dev.plugin.OnEpicDeath")]
+		private void OnEpicDeath(Player player, int whips, int naes)
+		{
+			if (naes > 2)
+			{
+				player.SendConsoleMessage("get nae nae'd");
+			}
 
-            if (whips > 1)
-            {
-                player.SendConsoleMessage("get whipped on");
-            }
-        }
+			if (whips > 1)
+			{
+				player.SendConsoleMessage("get whipped on");
+			}
+		}
 
-        // Hooks to event called by specific plugins
-        [PipeEvent("dev.plugin.OnWhip",
-            "dev.plugin",
-            "hoob.hud")]
-        private void OnWhip(Player player, Player target)
-        {
-            player.SendConsoleMessage("You were whipped on by " + target.Name);
-        }
+		// Hooks to event called by specific plugins
+		[PipeEvent("dev.plugin.OnWhip",
+			"dev.plugin",
+			"hoob.hud")]
+		private void OnWhip(Player player, Player target)
+		{
+			player.SendConsoleMessage("You were whipped on by " + target.Name);
+		}
 
 		// Declares a method usable to other plugins via piping.
 		[PipeMethod]
 		public bool GiveLottoItem(Player player)
 		{
 			if (player.TeamRole.Team == Team.SPECTATOR || 
-			    player.TeamRole.Team == Team.NONE ||
-			    player.TeamRole.Team == Team.SCP)
+				player.TeamRole.Team == Team.NONE ||
+				player.TeamRole.Team == Team.SCP)
 			{
 				return false;
 			}
