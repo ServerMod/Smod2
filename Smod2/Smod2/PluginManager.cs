@@ -90,20 +90,20 @@ namespace Smod2
 			}
 		}
 
-        private PermissionsManager permissionsManager;
-        public PermissionsManager PermissionsManager
-        {
-            get { return permissionsManager; }
-            set
-            {
-                if (permissionsManager == null)
-                {
-                    permissionsManager = value;
-                }
-            }
-        }
+		private PermissionsManager permissionsManager;
+		public PermissionsManager PermissionsManager
+		{
+			get { return permissionsManager; }
+			set
+			{
+				if (permissionsManager == null)
+				{
+					permissionsManager = value;
+				}
+			}
+		}
 
-        private Server server;
+		private Server server;
 		public Server Server
 		{
 			get { return server; }
@@ -147,7 +147,7 @@ namespace Smod2
 		{
 			enabledPlugins = new Dictionary<string, Plugin>();
 			disabledPlugins = new Dictionary<string, Plugin>();
-            permissionsManager = new PermissionsManager();
+			permissionsManager = new PermissionsManager();
 		}
 
 		public Plugin GetEnabledPlugin(string id)
