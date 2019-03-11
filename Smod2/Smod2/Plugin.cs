@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Smod2.Attributes;
 using Smod2.Commands;
 using Smod2.Config;
@@ -11,8 +11,8 @@ using Smod2.Permissions;
 
 namespace Smod2
 {
-    public abstract class Plugin
-    {
+	public abstract class Plugin
+	{
 		public PluginDetails Details
 		{
 			get;
@@ -58,51 +58,51 @@ namespace Smod2
 			}
 		}
 
-        public void RegisterPermissionsHandler(IPermissionsHandler handler)
-        {
-            if (PluginManager.Manager.PermissionsManager == null)
-            {
-                this.Error("Failed to register permissions handler because the permissions manager is null");
-            }
-            else
-            {
-                this.Debug(this.Details.name + " registered a permission handler.");
-                PluginManager.Manager.PermissionsManager.RegisterHandler(handler);
-            }
-        }
+		public void RegisterPermissionsHandler(IPermissionsHandler handler)
+		{
+			if (PluginManager.Manager.PermissionsManager == null)
+			{
+				this.Error("Failed to register permissions handler because the permissions manager is null");
+			}
+			else
+			{
+				this.Debug(this.Details.name + " registered a permission handler.");
+				PluginManager.Manager.PermissionsManager.RegisterHandler(handler);
+			}
+		}
 
-        public void UnregisterPermissionsHandler(IPermissionsHandler handler)
-        {
-            if (PluginManager.Manager.PermissionsManager == null)
-            {
-                this.Error("Failed to remove permissions handler because the permissions manager is null");
-            }
-            else
-            {
-                this.Debug(this.Details.name + " unregistered a permission handler.");
-                PluginManager.Manager.PermissionsManager.UnregisterHandler(handler);
-            }
-        }
+		public void UnregisterPermissionsHandler(IPermissionsHandler handler)
+		{
+			if (PluginManager.Manager.PermissionsManager == null)
+			{
+				this.Error("Failed to remove permissions handler because the permissions manager is null");
+			}
+			else
+			{
+				this.Debug(this.Details.name + " unregistered a permission handler.");
+				PluginManager.Manager.PermissionsManager.UnregisterHandler(handler);
+			}
+		}
 
-        public void AddDefaultPermission(string permissionName)
-        {
-            if (PluginManager.Manager.PermissionsManager == null)
-            {
-                this.Error("Failed to register default permission because the permissions manager is null");
-            }
-            PluginManager.Manager.PermissionsManager.RegisterDefaultPermission(permissionName);
-        }
+		public void AddDefaultPermission(string permissionName)
+		{
+			if (PluginManager.Manager.PermissionsManager == null)
+			{
+				this.Error("Failed to register default permission because the permissions manager is null");
+			}
+			PluginManager.Manager.PermissionsManager.RegisterDefaultPermission(permissionName);
+		}
 
-        public void RemoveDefaultPermission(string permissionName)
-        {
-            if (PluginManager.Manager.PermissionsManager == null)
-            {
-                this.Error("Failed to unregister default permission because the permissions manager is null");
-            }
-            PluginManager.Manager.PermissionsManager.UnregisterDefaultPermission(permissionName);
-        }
+		public void RemoveDefaultPermission(string permissionName)
+		{
+			if (PluginManager.Manager.PermissionsManager == null)
+			{
+				this.Error("Failed to unregister default permission because the permissions manager is null");
+			}
+			PluginManager.Manager.PermissionsManager.UnregisterDefaultPermission(permissionName);
+		}
 
-        public void AddConfig(ConfigSetting setting)
+		public void AddConfig(ConfigSetting setting)
 		{
 			ConfigManager.Manager.RegisterConfig(this, setting);
 		}
