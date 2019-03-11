@@ -50,6 +50,7 @@ namespace ExamplePlugin
 		[ConfigOption]
 		public readonly float myAwesomenessScore = 1f;
 
+		// First bool indicates if the variable is the primary user (unless another plugin is using the config, this should be true). Second bool indicates if the variable is a random config.
 		[ConfigOption(true, true)]
 		public readonly LiveConfig<int> lottoItemCount = new LiveConfig<int>(1);
 
