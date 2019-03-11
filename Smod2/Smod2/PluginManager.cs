@@ -7,14 +7,25 @@ using Smod2.Commands;
 using Smod2.API;
 using Smod2.Logging;
 using Smod2.Events;
+using Smod2.Piping;
 
 namespace Smod2
 {
+	[Flags]
+	public enum SearchFlags
+	{
+		NAME = 1 << 0,
+		AUTHOR = 1 << 1,
+		ID = 1 << 2,
+		DESCRIPTION = 1 << 3,
+		VERSION = 1 << 4
+	}
+	
 	public class PluginManager
 	{
 		public static readonly int SMOD_MAJOR = 3;
 		public static readonly int SMOD_MINOR = 3;
-		public static readonly int SMOD_REVISION = 0;
+		public static readonly int SMOD_REVISION = 1;
 		public static readonly string SMOD_BUILD = "A";
 
 		public static readonly string DEPENDENCY_FOLDER = "dependencies";
@@ -143,10 +154,98 @@ namespace Smod2
 
 		public Plugin GetDisabledPlugin(string id)
 		{
-			enabledPlugins.TryGetValue(id, out Plugin plugin);
+			disabledPlugins.TryGetValue(id, out Plugin plugin);
 			return plugin;
 		}
 
+		public Plugin GetPlugin(string id)
+		{
+			return GetEnabledPlugin(id) ?? GetDisabledPlugin(id);
+		}
+
+		
+		private List<Plugin> GetPluginsOfSearchable(IEnumerable<Plugin> searchable, string query, SearchFlags flags)
+		{
+			if (query == null)
+			{
+				throw new ArgumentNullException(nameof(query));
+			}
+			
+			Array searchFlags = Enum.GetValues(typeof(SearchFlags));
+			List<Plugin> plugins = new List<Plugin>();
+			foreach (Plugin plugin in searchable)
+			{
+				if (plugin.Details == null)
+				{
+					continue;
+				}
+
+				foreach (SearchFlags flag in searchFlags)
+				{
+					// Don't check for match if flag is not specified in flags.
+					if (!flags.HasFlag(flag))
+					{
+						continue;
+					}
+
+					bool match;
+					switch (flag)
+					{
+						case SearchFlags.ID:
+							match = plugin.Details.id == query;
+							break;
+					
+						case SearchFlags.NAME:
+							match = plugin.Details.name == query;
+							break;
+					
+						case SearchFlags.AUTHOR:
+							match = plugin.Details.author == query;
+							break;
+					
+						case SearchFlags.VERSION:
+							match = plugin.Details.version == query;
+							break;
+					
+						case SearchFlags.DESCRIPTION:
+							match = plugin.Details.description?.Length / 3 <= query.Length && plugin.Details.description.Contains(query);
+							break;
+						
+						// It should never get here but it won't compile otherwise.
+						default:
+							match = false;
+							break;
+					}
+
+					if (match)
+					{
+						plugins.Add(plugin);
+						break;
+					}
+				}
+			}
+
+			return plugins;
+		}
+
+		public List<Plugin> GetEnabledPlugins(string query, SearchFlags flags) => GetPluginsOfSearchable(enabledPlugins.Values, query, flags);
+		public List<Plugin> GetDisabledPlugins(string query, SearchFlags flags) => GetPluginsOfSearchable(disabledPlugins.Values, query, flags);
+
+		public List<Plugin> GetMatchingPlugins(string query, SearchFlags flags)
+		{
+			List<Plugin> plugins = GetPluginsOfSearchable(enabledPlugins.Values, query, flags);
+			foreach (Plugin plugin in GetPluginsOfSearchable(disabledPlugins.Values, query, flags))
+			{
+				if (!plugins.Contains(plugin))
+				{
+					plugins.Add(plugin);
+				}
+			}
+
+			return plugins;
+		}
+
+		[Obsolete("Use GetEnabledPlugins instead.")]
 		public List<Plugin> FindEnabledPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
@@ -161,10 +260,35 @@ namespace Smod2
 			return matching;
 		}
 
+		[Obsolete("Use GetDisabledPlugins instead.")]
 		public List<Plugin> FindDisabledPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
+			foreach (var plugin in disabledPlugins.Values)
+			{
+				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
+				{
+					matching.Add(plugin);
+				}
+			}
+
+			return matching;
+		}
+
+		[Obsolete("Use GetMatchingPlugins instead.")]
+		public List<Plugin> FindPlugins(string name)
+		{
+			List<Plugin> matching = new List<Plugin>();
+			
 			foreach (var plugin in enabledPlugins.Values)
+			{
+				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
+				{
+					matching.Add(plugin);
+				}
+			}
+			
+			foreach (var plugin in disabledPlugins.Values)
 			{
 				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
 				{
@@ -177,29 +301,57 @@ namespace Smod2
 
 		public void EnablePlugins()
 		{
-			foreach (var plugin in disabledPlugins)
+			// Converting to array is required because disabledPlugins is modified when a plugin is enabled.
+			Plugin[] plugins = new Plugin[disabledPlugins.Count];
+			disabledPlugins.Values.CopyTo(plugins, 0);
+			
+			foreach (Plugin plugin in plugins)
 			{
-				EnablePlugin(plugin.Value);
+				EnablePlugin(plugin);
 			}
-			disabledPlugins.Clear();
 		}
 
 		public void EnablePlugin(Plugin plugin)
 		{
-			plugin.Info("Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
-			ConfigManager.Manager.RegisterPlugin(plugin);
-			plugin.Register();
+			if (enabledPlugins.ContainsValue(plugin))
+			{
+				return;
+			}
+			
+			Manager.Logger.Info("PLUGIN_MANAGER", "Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
+			
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering pipe exports");
+			if (!PipeManager.Manager.IsRegistered(plugin)) PipeManager.Manager.RegisterPlugin(plugin); // In case it got disabled
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering pipe imports");
+			PipeManager.Manager.RegisterLinks(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering configs");
+			if (!ConfigManager.Manager.IsRegistered(plugin)) ConfigManager.Manager.RegisterPlugin(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering langs");
+			LangManager.Manager.RegisterPlugin(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading event snapshot");
+			EventManager.Manager.AddSnapshotEventHandlers(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading command snapshot");
+			CommandManager.ReregisterPlugin(plugin);
+
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Invoking OnEnable");
 			plugin.OnEnable();
+			
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Altering dictionaries");
+			disabledPlugins.Remove(plugin.Details.id);
 			enabledPlugins.Add(plugin.Details.id, plugin);
+			
+			Manager.Logger.Info("PLUGIN_MANAGER", "Enabled plugin  " + plugin.Details.name + " " + plugin.Details.version);
 		}
 
 		public void DisablePlugins()
 		{
-			foreach (var plugin in enabledPlugins)
+			Plugin[] plugins = new Plugin[disabledPlugins.Count];
+			disabledPlugins.Values.CopyTo(plugins, 0);
+			
+			foreach (Plugin plugin in plugins)
 			{
-				DisablePlugin(plugin.Value);
+				DisablePlugin(plugin);
 			}
-			enabledPlugins.Clear();
 		}
 
 		public void DisablePlugin(String id)
@@ -221,11 +373,31 @@ namespace Smod2
 
 		public void DisablePlugin(Plugin plugin)
 		{
-			plugin.OnDisable();
-			EventManager.Manager.RemoveEventHandlers(plugin);
-			CommandManager.UnregisterCommands(plugin);
+			if (disabledPlugins.ContainsValue(plugin))
+			{
+				return;
+			}
+			
+			Manager.Logger.Info("PLUGIN_MANAGER", "Disabling plugin " + plugin.Details.name + " " + plugin.Details.version);
+			
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Altering dictionaries");
+			enabledPlugins.Remove(plugin.Details.id);
 			disabledPlugins.Add(plugin.Details.id, plugin);
+			
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Invoking OnDisable");
+			plugin.OnDisable();
+
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading commands");
+			CommandManager.UnregisterCommands(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading event handlers");
+			EventManager.Manager.RemoveEventHandlers(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading configs");
 			ConfigManager.Manager.UnloadPlugin(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading translations");
+			LangManager.Manager.UnregisterPlugin(plugin);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading pipe imports/exports");
+			PipeManager.Manager.UnregisterPlugin(plugin);
+			Manager.Logger.Info("PLUGIN_MANAGER", "Disabled plugin " + plugin.Details.name + " " + plugin.Details.version);
 		}
 
 		public void LoadPlugins(String dir)
@@ -294,7 +466,7 @@ namespace Smod2
 					{
 						try
 						{
-							Plugin plugin = Activator.CreateInstance(t) as Plugin;
+							Plugin plugin = (Plugin)Activator.CreateInstance(t);
 							PluginDetails details = (PluginDetails)Attribute.GetCustomAttribute(t, typeof(PluginDetails));
 							if (details.id != null)
 							{
@@ -305,6 +477,14 @@ namespace Smod2
 								else
 								{
 									plugin.Details = details;
+									plugin.Pipes = new PluginPipes(plugin);
+									
+									ConfigManager.Manager.RegisterPlugin(plugin);
+									LangManager.Manager.RegisterPlugin(plugin);
+									PipeManager.Manager.RegisterPlugin(plugin);
+									
+									plugin.Register();
+
 									disabledPlugins.Add(details.id, plugin);
 									Logger.Info("PLUGIN_LOADER", "Plugin loaded: " + plugin.ToString());
 								}
@@ -318,8 +498,8 @@ namespace Smod2
 						catch (Exception e)
 						{
 							Logger.Error("PLUGIN_LOADER", "Failed to create instance of plugin " + t + "[" + path + "]");
-							Logger.Debug("PLUGIN_LOADER", e.Message);
-							Logger.Debug("PLUGIN_LOADER", e.StackTrace);
+							Logger.Error("PLUGIN_LOADER", e.GetType().Name + ": " + e.Message);
+							Logger.Error("PLUGIN_LOADER", e.StackTrace);
 						}
 					}
 				}
@@ -330,10 +510,38 @@ namespace Smod2
 				Logger.Debug("PLUGIN_LOADER", e.Message);
 				Logger.Debug("PLUGIN_LOADER", e.StackTrace);
 			}
+		}
+		
+		public static string ToUpperSnakeCase(string otherCase)
+		{
+			string snakeCase = "";
+			for (int i = 0; i < otherCase.Length; i++)
+			{
+				if (snakeCase.Length == 0 && otherCase[i] == '_')
+				{
+					continue;
+				}
+				
+				if (i > 0 && char.IsUpper(otherCase[i]) && otherCase[i - 1] != '_')
+				{
+					snakeCase += "_" + otherCase[i];
+				}
+				else
+				{
+					snakeCase += char.ToUpper(otherCase[i]);	
+				}
+			}
 
+			return snakeCase;
 		}
 
-
-
+		public void RefreshPluginAttributes()
+		{
+			foreach (Plugin plugin in enabledPlugins.Values)
+			{
+				ConfigManager.Manager.RefreshAttributes(plugin);
+				LangManager.Manager.RefreshAttributes(plugin);
+			}
+		}
 	}
 }

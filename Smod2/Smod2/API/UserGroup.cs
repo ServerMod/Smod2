@@ -8,5 +8,6 @@
 		public abstract bool Cover { get; }
 		public abstract bool HiddenByDefault { get; }
 		public abstract string Name { get; }
+		public abstract object GetComponent();
 	}
 }

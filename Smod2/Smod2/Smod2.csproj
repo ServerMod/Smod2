@@ -44,6 +44,13 @@
     <Compile Include="API\Map.cs" />
     <Compile Include="API\UserGroup.cs" />
     <Compile Include="API\Vector.cs" />
+    <Compile Include="Config\ConfigOption.cs" />
+    <Compile Include="Config\LiveConfig.cs" />
+    <Compile Include="LangManager\LangOption.cs" />
+    <Compile Include="Piping\PipeEvent.cs" />
+    <Compile Include="Piping\MemberPipe.cs" />
+    <Compile Include="Piping\PipeMethod.cs" />
+    <Compile Include="Piping\PipeField.cs" />
     <Compile Include="Attributes\PluginDetails.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
@@ -75,6 +82,11 @@
     <Compile Include="LangManager\LangSetting.cs" />
     <Compile Include="LangManager\LangManager.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Piping\MethodPipeParameter.cs" />
+    <Compile Include="Piping\PipeLink.cs" />
+    <Compile Include="Piping\PipeManager.cs" />
+    <Compile Include="Piping\PipeProperty.cs" />
+    <Compile Include="Piping\PluginPipes.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

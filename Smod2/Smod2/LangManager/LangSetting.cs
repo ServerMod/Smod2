@@ -1,4 +1,6 @@
-﻿namespace Smod2.Lang
+﻿using System;
+
+namespace Smod2.Lang
 {
 	public class LangSetting
 	{
@@ -31,9 +33,9 @@
 
 		public LangSetting(string key, string defaultText, string filename = "ServerMod")
 		{
-			this.key = key.ToUpper();
-			this.defaultText = defaultText;
-			this.filename = filename;
+			this.key = (key ?? throw new ArgumentNullException(nameof(key))).ToUpper();
+			this.defaultText = defaultText ?? throw new ArgumentNullException(nameof(defaultText));
+			this.filename = filename ?? throw new ArgumentNullException(nameof(filename));
 		}
 	}
 }

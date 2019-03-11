@@ -24,16 +24,28 @@ namespace ExamplePlugin
 			if (ev.Item.ItemType == ItemType.COIN)
 			{
 				double luckyValue = random.NextDouble();
-				if (luckyValue > 0.8)
+				
+				// Chance of instantly dying
+				if (luckyValue < plugin.killChance)
 				{
-					//20% chance of instantly dying
 					ev.Player.Kill();
 				}
-
-				if (luckyValue < 0.1)
+				else
 				{
-					//10% chance of getting a MicroHID
-					ev.ChangeTo = ItemType.MICROHID;
+					// An array lets other plugins set the values of it in events.
+					ItemType[] itemPtr = {ItemType.MICROHID};
+					plugin.InvokeEvent("courtney.example.plugin", itemPtr);
+
+					// Get the singular item from the array since indexing it every time is annoying.
+					ItemType item = itemPtr[0];
+					
+					// lottoItemCount is automatically read and converted to an int. This gives the item lottoItemCount times to the player.
+					int count = plugin.lottoItemCount;
+					plugin.Info($"{nameof(plugin.lottoItemCount)} is {count}");
+					for (int i = 0; i < count; i++)
+					{
+						ev.Player.GiveItem(item);
+					}
 				}
 			}
 		}
