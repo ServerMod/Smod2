@@ -68,6 +68,40 @@ namespace Smod2.Events
 			((IEventHandlerWarheadStopCountdown)handler).OnStopCountdown(this);
 		}
 	}
+	
+	public class WarheadChangeLeverEvent : Event
+	{
+		public Player Player { get; }
+		public bool Allow { get; set; }
+
+		public WarheadChangeLeverEvent(Player player)
+		{
+			Player = player;
+			Allow = true;
+		}
+		
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerWarheadChangeLever)handler).OnChangeLever(this);
+		}
+	}
+
+	public class WarheadKeycardAccessEvent : Event
+	{
+		public Player Player { get; }
+		public bool Allow { get; set; }
+
+		public WarheadKeycardAccessEvent(Player player, bool allow)
+		{
+			Player = player;
+			Allow = allow;
+		}
+		
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerWarheadKeycardAccess)handler).OnWarheadKeycardAccess(this);
+		}
+	}
 
 	public class WarheadDetonateEvent : Event
 	{

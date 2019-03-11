@@ -164,5 +164,6 @@ namespace Smod2.API
 		public abstract void SetCamera(Vector position, bool lookAt = false);
 		public abstract void ShowGainExp(ExperienceType expType);
 		public abstract void ShowLevelUp(int level);
+		public abstract object GetComponent();
 	}
 }

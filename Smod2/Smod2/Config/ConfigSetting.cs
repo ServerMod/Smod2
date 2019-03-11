@@ -1,5 +1,9 @@
-﻿namespace Smod2.Config
+﻿using System;
+using System.Collections.Generic;
+
+namespace Smod2.Config
 {
+	[Obsolete("Use ConfigSetting.Default.GetType() instead.", true)]
 	public enum SettingType
 	{
 		NUMERIC,
@@ -14,78 +18,35 @@
 
 	public class ConfigSetting
 	{
-		private string key;
-		public string Key
+		public string Key { get; }
+
+		public object Default { get; }
+
+		public bool RandomizedValue { get; }
+
+		public bool PrimaryUser { get; }
+
+		public string Description { get; }
+
+		public ConfigSetting(string key, object defaultValue, bool randomized, bool primaryUser, string description)
 		{
-			get
+			if (!ConfigManager.Manager.typeGetters.ContainsKey(defaultValue.GetType()))
 			{
-				return key;
+				throw new ArgumentException("Not a supported config type.", nameof(defaultValue));
 			}
+			
+			Key = key.ToUpper();
+			Default = defaultValue;
+			RandomizedValue = randomized;
+			PrimaryUser = primaryUser;
+			Description = description;
 		}
+		
+		[Obsolete("Use the constructor without SettingType.")]
+		public ConfigSetting(string key, object defaultValue, bool randomized, SettingType type,  bool primaryUser, string description) : this(key, defaultValue, randomized, primaryUser, description) { }
 
-		private object defaultValue;
-		public object Default
-		{
-			get
-			{
-				return defaultValue;
-			}
-		}
-
-		private bool randomized;
-		public bool RandomizedValue
-		{
-			get
-			{
-				return randomized;
-			}
-		}
-
-		private SettingType configType;
-		public SettingType ConfigValueType
-		{
-			get
-			{
-				return configType;
-			}
-		}
-
-		private bool primaryUser;
-		public bool PrimaryUser
-		{
-			get
-			{
-				return primaryUser;
-			}
-		}
-
-		private string description;
-		public string Description
-		{
-			get
-			{
-				return description;
-			}
-		}
-
-		public ConfigSetting(string key, object defaultValue, bool randomized, SettingType type,  bool primaryUser, string description)
-		{
-			this.key = key.ToUpper();
-			this.defaultValue = defaultValue;
-			this.randomized = randomized;
-			this.configType = type;
-			this.primaryUser = primaryUser;
-			this.description = description;
-		}
-
-		public ConfigSetting(string key, object defaultValue, SettingType type, bool primaryUser, string description)
-		{
-			this.key = key.ToUpper();
-			this.defaultValue = defaultValue;
-			this.randomized = false;
-			this.configType = type;
-			this.primaryUser = primaryUser;
-			this.description = description;
-		}
+		public ConfigSetting(string key, object defaultValue, bool primaryUser, string description) : this(key, defaultValue, false, primaryUser, description) { }
+		[Obsolete("Use the constructor without SettingType.")]
+		public ConfigSetting(string key, object defaultValue, SettingType type, bool primaryUser, string description) : this(key, defaultValue, false, type, primaryUser, description) { }
 	}
 }

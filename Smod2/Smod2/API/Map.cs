@@ -95,6 +95,7 @@ namespace Smod2.API
 		public abstract bool Lockable { get; set; }
 		public abstract float MovingSpeed { get; set; }
 		public abstract List<Vector> GetPositions();
+		public abstract object GetComponent();
 	}
 
 	public enum PocketDimensionExitType
@@ -173,6 +174,7 @@ namespace Smod2.API
 
 		public abstract void FlickerLights();
 		public abstract string[] GetObjectName();
+		public abstract object GetGameObject();
 	}
 
 	public abstract class Generator
@@ -187,5 +189,6 @@ namespace Smod2.API
 		public abstract Room Room { get; }
 
 		public abstract void Unlock();
+		public abstract object GetComponent();
 	}
 }

@@ -5,11 +5,17 @@ using Smod2.Events;
 
 namespace ExamplePlugin
 {
-	class RoundEventHandler : IEventHandlerRoundStart, IEventHandlerRoundEnd
+	class RoundEventHandler : IEventHandlerWaitingForPlayers, IEventHandlerRoundStart, IEventHandlerRoundEnd
 	{
 		private readonly ExamplePlugin plugin;
 
 		public RoundEventHandler(ExamplePlugin plugin) => this.plugin = plugin; //Expression bodies can also be used
+		
+		public void OnWaitingForPlayers(WaitingForPlayersEvent ev)
+		{
+			plugin.Info("Awesomeness score: " + plugin.myAwesomenessScore);
+			plugin.Info(plugin._configValue + plugin.GetConfigString("myConfigKey"));
+		}
 
 		public void OnRoundEnd(RoundEndEvent ev)
 		{

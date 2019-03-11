@@ -43,5 +43,6 @@
 		public abstract bool RoleDisallowed { get; set; }
 		public abstract int MaxHP { get; set; }
 		public abstract string Name { get; set; }
+		public abstract object GetClass();
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Smod2.EventHandlers;
 
 namespace Smod2.Events
@@ -26,21 +25,19 @@ namespace Smod2.Events
 		}
 
 		private static PriorityComparator priorityCompare = new PriorityComparator();
-		Dictionary<Type, List<EventHandlerWrapper>> event_meta;
-		Dictionary<Type, List<IEventHandler>> event_handlers;
+		private Dictionary<Type, List<EventHandlerWrapper>> event_meta;
+		private readonly Dictionary<Plugin, Snapshot> snapshots;
 
 		public EventManager()
 		{
 			event_meta = new Dictionary<Type, List<EventHandlerWrapper>>();
-			event_handlers = new Dictionary<Type, List<IEventHandler>>();
+			snapshots = new Dictionary<Plugin, Snapshot>();
 		}
 
 
-		public void HandleEvent<T>(Event ev)
+		public void HandleEvent<T>(Event ev) where T : IEventHandler
 		{
-			var list = this.GetEventHandlers<T>();
-
-			foreach(IEventHandler handler in list)
+			foreach(T handler in GetEventHandlers<T>())
 			{
 				try
 				{
@@ -48,8 +45,7 @@ namespace Smod2.Events
 				} catch (Exception e)
 				{
 					PluginManager.Manager.Logger.Error("Event", "Event Handler: " + handler.GetType().ToString() + " Failed to handle event:" + ev.GetType().ToString());
-					PluginManager.Manager.Logger.Error("Event", e.Message);
-					PluginManager.Manager.Logger.Error("Event", e.StackTrace);
+					PluginManager.Manager.Logger.Error("Event", e.ToString());
 				}
 			}
 		}
@@ -65,16 +61,32 @@ namespace Smod2.Events
 			}
 		}
 
-		public void AddEventHandler(Plugin plugin, Type eventType, IEventHandler handler, Priority priority=Priority.Normal)
+		public void AddEventHandler(Plugin plugin, Type eventType, IEventHandler handler, Priority priority = Priority.Normal)
 		{
 			plugin.Debug(string.Format("Adding event handler from: {0} type: {1} priority: {2} handler: {3}", plugin.Details.name, eventType, priority, handler.GetType()));
 			EventHandlerWrapper wrapper = new EventHandlerWrapper(plugin, priority, handler);
+
+			// If the plugin is not enabled
+			if (PluginManager.Manager.GetEnabledPlugin(plugin.Details.id) == null)
+			{
+				if (!snapshots.ContainsKey(plugin))
+				{
+					snapshots.Add(plugin, new Snapshot());
+				}
+				snapshots[plugin].Entries.Add(new Snapshot.SnapshotEntry(eventType, wrapper));
+			}
+
+			AddEventMeta(eventType, wrapper, handler);
+		}
+
+		private void AddEventMeta(Type eventType, EventHandlerWrapper wrapper, IEventHandler handler)
+		{
 			if (!event_meta.ContainsKey(eventType))
 			{
-				event_meta.Add(eventType, new List<EventHandlerWrapper>());
-				event_meta[eventType].Add(wrapper);
-				event_handlers.Add(eventType, new List<IEventHandler>());
-				event_handlers[eventType].Add(handler);
+				event_meta.Add(eventType, new List<EventHandlerWrapper>
+				{
+					wrapper
+				});
 			}
 			else
 			{
@@ -83,9 +95,21 @@ namespace Smod2.Events
 				// Doing this stuff on register instead of when the event is called for events that trigger lots (OnUpdate etc)
 				meta.Sort(priorityCompare);
 				meta.Reverse();
-				RebuildHandlerList(eventType);
+			}
+		}
+
+		public void AddSnapshotEventHandlers(Plugin plugin)
+		{
+			if (!snapshots.ContainsKey(plugin) || !snapshots[plugin].Active)
+			{
+				return;
 			}
 
+			snapshots[plugin].Active = false;
+			foreach (Snapshot.SnapshotEntry entry in snapshots[plugin].Entries)
+			{
+				AddEventMeta(entry.Type, entry.Wrapper, entry.Wrapper.Handler);
+			}
 		}
 
 		public void RemoveEventHandlers(Plugin plugin)
@@ -94,58 +118,43 @@ namespace Smod2.Events
 			// loop through the meta dict finding any handlers from this plugin
 			foreach (var meta in event_meta)
 			{
-				List<EventHandlerWrapper> metaList = meta.Value;
 				List<EventHandlerWrapper> newList = new List<EventHandlerWrapper>();
-				foreach (EventHandlerWrapper wrapper in metaList)
+
+				foreach (EventHandlerWrapper wrapper in meta.Value)
 				{
 					if (wrapper.Plugin != plugin)
 					{
 						newList.Add(wrapper);
 					}
 				}
-
-				new_event_meta.Add(meta.Key, newList);
+				
+				if (newList.Count > 0)
+				{
+					new_event_meta.Add(meta.Key, newList);
+				}
 			}
-
+			
 			event_meta = new_event_meta;
-			// rebuild handler list for each type
-			foreach (var meta in event_meta)
-			{
-				RebuildHandlerList(meta.Key);
-			}
 
-		}
-
-		private void RebuildHandlerList(Type eventType)
-		{
-			List<EventHandlerWrapper> meta = event_meta[eventType];
-			List<IEventHandler> handlers = new List<IEventHandler>();
-			foreach (EventHandlerWrapper metaDetails in meta)
+			if (snapshots.ContainsKey(plugin))
 			{
-				handlers.Add(metaDetails.Handler);
-			}
-
-			if (event_handlers.ContainsKey(eventType))
-			{
-				event_handlers[eventType] = handlers;
-			}
-			else
-			{
-				event_handlers.Add(eventType, handlers);
+				snapshots[plugin].Active = true;
 			}
 		}
 
 
-		public List<T> GetEventHandlers<T>()
+		public List<T> GetEventHandlers<T>() where T : IEventHandler
 		{
-			List<T> events;
-			if (event_handlers.ContainsKey(typeof(T)))
+			List<T> events = new List<T>();
+			if (event_meta.ContainsKey(typeof(T)))
 			{
-				events = event_handlers[typeof(T)].Cast<T>().ToList();
-			}
-			else
-			{
-				events = new List<T>();
+				foreach (EventHandlerWrapper wrapper in event_meta[typeof(T)])
+				{
+					if (wrapper.Handler is T tHandler)
+					{
+						events.Add(tHandler);
+					}
+				}
 			}
 
 			return events;
@@ -159,9 +168,30 @@ namespace Smod2.Events
 			}
 		}
 
+		private class Snapshot
+		{
+			public List<SnapshotEntry> Entries { get; private set; }
+			public bool Active { get; set; }
+
+			public Snapshot()
+			{
+				Entries = new List<SnapshotEntry>();
+			}
+
+			public class SnapshotEntry
+			{
+				public Type Type { get; }
+				public EventHandlerWrapper Wrapper { get; }
+
+				public SnapshotEntry(Type type, EventHandlerWrapper wrapper)
+				{
+					Type = type;
+					Wrapper = wrapper;
+				}
+			}
+		}
 	}
-
-
+	
 	public class EventHandlerWrapper
 	{
 		public Priority Priority { get; }
@@ -175,5 +205,4 @@ namespace Smod2.Events
 			this.Handler = handler;
 		}
 	}
-
 }
