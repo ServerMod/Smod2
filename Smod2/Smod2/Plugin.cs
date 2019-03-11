@@ -12,21 +12,21 @@ using Smod2.Piping;
 
 namespace Smod2
 {
-    public abstract class Plugin
-    {
+	public abstract class Plugin
+	{
 		public PluginDetails Details
 		{
 			get;
 			internal set;
 		}
 
-	    public PluginPipes Pipes
-	    {
-		    get;
-		    internal set;
-	    }
+		public PluginPipes Pipes
+		{
+			get;
+			internal set;
+		}
 
-	    [Obsolete("Use EventManager instead.")]
+		[Obsolete("Use EventManager instead.")]
 		public readonly EventManager eventManager = EventManager.Manager;
 		public EventManager EventManager => EventManager.Manager;
 		[Obsolete("Use PluginManager instead.")]
@@ -216,19 +216,19 @@ namespace Smod2
 			return new Dictionary<int, int>();
 		}
 
-	    public void InvokeEvent(string eventName) => InvokeEvent(eventName, null);
-	    public void InvokeEvent(string eventName, params object[] args) => InvokeExternalEvent(Details.id + "." + eventName, args);
+		public void InvokeEvent(string eventName) => InvokeEvent(eventName, null);
+		public void InvokeEvent(string eventName, params object[] args) => InvokeExternalEvent(Details.id + "." + eventName, args);
 
-	    public void InvokeExternalEvent(string fullName) => InvokeExternalEvent(fullName, null);
-	    public void InvokeExternalEvent(string fullName, params object[] args)
-	    {
-		    if (fullName == null)
-		    {
-			    throw new ArgumentNullException(nameof(fullName));
-		    }
+		public void InvokeExternalEvent(string fullName) => InvokeExternalEvent(fullName, null);
+		public void InvokeExternalEvent(string fullName, params object[] args)
+		{
+			if (fullName == null)
+			{
+				throw new ArgumentNullException(nameof(fullName));
+			}
 
-		    PipeManager.Manager.InvokeEvent(fullName, Details.id, args);
-	    }
+			PipeManager.Manager.InvokeEvent(fullName, Details.id, args);
+		}
 
 		public void Debug(string message)
 		{
