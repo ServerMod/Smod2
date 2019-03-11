@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Smod2.Attributes;
@@ -189,13 +189,19 @@ namespace Smod2
 				ConfigOption configOption = field.GetCustomAttribute<ConfigOption>();
 				if (configOption != null)
 				{
-					string key = configOption.Key ?? PluginManager.ToUpperSnakeCase(field.Name);
-					
 					string prefix = plugin.Details.configPrefix;
 					if (prefix == null)
-					{ 
+					{
 						PluginManager.Manager.Logger.Error("CONFIG_MANAGER",  $"{plugin} is trying to register attribute config {field.Name}, but does not have {nameof(PluginDetails.configPrefix)} in its {nameof(PluginDetails)} set.");
 						return;
+					}
+
+					string key = configOption.Key ?? PluginManager.ToUpperSnakeCase(field.Name);
+
+					if (string.IsNullOrWhiteSpace(key))
+					{
+						PluginManager.Manager.Logger.Error("CONFIG_MANAGER", $"{plugin} is trying to register attribute config {field.Name}, but it has no valid key. Is the variable all underscores with no config key overload?");
+						continue;
 					}
 
 					if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(LiveConfig<>))
@@ -223,6 +229,7 @@ namespace Smod2
 					if (!RegisterConfig(plugin, new ConfigSetting(prefix + "_" + key, field.GetValue(plugin), configOption.Randomized, configOption.PrimaryUser, configOption.Description)))
 					{
 						// Failed register so it should not be registered to refresh every round restart.
+						PluginManager.Manager.Logger.Debug("CONFIG_MANAGER", $"Unable to register attribute config {field.Name} from {plugin}.");
 						continue;
 					}
 

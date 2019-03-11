@@ -18,12 +18,16 @@ namespace Smod2.Config
 		
 		public ConfigOption(string key, bool primaryUser = true, bool randomized = false) : this(primaryUser, randomized)
 		{
-			Key = key ?? throw new ArgumentNullException(nameof(key));
+			if (string.IsNullOrWhiteSpace(key))
+			{
+				throw new ArgumentException("Config keys cannot be null, whitespace, or empty.", nameof(key));
+			}
+
+			Key = key;
 		}
 		
-		public ConfigOption(string key, string description, bool primaryUser = true, bool randomized = false) : this(primaryUser, randomized)
+		public ConfigOption(string key, string description, bool primaryUser = true, bool randomized = false) : this(key, primaryUser, randomized)
 		{
-			Key = key ?? throw new ArgumentNullException(nameof(key));
 			Description = description ?? throw new ArgumentNullException(nameof(description));
 		}
 	}

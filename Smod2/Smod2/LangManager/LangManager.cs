@@ -135,14 +135,20 @@ namespace Smod2
 				if (langOption != null)
 				{
 					string key = langOption.Key ?? PluginManager.ToUpperSnakeCase(field.Name);
-					
+
 					string file = plugin.Details.langFile;
 					if (file == null)
-					{ 
+					{
 						PluginManager.Manager.Logger.Error("LANG_MANAGER",  $"{plugin} is trying to register attribute lang {field.Name}, but does not have {nameof(PluginDetails.langFile)} in its {nameof(PluginDetails)} set.");
 						return;
 					}
-					
+
+					if (string.IsNullOrWhiteSpace(key))
+					{
+						PluginManager.Manager.Logger.Error("LANG_MANAGER", $"{plugin} is trying to register attribute lang {field.Name}, but it has no valid key. Is the variable all underscores with no config key overload?");
+						continue;
+					}
+
 					if (field.FieldType != typeof(string))
 					{
 						PluginManager.Manager.Logger.Error("LANG_MANAGER", $"{plugin} is trying to register attribute lang {field.Name}, but the type ({field.FieldType}) is not a string.");
@@ -152,6 +158,7 @@ namespace Smod2
 					if (!RegisterTranslation(plugin, new LangSetting(key, (string) field.GetValue(plugin),  file)))
 					{
 						// Failed register so it should not be registered to refresh every round restart.
+						PluginManager.Manager.Logger.Debug("LANG_MANAGER", $"Unable to register attribute translation {field.Name} from {plugin}.");
 						continue;
 					}
 
