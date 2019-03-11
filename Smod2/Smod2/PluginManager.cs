@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -183,13 +183,13 @@ namespace Smod2
 				foreach (SearchFlags flag in searchFlags)
 				{
 					// Don't check for match if flag is not specified in flags.
-					if ((flags & flag) != flag)
+					if (!flags.HasFlag(flag))
 					{
 						continue;
 					}
 
 					bool match;
-					switch (flags)
+					switch (flag)
 					{
 						case SearchFlags.ID:
 							match = plugin.Details.id == query;
