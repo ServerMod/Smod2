@@ -58,7 +58,7 @@ namespace Smod2
 			}
 		}
 
-        public void AddPermissionsHandler(IPermissionsHandler handler)
+        public void RegisterPermissionsHandler(IPermissionsHandler handler)
         {
             if (PluginManager.Manager.PermissionsManager == null)
             {
@@ -71,7 +71,7 @@ namespace Smod2
             }
         }
 
-        public void RemovePermissionsHandler(IPermissionsHandler handler)
+        public void UnregisterPermissionsHandler(IPermissionsHandler handler)
         {
             if (PluginManager.Manager.PermissionsManager == null)
             {
@@ -84,7 +84,7 @@ namespace Smod2
             }
         }
 
-        public void RegisterDefaultPermission(string permissionName)
+        public void AddDefaultPermission(string permissionName)
         {
             if (PluginManager.Manager.PermissionsManager == null)
             {
@@ -93,7 +93,7 @@ namespace Smod2
             PluginManager.Manager.PermissionsManager.RegisterDefaultPermission(permissionName);
         }
 
-        public void UnregisterDefaultPermission(string permissionName)
+        public void RemoveDefaultPermission(string permissionName)
         {
             if (PluginManager.Manager.PermissionsManager == null)
             {
