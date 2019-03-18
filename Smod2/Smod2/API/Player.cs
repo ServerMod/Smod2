@@ -72,6 +72,11 @@ namespace Smod2.API
 		CHEAT = 10
 	}
 
+	public enum WeaponType
+	{
+
+	}
+
 	public abstract class Player : ICommandSender
 	{
 		internal bool CallSetRoleEvent { get; set; }
