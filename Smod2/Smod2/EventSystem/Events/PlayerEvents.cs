@@ -426,8 +426,9 @@ namespace Smod2.Events
 		public Vector TargetPosition { get; }
 		public string TargetHitbox { get; }
 		public WeaponType? WeaponSound { get; set; }
+		public Vector Direction { get; set; }
 
-		public PlayerShootEvent(Player player, Player target, DamageType weapon, Vector sourcePosition, Vector targetPosition, string targetHitbox, WeaponType weaponSound, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
+		public PlayerShootEvent(Player player, Player target, DamageType weapon, Vector sourcePosition, Vector targetPosition, string targetHitbox, WeaponType weaponSound, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
 		{
 			this.Target = target;
 			this.Weapon = weapon;
@@ -437,6 +438,7 @@ namespace Smod2.Events
 			this.TargetPosition = targetPosition;
 			this.TargetHitbox = targetHitbox;
 			this.WeaponSound = weaponSound;
+			this.Direction = direction;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
