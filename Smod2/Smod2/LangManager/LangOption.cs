@@ -10,7 +10,12 @@ namespace Smod2.Lang
 		public LangOption() { }
 		public LangOption(string key)
 		{
-			Key = key ?? throw new ArgumentNullException(nameof(key));
+			if (string.IsNullOrWhiteSpace(key))
+			{
+				throw new ArgumentException("Lang keys cannot be null, whitespace, or empty.", nameof(key));
+			}
+			
+			Key = key;
 		}
 	}
 }
