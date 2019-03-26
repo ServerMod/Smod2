@@ -308,15 +308,19 @@ namespace Smod2.Events
 
 	public class PlayerThrowGrenadeEvent : PlayerEvent
 	{
-		public ItemType GrenadeType { get; }
-		public Vector Direction { get; }
-		public bool SlowThrow { get; }
+		public GrenadeType GrenadeType { get; set; }
+		public Vector Direction { get; set; }
+		public bool SlowThrow { get; set; }
+		public bool RemoveItem { get; set; }
+		public bool Allow { get; set; }
 
-		public PlayerThrowGrenadeEvent(Player player, ItemType grenadeType, Vector direction, bool slowThrow) : base(player)
+		public PlayerThrowGrenadeEvent(Player player, GrenadeType grenadeType, Vector direction, bool slowThrow, bool removeItem, bool allow) : base(player)
 		{
 			this.GrenadeType = grenadeType;
 			this.Direction = direction;
 			this.SlowThrow = slowThrow;
+			this.Allow = allow;
+			this.RemoveItem = removeItem;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)

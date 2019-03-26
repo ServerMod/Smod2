@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Smod2.Commands;
 
 namespace Smod2.API
@@ -82,6 +83,12 @@ namespace Smod2.API
 		USP = 5,
 	}
 
+	public enum GrenadeType
+	{
+		FRAG_GRENADE = 0,
+		FLASHBANG = 1
+	}
+
 	public abstract class Player : ICommandSender
 	{
 		internal bool CallSetRoleEvent { get; set; }
@@ -130,6 +137,8 @@ namespace Smod2.API
 		public abstract Vector GetRotation();
 		public abstract void SendConsoleMessage(string message, string color = "green");
 		public abstract void Infect(float time);
+		public abstract void ThrowGrenade(GrenadeType grenadeType, bool isCustomDirection, Vector direction, bool isEnvironmentallyTriggered, Vector position, bool isCustomForce, float throwForce, bool slowThrow = false);
+		[Obsolete("Use the overload with GrenadeType instead of ItemType", true)]
 		public abstract void ThrowGrenade(ItemType grenadeType, bool isCustomDirection, Vector direction, bool isEnvironmentallyTriggered, Vector position, bool isCustomForce, float throwForce, bool slowThrow = false);
 		public abstract bool GetBypassMode();
 		public abstract string GetAuthToken();
