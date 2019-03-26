@@ -6,7 +6,17 @@ namespace Smod2.Events
 {
 
 
-	public enum Priority {FIRST = 100, EARLIER = 80, EARLY = 70, NORMAL = 50, LATE = 30, LATER = 20, LAST = 10, MONITOR = 0};
+	public enum Priority
+	{
+		FIRST = 100,
+		EARLIER = 80,
+		EARLY = 70,
+		NORMAL = 50,
+		LATE = 30,
+		LATER = 20,
+		LAST = 10,
+		MONITOR = 0
+	};
 
 	public class EventManager
 	{
