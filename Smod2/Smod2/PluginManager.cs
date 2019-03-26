@@ -24,8 +24,8 @@ namespace Smod2
 	public class PluginManager
 	{
 		public static readonly int SMOD_MAJOR = 3;
-		public static readonly int SMOD_MINOR = 3;
-		public static readonly int SMOD_REVISION = 1;
+		public static readonly int SMOD_MINOR = 4;
+		public static readonly int SMOD_REVISION = 0;
 		public static readonly string SMOD_BUILD = "A";
 
 		public static readonly string DEPENDENCY_FOLDER = "dependencies";
