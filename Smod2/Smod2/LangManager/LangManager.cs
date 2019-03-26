@@ -198,7 +198,7 @@ namespace Smod2
 			{
 				foreach (string line in File.ReadAllLines(file.FullName))
 				{
-					if (line.Length > 0 && line[0] == '#')
+					if (line.Length == 0 || line[0] == '#' || line.StartsWith("//"))
 					{
 						continue;
 					}
@@ -210,8 +210,7 @@ namespace Smod2
 						continue;
 					}
 
-					keyvalue[0] = keyvalue[0].Trim();
-					keyvalue[1] = keyvalue[1].TrimStart();
+					keyvalue[1] = keyvalue[1].Substring(1);
 					// If the value contains a colon in it, make sure it isn't cut off
 					if (keyvalue.Length > 2)
 					{

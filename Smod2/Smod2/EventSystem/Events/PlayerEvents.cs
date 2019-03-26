@@ -420,11 +420,25 @@ namespace Smod2.Events
 	{
 		public Player Target { get; }
 		public DamageType Weapon { get; }
+		public bool ShouldSpawnHitmarker { get; set; }
+		public bool ShouldSpawnBloodDecal { get; set; }
+		public Vector SourcePosition { get; }
+		public Vector TargetPosition { get; }
+		public string TargetHitbox { get; }
+		public WeaponType? WeaponSound { get; set; }
+		public Vector Direction { get; set; }
 
-		public PlayerShootEvent(Player player, Player target, DamageType weapon) : base(player)
+		public PlayerShootEvent(Player player, Player target, DamageType weapon, Vector sourcePosition, Vector targetPosition, string targetHitbox, WeaponType weaponSound, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
 		{
 			this.Target = target;
 			this.Weapon = weapon;
+			this.ShouldSpawnHitmarker = spawnHitmarker;
+			this.ShouldSpawnBloodDecal = spawnBloodDecal;
+			this.SourcePosition = sourcePosition;
+			this.TargetPosition = targetPosition;
+			this.TargetHitbox = targetHitbox;
+			this.WeaponSound = weaponSound;
+			this.Direction = direction;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
