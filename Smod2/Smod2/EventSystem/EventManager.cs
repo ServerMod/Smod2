@@ -4,18 +4,16 @@ using Smod2.EventHandlers;
 
 namespace Smod2.Events
 {
-
-
 	public enum Priority
 	{
-		FIRST = 100,
-		EARLIER = 80,
-		EARLY = 70,
+		FIRST = 0,
+		EARLIER = 20,
+		EARLY = 40,
 		NORMAL = 50,
-		LATE = 30,
-		LATER = 20,
-		LAST = 10,
-		MONITOR = 0
+		LATE = 60,
+		LATER = 70,
+		LAST = 90,
+		MONITOR = 100
 	};
 
 	public class EventManager
@@ -104,7 +102,6 @@ namespace Smod2.Events
 				meta.Add(wrapper);
 				// Doing this stuff on register instead of when the event is called for events that trigger lots (OnUpdate etc)
 				meta.Sort(priorityCompare);
-				meta.Reverse();
 			}
 		}
 
