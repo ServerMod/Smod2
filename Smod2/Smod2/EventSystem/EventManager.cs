@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Smod2.EventHandlers;
 
@@ -6,7 +6,7 @@ namespace Smod2.Events
 {
 
 
-	public enum Priority {Highest = 100, High = 80, Normal = 50, Low = 20, Lowest = 0};
+	public enum Priority {EARLIER = 100, EARLY = 80, NORMAL = 50, LATE = 20, LATER = 10, MONITOR = 0};
 
 	public class EventManager
 	{
@@ -50,7 +50,7 @@ namespace Smod2.Events
 			}
 		}
 
-		public void AddEventHandlers(Plugin plugin, IEventHandler handler, Priority priority = Priority.Normal)
+		public void AddEventHandlers(Plugin plugin, IEventHandler handler, Priority priority = Priority.NORMAL)
 		{
 			foreach(Type intfce in handler.GetType().GetInterfaces()) {
 				if (typeof(IEventHandler).IsAssignableFrom(intfce))
@@ -61,7 +61,7 @@ namespace Smod2.Events
 			}
 		}
 
-		public void AddEventHandler(Plugin plugin, Type eventType, IEventHandler handler, Priority priority = Priority.Normal)
+		public void AddEventHandler(Plugin plugin, Type eventType, IEventHandler handler, Priority priority = Priority.NORMAL)
 		{
 			plugin.Debug(string.Format("Adding event handler from: {0} type: {1} priority: {2} handler: {3}", plugin.Details.name, eventType, priority, handler.GetType()));
 			EventHandlerWrapper wrapper = new EventHandlerWrapper(plugin, priority, handler);
