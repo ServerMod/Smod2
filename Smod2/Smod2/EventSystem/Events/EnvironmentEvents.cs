@@ -155,12 +155,14 @@ namespace Smod2.Events
 	public class ScpDeathAnnouncementEvent : Event
 	{
 		public bool ShouldPlay { get; set; }
-		public Player player { get; }
-		public Role role { get; }
+		public Player DeadPlayer { get; }
+		public Role PlayerRole { get; }
 
-		public ScpDeathAnnouncementEvent(Generator generator)
+		public ScpDeathAnnouncementEvent(bool shouldPlay, Player deadPlayer, Role playerRole)
 		{
-			Generator = generator;
+			ShouldPlay = shouldPlay;
+			DeadPlayer = deadPlayer;
+			PlayerRole = playerRole;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
