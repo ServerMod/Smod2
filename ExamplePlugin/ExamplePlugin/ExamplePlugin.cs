@@ -1,4 +1,4 @@
-﻿using Smod2;
+using Smod2;
 using Smod2.API;
 using Smod2.Attributes;
 using Smod2.Config;
@@ -18,8 +18,8 @@ namespace ExamplePlugin
 		langFile = "exampleplugin",
 		version = "1.0",
 		SmodMajor = 3,
-		SmodMinor = 3,
-		SmodRevision = 1
+		SmodMinor = 4,
+		SmodRevision = 0
 		)]
 	public class ExamplePlugin : Plugin
 	{
