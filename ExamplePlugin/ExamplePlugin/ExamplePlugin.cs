@@ -46,7 +46,7 @@ namespace ExamplePlugin
 		[PipeLink("dev.plugin", "DamageMultiplier")]
 		private FieldPipe<float> damageMultiplier;
 
-		// Registers config setting EP_MY_AWESOMENESS_SCORE with a default of 1 on intialization
+		// Registers config setting EP_MY_AWESOMENESS_SCORE with a default of 1 on initialization
 		[ConfigOption]
 		public readonly float myAwesomenessScore = 1f;
 
@@ -65,7 +65,7 @@ namespace ExamplePlugin
 
 		public override void OnEnable()
 		{
-			// Sets the pipe field to 0.1 if it exists. Pipes are not accessable in register.
+			// Sets the pipe field to 0.1 if it exists. Pipes are not accessible in register.
 			if (damageMultiplier != null)
 			{
 				damageMultiplier.Value = 0.1f;

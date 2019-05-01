@@ -1,4 +1,4 @@
-﻿using Smod2.Commands;
+using Smod2.Commands;
 using Smod2.API;
 
 namespace ExamplePlugin
@@ -9,7 +9,7 @@ namespace ExamplePlugin
 
 		public HelloWorldCommand(ExamplePlugin plugin)
 		{
-			//Constructor passing plugin refrence to this class
+			//Constructor passing plugin reference to this class
 			this.plugin = plugin;
 		}
 
