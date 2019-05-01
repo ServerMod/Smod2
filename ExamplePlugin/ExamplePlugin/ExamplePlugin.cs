@@ -77,7 +77,10 @@ namespace ExamplePlugin
 		public override void Register()
 		{
 			killChance = 0.2f;
-			
+
+			// Registers a permissions handler, this is NOT required for checking permissions of players or adding default permissions
+			// Use this if you are making a permission plugin
+			this.RegisterPermissionsHandler(new PermissionHandler());
 			// Register multiple events
 			this.AddEventHandlers(new RoundEventHandler(this));
 			// Register single event with priority (need to specify the handler type)
