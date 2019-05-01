@@ -27,8 +27,14 @@ namespace ExamplePlugin
 
 		public string[] OnCall(ICommandSender sender, string[] args)
 		{
-			//Will be null if command was called by server console
-			Player caller = sender as Player;
+			// Checks if the sender has permission to use this command, commands through the server console are always allowed
+			if (sender is Player player)
+			{
+				if (!player.HasPermission("exampleplugin.helloworld"))
+				{
+					return new[] { "You don't have permission to use that command." };
+				}
+			}
 			// This will print 3 lines in console.
 			return new string[] { "Hello World!", "My name is example plugin.", "thank you for listening, good bye!" };
 		}

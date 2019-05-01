@@ -88,6 +88,8 @@ namespace ExamplePlugin
 			this.AddConfig(new ConfigSetting("myConfigKey", "MyDefaultValue", true, "This is a description"));
 			// Register lang at runtime (in this case it is in Register, so it is on initialization)
 			this.AddTranslation(new LangSetting("myLangKey", "MyDefaultValue", "exampleplugin"));
+			// Sets a permission node as a default permission meaning all players will have it unless overridden by a permission plugin
+			this.AddDefaultPermission("exampleplugin.lottoitem");
 		}
 		
 		// Hooks to event called by any plugin
@@ -119,6 +121,7 @@ namespace ExamplePlugin
 		[PipeMethod]
 		public bool GiveLottoItem(Player player)
 		{
+			// Makes sure the player is playing on a team that can have items
 			if (player.TeamRole.Team == Team.SPECTATOR || 
 				player.TeamRole.Team == Team.NONE ||
 				player.TeamRole.Team == Team.SCP)
@@ -126,8 +129,17 @@ namespace ExamplePlugin
 				return false;
 			}
 
+			// Checks if the player has permission to receive items
+			if (!player.HasPermission("exampleplugin.lottoitem"))
+			{
+				return false;
+			}
+
+			// Spawns a coin at the feet of the player
 			Server.Map.SpawnItem(ItemType.COIN, player.GetPosition(), Vector.Zero);
 			player.PersonalBroadcast(5, "A coin has been spawned at your feet. Pick it up for a chance to get a Micro HID!", false);
+
+			// Invokes the OnGiveLottoItem event which other plugins may hook into, and includes the player in it
 			InvokeEvent("OnGiveLottoItem", player);
 
 			return true;
