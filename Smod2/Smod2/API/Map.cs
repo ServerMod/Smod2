@@ -20,6 +20,7 @@ namespace Smod2.API
 		public abstract bool WarheadDetonated { get; }
 		public abstract bool LCZDecontaminated { get; }
 		public abstract bool WarheadLeverEnabled { get; set; }
+		public abstract bool WarheadKeycardEntered { get; set; }
 		public abstract void SpawnItem(ItemType type, Vector position, Vector rotation);
 		/// <summary>  
 		/// Note: When FemurBreaker is enabled, SCP-106 can't be contained. This might break the lure configs and mechanism.
