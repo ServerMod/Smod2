@@ -948,10 +948,10 @@ namespace Smod2.Events
 		public bool Allow { get; set; }
 		public float PanicTime { get; set; }
 
-		public Scp096PanicEvent(Player player, bool Allow, float PanicTime) : base(player)
+		public Scp096PanicEvent(Player player, bool allow, float panicTime) : base(player)
 		{
-			this.Allow = Allow;
-			this.PanicTime = PanicTime;
+			Allow = allow;
+			PanicTime = panicTime;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -964,9 +964,9 @@ namespace Smod2.Events
 	{
 		public bool Allow { get; set; }
 
-		public Scp096EnrageEvent(Player player, bool Allow) : base(player)
+		public Scp096EnrageEvent(Player player, bool allow) : base(player)
 		{
-			this.Allow = Allow;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -979,9 +979,9 @@ namespace Smod2.Events
 	{
 		public bool Allow { get; set; }
 
-		public Scp096CooldownStartEvent(Player player, bool Allow) : base(player)
+		public Scp096CooldownStartEvent(Player player, bool allow) : base(player)
 		{
-			this.Allow = Allow;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -994,9 +994,9 @@ namespace Smod2.Events
 	{
 		public bool Allow { get; set; }
 
-		public Scp096CooldownEndEvent(Player player, bool Allow) : base(player)
+		public Scp096CooldownEndEvent(Player player, bool allow) : base(player)
 		{
-			this.Allow = Allow;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
