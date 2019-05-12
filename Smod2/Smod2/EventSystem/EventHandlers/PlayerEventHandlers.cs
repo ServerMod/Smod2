@@ -446,19 +446,19 @@ namespace Smod2.EventHandlers
 		void OnScp096Enrage(Scp096EnrageEvent ev);
 	}
 
-	public interface IEventHandlerScp096Cooldown : IEventHandler
+	public interface IEventHandlerScp096CooldownStart : IEventHandler
 	{
 		/// <summary>
 		/// Called when SCP-096 enters cooldown.
 		/// </summary>
-		void OnScp096Cooldown(Scp096CooldownEvent ev);
+		void OnScp096CooldownStart(Scp096CooldownStartEvent ev);
 	}
 
-	public interface IEventHandlerScp096Ready : IEventHandler
+	public interface IEventHandlerScp096CooldownEnd : IEventHandler
 	{
 		/// <summary>
 		/// Called when SCP-096 exits cooldown.
 		/// </summary>
-		void OnScp096Ready(Scp096ReadyEvent ev);
+		void OnScp096CooldownEnd(Scp096CooldownEndEvent ev);
 	}
 }

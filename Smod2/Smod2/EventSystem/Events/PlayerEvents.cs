@@ -975,33 +975,33 @@ namespace Smod2.Events
 		}
 	}
 
-	public class Scp096CooldownEvent : PlayerEvent
+	public class Scp096CooldownStartEvent : PlayerEvent
 	{
 		public bool Allow { get; set; }
 
-		public Scp096CooldownEvent(Player player, bool Allow) : base(player)
+		public Scp096CooldownStartEvent(Player player, bool Allow) : base(player)
 		{
 			this.Allow = Allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerScp096Cooldown)handler).OnScp096Cooldown(this);
+			((IEventHandlerScp096CooldownStart)handler).OnScp096CooldownStart(this);
 		}
 	}
 
-	public class Scp096ReadyEvent : PlayerEvent
+	public class Scp096CooldownEndEvent : PlayerEvent
 	{
 		public bool Allow { get; set; }
 
-		public Scp096ReadyEvent(Player player, bool Allow) : base(player)
+		public Scp096CooldownEndEvent(Player player, bool Allow) : base(player)
 		{
 			this.Allow = Allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerScp096Ready)handler).OnScp096Ready(this);
+			((IEventHandlerScp096CooldownEnd)handler).OnScp096CooldownEnd(this);
 		}
 	}
 }
