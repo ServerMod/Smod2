@@ -945,13 +945,11 @@ namespace Smod2.Events
 
 	public class Scp096PanicEvent : PlayerEvent
 	{
-		public Player Activator { get; }
 		public bool Allow { get; set; }
 		public float PanicTime { get; set; }
 
 		public Scp096PanicEvent(Player player, bool Allow, float PanicTime) : base(player)
 		{
-			this.Activator = Activator;
 			this.Allow = Allow;
 			this.PanicTime = PanicTime;
 		}
