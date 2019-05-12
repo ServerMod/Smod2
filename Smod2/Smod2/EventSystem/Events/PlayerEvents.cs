@@ -1,4 +1,4 @@
-﻿using Smod2.API;
+using Smod2.API;
 using Smod2.EventHandlers;
 using System.Collections.Generic;
 
@@ -940,6 +940,70 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandler079ElevatorTeleport)handler).On079ElevatorTeleport(this);
+		}
+	}
+
+	public class Scp096PanicEvent : PlayerEvent
+	{
+		public Player Activator { get; }
+		public bool Allow { get; set; }
+		public float PanicTime { get; set; }
+
+		public Scp096PanicEvent(Player player, bool Allow, float PanicTime) : base(player)
+		{
+			this.Activator = Activator;
+			this.Allow = Allow;
+			this.PanicTime = PanicTime;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerScp096Panic)handler).OnScp096Panic(this);
+		}
+	}
+
+	public class Scp096EnrageEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+
+		public Scp096EnrageEvent(Player player, bool Allow) : base(player)
+		{
+			this.Allow = Allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerScp096Enrage)handler).OnScp096Enrage(this);
+		}
+	}
+
+	public class Scp096CooldownEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+
+		public Scp096CooldownEvent(Player player, bool Allow) : base(player)
+		{
+			this.Allow = Allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerScp096Cooldown)handler).OnScp096Cooldown(this);
+		}
+	}
+
+	public class Scp096ReadyEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+
+		public Scp096ReadyEvent(Player player, bool Allow) : base(player)
+		{
+			this.Allow = Allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerScp096Ready)handler).OnScp096Ready(this);
 		}
 	}
 }

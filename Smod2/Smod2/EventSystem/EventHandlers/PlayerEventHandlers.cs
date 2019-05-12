@@ -1,4 +1,4 @@
-﻿using Smod2.Events;
+using Smod2.Events;
 
 namespace Smod2.EventHandlers
 {
@@ -428,5 +428,37 @@ namespace Smod2.EventHandlers
 		/// Called when SCP-079 uses an elevator to teleport to a new floor.
 		/// </summary>
 		void On079ElevatorTeleport(Player079ElevatorTeleportEvent ev);
+	}
+
+	public interface IEventHandlerScp096Panic : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-096 enters panic mode.
+		/// </summary>
+		void OnScp096Panic(Scp096PanicEvent ev);
+	}
+
+	public interface IEventHandlerScp096Enrage : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-096 enters rage mode.
+		/// </summary>
+		void OnScp096Enrage(Scp096EnrageEvent ev);
+	}
+
+	public interface IEventHandlerScp096Cooldown : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-096 enters cooldown.
+		/// </summary>
+		void OnScp096Cooldown(Scp096CooldownEvent ev);
+	}
+
+	public interface IEventHandlerScp096Ready : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-096 exits cooldown.
+		/// </summary>
+		void OnScp096Ready(Scp096ReadyEvent ev);
 	}
 }
