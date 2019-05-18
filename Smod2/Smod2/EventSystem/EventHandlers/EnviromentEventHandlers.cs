@@ -66,4 +66,12 @@ namespace Smod2.EventHandlers
 		/// </summary>
 		void OnGeneratorFinish(GeneratorFinishEvent ev);
 	}
+	
+	public interface IEventHandlerScpDeathAnnouncement : IEventHandler
+	{
+		/// <summary>
+		/// Called when a C.A.S.S.I.E. announcement gets added for an SCP death.
+		/// </summary>
+		void OnScpDeathAnnouncement(ScpDeathAnnouncementEvent ev);
+	}
 }

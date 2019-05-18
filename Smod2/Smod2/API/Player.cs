@@ -145,6 +145,10 @@ namespace Smod2.API
 		public abstract void HideTag(bool enable);
 		public abstract void PersonalBroadcast(uint duration, string message, bool isMonoSpaced);
 		public abstract void PersonalClearBroadcasts();
+		public bool HasPermission(string permissionName)
+		{
+			return PluginManager.Manager.PermissionsManager.CheckPermission(this, permissionName);
+		}
 		/// <summary>  
 		/// Get SCP-106's portal position. Returns zero if Player is not SCP-106 or SCP-106 hasn't created one.
 		/// </summary> 

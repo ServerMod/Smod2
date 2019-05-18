@@ -151,4 +151,23 @@ namespace Smod2.Events
 			((IEventHandlerGeneratorFinish)handler).OnGeneratorFinish(this);
 		}
 	}
+	
+	public class ScpDeathAnnouncementEvent : Event
+	{
+		public bool ShouldPlay { get; set; }
+		public Player DeadPlayer { get; }
+		public Role PlayerRole { get; }
+
+		public ScpDeathAnnouncementEvent(bool shouldPlay, Player deadPlayer, Role playerRole)
+		{
+			ShouldPlay = shouldPlay;
+			DeadPlayer = deadPlayer;
+			PlayerRole = playerRole;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerScpDeathAnnouncement)handler).OnScpDeathAnnouncement(this);
+		}
+	}
 }

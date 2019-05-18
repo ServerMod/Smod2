@@ -35,6 +35,8 @@ namespace Smod2.API
 		public abstract Player GetIntercomSpeaker();
 		public abstract void Broadcast(uint duration, string message, bool isMonoSpaced);
 		public abstract void ClearBroadcasts();
+		public abstract bool WarheadLeverEnabled { get; set; }
+		public abstract bool WarheadKeycardEntered { get; set; }
 	}
 
 	public abstract class Door

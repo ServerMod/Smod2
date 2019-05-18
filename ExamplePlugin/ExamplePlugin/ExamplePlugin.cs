@@ -1,4 +1,4 @@
-﻿using Smod2;
+using Smod2;
 using Smod2.API;
 using Smod2.Attributes;
 using Smod2.Config;
@@ -18,8 +18,8 @@ namespace ExamplePlugin
 		langFile = "exampleplugin",
 		version = "1.0",
 		SmodMajor = 3,
-		SmodMinor = 3,
-		SmodRevision = 1
+		SmodMinor = 4,
+		SmodRevision = 0
 		)]
 	public class ExamplePlugin : Plugin
 	{
@@ -46,7 +46,7 @@ namespace ExamplePlugin
 		[PipeLink("dev.plugin", "DamageMultiplier")]
 		private FieldPipe<float> damageMultiplier;
 
-		// Registers config setting EP_MY_AWESOMENESS_SCORE with a default of 1 on intialization
+		// Registers config setting EP_MY_AWESOMENESS_SCORE with a default of 1 on initialization
 		[ConfigOption]
 		public readonly float myAwesomenessScore = 1f;
 
@@ -65,7 +65,7 @@ namespace ExamplePlugin
 
 		public override void OnEnable()
 		{
-			// Sets the pipe field to 0.1 if it exists. Pipes are not accessable in register.
+			// Sets the pipe field to 0.1 if it exists. Pipes are not accessible in register.
 			if (damageMultiplier != null)
 			{
 				damageMultiplier.Value = 0.1f;
@@ -77,7 +77,10 @@ namespace ExamplePlugin
 		public override void Register()
 		{
 			killChance = 0.2f;
-			
+
+			// Registers a permissions handler, this is NOT required for checking permissions of players or adding default permissions
+			// Use this if you are making a permission plugin
+			this.RegisterPermissionsHandler(new PermissionHandler());
 			// Register multiple events
 			this.AddEventHandlers(new RoundEventHandler(this));
 			// Register single event with priority (need to specify the handler type)
@@ -88,6 +91,8 @@ namespace ExamplePlugin
 			this.AddConfig(new ConfigSetting("myConfigKey", "MyDefaultValue", true, "This is a description"));
 			// Register lang at runtime (in this case it is in Register, so it is on initialization)
 			this.AddTranslation(new LangSetting("myLangKey", "MyDefaultValue", "exampleplugin"));
+			// Sets a permission node as a default permission meaning all players will have it unless overridden by a permission plugin
+			this.AddDefaultPermission("exampleplugin.lottoitem");
 		}
 		
 		// Hooks to event called by any plugin
@@ -119,6 +124,7 @@ namespace ExamplePlugin
 		[PipeMethod]
 		public bool GiveLottoItem(Player player)
 		{
+			// Makes sure the player is playing on a team that can have items
 			if (player.TeamRole.Team == Team.SPECTATOR || 
 				player.TeamRole.Team == Team.NONE ||
 				player.TeamRole.Team == Team.SCP)
@@ -126,8 +132,17 @@ namespace ExamplePlugin
 				return false;
 			}
 
+			// Checks if the player has permission to receive items
+			if (!player.HasPermission("exampleplugin.lottoitem"))
+			{
+				return false;
+			}
+
+			// Spawns a coin at the feet of the player
 			Server.Map.SpawnItem(ItemType.COIN, player.GetPosition(), Vector.Zero);
 			player.PersonalBroadcast(5, "A coin has been spawned at your feet. Pick it up for a chance to get a Micro HID!", false);
+
+			// Invokes the OnGiveLottoItem event which other plugins may hook into, and includes the player in it
 			InvokeEvent("OnGiveLottoItem", player);
 
 			return true;

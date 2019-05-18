@@ -8,6 +8,7 @@ using Smod2.API;
 using Smod2.Logging;
 using Smod2.Events;
 using Smod2.Piping;
+using Smod2.Permissions;
 
 namespace Smod2
 {
@@ -25,7 +26,8 @@ namespace Smod2
 	{
 		public static readonly int SMOD_MAJOR = 3;
 		public static readonly int SMOD_MINOR = 4;
-		public static readonly int SMOD_REVISION = 0;
+		public static readonly int SMOD_REVISION = 1;
+
 		public static readonly string SMOD_BUILD = "A";
 
 		public static readonly string DEPENDENCY_FOLDER = "dependencies";
@@ -100,6 +102,19 @@ namespace Smod2
 			}
 		}
 
+		private PermissionsManager permissionsManager;
+		public PermissionsManager PermissionsManager
+		{
+			get { return permissionsManager; }
+			set
+			{
+				if (permissionsManager == null)
+				{
+					permissionsManager = value;
+				}
+			}
+		}
+
 		private Server server;
 		public Server Server
 		{
@@ -144,6 +159,7 @@ namespace Smod2
 		{
 			enabledPlugins = new Dictionary<string, Plugin>();
 			disabledPlugins = new Dictionary<string, Plugin>();
+			permissionsManager = new PermissionsManager();
 		}
 
 		public Plugin GetEnabledPlugin(string id)
