@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Smod2.Commands;
 
@@ -29,6 +29,7 @@ namespace Smod2.API
 		public abstract List<Player> GetPlayers(Role role);
 		public abstract List<Player> GetPlayers(Role[] roles);
 		public abstract List<Player> GetPlayers(Team team);
+		public abstract List<Player> GetPlayers(Predicate<Player> predicate);
 		public abstract Player GetPlayer(int playerId);
 		public abstract List<Connection> GetConnections(string filter = "");
 		public abstract List<TeamRole> GetRoles(string filter = "");
