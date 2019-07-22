@@ -25,7 +25,8 @@ namespace Smod2.API
 		public abstract bool Visible { get; set; } //Not used whatsoever. Only kept to prevent plugins to have to be recompiled
 		public abstract string PlayerListTitle { get; set; }
 
-		public abstract List<Player> GetPlayers(string filter = "");
+		public abstract List<Player> GetPlayers();
+		public abstract List<Player> GetPlayers(string filter);
 		public abstract List<Player> GetPlayers(Role role);
 		public abstract List<Player> GetPlayers(Role[] roles);
 		public abstract List<Player> GetPlayers(Team team);
