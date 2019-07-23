@@ -29,7 +29,13 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnPlayerPickupItem(PlayerPickupItemEvent ev);
 	}
-
+	public interface IEventHandlerPlayerPickupItemEarly : IEventHandler
+	{
+		/// <summary>  
+		/// This is called when a player picks up an item.
+		/// </summary> 
+		void OnPlayerPickupItemEarly(PlayerPickupItemEarlyEvent ev);
+	}
 	public interface IEventHandlerPlayerPickupItemLate : IEventHandler
 	{
 		/// <summary>  
@@ -37,7 +43,6 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnPlayerPickupItemLate(PlayerPickupItemLateEvent ev);
 	}
-
 	public interface IEventHandlerPlayerDropItem : IEventHandler
 	{
 		/// <summary>  
@@ -45,7 +50,13 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnPlayerDropItem(PlayerDropItemEvent ev);
 	}
-
+	public interface IEventHandlerPlayerDropAllItems : IEventHandler
+	{
+		/// <summary>  
+		/// This is called when all of the item's are going to be dropped.
+		/// </summary> 
+		void OnPlayerDropAllItems(PlayerDropAllItemsEvent ev);
+	}
 	public interface IEventHandlerPlayerJoin : IEventHandler
 	{
 		/// <summary>  

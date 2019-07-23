@@ -1,4 +1,4 @@
-﻿using Smod2.API;
+using Smod2.API;
 using Smod2.EventHandlers;
 
 namespace Smod2.Events
@@ -198,4 +198,20 @@ namespace Smod2.Events
 			((IEventHandlerSceneChanged)handler).OnSceneChanged(this);
 		}
 	}
+	
+	public class SetSeedEvent : Event
+	{
+		public int Seed { get; set; }
+
+		public SetSeedEvent(int seed)
+		{
+			this.Seed = seed;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSetSeed)handler).OnSetSeed(this);
+		}
+	}
+	
 }

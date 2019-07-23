@@ -1,4 +1,4 @@
-﻿using Smod2.Events;
+using Smod2.Events;
 
 namespace Smod2.EventHandlers
 {
@@ -104,6 +104,14 @@ namespace Smod2.EventHandlers
 		///  This event handler will call when the server scene changes
 		/// </summary> 
 		void OnSceneChanged(SceneChangedEvent ev);
+	}
+	
+	public interface IEventHandlerSetSeed : IEventHandler
+	{
+		/// <summary>  
+		///  This event handler will call when the seed for the round is being set
+		/// </summary> 
+		void OnSetSeed(SetSeedEvent ev);
 	}
 }
 
