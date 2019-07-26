@@ -9,7 +9,7 @@ namespace Smod2.Lang
 		{
 			get
 			{
-				return key;
+				return key.ToLower();
 			}
 		}
 
