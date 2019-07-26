@@ -213,5 +213,4 @@ namespace Smod2.Events
 			((IEventHandlerSetSeed)handler).OnSetSeed(this);
 		}
 	}
-	
 }

@@ -1,4 +1,4 @@
-﻿using Smod2.Events;
+using Smod2.Events;
 
 namespace Smod2.EventHandlers
 {
@@ -73,5 +73,21 @@ namespace Smod2.EventHandlers
 		/// Called when a C.A.S.S.I.E. announcement gets added for an SCP death.
 		/// </summary>
 		void OnScpDeathAnnouncement(ScpDeathAnnouncementEvent ev);
+	}
+
+	public interface IEventHandlerCassieCustomAnnouncement : IEventHandler
+	{
+		/// <summary>  
+		///  This event handler will call when a custom announcement is made. (AKA through the api for example.)
+		/// </summary> 
+		void OnCassieCustomAnnouncement(CassieCustomAnnouncementEvent ev);
+	}
+
+	public interface IEventHandlerCassieTeamAnnouncement : IEventHandler
+	{
+		/// <summary>  
+		///  This event handler will call when NTF respawns.
+		/// </summary> 
+		void OnCassieTeamAnnouncement(CassieTeamAnnouncementEvent ev);
 	}
 }
