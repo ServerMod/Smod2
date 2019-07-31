@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Smod2.Commands;
 
@@ -46,7 +46,8 @@ namespace Smod2.API
 	{
 		DROPPED_5 = 0, // Epsilon-11 Standard Rifle (Type 0)
 		DROPPED_7 = 1, // MP7, Logicer (Type 1)
-		DROPPED_9 = 2 // COM15, P90 (Type 2)
+		DROPPED_9 = 2, // COM15, P90 (Type 2)
+		NONE = 3
 	}
 
 	public enum RadioStatus
@@ -71,16 +72,6 @@ namespace Smod2.API
 		USE_TESLAGATE = 8,
 		USE_ELEVATOR = 9,
 		CHEAT = 10
-	}
-
-	public enum WeaponType
-	{
-		COM15 = 0,
-		P90 = 1,
-		E11_STANDARD_RIFLE = 2,
-		MP7 = 3,
-		LOGICER = 4,
-		USP = 5,
 	}
 
 	public enum GrenadeType

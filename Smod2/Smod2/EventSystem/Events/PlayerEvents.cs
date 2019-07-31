@@ -124,12 +124,10 @@ namespace Smod2.Events
 
 	public class PlayerDropAllItemsEvent : PlayerEvent
 	{
-		public Item[] ItemsDropped { get; }
 		public bool Allow { get; set; }
 
-		public PlayerDropAllItemsEvent(Player player, Item[] ItemList, bool allow) : base(player)
+		public PlayerDropAllItemsEvent(Player player, bool allow) : base(player)
 		{
-			this.ItemsDropped = ItemList;
 			this.Allow = allow;
 		}
 

@@ -1,4 +1,4 @@
-﻿namespace Smod2.API
+namespace Smod2.API
 {
 	public enum ItemType
 	{
@@ -56,5 +56,7 @@
 		public abstract void SetKinematic(bool doPhysics);
 		public abstract bool GetKinematic();
 		public abstract object GetComponent();
+		public abstract bool IsWeapon();
+		public abstract Weapon ToWeapon();
 	}
 }
