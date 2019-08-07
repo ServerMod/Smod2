@@ -44,10 +44,10 @@ namespace Smod2.API
 
 	public enum AmmoType
 	{
+		NONE = -1,
 		DROPPED_5 = 0, // Epsilon-11 Standard Rifle (Type 0)
 		DROPPED_7 = 1, // MP7, Logicer (Type 1)
 		DROPPED_9 = 2, // COM15, P90 (Type 2)
-		NONE = 3
 	}
 
 	public enum RadioStatus

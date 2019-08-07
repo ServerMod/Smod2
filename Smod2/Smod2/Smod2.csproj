@@ -44,6 +44,7 @@
     <Compile Include="API\Map.cs" />
     <Compile Include="API\UserGroup.cs" />
     <Compile Include="API\Vector.cs" />
+    <Compile Include="API\Weapon.cs" />
     <Compile Include="Config\ConfigOption.cs" />
     <Compile Include="Config\LiveConfig.cs" />
     <Compile Include="LangManager\LangOption.cs" />
