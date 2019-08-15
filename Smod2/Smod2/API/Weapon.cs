@@ -8,7 +8,7 @@ namespace Smod2.API
 		P90 = (int)ItemType.P90,
 		MP4 = (int)ItemType.MP4,
 		LOGICER = (int)ItemType.LOGICER,
-		USP = (int)ItemType.USP,
+		USP = (int)ItemType.USP
 	}
 
 	public enum WeaponSight
@@ -18,7 +18,7 @@ namespace Smod2.API
 		HOLO_SIGHT = 2,
 		NIGHT_VISION = 3,
 		SNIPER_SCOPE = 4,
-		COLLIMATOR = 5,
+		COLLIMATOR = 5
 	}
 
 	public enum WeaponBarrel
@@ -28,7 +28,7 @@ namespace Smod2.API
 		OIL_FILTER = 2,
 		MUZZLE_BREAK = 3,
 		HEAVY_BARREL = 4,
-		MUZZLE_BOOSTER = 5,
+		MUZZLE_BOOSTER = 5
 	}
 
 	public enum WeaponOther
@@ -37,7 +37,7 @@ namespace Smod2.API
 		FLASHLIGHT = 1,
 		LASER = 2,
 		AMMO_COUNTER = 3,
-		GYROSCOPIC_STABILIZER = 4,
+		GYROSCOPIC_STABILIZER = 4
 	}
 
 	public enum AttachmentType
@@ -45,7 +45,7 @@ namespace Smod2.API
 		NONE = -1,
 		SIGHT = 0,
 		BARREL = 1,
-		OTHER = 2,
+		OTHER = 2
 	}
 
 	public abstract class Weapon

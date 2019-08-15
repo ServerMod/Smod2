@@ -39,7 +39,7 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerPlayerPickupItemLate : IEventHandler
 	{
 		/// <summary>  
-		/// This is called after a player picks up an item and is their inventory.
+		/// This is called after a player picks up an item and is in their inventory.
 		/// </summary> 
 		void OnPlayerPickupItemLate(PlayerPickupItemLateEvent ev);
 	}
