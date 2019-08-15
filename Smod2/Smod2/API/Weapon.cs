@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Smod2.API
 {
 	public enum WeaponType
@@ -48,10 +42,10 @@ namespace Smod2.API
 
 	public enum AttachmentType
 	{
-		NONE = 0,
-		SIGHT = 1,
-		BARREL = 2,
-		OTHER = 3,
+		NONE = -1,
+		SIGHT = 0,
+		BARREL = 1,
+		OTHER = 2,
 	}
 
 	public abstract class Weapon
