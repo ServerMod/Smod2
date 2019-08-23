@@ -1,5 +1,5 @@
 using Smod2.Events;
-
+using System;
 namespace Smod2.EventHandlers
 {
 	public interface IEventHandlerRoundStart : IEventHandler
@@ -26,28 +26,30 @@ namespace Smod2.EventHandlers
 		void OnConnect(ConnectEvent ev);
 	}
 
+	[Obsolete("Provides no information please use IEventHandlerPlayerLeave")]
 	public interface IEventHandlerDisconnect : IEventHandler
 	{
 		/// <summary>  
 		///  This is the event handler for disconnection events.
-		/// </summary> 
+		/// </summary>
 		void OnDisconnect(DisconnectEvent ev);
 	}
 
+	[Obsolete("Provides no information please use IEventHandlerPlayerLeave")]
 	public interface IEventHandlerLateDisconnect : IEventHandler
 	{
 		/// <summary>  
 		///  This is the event handler for disconnection events after the player has disconnected.
-		/// </summary> 
+		/// </summary>
 		void OnLateDisconnect(LateDisconnectEvent ev);
 	}
 
 	public interface IEventHandlerPlayerLeave : IEventHandler
 	{
 		/// <summary>  
-		///  This is called when OnDestroy() is called on QueryProcessor.
+		///  Called OnDestroy of QueryProcessor aka when a player leaves.
 		/// </summary> 
-		void OnPlayerLeave(PlayerLeaveEvent ev);
+		void OnPlayerLeave(OnPlayerLeaveEvent ev);
 	}
 
 	public interface IEventHandlerCheckRoundEnd : IEventHandler

@@ -1,5 +1,6 @@
 using Smod2.API;
 using Smod2.EventHandlers;
+using System;
 
 namespace Smod2.Events
 {
@@ -92,14 +93,16 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PlayerLeaveEvent : ConnectionEvent
+	public class OnPlayerLeaveEvent : Event
 	{
 		public string Name { get; }
 		public string SteamID { get; }
-		public PlayerLeaveEvent(Connection connection, string steamid, string name) : base(connection)
+		public string IP { get; }
+		public OnPlayerLeaveEvent(string steamid, string ip, string name)
 		{
-			this.Name = name;
+			this.IP = ip;
 			this.SteamID = steamid;
+			this.Name = name;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -107,7 +110,7 @@ namespace Smod2.Events
 			((IEventHandlerPlayerLeave)handler).OnPlayerLeave(this);
 		}
 	}
-	
+
 	public class CheckRoundEndEvent : ServerEvent
 	{
 		public CheckRoundEndEvent(Server server, Round round) : base(server)
