@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="HelloWorldCommand.cs" />
     <Compile Include="LottoItemHandler.cs" />
+    <Compile Include="MultipleEventsExample.cs" />
     <Compile Include="PermissionHandler.cs" />
     <Compile Include="RoundEventHandler.cs" />
     <Compile Include="ExamplePlugin.cs" />
