@@ -42,6 +42,14 @@ namespace Smod2.EventHandlers
 		void OnLateDisconnect(LateDisconnectEvent ev);
 	}
 
+	public interface IEventHandlerPlayerLeave : IEventHandler
+	{
+		/// <summary>  
+		///  This is called when OnDestroy() is called on QueryProcessor.
+		/// </summary> 
+		void OnPlayerLeave(PlayerLeaveEvent ev);
+	}
+
 	public interface IEventHandlerCheckRoundEnd : IEventHandler
 	{
 		/// <summary>  

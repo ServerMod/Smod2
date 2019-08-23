@@ -70,12 +70,8 @@ namespace Smod2.Events
 
 	public class DisconnectEvent : ConnectionEvent
 	{
-		public string Name { get; }
-		public string SteamID { get; }
-		public DisconnectEvent(Connection connection, string steamid, string name) : base(connection)
+		public DisconnectEvent(Connection connection) : base(connection)
 		{
-			this.Name = name;
-			this.SteamID = steamid;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -86,12 +82,8 @@ namespace Smod2.Events
 
 	public class LateDisconnectEvent : ConnectionEvent
 	{
-		public string Name { get; }
-		public string SteamID { get; }
-		public LateDisconnectEvent(Connection connection, string steamid, string name) : base(connection)
+		public LateDisconnectEvent(Connection connection) : base(connection)
 		{
-			this.Name = name;
-			this.SteamID = steamid;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -100,6 +92,22 @@ namespace Smod2.Events
 		}
 	}
 
+	public class PlayerLeaveEvent : ConnectionEvent
+	{
+		public string Name { get; }
+		public string SteamID { get; }
+		public PlayerLeaveEvent(Connection connection, string steamid, string name) : base(connection)
+		{
+			this.Name = name;
+			this.SteamID = steamid;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerLeave)handler).OnPlayerLeave(this);
+		}
+	}
+	
 	public class CheckRoundEndEvent : ServerEvent
 	{
 		public CheckRoundEndEvent(Server server, Round round) : base(server)
