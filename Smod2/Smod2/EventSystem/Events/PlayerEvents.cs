@@ -98,7 +98,7 @@ namespace Smod2.Events
 	{
 		public Item Item { get; }
 		public bool Allow { get; set; }
-		public PlayerPickupItemEarlyEvent(Player player, Item item, bool allow) : base(player)
+		public PlayerPickupItemEarlyEvent(Player player, Item item, bool allow = true) : base(player)
 		{
 			this.Item = item;
 			this.Allow = allow;
@@ -126,7 +126,7 @@ namespace Smod2.Events
 	{
 		public bool Allow { get; set; }
 
-		public PlayerDropAllItemsEvent(Player player, bool allow) : base(player)
+		public PlayerDropAllItemsEvent(Player player, bool allow = true) : base(player)
 		{
 			this.Allow = allow;
 		}
@@ -532,13 +532,13 @@ namespace Smod2.Events
 
 	public class PlayerHandcuffedEvent : PlayerEvent
 	{
-		public bool Handcuffed { get; set; }
+		public bool Allow { get; set; }
 
 		public Player Owner { get; set; }
 
-		public PlayerHandcuffedEvent(Player player, bool handcuffed, Player owner) : base(player)
+		public PlayerHandcuffedEvent(Player player, Player owner, bool allow = true) : base(player)
 		{
-			this.Handcuffed = handcuffed;
+			this.Allow = allow;
 			this.Owner = owner;
 		}
 

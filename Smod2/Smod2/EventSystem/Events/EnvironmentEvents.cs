@@ -174,13 +174,13 @@ namespace Smod2.Events
 	public class CassieCustomAnnouncementEvent : Event
 	{
 		public string Words { get; set; }
-		public bool MakeHold { get; set; }
+		public bool MonoSpaced { get; set; }
 		public bool Allow { get; set; }
 
-		public CassieCustomAnnouncementEvent(string words, bool makehold, bool allow = true)
+		public CassieCustomAnnouncementEvent(string words, bool monospaced, bool allow = true)
 		{
 			this.Words = words;
-			this.MakeHold = makehold;
+			this.MonoSpaced = monospaced;
 			this.Allow = allow;
 		}
 
@@ -200,7 +200,7 @@ namespace Smod2.Events
 		public CassieTeamAnnouncementEvent(char natoLetter, int natoNumber, int scpsLeft, bool allow = true)
 		{
 			this.NatoLetter = natoLetter;
-			this.NatoNumber = NatoNumber;
+			this.NatoNumber = natoNumber;
 			this.SCPsLeft = scpsLeft;
 			this.Allow = allow;
 		}

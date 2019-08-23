@@ -136,6 +136,8 @@ namespace Smod2.API
 		public abstract void HideTag(bool enable);
 		public abstract void PersonalBroadcast(uint duration, string message, bool isMonoSpaced);
 		public abstract void PersonalClearBroadcasts();
+		public abstract bool Muted { get; set; }
+		public abstract bool IntercomMuted { get; set; }
 		public bool HasPermission(string permissionName)
 		{
 			return PluginManager.Manager.PermissionsManager.CheckPermission(this, permissionName);
