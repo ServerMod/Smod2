@@ -69,9 +69,9 @@ namespace Smod2.Events
 		}
 	}
 
-	public class DisconnectEvent : ConnectionEvent
+	public class DisconnectEvent : Event
 	{
-		public DisconnectEvent(Connection connection) : base(connection)
+		public DisconnectEvent()
 		{
 		}
 
@@ -81,9 +81,10 @@ namespace Smod2.Events
 		}
 	}
 
-	public class LateDisconnectEvent : ConnectionEvent
+
+	public class LateDisconnectEvent : Event
 	{
-		public LateDisconnectEvent(Connection connection) : base(connection)
+		public LateDisconnectEvent()
 		{
 		}
 
@@ -93,21 +94,23 @@ namespace Smod2.Events
 		}
 	}
 
-	public class OnPlayerLeaveEvent : Event
+	public class PlayerLeaveEvent : Event
 	{
 		public string Name { get; }
 		public string SteamID { get; }
 		public string IP { get; }
-		public OnPlayerLeaveEvent(string steamid, string ip, string name)
+		public int PlayerID { get; }
+		public PlayerLeaveEvent(string steamid, string ip, string name, int id)
 		{
 			this.IP = ip;
 			this.SteamID = steamid;
 			this.Name = name;
+			this.PlayerID = id;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerPlayerLeave)handler).OnPlayerLeave(this);
+			((IEventHandlerPlayerLeave)handler).PlayerLeaveEvent(this);
 		}
 	}
 

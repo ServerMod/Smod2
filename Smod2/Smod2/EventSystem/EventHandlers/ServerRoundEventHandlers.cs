@@ -26,7 +26,6 @@ namespace Smod2.EventHandlers
 		void OnConnect(ConnectEvent ev);
 	}
 
-	[Obsolete("Provides no information please use IEventHandlerPlayerLeave")]
 	public interface IEventHandlerDisconnect : IEventHandler
 	{
 		/// <summary>  
@@ -49,7 +48,7 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		///  Called OnDestroy of QueryProcessor aka when a player leaves.
 		/// </summary> 
-		void OnPlayerLeave(OnPlayerLeaveEvent ev);
+		void PlayerLeaveEvent(PlayerLeaveEvent ev);
 	}
 
 	public interface IEventHandlerCheckRoundEnd : IEventHandler
