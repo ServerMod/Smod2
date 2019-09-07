@@ -110,7 +110,7 @@ namespace Smod2.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerPlayerLeave)handler).PlayerLeaveEvent(this);
+			((IEventHandlerPlayerLeave)handler).OnPlayerLeave(this);
 		}
 	}
 

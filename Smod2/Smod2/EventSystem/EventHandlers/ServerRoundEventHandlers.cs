@@ -48,7 +48,7 @@ namespace Smod2.EventHandlers
 		/// <summary>  
 		///  Called OnDestroy of QueryProcessor aka when a player leaves.
 		/// </summary> 
-		void PlayerLeaveEvent(PlayerLeaveEvent ev);
+		void OnPlayerLeave(PlayerLeaveEvent ev);
 	}
 
 	public interface IEventHandlerCheckRoundEnd : IEventHandler
