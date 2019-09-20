@@ -6,9 +6,19 @@ namespace Smod2.API
 		MICROHID = (int)ItemType.MICROHID,
 		E11_STANDARD_RIFLE = (int)ItemType.E11_STANDARD_RIFLE,
 		P90 = (int)ItemType.P90,
-		MP4 = (int)ItemType.MP4,
+		MP7 = (int)ItemType.MP7,
 		LOGICER = (int)ItemType.LOGICER,
 		USP = (int)ItemType.USP
+	}
+
+	public enum WeaponSound
+	{
+		COM15 = 0,
+		P90 = 1,
+		E11_STANDARD_RIFLE = 2,
+		MP7 = 3,
+		LOGICER = 4,
+		USP = 5,
 	}
 
 	public enum WeaponSight
@@ -57,6 +67,7 @@ namespace Smod2.API
 		public abstract float AmmoInClip { get; set; }
 		public abstract int MaxClipSize { get; }
 		public abstract AmmoType AmmoType { get; }
+		public abstract DamageType DamageType { get; }
 		public abstract object GetComponent();
 	}
 }

@@ -26,7 +26,7 @@ namespace Smod2.API
 		E11_STANDARD_RIFLE = 20,
 		P90 = 21,
 		DROPPED_5 = 22,
-		MP4 = 23,
+		MP7 = 23,
 		LOGICER = 24,
 		FRAG_GRENADE = 25,
 		FLASHBANG = 26,
