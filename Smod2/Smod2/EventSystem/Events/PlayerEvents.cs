@@ -460,9 +460,9 @@ namespace Smod2.Events
 		public Vector TargetPosition { get; }
 		public string TargetHitbox { get; }
 		public Vector Direction { get; set; }
-		public WeaponSound WeaponSound { get; set; }
+		public WeaponSound ?WeaponSound { get; set; }
 
-		public PlayerShootEvent(Player player, Player target, Weapon weapon, WeaponSound weaponSound, Vector sourcePosition, Vector targetPosition, string targetHitbox, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
+		public PlayerShootEvent(Player player, Player target, Weapon weapon, WeaponSound ?weaponSound, Vector sourcePosition, Vector targetPosition, string targetHitbox, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
 		{
 			this.Target = target;
 			this.Weapon = weapon;
@@ -644,13 +644,13 @@ namespace Smod2.Events
 
 	public class PlayerReloadEvent : PlayerEvent
 	{
-		public ItemType Weapon { get; }
+		public Weapon Weapon { get; }
 		public int AmmoRemoved { get; set; }
 		public int ClipAmmoCountAfterReload { get; set; }
 		public int NormalMaxClipSize { get; }
 		public int CurrentClipAmmoCount { get; }
 		public int CurrentAmmoTotal { get; }
-		public PlayerReloadEvent(Player player, ItemType weapon, int ammoRemoved, int clipAmmoCountAfterReload, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal) : base(player)
+		public PlayerReloadEvent(Player player, Weapon weapon, int ammoRemoved, int clipAmmoCountAfterReload, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal) : base(player)
 		{
 			this.Weapon = weapon;
 			this.AmmoRemoved = ammoRemoved;

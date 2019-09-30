@@ -69,5 +69,6 @@ namespace Smod2.API
 		public abstract AmmoType AmmoType { get; }
 		public abstract DamageType DamageType { get; }
 		public abstract object GetComponent();
+		public abstract Item ToItem();
 	}
 }

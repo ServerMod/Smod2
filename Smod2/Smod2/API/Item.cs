@@ -56,7 +56,7 @@ namespace Smod2.API
 		public abstract void SetKinematic(bool doPhysics);
 		public abstract bool GetKinematic();
 		public abstract object GetComponent();
-		public abstract bool IsWeapon();
+		public abstract bool IsWeapon { get; }
 		public abstract Weapon ToWeapon();
 	}
 }
