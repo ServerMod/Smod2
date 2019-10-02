@@ -668,8 +668,14 @@ namespace Smod2.Events
 
 	public class PlayerGrenadeExplosion : PlayerEvent
 	{
-		public PlayerGrenadeExplosion(Player thrower) : base(thrower)
+		public bool Allow { get; set; }
+		public GrenadeType GrenadeType { get; }
+		public Vector Position { get; }
+		public PlayerGrenadeExplosion(Player thrower, GrenadeType grenadetype, Vector position, bool allow = true) : base(thrower)
 		{
+			this.Allow = allow;
+			this.GrenadeType = grenadetype;
+			this.Position = position;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
