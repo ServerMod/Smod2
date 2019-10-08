@@ -29,13 +29,7 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnPlayerPickupItem(PlayerPickupItemEvent ev);
 	}
-	public interface IEventHandlerPlayerPickupItemEarly : IEventHandler
-	{
-		/// <summary>  
-		/// This is called when a player picks up an item and its still on the ground.
-		/// </summary> 
-		void OnPlayerPickupItemEarly(PlayerPickupItemEarlyEvent ev);
-	}
+
 	public interface IEventHandlerPlayerPickupItemLate : IEventHandler
 	{
 		/// <summary>  

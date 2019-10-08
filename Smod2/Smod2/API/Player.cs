@@ -131,7 +131,7 @@ namespace Smod2.API
 		public abstract void ThrowGrenade(GrenadeType grenadeType, bool isCustomDirection, Vector direction, bool isEnvironmentallyTriggered, Vector position, bool isCustomForce, float throwForce, bool slowThrow = false);
 		[Obsolete("Use the overload with GrenadeType instead of ItemType", true)]
 		public abstract void ThrowGrenade(ItemType grenadeType, bool isCustomDirection, Vector direction, bool isEnvironmentallyTriggered, Vector position, bool isCustomForce, float throwForce, bool slowThrow = false);
-		public abstract bool GetBypassMode();
+		public abstract bool BypassMode { get; set; }
 		public abstract string GetAuthToken();
 		public abstract void HideTag(bool enable);
 		public abstract void PersonalBroadcast(uint duration, string message, bool isMonoSpaced);

@@ -94,21 +94,6 @@ namespace Smod2.Events
 			((IEventHandlerPlayerPickupItemLate)handler).OnPlayerPickupItemLate(this);
 		}
 	}
-	public class PlayerPickupItemEarlyEvent : PlayerEvent
-	{
-		public Item Item { get; }
-		public bool Allow { get; set; }
-		public PlayerPickupItemEarlyEvent(Player player, Item item, bool allow = true) : base(player)
-		{
-			this.Item = item;
-			this.Allow = allow;
-		}
-
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-			((IEventHandlerPlayerPickupItemEarly)handler).OnPlayerPickupItemEarly(this);
-		}
-	}
 
 	public class PlayerDropItemEvent : PlayerItemEvent
 	{
@@ -670,7 +655,7 @@ namespace Smod2.Events
 	{
 		public bool Allow { get; set; }
 		public GrenadeType GrenadeType { get; }
-		public Vector Position { get; }
+		public Vector Position { get; set; }
 		public PlayerGrenadeExplosion(Player thrower, GrenadeType grenadetype, Vector position, bool allow = true) : base(thrower)
 		{
 			this.Allow = allow;
