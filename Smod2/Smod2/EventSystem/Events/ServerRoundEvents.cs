@@ -1,5 +1,6 @@
-﻿using Smod2.API;
+using Smod2.API;
 using Smod2.EventHandlers;
+using System;
 
 namespace Smod2.Events
 {
@@ -68,9 +69,9 @@ namespace Smod2.Events
 		}
 	}
 
-	public class DisconnectEvent : ConnectionEvent
+	public class DisconnectEvent : Event
 	{
-		public DisconnectEvent(Connection connection) : base(connection)
+		public DisconnectEvent()
 		{
 		}
 
@@ -80,15 +81,36 @@ namespace Smod2.Events
 		}
 	}
 
-	public class LateDisconnectEvent : ConnectionEvent
+
+	public class LateDisconnectEvent : Event
 	{
-		public LateDisconnectEvent(Connection connection) : base(connection)
+		public LateDisconnectEvent()
 		{
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerLateDisconnect)handler).OnLateDisconnect(this);
+		}
+	}
+
+	public class PlayerLeaveEvent : Event
+	{
+		public string Name { get; }
+		public string SteamID { get; }
+		public string IP { get; }
+		public int PlayerID { get; }
+		public PlayerLeaveEvent(string steamid, string ip, string name, int id)
+		{
+			this.IP = ip;
+			this.SteamID = steamid;
+			this.Name = name;
+			this.PlayerID = id;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerLeave)handler).OnPlayerLeave(this);
 		}
 	}
 
@@ -196,6 +218,21 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerSceneChanged)handler).OnSceneChanged(this);
+		}
+	}
+	
+	public class SetSeedEvent : Event
+	{
+		public int Seed { get; set; }
+
+		public SetSeedEvent(int seed)
+		{
+			this.Seed = seed;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSetSeed)handler).OnSetSeed(this);
 		}
 	}
 }

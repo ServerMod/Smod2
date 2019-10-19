@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -26,9 +26,9 @@ namespace Smod2
 	{
 		public static readonly int SMOD_MAJOR = 3;
 		public static readonly int SMOD_MINOR = 5;
-		public static readonly int SMOD_REVISION = 0;
+		public static readonly int SMOD_REVISION = 1;
 
-		public static readonly string SMOD_BUILD = "A";
+		public static readonly string SMOD_BUILD = "K";
 
 		public static readonly string DEPENDENCY_FOLDER = "dependencies";
 

@@ -1,4 +1,4 @@
-﻿namespace Smod2.API
+namespace Smod2.API
 {
 	public enum ItemType
 	{
@@ -26,7 +26,7 @@
 		E11_STANDARD_RIFLE = 20,
 		P90 = 21,
 		DROPPED_5 = 22,
-		MP4 = 23,
+		MP7 = 23,
 		LOGICER = 24,
 		FRAG_GRENADE = 25,
 		FLASHBANG = 26,
@@ -56,5 +56,7 @@
 		public abstract void SetKinematic(bool doPhysics);
 		public abstract bool GetKinematic();
 		public abstract object GetComponent();
+		public abstract bool IsWeapon { get; }
+		public abstract Weapon ToWeapon();
 	}
 }

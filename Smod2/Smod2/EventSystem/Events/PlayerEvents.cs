@@ -107,6 +107,21 @@ namespace Smod2.Events
 		}
 	}
 
+	public class PlayerDropAllItemsEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+
+		public PlayerDropAllItemsEvent(Player player, bool allow = true) : base(player)
+		{
+			this.Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerDropAllItems)handler).OnPlayerDropAllItems(this);
+		}
+	}
+
 	public class PlayerJoinEvent : PlayerEvent
 	{
 		public PlayerJoinEvent(Player player) : base(player)
@@ -423,16 +438,16 @@ namespace Smod2.Events
 	public class PlayerShootEvent : PlayerEvent
 	{
 		public Player Target { get; }
-		public DamageType Weapon { get; }
+		public Weapon Weapon { get; }
 		public bool ShouldSpawnHitmarker { get; set; }
 		public bool ShouldSpawnBloodDecal { get; set; }
 		public Vector SourcePosition { get; }
 		public Vector TargetPosition { get; }
 		public string TargetHitbox { get; }
-		public WeaponType? WeaponSound { get; set; }
 		public Vector Direction { get; set; }
+		public WeaponSound ?WeaponSound { get; set; }
 
-		public PlayerShootEvent(Player player, Player target, DamageType weapon, Vector sourcePosition, Vector targetPosition, string targetHitbox, WeaponType weaponSound, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
+		public PlayerShootEvent(Player player, Player target, Weapon weapon, WeaponSound ?weaponSound, Vector sourcePosition, Vector targetPosition, string targetHitbox, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
 		{
 			this.Target = target;
 			this.Weapon = weapon;
@@ -441,8 +456,8 @@ namespace Smod2.Events
 			this.SourcePosition = sourcePosition;
 			this.TargetPosition = targetPosition;
 			this.TargetHitbox = targetHitbox;
-			this.WeaponSound = weaponSound;
 			this.Direction = direction;
+			this.WeaponSound = weaponSound;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -502,13 +517,13 @@ namespace Smod2.Events
 
 	public class PlayerHandcuffedEvent : PlayerEvent
 	{
-		public bool Handcuffed { get; set; }
+		public bool Allow { get; set; }
 
 		public Player Owner { get; set; }
 
-		public PlayerHandcuffedEvent(Player player, bool handcuffed, Player owner) : base(player)
+		public PlayerHandcuffedEvent(Player player, Player owner, bool allow = true) : base(player)
 		{
-			this.Handcuffed = handcuffed;
+			this.Allow = allow;
 			this.Owner = owner;
 		}
 
@@ -614,13 +629,13 @@ namespace Smod2.Events
 
 	public class PlayerReloadEvent : PlayerEvent
 	{
-		public ItemType Weapon { get; }
+		public Weapon Weapon { get; }
 		public int AmmoRemoved { get; set; }
 		public int ClipAmmoCountAfterReload { get; set; }
 		public int NormalMaxClipSize { get; }
 		public int CurrentClipAmmoCount { get; }
 		public int CurrentAmmoTotal { get; }
-		public PlayerReloadEvent(Player player, ItemType weapon, int ammoRemoved, int clipAmmoCountAfterReload, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal) : base(player)
+		public PlayerReloadEvent(Player player, Weapon weapon, int ammoRemoved, int clipAmmoCountAfterReload, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal) : base(player)
 		{
 			this.Weapon = weapon;
 			this.AmmoRemoved = ammoRemoved;
@@ -638,8 +653,14 @@ namespace Smod2.Events
 
 	public class PlayerGrenadeExplosion : PlayerEvent
 	{
-		public PlayerGrenadeExplosion(Player thrower) : base(thrower)
+		public bool Allow { get; set; }
+		public GrenadeType GrenadeType { get; }
+		public Vector Position { get; set; }
+		public PlayerGrenadeExplosion(Player thrower, GrenadeType grenadetype, Vector position, bool allow = true) : base(thrower)
 		{
+			this.Allow = allow;
+			this.GrenadeType = grenadetype;
+			this.Position = position;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)

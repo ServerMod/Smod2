@@ -25,7 +25,7 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerPlayerPickupItem : IEventHandler
 	{
 		/// <summary>  
-		/// This is called when a player picks up an item.
+		/// This is called when a player picks up an item and its deleted off of the ground and is NOT in their inventory.
 		/// </summary> 
 		void OnPlayerPickupItem(PlayerPickupItemEvent ev);
 	}
@@ -33,11 +33,10 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerPlayerPickupItemLate : IEventHandler
 	{
 		/// <summary>  
-		/// This is called after a player picks up an item.
+		/// This is called after a player picks up an item and is in their inventory.
 		/// </summary> 
 		void OnPlayerPickupItemLate(PlayerPickupItemLateEvent ev);
 	}
-
 	public interface IEventHandlerPlayerDropItem : IEventHandler
 	{
 		/// <summary>  
@@ -45,7 +44,13 @@ namespace Smod2.EventHandlers
 		/// </summary> 
 		void OnPlayerDropItem(PlayerDropItemEvent ev);
 	}
-
+	public interface IEventHandlerPlayerDropAllItems : IEventHandler
+	{
+		/// <summary>  
+		/// This is called when all of the items in a player's inventory are going to be dropped.
+		/// </summary> 
+		void OnPlayerDropAllItems(PlayerDropAllItemsEvent ev);
+	}
 	public interface IEventHandlerPlayerJoin : IEventHandler
 	{
 		/// <summary>  

@@ -1,4 +1,4 @@
-﻿using Smod2.API;
+using Smod2.API;
 using Smod2.EventHandlers;
 
 namespace Smod2.Events
@@ -168,6 +168,46 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerScpDeathAnnouncement)handler).OnScpDeathAnnouncement(this);
+		}
+	}
+
+	public class CassieCustomAnnouncementEvent : Event
+	{
+		public string Words { get; set; }
+		public bool MonoSpaced { get; set; }
+		public bool Allow { get; set; }
+
+		public CassieCustomAnnouncementEvent(string words, bool monospaced, bool allow = true)
+		{
+			this.Words = words;
+			this.MonoSpaced = monospaced;
+			this.Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerCassieCustomAnnouncement)handler).OnCassieCustomAnnouncement(this);
+		}
+	}
+
+	public class CassieTeamAnnouncementEvent : Event
+	{
+		public char NatoLetter { get; set; }
+		public int NatoNumber { get; set; }
+		public int SCPsLeft { get; set; }
+		public bool Allow { get; set; }
+
+		public CassieTeamAnnouncementEvent(char natoLetter, int natoNumber, int scpsLeft, bool allow = true)
+		{
+			this.NatoLetter = natoLetter;
+			this.NatoNumber = natoNumber;
+			this.SCPsLeft = scpsLeft;
+			this.Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerCassieTeamAnnouncement)handler).OnCassieTeamAnnouncement(this);
 		}
 	}
 }

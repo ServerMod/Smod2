@@ -1,5 +1,5 @@
-﻿using Smod2.Events;
-
+using Smod2.Events;
+using System;
 namespace Smod2.EventHandlers
 {
 	public interface IEventHandlerRoundStart : IEventHandler
@@ -30,16 +30,25 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		///  This is the event handler for disconnection events.
-		/// </summary> 
+		/// </summary>
 		void OnDisconnect(DisconnectEvent ev);
 	}
 
+	[Obsolete("Provides no information please use IEventHandlerPlayerLeave")]
 	public interface IEventHandlerLateDisconnect : IEventHandler
 	{
 		/// <summary>  
 		///  This is the event handler for disconnection events after the player has disconnected.
-		/// </summary> 
+		/// </summary>
 		void OnLateDisconnect(LateDisconnectEvent ev);
+	}
+
+	public interface IEventHandlerPlayerLeave : IEventHandler
+	{
+		/// <summary>  
+		///  Called OnDestroy of QueryProcessor aka when a player leaves.
+		/// </summary> 
+		void OnPlayerLeave(PlayerLeaveEvent ev);
 	}
 
 	public interface IEventHandlerCheckRoundEnd : IEventHandler
@@ -104,6 +113,14 @@ namespace Smod2.EventHandlers
 		///  This event handler will call when the server scene changes
 		/// </summary> 
 		void OnSceneChanged(SceneChangedEvent ev);
+	}
+	
+	public interface IEventHandlerSetSeed : IEventHandler
+	{
+		/// <summary>  
+		///  This event handler will call when the seed for the round is being set
+		/// </summary> 
+		void OnSetSeed(SetSeedEvent ev);
 	}
 }
 
