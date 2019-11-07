@@ -29,12 +29,21 @@ namespace Smod2.Events
 
 	public class RoundEndEvent : ServerEvent
 	{
-		public RoundEndEvent(Server server, Round round, ROUND_END_STATUS status) : base(server)
+		public RoundEndEvent(Server server, Round round, ROUND_END_STATUS status, LeadingTeam leading) : base(server)
 		{
 			this.round = round;
 			this.status = status;
+			this.leadingTeam = leading;
 		}
-
+		private LeadingTeam leadingTeam;
+		public LeadingTeam LeadingTeam
+		{
+			get => leadingTeam;
+			set
+			{
+				leadingTeam = value;
+			}
+		}
 		private Round round;
 		public Round Round { get => round; }
 		private ROUND_END_STATUS status;

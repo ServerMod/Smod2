@@ -1,4 +1,4 @@
-﻿
+
 namespace Smod2.API
 {
 	public enum ROUND_END_STATUS {
@@ -11,7 +11,13 @@ namespace Smod2.API
 		FORCE_END,
 		OTHER_VICTORY
 	}
-
+	public enum LeadingTeam
+	{
+		FacilityForces,
+		ChaosInsurgency,
+		Anomalies,
+		Draw
+	}
 	public abstract class Round
 	{
 		public abstract RoundStats Stats { get; }
