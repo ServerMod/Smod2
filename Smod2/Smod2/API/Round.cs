@@ -13,10 +13,10 @@ namespace Smod2.API
 	}
 	public enum LeadingTeam
 	{
-		FacilityForces,
-		ChaosInsurgency,
-		Anomalies,
-		Draw
+		FacilityForces = 0,
+		ChaosInsurgency = 1,
+		Anomalies = 2,
+		Draw = 3
 	}
 	public abstract class Round
 	{
