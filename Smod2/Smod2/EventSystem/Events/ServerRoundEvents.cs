@@ -105,16 +105,10 @@ namespace Smod2.Events
 
 	public class PlayerLeaveEvent : Event
 	{
-		public string Name { get; }
-		public string SteamID { get; }
-		public string IP { get; }
-		public int PlayerID { get; }
-		public PlayerLeaveEvent(string steamid, string ip, string name, int id)
+		public Player Player { get; }
+		public PlayerLeaveEvent(Player player)
 		{
-			this.IP = ip;
-			this.SteamID = steamid;
-			this.Name = name;
-			this.PlayerID = id;
+			this.Player = player;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
