@@ -1,4 +1,4 @@
-﻿using Smod2.API;
+using Smod2.API;
 using Smod2.EventHandlers;
 using Smod2.Events;
 using System.Collections.Generic;
@@ -7,12 +7,12 @@ namespace Smod2.EventSystem.Events
 {
 	public class DecideRespawnQueueEvent : Event
 	{
-		public DecideRespawnQueueEvent(Team[] teams)
+		public DecideRespawnQueueEvent(TeamType[] teams)
 		{
 			Teams = teams;
 		}
 
-		public Team[] Teams { get; set; }
+		public TeamType[] Teams { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
@@ -40,13 +40,13 @@ namespace Smod2.EventSystem.Events
 
 	public class SetRoleMaxHPEvent : Event
 	{
-		public SetRoleMaxHPEvent(Role role, int maxHP)
+		public SetRoleMaxHPEvent(RoleType role, int maxHP)
 		{
 			Role = role;
 			MaxHP = maxHP;
 		}
 
-		public Role Role { get; }
+		public RoleType Role { get; }
 		
 		public int MaxHP { get; set; }
 

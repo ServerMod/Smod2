@@ -89,6 +89,8 @@ namespace Smod2.API
 		public abstract string Name { get; }
 		public abstract string IpAddress { get; }
 		public abstract int PlayerId { get; }
+		public abstract string UserId { get; }
+		[Obsolete("Use UserId instead of SteamId")]
 		public abstract string SteamId { get; }
 		public abstract RadioStatus RadioStatus { get; set; }
 		public abstract bool OverwatchMode { get; set; }
@@ -96,10 +98,10 @@ namespace Smod2.API
 		public abstract Scp079Data Scp079Data { get; }
 
 		public abstract void Kill(DamageType type = DamageType.NUKE);
-		public abstract int GetHealth();
-		public abstract void AddHealth(int amount);
-		public abstract void Damage(int amount, DamageType type = DamageType.NUKE);
-		public abstract void SetHealth(int amount, DamageType type = DamageType.NUKE);
+		public abstract float GetHealth();
+		public abstract void AddHealth(float amount);
+		public abstract void Damage(float amount, DamageType type = DamageType.NUKE);
+		public abstract void SetHealth(float amount, DamageType type = DamageType.NUKE);
 		public abstract int GetAmmo(AmmoType type);
 		public abstract void SetAmmo(AmmoType type, int amount);
 		public abstract Vector GetPosition();
@@ -119,7 +121,7 @@ namespace Smod2.API
 		public abstract bool HasItem(ItemType type);
 		public abstract int GetItemIndex(ItemType type);
 		public abstract bool IsHandcuffed();
-		public abstract void ChangeRole(Role role, bool full = true, bool spawnTeleport = true, bool spawnProtect = true, bool removeHandcuffs = false);
+		public abstract void ChangeRole(RoleType role, bool full = true, bool spawnTeleport = true, bool spawnProtect = true, bool removeHandcuffs = false);
 		public abstract object GetGameObject();
 		public abstract UserGroup GetUserGroup();
 		public abstract string[] RunCommand(string command, string[] args);

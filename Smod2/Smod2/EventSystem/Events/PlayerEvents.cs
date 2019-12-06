@@ -152,12 +152,12 @@ namespace Smod2.Events
 
 	public class PlayerInitialAssignTeamEvent : PlayerEvent
 	{
-		public PlayerInitialAssignTeamEvent(Player player, Team team) : base(player)
+		public PlayerInitialAssignTeamEvent(Player player, TeamType team) : base(player)
 		{
 			Team = team;
 		}
 
-		public Team Team { get; set; }
+		public TeamType Team { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
@@ -168,7 +168,7 @@ namespace Smod2.Events
 	public class PlayerCheckEscapeEvent : PlayerEvent
 	{
 		public bool AllowEscape { get; set; }
-		public Role ChangeRole { get; set; }
+		public RoleType ChangeRole { get; set; }
 
 		public PlayerCheckEscapeEvent(Player player) : base(player)
 		{
@@ -182,7 +182,7 @@ namespace Smod2.Events
 
 	public class PlayerSetRoleEvent : PlayerEvent
 	{
-		public PlayerSetRoleEvent(Player player, TeamRole teamRole, Role role, List<ItemType> items, bool usingDefaultItem = true) : base(player)
+		public PlayerSetRoleEvent(Player player, TeamRole teamRole, RoleType role, List<ItemType> items, bool usingDefaultItem = true) : base(player)
 		{
 			TeamRole = teamRole;
 			Role = role;
@@ -194,7 +194,7 @@ namespace Smod2.Events
 
 		public bool UsingDefaultItem { get; set; }
 
-		public Role Role { get; set; }
+		public RoleType Role { get; set; }
 
 		public TeamRole TeamRole { get; }
 
@@ -365,14 +365,14 @@ namespace Smod2.Events
 
 	public class PlayerSpawnRagdollEvent : PlayerEvent
 	{
-		public Role Role { get; set; }
+		public RoleType Role { get; set; }
 		public Vector Position { get; set; }
 		public Vector Rotation { get; set; }
 		public Player Attacker { get; }
 		public DamageType DamageType { get; set; }
 		public bool AllowRecall { get; set; }
 
-		public PlayerSpawnRagdollEvent(Player player, Role role, Vector position, Vector rotation, Player attacker, DamageType damageType, bool allowRecall) : base(player)
+		public PlayerSpawnRagdollEvent(Player player, RoleType role, Vector position, Vector rotation, Player attacker, DamageType damageType, bool allowRecall) : base(player)
 		{
 			this.Role = role;
 			this.Position = position;
