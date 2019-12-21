@@ -181,6 +181,8 @@ namespace Smod2.API
 		public abstract Vector Forward { get; }
 		public abstract Vector SpeakerPosition { get; }
 
+		public abstract void FlickerLights(float duration = 8f);
+		[Obsolete("Use FlickerLights(float duration = 8f) instead of FlickerLights()")]
 		public abstract void FlickerLights();
 		public abstract string[] GetObjectName();
 		public abstract object GetGameObject();
