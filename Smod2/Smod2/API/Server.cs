@@ -40,6 +40,8 @@ namespace Smod2.API
 		public abstract Player GetPlayer(int playerId);
 		public abstract List<Connection> GetConnections(string filter = "");
 		public abstract List<TeamRole> GetRoles(string filter = "");
+		public abstract string GetAppFolder(bool addSeparator = true, bool serverConfig = false, string centralConfig = "");
+		[Obsolete("Use GetAppFolder(bool addSeparator = true, bool serverConfig = false, string centralConfig = \"\") instead of GetAppFolder(bool shared = false, bool addSeparator = false, bool addPort = false, bool addConfigs = false)")]
 		public abstract string GetAppFolder(bool shared = false, bool addSeparator = false, bool addPort = false, bool addConfigs = false);
 
 		public abstract bool BanUserId(string username, string userId, int duration, string reason = "", string issuer = "Server");
