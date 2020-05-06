@@ -359,15 +359,9 @@ namespace Smod2
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading event snapshot");
 			EventManager.Manager.AddSnapshotEventHandlers(plugin);
 
-			if (CommandManager == null)
-			{
-				Manager.Logger.Error("PLUGIN_MANAGER", "Somehow CommandManager is null. Skipping loading commands...");
-			}
-			else
-			{
-				Manager.Logger.Debug("PLUGIN_MANAGER", "Loading command snapshot");
-				CommandManager.ReregisterPlugin(plugin);
-			}
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading command snapshot");
+
+			CommandManager.ReregisterPlugin(plugin);
 
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Invoking OnEnable");
 			plugin.OnEnable();
@@ -423,15 +417,8 @@ namespace Smod2
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Invoking OnDisable");
 			plugin.OnDisable();
 
-			if (CommandManager == null)
-			{
-				Manager.Logger.Error("PLUGIN_MANAGER", "Somehow CommandManager is null. Skipping unloading commands...");
-			}
-			else
-			{
-				Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading commands");
-				CommandManager.UnregisterCommands(plugin);
-			}
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading commands");
+			CommandManager.UnregisterCommands(plugin);
 
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading event handlers");
 			EventManager.Manager.RemoveEventHandlers(plugin);
