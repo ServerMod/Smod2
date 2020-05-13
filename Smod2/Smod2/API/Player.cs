@@ -4,6 +4,13 @@ using Smod2.Commands;
 
 namespace Smod2.API
 {
+	public enum UserIdType
+	{
+		STEAM,
+		DISCORD,
+		NORTHWOOD
+	}
+
 	public enum DamageType
 	{
 		NONE,
@@ -90,6 +97,7 @@ namespace Smod2.API
 		public abstract string IpAddress { get; }
 		public abstract int PlayerId { get; }
 		public abstract string UserId { get; }
+		public abstract UserIdType UserIdType { get; }
 		[Obsolete("Use UserId instead of SteamId")]
 		public abstract string SteamId { get; }
 		public abstract RadioStatus RadioStatus { get; set; }
@@ -97,6 +105,20 @@ namespace Smod2.API
 		public abstract bool DoNotTrack { get; }
 		public abstract Scp079Data Scp079Data { get; }
 
+		public string GetParsedUserID()
+		{
+			if (!string.IsNullOrWhiteSpace(UserId))
+			{
+				int charLocation = UserId.IndexOf('@');
+
+				if (charLocation > 0)
+				{
+					return UserId.Substring(0, charLocation);
+				}
+			}
+
+			return null;
+		}
 		public abstract void Kill(DamageType type = DamageType.NUKE);
 		public abstract float GetHealth();
 		public abstract void AddHealth(float amount);
