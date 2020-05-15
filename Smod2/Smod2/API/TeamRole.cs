@@ -31,7 +31,6 @@ namespace Smod2.API
 	public enum RoleType
 	{
 		UNASSIGNED = -1,
-		SCP_457 = -1,
 		SCP_173 = 0,
 		CLASSD = 1,
 		SPECTATOR = 2,
@@ -95,7 +94,6 @@ namespace Smod2.API
 			RoleType.SCP_096,
 			RoleType.SCP_106,
 			RoleType.SCP_173,
-			RoleType.SCP_457,
 			RoleType.SCP_939_53,
 			RoleType.SCP_939_89,
 			RoleType.CLASSD,
@@ -116,7 +114,6 @@ namespace Smod2.API
 			RoleType.SCP_096,
 			RoleType.SCP_106,
 			RoleType.SCP_173,
-			RoleType.SCP_457,
 			RoleType.SCP_939_53,
 			RoleType.SCP_939_89
 		};
@@ -127,7 +124,6 @@ namespace Smod2.API
 			RoleType.SCP_096,
 			RoleType.SCP_106,
 			RoleType.SCP_173,
-			RoleType.SCP_457,
 			RoleType.SCP_939_53,
 			RoleType.SCP_939_89
 		};
