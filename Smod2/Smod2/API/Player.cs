@@ -109,7 +109,7 @@ namespace Smod2.API
 		{
 			if (!string.IsNullOrWhiteSpace(UserId))
 			{
-				int charLocation = UserId.IndexOf('@');
+				int charLocation = UserId.LastIndexOf('@');
 
 				if (charLocation > 0)
 				{
