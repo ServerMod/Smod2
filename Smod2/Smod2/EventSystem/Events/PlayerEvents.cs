@@ -420,18 +420,24 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PlayerMedkitUseEvent : PlayerEvent
+	public class PlayerMedicalUseEvent : PlayerEvent
 	{
-		public int RecoverHealth { get; set; }
+		public int AmountHealth { get; set; }
+		public int ArtificalHP { get; set; }
+		public int AmountRegen { get; }
+		public ItemType MedicalItem { get; }
 
-		public PlayerMedkitUseEvent(Player player, int recoverHealth) : base(player)
+		public PlayerMedicalUseEvent(Player player, int amountHealth, int artificalHP, int TotalhpRegenerated, ItemType item) : base(player)
 		{
-			this.RecoverHealth = recoverHealth;
+			this.AmountHealth = amountHealth;
+			this.MedicalItem = item;
+			this.ArtificalHP = artificalHP;
+			this.AmountRegen = TotalhpRegenerated;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerMedkitUse)handler).OnMedkitUse(this);
+			((IEventHandlerMedicalUse)handler).OnMedicalUse(this);
 		}
 	}
 

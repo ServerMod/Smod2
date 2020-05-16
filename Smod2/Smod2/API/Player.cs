@@ -122,6 +122,8 @@ namespace Smod2.API
 		public abstract void Kill(DamageType type = DamageType.NUKE);
 		public abstract float GetHealth();
 		public abstract void AddHealth(float amount);
+		public abstract float GetArtificialHealth();
+		public abstract void SetArtificialHealth(float amount);
 		public abstract void Damage(float amount, DamageType type = DamageType.NUKE);
 		public abstract void SetHealth(float amount, DamageType type = DamageType.NUKE);
 		public abstract int GetAmmo(AmmoType type);
