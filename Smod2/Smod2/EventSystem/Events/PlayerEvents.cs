@@ -423,16 +423,16 @@ namespace Smod2.Events
 	public class PlayerMedicalUseEvent : PlayerEvent
 	{
 		public int AmountHealth { get; set; }
-		public int ArtificalHP { get; set; }
+		public int AmountArtificial { get; set; }
 		public int AmountRegen { get; }
 		public ItemType MedicalItem { get; }
 
 		public PlayerMedicalUseEvent(Player player, int amountHealth, int artificalHP, int TotalhpRegenerated, ItemType item) : base(player)
 		{
 			this.AmountHealth = amountHealth;
-			this.MedicalItem = item;
-			this.ArtificalHP = artificalHP;
+			this.AmountArtificial = artificalHP;
 			this.AmountRegen = TotalhpRegenerated;
+			this.MedicalItem = item;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
