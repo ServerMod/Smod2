@@ -187,12 +187,12 @@ namespace Smod2.EventHandlers
 		void OnContain106(PlayerContain106Event ev);
 	}
 
-	public interface IEventHandlerMedkitUse : IEventHandler
+	public interface IEventHandlerMedicalUse : IEventHandler
 	{
 		/// <summary>  
 		/// Called when a player uses Medkit
 		/// <summary>
-		void OnMedkitUse(PlayerMedkitUseEvent ev);
+		void OnMedicalUse(PlayerMedicalUseEvent ev);
 	}
 
 	public interface IEventHandlerShoot : IEventHandler

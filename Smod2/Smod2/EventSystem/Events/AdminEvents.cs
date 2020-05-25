@@ -1,4 +1,4 @@
-﻿using Smod2.API;
+using Smod2.API;
 using Smod2.EventHandlers;
 
 namespace Smod2.Events
@@ -32,7 +32,7 @@ namespace Smod2.Events
 	public class BanEvent : Event
 	{
 		public Player Player { get; set; }
-		public Player Admin { get; set; }
+		public string Issuer { get; set; }
 		public int Duration { get; set; }
 		public string Reason { get; set; }
 		public string Result { get; set; }

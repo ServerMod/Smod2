@@ -1,4 +1,5 @@
-﻿using Smod2.Events;
+using System;
+using Smod2.Events;
 
 namespace Smod2.EventHandlers
 {
@@ -6,6 +7,7 @@ namespace Smod2.EventHandlers
 	{
 		void OnAdminQuery(AdminQueryEvent ev);
 	}
+	[Obsolete("This event is never triggered and will be removed in the future")]
 	public interface IEventHandlerAuthCheck : IEventHandler
 	{
 		void OnAuthCheck(AuthCheckEvent ev);

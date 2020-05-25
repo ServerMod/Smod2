@@ -25,10 +25,10 @@ namespace Smod2
 	public class PluginManager
 	{
 		public static readonly int SMOD_MAJOR = 3;
-		public static readonly int SMOD_MINOR = 6;
+		public static readonly int SMOD_MINOR = 7;
 		public static readonly int SMOD_REVISION = 0;
 
-		public static readonly string SMOD_BUILD = "B";
+		public static readonly string SMOD_BUILD = "A";
 
 		public static readonly string DEPENDENCY_FOLDER = "dependencies";
 
@@ -323,6 +323,12 @@ namespace Smod2
 			
 			foreach (Plugin plugin in plugins)
 			{
+				if (plugin == null)
+				{
+					Manager.Logger.Error("PLUGIN_MANAGER", "Somehow one of the plugins is null. Skipping...");
+					continue;
+				}
+
 				EnablePlugin(plugin);
 			}
 		}
@@ -333,9 +339,15 @@ namespace Smod2
 			{
 				return;
 			}
-			
+
+			if (plugin.Details == null)
+			{
+				Manager.Logger.Error("PLUGIN_MANAGER", "Somehow one of the plugins Details is null. Skipping...");
+				return;
+			}
+
 			Manager.Logger.Info("PLUGIN_MANAGER", "Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
-			
+
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering pipe exports");
 			if (!PipeManager.Manager.IsRegistered(plugin)) PipeManager.Manager.RegisterPlugin(plugin); // In case it got disabled
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering pipe imports");
@@ -346,7 +358,9 @@ namespace Smod2
 			LangManager.Manager.RegisterPlugin(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading event snapshot");
 			EventManager.Manager.AddSnapshotEventHandlers(plugin);
+
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Loading command snapshot");
+
 			CommandManager.ReregisterPlugin(plugin);
 
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Invoking OnEnable");
@@ -405,6 +419,7 @@ namespace Smod2
 
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading commands");
 			CommandManager.UnregisterCommands(plugin);
+
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading event handlers");
 			EventManager.Manager.RemoveEventHandlers(plugin);
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Unloading configs");

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Smod2.API
@@ -5,7 +6,11 @@ namespace Smod2.API
 	public abstract class Map
 	{
 		public abstract List<Item> GetItems(ItemType type, bool world_only);
+		public abstract Vector GetRandomSpawnPoint(RoleType role);
+		[Obsolete("Use RoleType instead of Role")]
 		public abstract Vector GetRandomSpawnPoint(Role role);
+		public abstract List<Vector> GetSpawnPoints(RoleType role);
+		[Obsolete("Use RoleType instead of Role")]
 		public abstract List<Vector> GetSpawnPoints(Role role);
 		public abstract List<Vector> GetBlastDoorPoints();
 		public abstract List<Door> GetDoors();
@@ -176,6 +181,8 @@ namespace Smod2.API
 		public abstract Vector Forward { get; }
 		public abstract Vector SpeakerPosition { get; }
 
+		public abstract void FlickerLights(float duration = 8f);
+		[Obsolete("Use FlickerLights(float duration = 8f) instead of FlickerLights()")]
 		public abstract void FlickerLights();
 		public abstract string[] GetObjectName();
 		public abstract object GetGameObject();
