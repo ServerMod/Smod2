@@ -36,7 +36,9 @@ namespace Smod2.API
 		SCP_096,
 		SCP_106,
 		SCP_173,
-		SCP_939
+		SCP_939,
+		SCP_207,
+		RECONTAINMENT
 	}
 
 	public enum UserRank
