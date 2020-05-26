@@ -30,6 +30,7 @@ namespace Smod2.API
 		MP7,
 		LOGICER, // Chaos Gun
 		USP,
+		MICROHID, //New: used to simply use TESLA
 		FRAG, // Frag grenade
 		SCP_049,
 		SCP_049_2,
