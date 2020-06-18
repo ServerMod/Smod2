@@ -1035,4 +1035,21 @@ namespace Smod2.Events
 			((IEventHandlerScp096CooldownEnd)handler).OnScp096CooldownEnd(this);
 		}
 	}
+
+	public class Scp096AddTargetEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+		public Player Target { get; }
+
+		public Scp096AddTargetEvent(Player scp096, Player target, bool allow = true) : base(scp096)
+		{
+			Allow = allow;
+			Target = target;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerScp096AddTarget)handler).OnScp096AddTarget(this);
+		}
+	}
 }

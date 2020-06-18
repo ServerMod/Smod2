@@ -466,4 +466,12 @@ namespace Smod2.EventHandlers
 		/// </summary>
 		void OnScp096CooldownEnd(Scp096CooldownEndEvent ev);
 	}
+
+	public interface IEventHandlerScp096AddTarget : IEventHandler
+	{
+		/// <summary>
+		/// Called when SCP-096 adds a target.
+		/// </summary>
+		void OnScp096AddTarget(Scp096AddTargetEvent ev);
+	}
 }
