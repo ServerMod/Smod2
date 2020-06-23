@@ -26,6 +26,6 @@ namespace Smod2.API
 		public abstract void AddNTFUnit(string unit);
 		public abstract void MTFRespawn(bool isCI);
 		public abstract void RestartRound();
-		public abstract bool RoundLock { get; set; };
+		public abstract bool RoundLock { get; set; }
 	}
 }
