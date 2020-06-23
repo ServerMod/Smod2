@@ -7,13 +7,15 @@ namespace Smod2.EventSystem.Events
 {
 	public class DecideRespawnQueueEvent : Event
 	{
-		public DecideRespawnQueueEvent(TeamType[] teams)
+		public DecideRespawnQueueEvent(TeamType[] teams, Player[] players)
 		{
 			Teams = teams;
+			Players = players;
 		}
 
 		public TeamType[] Teams { get; set; }
-
+		public Player[] Players { get; set; }
+		
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerDecideTeamRespawnQueue)handler).OnDecideTeamRespawnQueue(this);
