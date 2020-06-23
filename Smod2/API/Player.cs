@@ -88,6 +88,7 @@ namespace Smod2.API
 	{
 		FRAG_GRENADE = 0,
 		FLASHBANG = 1
+		SCP018 = 2
 	}
 
 	public abstract class Player : ICommandSender
