@@ -87,7 +87,7 @@ namespace Smod2.API
 	public enum GrenadeType
 	{
 		FRAG_GRENADE = 0,
-		FLASHBANG = 1
+		FLASHBANG = 1,
 		SCP018 = 2
 	}
 
