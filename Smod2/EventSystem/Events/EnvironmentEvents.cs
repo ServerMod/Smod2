@@ -1,5 +1,6 @@
 using Smod2.API;
 using Smod2.EventHandlers;
+using System.Collections.Generic;
 
 namespace Smod2.Events
 {
@@ -7,15 +8,17 @@ namespace Smod2.Events
 	{
 		public Player User { get; }
 		public KnobSetting KnobSetting { get; set; }
-		public object[] Inputs { get; set; } //TODO: Proper wrapping API
+		public List<Player> PlayerInputs { get; set; }
+		public List<Item> ItemInputs { get; set; }
 		public Vector IntakePos { get; set; }
 		public Vector OutputPos { get; set; }
 
-		public SCP914ActivateEvent(Player user, KnobSetting knobSetting, object[] inputs, Vector intakePos, Vector outputPos)
+		public SCP914ActivateEvent(Player user, KnobSetting knobSetting, List<Player> playerList, List<Item> itemList, Vector intakePos, Vector outputPos)
 		{
 			this.User = user;
 			this.KnobSetting = knobSetting;
-			this.Inputs = inputs;
+			this.PlayerInputs = playerList;
+			this.ItemInputs = itemList;
 			this.IntakePos = intakePos;
 			this.OutputPos = outputPos;
 		}
