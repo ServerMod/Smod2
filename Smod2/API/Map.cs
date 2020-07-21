@@ -44,7 +44,7 @@ namespace Smod2.API
 		public abstract void ClearBroadcasts();
 		public abstract bool WarheadLeverEnabled { get; set; }
 		public abstract bool WarheadKeycardEntered { get; set; }
-		public abstract void OverchargeLights(float forceDuration, bool onlyHeavy)
+		public abstract void OverchargeLights(float forceDuration, bool onlyHeavy);
 	}
 
 	public abstract class Door
