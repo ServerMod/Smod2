@@ -159,9 +159,9 @@ namespace Smod2.Events
 	{
 		public bool ShouldPlay { get; set; }
 		public Player DeadPlayer { get; }
-		public Role PlayerRole { get; }
+		public RoleType PlayerRole { get; }
 
-		public ScpDeathAnnouncementEvent(bool shouldPlay, Player deadPlayer, Role playerRole)
+		public ScpDeathAnnouncementEvent(bool shouldPlay, Player deadPlayer, RoleType playerRole)
 		{
 			ShouldPlay = shouldPlay;
 			DeadPlayer = deadPlayer;
