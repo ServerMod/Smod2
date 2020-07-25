@@ -292,12 +292,15 @@ namespace Smod2.Events
 		public Vector TargetPosition { get; set; }
 		public Player Attacker { get; }
 
-		public PlayerPocketDimensionEnterEvent(Player player, float damage, Vector lastPosition, Vector targetPosition, Player attacker) : base(player)
+		public bool Allow { get; set; }
+
+		public PlayerPocketDimensionEnterEvent(Player player, float damage, Vector lastPosition, Vector targetPosition, Player attacker, bool allow) : base(player)
 		{
 			Damage = damage;
 			LastPosition = lastPosition;
 			TargetPosition = targetPosition;
 			Attacker = attacker;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
