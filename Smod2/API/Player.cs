@@ -13,33 +13,37 @@ namespace Smod2.API
 
 	public enum DamageType
 	{
-		NONE,
-		LURE,
-		NUKE,
-		WALL,
-		DECONT, // Decontamination
-		TESLA, // Tesla
-		FALLDOWN,
-		FLYING,
-		CONTAIN,
-		POCKET,
-		RAGDOLLLESS,
-		COM15,
-		P90,
-		E11_STANDARD_RIFLE,
-		MP7,
-		LOGICER, // Chaos Gun
-		USP,
-		MICROHID, //New: used to simply use TESLA
-		FRAG, // Frag grenade
-		SCP_049,
-		SCP_049_2,
-		SCP_096,
-		SCP_106,
-		SCP_173,
-		SCP_939,
-		SCP_207,
-		RECONTAINMENT
+		NONE = 0,
+		LURE = 1,
+		NUKE = 2,
+		WALL = 3,
+		DECONT = 4,
+		TESLA = 5,
+		FALLDOWN = 6,
+		FLYING_DETECTION = 7,
+		FRIENDLY_FIRE_DETECTOR = 8,
+		CONTAIN = 9,
+		POCKET = 10,
+		RAGDOLLLESS = 11,
+		COM15 = 12,
+		P90 = 13,
+		E11_STANDARD_RIFLE = 14,
+		MP7 = 15,
+		LOGICIER = 16,
+		USP = 17,
+		MICROHID = 18,
+		GRENADE = 19,
+		SCP_049 = 20,
+		SCP_049_2 = 21,
+		SCP_096 = 22,
+		SCP_106 = 23,
+		SCP_173 = 24,
+		SCP_939 = 25,
+		SCP_207 = 26,
+		RECONTAINMENT = 27,
+		BLEEDING = 28,
+		POISONED = 29,
+		ASPHYXIATION = 30
 	}
 
 	public enum UserRank
