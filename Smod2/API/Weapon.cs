@@ -4,7 +4,7 @@ namespace Smod2.API
 	{
 		COM15 = (int)ItemType.COM15,
 		MICROHID = (int)ItemType.MicroHID,
-		E11_STANDARD_RIFLE = (int)ItemType.E11SR,
+		E11_STANDARD_RIFLE = (int)ItemType.Epsilon_11_SR,
 		P90 = (int)ItemType.Project90,
 		MP7 = (int)ItemType.MP7,
 		LOGICER = (int)ItemType.Logicer,
