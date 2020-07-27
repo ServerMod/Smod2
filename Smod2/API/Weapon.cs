@@ -3,11 +3,11 @@ namespace Smod2.API
 	public enum WeaponType
 	{
 		COM15 = (int)ItemType.COM15,
-		MICROHID = (int)ItemType.MICROHID,
-		E11_STANDARD_RIFLE = (int)ItemType.E11_STANDARD_RIFLE,
-		P90 = (int)ItemType.P90,
+		MICROHID = (int)ItemType.MicroHID,
+		E11_STANDARD_RIFLE = (int)ItemType.E11SR,
+		P90 = (int)ItemType.Project90,
 		MP7 = (int)ItemType.MP7,
-		LOGICER = (int)ItemType.LOGICER,
+		LOGICER = (int)ItemType.Logicer,
 		USP = (int)ItemType.USP
 	}
 
