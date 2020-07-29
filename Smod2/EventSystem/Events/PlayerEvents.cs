@@ -17,16 +17,18 @@ namespace Smod2.Events
 
 	public class PlayerHurtEvent : PlayerEvent
 	{
-		public PlayerHurtEvent(Player player, Player attacker, float damage, DamageType damageType) : base(player)
+		public PlayerHurtEvent(Player player, Player attacker, float damage,float ahpdamage, DamageType damageType) : base(player)
 		{
 			this.attacker = attacker;
 			Damage = damage;
+			AHPDamage = ahpdamage;
 			DamageType = damageType;
 		}
 
 		private Player attacker;
 		public Player Attacker { get => attacker; }
 		public float Damage { get; set; }
+		public float AHPDamage { get; set; }
 		public DamageType DamageType { get; set; }
 		
 		public override void ExecuteHandler(IEventHandler handler)
@@ -444,6 +446,25 @@ namespace Smod2.Events
 		}
 	}
 
+	public class PlayerMedicalHealOverTimeEvent : PlayerEvent
+	{
+		public float HealthRegenerated { get; set; }
+		public float ArtificialRegenerated { get; set; }
+		public ItemType MedicalItem { get; }
+
+		public PlayerMedicalHealOverTimeEvent(Player player, float amountHealth, float artificalHP, ItemType item) : base(player)
+		{
+			this.HealthRegenerated = amountHealth;
+			this.ArtificialRegenerated = artificalHP;
+			this.MedicalItem = item;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerMedicalHealOverTime)handler).OnMedicalHealOverTime(this);
+		}
+	}
+
 	public class PlayerShootEvent : PlayerEvent
 	{
 		public Player Target { get; }
@@ -456,7 +477,9 @@ namespace Smod2.Events
 		public Vector Direction { get; set; }
 		public WeaponSound ?WeaponSound { get; set; }
 
-		public PlayerShootEvent(Player player, Player target, Weapon weapon, WeaponSound ?weaponSound, Vector sourcePosition, Vector targetPosition, string targetHitbox, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
+		public bool Allow { get; set; }
+
+		public PlayerShootEvent(Player player, Player target, Weapon weapon, WeaponSound ?weaponSound, Vector sourcePosition, Vector targetPosition, string targetHitbox, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true, bool allow = true) : base(player)
 		{
 			this.Target = target;
 			this.Weapon = weapon;
@@ -467,6 +490,7 @@ namespace Smod2.Events
 			this.TargetHitbox = targetHitbox;
 			this.Direction = direction;
 			this.WeaponSound = weaponSound;
+			this.Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -1053,6 +1077,42 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerScp096AddTarget)handler).OnScp096AddTarget(this);
+		}
+	}
+
+	public class MicroHIDEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+		public Weapon MicroHID { get; }
+		public MicroHIDState CurrentState { get; }
+
+		public MicroHIDEvent(Player shooter, Weapon microHID, MicroHIDState state, bool allow = true) : base(shooter)
+		{
+			Allow = allow;
+			MicroHID = microHID;
+			CurrentState = state;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerMicroHID)handler).OnMicroHIDStateChange(this);
+		}
+	}
+
+	public class StatusEffectEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+		public StatusEffect StatusEffect { get; }
+
+		public StatusEffectEvent(Player player, StatusEffect state, bool allow = true) : base(player)
+		{
+			Allow = allow;
+			StatusEffect = state;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerStatusEffect)handler).OnStatusEffectChange(this);
 		}
 	}
 }

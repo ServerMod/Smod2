@@ -123,7 +123,7 @@ namespace Smod2.EventHandlers
 		void OnIntercomCooldownCheck(PlayerIntercomCooldownCheckEvent ev);
 	}
 
-	public interface IEventHandlerPocketDimensionExit: IEventHandler
+	public interface IEventHandlerPocketDimensionExit : IEventHandler
 	{
 		/// <summary>  
 		/// Called when a player escapes from Pocket Demension
@@ -131,7 +131,7 @@ namespace Smod2.EventHandlers
 		void OnPocketDimensionExit(PlayerPocketDimensionExitEvent ev);
 	}
 
-	public interface IEventHandlerPocketDimensionEnter: IEventHandler
+	public interface IEventHandlerPocketDimensionEnter : IEventHandler
 	{
 		/// <summary>  
 		/// Called when a player enters Pocket Demension
@@ -190,9 +190,17 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerMedicalUse : IEventHandler
 	{
 		/// <summary>  
-		/// Called when a player uses Medkit
+		/// Called when a player uses any medical item.
 		/// <summary>
 		void OnMedicalUse(PlayerMedicalUseEvent ev);
+	}
+
+	public interface IEventHandlerMedicalHealOverTime : IEventHandler
+	{
+		/// <summary>  
+		/// Called when a player heals over time.
+		/// <summary>
+		void OnMedicalHealOverTime(PlayerMedicalHealOverTimeEvent ev);
 	}
 
 	public interface IEventHandlerShoot : IEventHandler
@@ -274,7 +282,7 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnRecallZombie(PlayerRecallZombieEvent ev);
 	}
-	
+
 	public interface IEventHandlerCallCommand : IEventHandler
 	{
 		/// <summary>  
@@ -473,5 +481,21 @@ namespace Smod2.EventHandlers
 		/// Called when SCP-096 adds a target.
 		/// </summary>
 		void OnScp096AddTarget(Scp096AddTargetEvent ev);
+	}
+
+	public interface IEventHandlerMicroHID : IEventHandler
+	{
+		/// <summary>
+		/// Called when MicroHID changes state like when a player starting firing, when it fires and when it ends.
+		/// </summary>
+		void OnMicroHIDStateChange(MicroHIDEvent ev);
+	}
+
+	public interface IEventHandlerStatusEffect : IEventHandler
+	{
+		/// <summary>
+		/// Called whenever a player is affected by a status effect.
+		/// </summary>
+		void OnStatusEffectChange(StatusEffectEvent ev);
 	}
 }

@@ -11,6 +11,14 @@ namespace Smod2.API
 		USP = (int)ItemType.USP
 	}
 
+	public enum MicroHIDState
+	{
+		IDLE,
+		CHARGINGFULL,
+		CHARGING,
+		FIRING
+	}
+
 	public enum WeaponSound
 	{
 		COM15 = 0,
