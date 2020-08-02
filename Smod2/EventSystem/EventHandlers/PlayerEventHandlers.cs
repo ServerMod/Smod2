@@ -474,4 +474,12 @@ namespace Smod2.EventHandlers
 		/// </summary>
 		void OnScp096AddTarget(Scp096AddTargetEvent ev);
 	}
+
+	public interface IEventHandlerPlayerLockerAccess : IEventHandler
+	{
+		/// <summary>
+		///	Called when the player interacts with the locker.
+		/// </summary>
+		void OnPlayerLockerAccess(PlayerLockerAccessEvent ev);
+	}
 }
