@@ -131,10 +131,16 @@ namespace Smod2.API
 			return null;
 		}
 		public abstract void Kill(DamageType type = DamageType.NUKE);
+		[Obsolete("Use HP property instead.")]
 		public abstract float GetHealth();
+		[Obsolete("Use HP property instead.")]
 		public abstract void AddHealth(float amount);
+		[Obsolete("Use AHP property instead.")]
 		public abstract float GetArtificialHealth();
+		[Obsolete("Use AHP property instead.")]
 		public abstract void SetArtificialHealth(float amount);
+		public abstract float AHP { get; set; }
+		public abstract float HP { get; set; }
 		public abstract void Damage(float amount, DamageType type = DamageType.NUKE);
 		public abstract void SetHealth(float amount, DamageType type = DamageType.NUKE);
 		public abstract int GetAmmo(AmmoType type);
@@ -165,9 +171,11 @@ namespace Smod2.API
 		public abstract Vector GetRotation();
 		public abstract void SendConsoleMessage(string message, string color = "green");
 		public abstract void Infect(float time);
+		[Obsolete("Use the other grenadetype overload since this is outdated with base game.")]
 		public abstract void ThrowGrenade(GrenadeType grenadeType, bool isCustomDirection, Vector direction, bool isEnvironmentallyTriggered, Vector position, bool isCustomForce, float throwForce, bool slowThrow = false);
 		[Obsolete("Use the overload with GrenadeType instead of ItemType", true)]
 		public abstract void ThrowGrenade(ItemType grenadeType, bool isCustomDirection, Vector direction, bool isEnvironmentallyTriggered, Vector position, bool isCustomForce, float throwForce, bool slowThrow = false);
+		public abstract void ThrowGrenade(GrenadeType grenadeType, Vector direction = null, float throwForce = 1f, bool slowThrow = false);
 		public abstract bool BypassMode { get; set; }
 		[Obsolete("Use BypassMode property instead.")]
 		public abstract bool GetBypassMode();
