@@ -1055,4 +1055,57 @@ namespace Smod2.Events
 			((IEventHandlerScp096AddTarget)handler).OnScp096AddTarget(this);
 		}
 	}
+
+	public class DisableStatusEffectEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+		public PlayerEffect PlayerEffect { get; }
+
+		public DisableStatusEffectEvent(Player player, PlayerEffect effect, bool allow = true) : base(player)
+		{
+			PlayerEffect = effect;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerDisableStatusEffect)handler).OnDisableStatusEffect(this);
+		}
+	}
+
+	public class EarlyStatusEffectChangeEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+		public PlayerEffect PlayerEffect { get; }
+		public float NewValue { get; set; }
+
+		public EarlyStatusEffectChangeEvent(Player player, PlayerEffect effect, float New, bool allow = true) : base(player)
+		{
+			PlayerEffect = effect;
+			Allow = allow;
+			NewValue = New;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerEarlyStatusEffectChange)handler).OnEarlyStatusEffectChange(this);
+		}
+	}
+
+	public class LateStatusEffectChangeEvent : PlayerEvent
+	{
+		public PlayerEffect PlayerEffect { get; }
+		public float NewValue { get; set; }
+		
+		public LateStatusEffectChangeEvent(Player player, PlayerEffect effect, float New) : base(player)
+		{
+			PlayerEffect = effect;
+			NewValue = New;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerLateStatusEffectChange)handler).OnLateStatusEffectChange(this);
+		}
+	}
 }

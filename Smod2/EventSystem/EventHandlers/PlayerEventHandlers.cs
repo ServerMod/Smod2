@@ -123,7 +123,7 @@ namespace Smod2.EventHandlers
 		void OnIntercomCooldownCheck(PlayerIntercomCooldownCheckEvent ev);
 	}
 
-	public interface IEventHandlerPocketDimensionExit: IEventHandler
+	public interface IEventHandlerPocketDimensionExit : IEventHandler
 	{
 		/// <summary>  
 		/// Called when a player escapes from Pocket Demension
@@ -131,7 +131,7 @@ namespace Smod2.EventHandlers
 		void OnPocketDimensionExit(PlayerPocketDimensionExitEvent ev);
 	}
 
-	public interface IEventHandlerPocketDimensionEnter: IEventHandler
+	public interface IEventHandlerPocketDimensionEnter : IEventHandler
 	{
 		/// <summary>  
 		/// Called when a player enters Pocket Demension
@@ -274,7 +274,7 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnRecallZombie(PlayerRecallZombieEvent ev);
 	}
-	
+
 	public interface IEventHandlerCallCommand : IEventHandler
 	{
 		/// <summary>  
@@ -473,5 +473,29 @@ namespace Smod2.EventHandlers
 		/// Called when SCP-096 adds a target.
 		/// </summary>
 		void OnScp096AddTarget(Scp096AddTargetEvent ev);
+	}
+
+	public interface IEventHandlerDisableStatusEffect : IEventHandler
+	{
+		/// <summary>
+		/// Called when an effect is disabled or times out.
+		/// </summary>
+		void OnDisableStatusEffect(DisableStatusEffectEvent ev);
+	}
+
+	public interface IEventHandlerEarlyStatusEffectChange : IEventHandler
+	{
+		/// <summary>
+		/// Called before effect's duration is changed.
+		/// </summary>
+		void OnEarlyStatusEffectChange(EarlyStatusEffectChangeEvent ev);
+	}
+
+	public interface IEventHandlerLateStatusEffectChange : IEventHandler
+	{
+		/// <summary>
+		/// Called after effect's duration is changed.
+		/// </summary>
+		void OnLateStatusEffectChange(LateStatusEffectChangeEvent ev);
 	}
 }
