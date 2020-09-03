@@ -1052,8 +1052,8 @@ namespace Smod2.Events
 
 	public sealed class PlayerLockerAccessEvent : PlayerEvent
 	{
-		public int LockerId { get; }
-		public int ChamberId { get; }
+		public byte LockerId { get; }
+		public byte ChamberId { get; }
 		/// <summary>
 		///	Is the same permissions for items.
 		/// </summary>
@@ -1065,7 +1065,7 @@ namespace Smod2.Events
 		public bool Allow { get; set; }
 
 		public PlayerLockerAccessEvent(Player ply,
-			int lockerId, int chamberId, string chamberAccessToken,
+			byte lockerId, byte chamberId, string chamberAccessToken,
 			 bool isOpening, bool allow) : base(ply)
 		{
 			LockerId = lockerId;
