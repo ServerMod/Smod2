@@ -6,29 +6,27 @@ namespace Smod2.Events
 {
 	public abstract class PlayerEvent : Event
 	{
-		public PlayerEvent(Player player)
+		protected PlayerEvent(Player player)
 		{
-			this.player = player;
+			this.Player = player;
 		}
 
-		private Player player;
-		public Player Player { get => player; }
+		public Player Player { get; }
 	}
 
 	public class PlayerHurtEvent : PlayerEvent
 	{
 		public PlayerHurtEvent(Player player, Player attacker, float damage, DamageType damageType) : base(player)
 		{
-			this.attacker = attacker;
+			this.Attacker = attacker;
 			Damage = damage;
 			DamageType = damageType;
 		}
 
-		private Player attacker;
-		public Player Attacker { get => attacker; }
+		public Player Attacker { get; }
 		public float Damage { get; set; }
 		public DamageType DamageType { get; set; }
-		
+
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerPlayerHurt)handler).OnPlayerHurt(this);
@@ -56,7 +54,7 @@ namespace Smod2.Events
 
 	public abstract class PlayerItemEvent : PlayerEvent
 	{
-		public PlayerItemEvent(Player player, Item item, ItemType change, bool allow = true) : base(player)
+		protected PlayerItemEvent(Player player, Item item, ItemType change, bool allow) : base(player)
 		{
 			Item = item;
 			Allow = allow;
@@ -66,42 +64,6 @@ namespace Smod2.Events
 		public Item Item { get; set; }
 		public ItemType ChangeTo { get; set; }
 		public bool Allow { get; set; }
-	}
-
-	public class PlayerSCP268UseEvent : PlayerEvent
-	{
-		public Item SCP268 { get; }
-		public bool Allow { get; set; }
-		public float Cooldown { get; set; }
-
-		public PlayerSCP268UseEvent(Player player, Item item, float cd, bool allow = true) : base(player)
-		{
-			Cooldown = cd;
-			SCP268 = item;
-			Allow = allow;
-		}
-
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-			((IEventHandlerPlayerSCP268Use)handler).OnPlayerSCP268Use(this);
-		}
-	}
-
-	public class PlayerSCP207UseEvent : PlayerEvent
-	{
-		public Item SCP207 { get; }
-		public bool Allow { get; set; }
-
-		public PlayerSCP207UseEvent(Player player, Item item, bool allow = true) : base(player)
-		{
-			SCP207 = item;
-			Allow = allow;
-		}
-
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-			((IEventHandlerPlayerSCP207Use)handler).OnPlayerSCP207Use(this);
-		}
 	}
 
 	public class PlayerPickupItemEvent : PlayerItemEvent
@@ -169,7 +131,6 @@ namespace Smod2.Events
 			((IEventHandlerPlayerJoin)handler).OnPlayerJoin(this);
 		}
 	}
-
 
 	public class PlayerNicknameSetEvent : PlayerEvent
 	{
@@ -257,15 +218,13 @@ namespace Smod2.Events
 
 	public class PlayerDoorAccessEvent : PlayerEvent
 	{
-		public Door Door { get => door; }
+		public Door Door { get; }
 		public bool Allow { get; set; }
 		public bool Destroy { get; set; }
 
-		private Door door;
-
 		public PlayerDoorAccessEvent(Player player, Door door) : base(player)
 		{
-			this.door = door;
+			this.Door = door;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -654,8 +613,7 @@ namespace Smod2.Events
 			((IEventHandlerRecallZombie)handler).OnRecallZombie(this);
 		}
 	}
-	
-	
+
 	public class PlayerCallCommandEvent: PlayerEvent
 	{
 		public string ReturnMessage { get; set;}
@@ -1094,6 +1052,37 @@ namespace Smod2.Events
 		}
 	}
 
+	public sealed class PlayerLockerAccessEvent : PlayerEvent
+	{
+		public byte LockerId { get; }
+		public byte ChamberId { get; }
+		/// <summary>
+		///	Is the same permissions for items.
+		/// </summary>
+		public string ChamberAccessToken { get; }
+		/// <summary>
+		///	true if the player is opening the locker; otherwise, false.
+		/// </summary>
+		public bool IsOpening { get; }
+		public bool Allow { get; set; }
+
+		public PlayerLockerAccessEvent(Player ply,
+			byte lockerId, byte chamberId, string chamberAccessToken,
+			 bool isOpening, bool allow) : base(ply)
+		{
+			LockerId = lockerId;
+			ChamberId = chamberId;
+			ChamberAccessToken = chamberAccessToken;
+			IsOpening = isOpening;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerLockerAccess)handler).OnPlayerLockerAccess(this);
+		}
+	}
+
 	public class DisableStatusEffectEvent : PlayerEvent
 	{
 		public bool Allow { get; set; }
@@ -1134,7 +1123,7 @@ namespace Smod2.Events
 	{
 		public PlayerEffect PlayerEffect { get; }
 		public float NewValue { get; set; }
-		
+
 		public LateStatusEffectChangeEvent(Player player, PlayerEffect effect, float New) : base(player)
 		{
 			PlayerEffect = effect;
@@ -1144,6 +1133,42 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerLateStatusEffectChange)handler).OnLateStatusEffectChange(this);
+		}
+	}
+
+	public class PlayerSCP268UseEvent : PlayerEvent
+	{
+		public Item SCP268 { get; }
+		public bool Allow { get; set; }
+		public float Cooldown { get; set; }
+
+		public PlayerSCP268UseEvent(Player player, Item item, float cd, bool allow = true) : base(player)
+		{
+			Cooldown = cd;
+			SCP268 = item;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerSCP268Use)handler).OnPlayerSCP268Use(this);
+		}
+	}
+
+	public class PlayerSCP207UseEvent : PlayerEvent
+	{
+		public Item SCP207 { get; }
+		public bool Allow { get; set; }
+
+		public PlayerSCP207UseEvent(Player player, Item item, bool allow = true) : base(player)
+		{
+			SCP207 = item;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerSCP207Use)handler).OnPlayerSCP207Use(this);
 		}
 	}
 }

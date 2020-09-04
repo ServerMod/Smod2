@@ -30,22 +30,6 @@ namespace Smod2.EventHandlers
 		void OnPlayerPickupItem(PlayerPickupItemEvent ev);
 	}
 
-	public interface IEventHandlerPlayerSCP268Use : IEventHandler
-	{
-		/// <summary>
-		/// This is called when a player uses SCP-268 (AKA the hat)
-		/// </summary>
-		void OnPlayerSCP268Use(PlayerSCP268UseEvent ev);
-	}
-
-	public interface IEventHandlerPlayerSCP207Use : IEventHandler
-	{
-		/// <summary>
-		/// This is called when a player uses SCP-207 (AKA the cola)
-		/// </summary>
-		void OnPlayerSCP207Use(PlayerSCP207UseEvent ev);
-	}
-
 	public interface IEventHandlerPlayerPickupItemLate : IEventHandler
 	{
 		/// <summary>  
@@ -139,7 +123,7 @@ namespace Smod2.EventHandlers
 		void OnIntercomCooldownCheck(PlayerIntercomCooldownCheckEvent ev);
 	}
 
-	public interface IEventHandlerPocketDimensionExit : IEventHandler
+	public interface IEventHandlerPocketDimensionExit: IEventHandler
 	{
 		/// <summary>  
 		/// Called when a player escapes from Pocket Demension
@@ -147,7 +131,7 @@ namespace Smod2.EventHandlers
 		void OnPocketDimensionExit(PlayerPocketDimensionExitEvent ev);
 	}
 
-	public interface IEventHandlerPocketDimensionEnter : IEventHandler
+	public interface IEventHandlerPocketDimensionEnter: IEventHandler
 	{
 		/// <summary>  
 		/// Called when a player enters Pocket Demension
@@ -290,7 +274,7 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		void OnRecallZombie(PlayerRecallZombieEvent ev);
 	}
-
+	
 	public interface IEventHandlerCallCommand : IEventHandler
 	{
 		/// <summary>  
@@ -491,6 +475,14 @@ namespace Smod2.EventHandlers
 		void OnScp096AddTarget(Scp096AddTargetEvent ev);
 	}
 
+	public interface IEventHandlerPlayerLockerAccess : IEventHandler
+	{
+		/// <summary>
+		///	Called when the player interacts with the locker.
+		/// </summary>
+		void OnPlayerLockerAccess(PlayerLockerAccessEvent ev);
+	}
+
 	public interface IEventHandlerDisableStatusEffect : IEventHandler
 	{
 		/// <summary>
@@ -513,5 +505,21 @@ namespace Smod2.EventHandlers
 		/// Called after effect's duration is changed.
 		/// </summary>
 		void OnLateStatusEffectChange(LateStatusEffectChangeEvent ev);
+	}
+
+	public interface IEventHandlerPlayerSCP268Use : IEventHandler
+	{
+		/// <summary>
+		/// This is called when a player uses SCP-268 (AKA the hat)
+		/// </summary>
+		void OnPlayerSCP268Use(PlayerSCP268UseEvent ev);
+	}
+
+	public interface IEventHandlerPlayerSCP207Use : IEventHandler
+	{
+		/// <summary>
+		/// This is called when a player uses SCP-207 (AKA the cola)
+		/// </summary>
+		void OnPlayerSCP207Use(PlayerSCP207UseEvent ev);
 	}
 }
