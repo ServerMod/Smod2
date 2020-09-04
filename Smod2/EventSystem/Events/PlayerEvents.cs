@@ -717,8 +717,10 @@ namespace Smod2.Events
 	public class PlayerGrenadeHitPlayer : PlayerEvent
 	{
 		public Player Victim { get; }
-		public PlayerGrenadeHitPlayer(Player thrower, Player victim) : base(thrower)
+		public GrenadeType GrenadeType { get; }
+		public PlayerGrenadeHitPlayer(Player thrower, Player victim, GrenadeType type) : base(thrower)
 		{
+			GrenadeType = type;
 			Victim = victim;
 		}
 
