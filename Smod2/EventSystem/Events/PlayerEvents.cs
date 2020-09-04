@@ -56,7 +56,7 @@ namespace Smod2.Events
 
 	public abstract class PlayerItemEvent : PlayerEvent
 	{
-		public PlayerItemEvent(Player player, Item item, ItemType change, bool allow) : base(player)
+		public PlayerItemEvent(Player player, Item item, ItemType change, bool allow = true) : base(player)
 		{
 			Item = item;
 			Allow = allow;
@@ -66,6 +66,42 @@ namespace Smod2.Events
 		public Item Item { get; set; }
 		public ItemType ChangeTo { get; set; }
 		public bool Allow { get; set; }
+	}
+
+	public class PlayerSCP268UseEvent : PlayerEvent
+	{
+		public Item SCP268 { get; }
+		public bool Allow { get; set; }
+		public float Cooldown { get; set; }
+
+		public PlayerSCP268UseEvent(Player player, Item item, float cd, bool allow = true) : base(player)
+		{
+			Cooldown = cd;
+			SCP268 = item;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerSCP268Use)handler).OnPlayerSCP268Use(this);
+		}
+	}
+
+	public class PlayerSCP207UseEvent : PlayerEvent
+	{
+		public Item SCP207 { get; }
+		public bool Allow { get; set; }
+
+		public PlayerSCP207UseEvent(Player player, Item item, bool allow = true) : base(player)
+		{
+			SCP207 = item;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerSCP207Use)handler).OnPlayerSCP207Use(this);
+		}
 	}
 
 	public class PlayerPickupItemEvent : PlayerItemEvent

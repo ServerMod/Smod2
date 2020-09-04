@@ -30,6 +30,22 @@ namespace Smod2.EventHandlers
 		void OnPlayerPickupItem(PlayerPickupItemEvent ev);
 	}
 
+	public interface IEventHandlerPlayerSCP268Use : IEventHandler
+	{
+		/// <summary>
+		/// This is called when a player uses SCP-268 (AKA the hat)
+		/// </summary>
+		void OnPlayerSCP268Use(PlayerSCP268UseEvent ev);
+	}
+
+	public interface IEventHandlerPlayerSCP207Use : IEventHandler
+	{
+		/// <summary>
+		/// This is called when a player uses SCP-207 (AKA the cola)
+		/// </summary>
+		void OnPlayerSCP207Use(PlayerSCP207UseEvent ev);
+	}
+
 	public interface IEventHandlerPlayerPickupItemLate : IEventHandler
 	{
 		/// <summary>  
