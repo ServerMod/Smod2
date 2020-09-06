@@ -104,7 +104,7 @@ namespace Smod2.API
 		protected bool ShouldCallSetRoleEvent { get => CallSetRoleEvent; } // used in the game
 
 		public abstract TeamRole TeamRole { get; set; }
-		public abstract string Name { get; }
+		public abstract string Name { get; set; }
 		public abstract string IpAddress { get; }
 		public abstract int PlayerId { get; }
 		public abstract string UserId { get; }
