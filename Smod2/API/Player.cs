@@ -130,6 +130,7 @@ namespace Smod2.API
 
 		public abstract TeamRole TeamRole { get; set; }
 		public abstract string Name { get; }
+		public abstract string DisplayedNickname { get; set; } // Differs from the Name in that it can be modified by server.
 		public abstract string IpAddress { get; }
 		public abstract int PlayerId { get; }
 		public abstract string UserId { get; }

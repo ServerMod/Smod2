@@ -25,7 +25,9 @@ namespace Smod2.Events
 		public string DeniedMessage { get; set; }
 		public override void ExecuteHandler(IEventHandler handler)
 		{
+#pragma warning disable 618
 			((IEventHandlerAuthCheck)handler).OnAuthCheck(this);
+#pragma warning restore 618
 		}
 	}
 
