@@ -1,4 +1,4 @@
-﻿using Smod2.EventSystem.Events;
+using Smod2.EventSystem.Events;
 
 namespace Smod2.EventHandlers
 {
@@ -6,7 +6,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called at the start, when the team respawn queue is being read. This happens BEFORE it fills it to full with filler_team_id.
-		/// <summary>  
+		/// </summary>  
 		void OnDecideTeamRespawnQueue(DecideRespawnQueueEvent ev);
 	}
 
@@ -14,7 +14,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called before MTF or CI respawn.
-		/// <summary>  
+		/// </summary>  
 		void OnTeamRespawn(TeamRespawnEvent ev);
 	}
 
@@ -22,7 +22,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when the max HP of each role is being set. This happens every round.
-		/// <summary>  
+		/// </summary>  
 		void OnSetRoleMaxHP(SetRoleMaxHPEvent ev);
 	}
 
@@ -30,7 +30,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when the configs of SCPs are being set. This happens every round.
-		/// <summary>  
+		/// </summary>  
 		void OnSetSCPConfig(SetSCPConfigEvent ev);
 	}
 
@@ -38,7 +38,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when the name of NTF unit is about to be set. This happens when NTF units respawn.
-		/// <summary>  
+		/// </summary>  
 		void OnSetNTFUnitName(SetNTFUnitNameEvent ev);
 	}
 }

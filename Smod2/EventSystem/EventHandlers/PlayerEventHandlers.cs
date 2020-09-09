@@ -71,7 +71,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a team is picked for a player. Nothing is assigned to the player, but you can change what team the player will spawn as.
-		/// <summary>  
+		/// </summary>  
 		void OnAssignTeam(PlayerInitialAssignTeamEvent ev);
 	}
 
@@ -79,7 +79,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called after the player is set a class, at any point in the game. 
-		/// <summary>  
+		/// </summary>  
 		void OnSetRole(PlayerSetRoleEvent ev);
 	}
 
@@ -87,7 +87,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player is checking if they should escape (this is regardless of class)
-		/// <summary>  
+		/// </summary>  
 		void OnCheckEscape(PlayerCheckEscapeEvent ev);
 	}
 
@@ -95,7 +95,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player spawns into the world
-		/// <summary>  
+		/// </summary>  
 		void OnSpawn(PlayerSpawnEvent ev);
 	}
 
@@ -103,7 +103,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player attempts to access a door that requires perms
-		/// <summary>  
+		/// </summary>  
 		void OnDoorAccess(PlayerDoorAccessEvent ev);
 	}
 
@@ -111,7 +111,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player attempts to use intercom.
-		/// <summary>  
+		/// </summary>  
 		void OnIntercom(PlayerIntercomEvent ev);
 	}
 
@@ -119,7 +119,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player attempts to use intercom. This happens before the cooldown check.
-		/// <summary>  
+		/// </summary>  
 		void OnIntercomCooldownCheck(PlayerIntercomCooldownCheckEvent ev);
 	}
 
@@ -127,7 +127,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player escapes from Pocket Demension
-		/// <summary>  
+		/// </summary>  
 		void OnPocketDimensionExit(PlayerPocketDimensionExitEvent ev);
 	}
 
@@ -135,7 +135,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player enters Pocket Demension
-		/// <summary>  
+		/// </summary>  
 		void OnPocketDimensionEnter(PlayerPocketDimensionEnterEvent ev);
 	}
 
@@ -143,7 +143,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player enters the wrong way of Pocket Demension. This happens before the player is killed.
-		/// <summary>  
+		/// </summary>  
 		void OnPocketDimensionDie(PlayerPocketDimensionDieEvent ev);
 	}
 
@@ -151,7 +151,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called after a player throws a grenade
-		/// <summary>  
+		/// </summary>  
 		void OnThrowGrenade(PlayerThrowGrenadeEvent ev);
 	}
 
@@ -159,7 +159,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player is cured by SCP-049
-		/// <summary>  
+		/// </summary>  
 		void OnPlayerInfected(PlayerInfectedEvent ev);
 	}
 
@@ -167,7 +167,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a ragdoll is spawned
-		/// <summary>  
+		/// </summary>  
 		void OnSpawnRagdoll(PlayerSpawnRagdollEvent ev);
 	}
 
@@ -175,7 +175,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player enters FemurBreaker
-		/// <summary> 
+		/// </summary> 
 		void OnLure(PlayerLureEvent ev);
 	}
 
@@ -183,7 +183,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player presses the button to contain SCP-106
-		/// <summary>
+		/// </summary>
 		void OnContain106(PlayerContain106Event ev);
 	}
 
@@ -191,7 +191,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player uses Medkit
-		/// <summary>
+		/// </summary>
 		void OnMedicalUse(PlayerMedicalUseEvent ev);
 	}
 
@@ -199,7 +199,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player shoots
-		/// <summary>
+		/// </summary>
 		void OnShoot(PlayerShootEvent ev);
 	}
 
@@ -207,7 +207,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when SCP-106 creates a portal
-		/// <summary>
+		/// </summary>
 		void On106CreatePortal(Player106CreatePortalEvent ev);
 	}
 
@@ -215,7 +215,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when SCP-106 teleports through portals
-		/// <summary>
+		/// </summary>
 		void On106Teleport(Player106TeleportEvent ev);
 	}
 
@@ -223,7 +223,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player uses an elevator
-		/// <summary>
+		/// </summary>
 		void OnElevatorUse(PlayerElevatorUseEvent ev);
 	}
 
@@ -231,7 +231,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player is about to be handcuffed/released
-		/// <summary>
+		/// </summary>
 		void OnHandcuffed(PlayerHandcuffedEvent ev);
 	}
 
@@ -239,7 +239,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player triggers a tesla gate
-		/// <summary>
+		/// </summary>
 		void OnPlayerTriggerTesla(PlayerTriggerTeslaEvent ev);
 	}
 
@@ -247,7 +247,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player changes the knob of SCP-914
-		/// <summary>
+		/// </summary>
 		void OnSCP914ChangeKnob(PlayerSCP914ChangeKnobEvent ev);
 	}
 
@@ -255,7 +255,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player changes the status of their radio
-		/// <summary>
+		/// </summary>
 		void OnPlayerRadioSwitch(PlayerRadioSwitchEvent ev);
 	}
 
@@ -263,7 +263,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player makes noise
-		/// <summary>
+		/// </summary>
 		void OnMakeNoise(PlayerMakeNoiseEvent ev);
 	}
 
@@ -271,7 +271,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when SCP-049 turns someone into a zombie
-		/// <summary>
+		/// </summary>
 		void OnRecallZombie(PlayerRecallZombieEvent ev);
 	}
 	
@@ -279,7 +279,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player uses a command that starts with .
-		/// <summary>
+		/// </summary>
 		void OnCallCommand(PlayerCallCommandEvent ev);
 	}
 
@@ -287,7 +287,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player reloads their weapon
-		/// <summary>
+		/// </summary>
 		void OnReload(PlayerReloadEvent ev);
 	}
 
@@ -295,7 +295,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player's grenade explodes
-		/// <summary>
+		/// </summary>
 		void OnGrenadeExplosion(PlayerGrenadeExplosion ev);
 	}
 
@@ -303,7 +303,7 @@ namespace Smod2.EventHandlers
 	{
 		/// <summary>  
 		/// Called when a player's grenade hits a player
-		/// <summary>
+		/// </summary>
 		void OnGrenadeHitPlayer(PlayerGrenadeHitPlayer ev);
 	}
 

@@ -99,7 +99,9 @@ namespace Smod2.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
+#pragma warning disable 618
 			((IEventHandlerLateDisconnect)handler).OnLateDisconnect(this);
+#pragma warning restore 618
 		}
 	}
 
