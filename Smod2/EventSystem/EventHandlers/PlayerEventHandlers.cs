@@ -482,4 +482,44 @@ namespace Smod2.EventHandlers
 		/// </summary>
 		void OnPlayerLockerAccess(PlayerLockerAccessEvent ev);
 	}
+
+	public interface IEventHandlerDisableStatusEffect : IEventHandler
+	{
+		/// <summary>
+		/// Called when an effect is disabled or times out.
+		/// </summary>
+		void OnDisableStatusEffect(DisableStatusEffectEvent ev);
+	}
+
+	public interface IEventHandlerEarlyStatusEffectChange : IEventHandler
+	{
+		/// <summary>
+		/// Called before effect's duration is changed.
+		/// </summary>
+		void OnEarlyStatusEffectChange(EarlyStatusEffectChangeEvent ev);
+	}
+
+	public interface IEventHandlerLateStatusEffectChange : IEventHandler
+	{
+		/// <summary>
+		/// Called after effect's duration is changed.
+		/// </summary>
+		void OnLateStatusEffectChange(LateStatusEffectChangeEvent ev);
+	}
+
+	public interface IEventHandlerPlayerSCP268Use : IEventHandler
+	{
+		/// <summary>
+		/// This is called when a player uses SCP-268 (AKA the hat)
+		/// </summary>
+		void OnPlayerSCP268Use(PlayerSCP268UseEvent ev);
+	}
+
+	public interface IEventHandlerPlayerSCP207Use : IEventHandler
+	{
+		/// <summary>
+		/// This is called when a player uses SCP-207 (AKA the cola)
+		/// </summary>
+		void OnPlayerSCP207Use(PlayerSCP207UseEvent ev);
+	}
 }

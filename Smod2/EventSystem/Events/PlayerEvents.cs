@@ -675,8 +675,10 @@ namespace Smod2.Events
 	public class PlayerGrenadeHitPlayer : PlayerEvent
 	{
 		public Player Victim { get; }
-		public PlayerGrenadeHitPlayer(Player thrower, Player victim) : base(thrower)
+		public GrenadeType GrenadeType { get; }
+		public PlayerGrenadeHitPlayer(Player thrower, Player victim, GrenadeType type) : base(thrower)
 		{
+			GrenadeType = type;
 			Victim = victim;
 		}
 
@@ -1078,6 +1080,95 @@ namespace Smod2.Events
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerPlayerLockerAccess)handler).OnPlayerLockerAccess(this);
+		}
+	}
+
+	public class DisableStatusEffectEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+		public PlayerEffect PlayerEffect { get; }
+
+		public DisableStatusEffectEvent(Player player, PlayerEffect effect, bool allow = true) : base(player)
+		{
+			PlayerEffect = effect;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerDisableStatusEffect)handler).OnDisableStatusEffect(this);
+		}
+	}
+
+	public class EarlyStatusEffectChangeEvent : PlayerEvent
+	{
+		public bool Allow { get; set; }
+		public PlayerEffect PlayerEffect { get; }
+		public float NewValue { get; set; }
+
+		public EarlyStatusEffectChangeEvent(Player player, PlayerEffect effect, float New, bool allow = true) : base(player)
+		{
+			PlayerEffect = effect;
+			Allow = allow;
+			NewValue = New;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerEarlyStatusEffectChange)handler).OnEarlyStatusEffectChange(this);
+		}
+	}
+
+	public class LateStatusEffectChangeEvent : PlayerEvent
+	{
+		public PlayerEffect PlayerEffect { get; }
+		public float NewValue { get; set; }
+
+		public LateStatusEffectChangeEvent(Player player, PlayerEffect effect, float New) : base(player)
+		{
+			PlayerEffect = effect;
+			NewValue = New;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerLateStatusEffectChange)handler).OnLateStatusEffectChange(this);
+		}
+	}
+
+	public class PlayerSCP268UseEvent : PlayerEvent
+	{
+		public Item SCP268 { get; }
+		public bool Allow { get; set; }
+		public float Cooldown { get; set; }
+
+		public PlayerSCP268UseEvent(Player player, Item item, float cd, bool allow = true) : base(player)
+		{
+			Cooldown = cd;
+			SCP268 = item;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerSCP268Use)handler).OnPlayerSCP268Use(this);
+		}
+	}
+
+	public class PlayerSCP207UseEvent : PlayerEvent
+	{
+		public Item SCP207 { get; }
+		public bool Allow { get; set; }
+
+		public PlayerSCP207UseEvent(Player player, Item item, bool allow = true) : base(player)
+		{
+			SCP207 = item;
+			Allow = allow;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerPlayerSCP207Use)handler).OnPlayerSCP207Use(this);
 		}
 	}
 }
