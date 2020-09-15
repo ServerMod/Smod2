@@ -89,12 +89,15 @@ namespace Smod2.API
 
 	public enum IntercomStatus
 	{
-		Muted,
-		Restarting,
-		Transmitting_Admin,
-		Transmitting_Bypass,
-		Transmitting,
-		Ready
+		Ready = 0,
+		Transmitting = 1,
+		/* TransmittingBypass */
+		Transmitting_Bypass = 2,
+		Restarting = 3,
+		/* AdminSpeaking */
+		Transmitting_Admin = 4,
+		Muted = 5,
+		Custom = 6
 	}
 
 	public abstract class Elevator
