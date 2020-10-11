@@ -175,6 +175,7 @@ namespace Smod2.API
 		public abstract float HP { get; set; }
 		public abstract float Stamina { get; set; }
 		public abstract void Damage(float amount, DamageType type = DamageType.NUKE);
+		[Obsolete("Use HP property instead.")]
 		public abstract void SetHealth(float amount, DamageType type = DamageType.NUKE);
 		public abstract int GetAmmo(AmmoType type);
 		public abstract void SetAmmo(AmmoType type, int amount);
@@ -195,13 +196,17 @@ namespace Smod2.API
 		public abstract void SetCurrentItemIndex(int index);
 		public abstract bool HasItem(ItemType type);
 		public abstract int GetItemIndex(ItemType type);
+		public abstract void ClearInventory();
 		public abstract bool IsHandcuffed();
 		public abstract void ChangeRole(RoleType role, bool full = true, bool spawnTeleport = true, bool spawnProtect = true, bool removeHandcuffs = false);
 		public abstract object GetGameObject();
 		public abstract UserGroup GetUserGroup();
 		public abstract string[] RunCommand(string command, string[] args);
+		[Obsolete("Use GodMode property instead.")]
 		public abstract bool GetGodmode();
+		[Obsolete("Use GodMode property instead.")]
 		public abstract void SetGodmode(bool godmode);
+		public abstract bool GodMode { get; set; }
 		public abstract Vector GetRotation();
 		public abstract void SendConsoleMessage(string message, string color = "green");
 		public abstract void Infect(float time);
