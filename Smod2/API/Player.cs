@@ -123,7 +123,7 @@ namespace Smod2.API
 		INVIGORATED = 20,
 	}
 
-	public abstract class Player : ICommandSender
+	public abstract class Player : ICommandSender, IEquatable<Player>
 	{
 		internal bool CallSetRoleEvent { get; set; }
 		protected bool ShouldCallSetRoleEvent { get => CallSetRoleEvent; } // used in the game
@@ -237,6 +237,32 @@ namespace Smod2.API
 		public abstract void RemoveHandcuffs();
 		public abstract bool GetGhostMode();
 		public abstract void SetGhostMode(bool ghostMode, bool visibleToSpec = true, bool visibleWhenTalking = true);
+
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as Player);
+		}
+
+		public bool Equals(Player other)
+		{
+			return other != null &&
+				   PlayerId == other.PlayerId;
+		}
+
+		public override int GetHashCode()
+		{
+			return 956575109 + PlayerId.GetHashCode();
+		}
+
+		public static bool operator ==(Player left, Player right)
+		{
+			return EqualityComparer<Player>.Default.Equals(left, right);
+		}
+
+		public static bool operator !=(Player left, Player right)
+		{
+			return !(left == right);
+		}
 	}
 
 	public abstract class Scp079Data
