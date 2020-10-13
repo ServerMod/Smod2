@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Smod2.API
 {
 	public enum WeaponType
@@ -58,7 +61,7 @@ namespace Smod2.API
 		OTHER = 2
 	}
 
-	public abstract class Weapon
+	public abstract class Weapon : IEquatable<Weapon>
 	{
 		public abstract WeaponType WeaponType { get; }
 		public abstract WeaponSight Sight { get; set; }
@@ -69,6 +72,33 @@ namespace Smod2.API
 		public abstract AmmoType AmmoType { get; }
 		public abstract DamageType DamageType { get; }
 		public abstract object GetComponent();
+		public abstract int UniqueIdentifier { get; }
 		public abstract Item ToItem();
+
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as Weapon);
+		}
+
+		public bool Equals(Weapon other)
+		{
+			return other != null &&
+				   UniqueIdentifier == other.UniqueIdentifier;
+		}
+
+		public override int GetHashCode()
+		{
+			return 1780733181 + UniqueIdentifier.GetHashCode();
+		}
+
+		public static bool operator ==(Weapon left, Weapon right)
+		{
+			return EqualityComparer<Weapon>.Default.Equals(left, right);
+		}
+
+		public static bool operator !=(Weapon left, Weapon right)
+		{
+			return !(left == right);
+		}
 	}
 }
