@@ -46,6 +46,17 @@ namespace Smod2.API
 		public abstract bool WarheadLeverEnabled { get; set; }
 		public abstract bool WarheadKeycardEntered { get; set; }
 		public abstract void OverchargeLights(float forceDuration, bool onlyHeavy);
+
+		/// <summary>
+		/// Spawns an item for everyone then returns that object.
+		/// </summary>
+		/// <param name="ThingToSpawn">Which prefab to use</param>
+		/// <param name="position">Global position</param>
+		/// <param name="rotation">Rotation</param>
+		/// <param name="size">Scale the prefab</param>
+		/// <param name="spawnRightAway">Should it spawn the Spawnable right away or let the plugin do it.</param>
+		/// <returns>Gameobject that has been spawned</returns>
+		public abstract object SpawnSpawnable(Spawnable ThingToSpawn, Vector position, Vector rotation, Vector size, bool spawnRightAway = true);
 	}
 
 	public abstract class Door
@@ -124,6 +135,27 @@ namespace Smod2.API
 		public abstract Vector Position { get; }
 	}
 
+	public enum Spawnable //1st is player and 2nd is Lobby_Playback and I don't know how spawning these would break/destroy existance itself.
+	{
+		Pickup = 2,
+		Work_Station = 3,
+		Ragdoll_SCP173 = 4,
+		Ragdoll_DClass = 5,
+		Ragdoll_SCP106 = 6,
+		Ragdoll_MTF = 7,
+		Ragdoll_SCIENTIST = 8,
+		Ragdoll_SCP049 = 9,
+		Ragdoll_CHAOS = 10,
+		SCP_096_Ragdoll = 11,
+		Ragdoll_SCP049_2 = 12,
+		Ragdoll_GUARD = 13,
+		Ragdoll_SCP939_53 = 14,
+		Ragdoll_SCP939_89 = 15,
+		Grenade_Flash = 16,
+		Grenade_Frag = 17,
+		Grenade_SCP_018 = 18
+	}
+
 	public enum ZoneType
 	{
 		UNDEFINED = 0,
@@ -185,7 +217,6 @@ namespace Smod2.API
 		public abstract Vector Position { get; }
 		public abstract Vector Forward { get; }
 		public abstract Vector SpeakerPosition { get; }
-
 		public abstract void FlickerLights(float duration = 8f);
 		[Obsolete("Use FlickerLights(float duration = 8f) instead of FlickerLights()")]
 		public abstract void FlickerLights();
@@ -203,7 +234,6 @@ namespace Smod2.API
 		public abstract float TimeLeft { get; set; }
 		public abstract Vector Position { get; }
 		public abstract Room Room { get; }
-
 		public abstract void Unlock();
 		public abstract object GetComponent();
 	}

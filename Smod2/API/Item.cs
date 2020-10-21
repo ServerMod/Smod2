@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Smod2.API
 {
 	public enum ItemType
@@ -77,7 +80,7 @@ namespace Smod2.API
 		VERY_FINE = 4
 	}
 
-	public abstract class Item
+	public abstract class Item : IEquatable<Item>
 	{
 		public abstract bool InWorld { get; }
 		public abstract ItemType ItemType { get; }
@@ -89,6 +92,36 @@ namespace Smod2.API
 		public abstract bool GetKinematic();
 		public abstract object GetComponent();
 		public abstract bool IsWeapon { get; }
+		/// <summary>
+		/// Used so IEquatable is possible so you can compare items.
+		/// </summary>
+		public abstract int UniqueIdentifier { get; }
 		public abstract Weapon ToWeapon();
+
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as Item);
+		}
+
+		public bool Equals(Item other)
+		{
+			return other != null && UniqueIdentifier != 0 && other.UniqueIdentifier != 0 && 
+				   UniqueIdentifier == other.UniqueIdentifier;
+		}
+
+		public override int GetHashCode()
+		{
+			return 1780733181 + UniqueIdentifier.GetHashCode();
+		}
+
+		public static bool operator ==(Item left, Item right)
+		{
+			return EqualityComparer<Item>.Default.Equals(left, right);
+		}
+
+		public static bool operator !=(Item left, Item right)
+		{
+			return !(left == right);
+		}
 	}
 }
