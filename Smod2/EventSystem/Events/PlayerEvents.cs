@@ -447,11 +447,11 @@ namespace Smod2.Events
 		public bool ShouldSpawnBloodDecal { get; set; }
 		public Vector SourcePosition { get; }
 		public Vector TargetPosition { get; }
-		public string TargetHitbox { get; }
+		public HitBoxType TargetHitbox { get; }
 		public Vector Direction { get; set; }
 		public WeaponSound ?WeaponSound { get; set; }
 
-		public PlayerShootEvent(Player player, Player target, Weapon weapon, WeaponSound ?weaponSound, Vector sourcePosition, Vector targetPosition, string targetHitbox, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
+		public PlayerShootEvent(Player player, Player target, Weapon weapon, WeaponSound ?weaponSound, Vector sourcePosition, Vector targetPosition, HitBoxType targetHitbox, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
 		{
 			this.Target = target;
 			this.Weapon = weapon;

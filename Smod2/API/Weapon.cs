@@ -61,6 +61,17 @@ namespace Smod2.API
 		OTHER = 2
 	}
 
+	public enum HitBoxType
+	{
+		LEG = 0,
+		ARM = 1,
+		BODY = 2,
+		HEAD = 3,
+		WINDOW = 4,
+		HOLE = 5,
+		NULL = 6
+	}
+
 	public abstract class Weapon : IEquatable<Weapon>
 	{
 		public abstract WeaponType WeaponType { get; }
