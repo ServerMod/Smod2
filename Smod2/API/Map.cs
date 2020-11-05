@@ -5,7 +5,11 @@ namespace Smod2.API
 {
 	public abstract class Map
 	{
-		public abstract List<Room> GetAllRooms();
+		/// <summary>
+		/// Gets every Room in the game including surface (Pocket excluded)
+		/// </summary>
+		/// <returns>Every room in the game</returns>
+		public abstract List<Room> GetRooms();
 		public abstract List<Item> GetItems(ItemType type, bool world_only);
 		public abstract Vector GetRandomSpawnPoint(RoleType role);
 		[Obsolete("Use RoleType instead of Role")]
