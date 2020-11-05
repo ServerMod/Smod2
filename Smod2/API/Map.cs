@@ -5,6 +5,11 @@ namespace Smod2.API
 {
 	public abstract class Map
 	{
+		/// <summary>
+		/// Gets every Room in the game including surface (Pocket excluded)
+		/// </summary>
+		/// <returns>Every room in the game</returns>
+		public abstract List<Room> GetRooms();
 		public abstract List<Item> GetItems(ItemType type, bool world_only);
 		public abstract Vector GetRandomSpawnPoint(RoleType role);
 		[Obsolete("Use RoleType instead of Role")]
@@ -158,49 +163,69 @@ namespace Smod2.API
 
 	public enum ZoneType
 	{
-		UNDEFINED = 0,
-		LCZ = 1,
-		HCZ = 2,
-		ENTRANCE = 3
+		LCZ,
+		HCZ,
+		ENTRANCE,
+		SURFACE
 	}
 
 	public enum RoomType
 	{
-		UNDEFINED = 0,
-		WC00 = 1,
-		SCP_914 = 2,
-		AIRLOCK_00 = 3,
-		AIRLOCK_01 = 4,
-		CHECKPOINT_A = 5,
-		CHECKPOINT_B = 6,
-		HCZ_ARMORY = 7,
-		SERVER_ROOM = 8,
-		MICROHID = 9,
-		NUKE = 10,
-		SCP_012 = 11,
-		SCP_049 = 12,
-		SCP_079 = 13,
-		SCP_096 = 14,
-		SCP_106 = 15,
-		SCP_173 = 16,
-		SCP_372 = 17,
-		SCP_939 = 18,
-		ENTRANCE_CHECKPOINT = 19,
-		TESLA_GATE = 20,
-		PC_SMALL = 21,
-		PC_LARGE = 22,
-		GATE_A = 23,
-		GATE_B = 24,
-		CAFE = 25,
-		INTERCOM = 26,
-		DR_L = 27,
-		STRAIGHT = 28,
-		CURVE = 29,
-		T_INTERSECTION = 30,
-		X_INTERSECTION = 31,
-		LCZ_ARMORY = 32,
-		CLASS_D_CELLS = 33,
-		CUBICLES = 34
+		//Light Containment Zone
+		LCZ_012,
+		LCZ_173,
+		LCZ_372,
+		LCZ_914,
+		LCZ_AIRLOCK,
+		LCZ_ARMORY,
+		LCZ_CAFE,
+		LCZ_CHECKPOINT_A,
+		LCZ_CHECKPOINT_B,
+		LCZ_CLASSD_SPAWN,
+		LCZ_4_WAY_INTERSECTION,
+		LCZ_3_WAY_INTERSECTION,
+		LCZ_CURVE,
+		LCZ_PLANTS,
+		LCZ_STRAIGHT,
+		LCZ_TOILETS,
+		//Heavy Containment Zone
+		HCZ_049,
+		HCZ_079,
+		HCZ_106,
+		HCZ_096,
+		HCZ_939,
+		HCZ_CHECKPOINT_A,
+		HCZ_CHECKPOINT_B,
+		HCZ_4_WAY_INTERSECTION,
+		HCZ_3_WAY_INTERSECTION,
+		HCZ_CURVE,
+		HCZ_STRAIGHT,
+		HCZ_EZ_CHECKPOINT,
+		HCZ_HID,
+		HCZ_NUKE,
+		HCZ_SERVER,
+		HCZ_TARMORY,
+		HCZ_TESLA,
+		//Entrance Zone
+		EZ_STRAIGHT,
+		EZ_CAFETERIA,
+		EZ_CHEF, //There are 4 straight hallways... how do you name these properly >>>>:(
+		EZ_GATE_A,
+		EZ_GATE_B,
+		EZ_4_WAY_INTERSECTION,
+		EZ_3_WAY_INTERSECTION,
+		EZ_CURVE,
+		EZ_COLLAPSEDTUNNEL,
+		EZ_REDGATE,
+		EZ_INTERCOM,
+		EZ_PC_LARGE,
+		EZ_PC_SMALL,
+		EZ_SHELTER,
+		EZ_SMALLSTRAIGHT,
+		EZ_SMALLSTRAIGHT2,
+		EZ_UPSTAIRS,
+		//End
+		SURFACE,
 	}
 
 	public enum Scp079InteractionType

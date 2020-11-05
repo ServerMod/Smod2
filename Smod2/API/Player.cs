@@ -141,6 +141,7 @@ namespace Smod2.API
 		public abstract bool OverwatchMode { get; set; }
 		public abstract bool DoNotTrack { get; }
 		public abstract Scp079Data Scp079Data { get; }
+		public abstract Room GetCurrentRoom();
 
 		public string GetParsedUserID()
 		{
