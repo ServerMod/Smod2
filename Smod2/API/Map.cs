@@ -64,17 +64,76 @@ namespace Smod2.API
 		public abstract object SpawnSpawnable(Spawnable ThingToSpawn, Vector position, Vector rotation, Vector size, bool spawnRightAway = true);
 	}
 
+	[Flags]
+	public enum KeycardPermission : ushort
+	{
+		None = 0x0,
+		Checkpoints = 0x1,
+		ExitGates = 0x2,
+		Intercom = 0x4,
+		AlphaWarhead = 0x8,
+		ContainmentLevelOne = 0x10,
+		ContainmentLevelTwo = 0x20,
+		ContainmentLevelThree = 0x40,
+		ArmoryLevelOne = 0x80,
+		ArmoryLevelTwo = 0x100,
+		ArmoryLevelThree = 0x200,
+		ScpOverride = 0x400
+	}
+
+	[Flags]
+	public enum DoorLockReasons : ushort
+	{
+		None = 0x0,
+		Regular079 = 0x1,
+		Lockdown079 = 0x2,
+		Warhead = 0x4,
+		AdminCommand = 0x8,
+		DecontLockdown = 0x10,
+		DecontEvacuate = 0x20,
+		SpecialDoorFeature = 0x40,
+		NoPower = 0x80,
+		Isolation = 0x100
+	}
+
+	[Flags]
+	public enum DoorLockModes : byte
+	{
+		FullLock = 0x0,
+		CanOpen = 0x1,
+		CanClose = 0x2,
+		ScpOverride = 0x4
+	}
+
+	public enum DoorActions
+	{
+		Opened,
+		Closed,
+		AccessDenied,
+		Locked,
+		Unlocked,
+		Destroyed
+	}
+
 	public abstract class Door
 	{
 		public abstract bool Open { get; set; }
 		public abstract bool Destroyed { get; set; }
+		[Obsolete("DontOpenOnWarhead removed from base game.")]
 		public abstract bool DontOpenOnWarhead { get; set; }
+		[Obsolete("BlockAfterWarheadDetonation removed from base game.")]
 		public abstract bool BlockAfterWarheadDetonation { get; set; }
 		public abstract bool Locked { get; set; }
+		[Obsolete("LockCooldown removed from base game.")]
 		public abstract float LockCooldown { get; set; }
 		public abstract Vector Position { get; }
 		public abstract string Name { get; }
+		[Obsolete("Permission replaced with RequiredPermission")]
 		public abstract string Permission { get; }
+		public abstract KeycardPermission RequiredPermission { get; set; }
+		public abstract DoorLockReasons LockReasons { get; set; }
+		public abstract DoorLockModes LockModes { get; }
+		public abstract void TriggerAction(DoorActions action);
 		public abstract object GetComponent();
 	}
 
