@@ -117,7 +117,7 @@ namespace ExamplePlugin
 			"hoob.hud")]
 		private void OnWhip(Player player, Player target)
 		{
-			player.SendConsoleMessage("You were whipped on by " + target.Name);
+			player.SendConsoleMessage("You were whipped on by " + target.name);
 		}
 
 		// Declares a method usable to other plugins via piping.
@@ -125,9 +125,9 @@ namespace ExamplePlugin
 		public bool GiveLottoItem(Player player)
 		{
 			// Makes sure the player is playing on a team that can have items
-			if (player.TeamRole.Team == TeamType.SPECTATOR || 
-				player.TeamRole.Team == TeamType.NONE ||
-				player.TeamRole.Team == TeamType.SCP)
+			if (player.teamRole.Team == TeamType.SPECTATOR || 
+				player.teamRole.Team == TeamType.NONE ||
+				player.teamRole.Team == TeamType.SCP)
 			{
 				return false;
 			}
