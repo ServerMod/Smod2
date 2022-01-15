@@ -117,22 +117,14 @@ namespace Smod2.API
 
 	public abstract class Door
 	{
-		public abstract bool Open { get; set; }
-		public abstract bool Destroyed { get; set; }
-		[Obsolete("DontOpenOnWarhead removed from base game.")]
-		public abstract bool DontOpenOnWarhead { get; set; }
-		[Obsolete("BlockAfterWarheadDetonation removed from base game.")]
-		public abstract bool BlockAfterWarheadDetonation { get; set; }
-		public abstract bool Locked { get; set; }
-		[Obsolete("LockCooldown removed from base game.")]
-		public abstract float LockCooldown { get; set; }
-		public abstract Vector Position { get; }
-		public abstract string Name { get; }
-		[Obsolete("Permission replaced with RequiredPermission")]
-		public abstract string Permission { get; }
-		public abstract KeycardPermission RequiredPermission { get; set; }
-		public abstract DoorLockReasons LockReasons { get; set; }
-		public abstract DoorLockModes LockModes { get; }
+		public abstract bool isOpen { get; set; }
+		public abstract bool isDestroyed { get; }
+		public abstract bool isLocked { get; set; }
+		public abstract Vector position { get; }
+		public abstract string name { get; }
+		public abstract KeycardPermission requiredPermission { get; set; }
+		public abstract DoorLockReasons lockReasons { get; set; }
+		public abstract DoorLockModes lockModes { get; }
 		public abstract void TriggerAction(DoorActions action);
 		public abstract object GetComponent();
 	}
