@@ -158,7 +158,7 @@ namespace Smod2.API
 		public abstract List<PlayerEffect> GetAllPlayerEffects();
         public abstract PlayerEffect GetPlayerEffect(StatusEffect effectToReturn);
         public abstract void Kill(string reason);
-		public abstract void Damage(float amount, string reason);
+		public abstract void Damage(string reason, float amount, string cassieDeathAnnouncement = "");
 		public abstract int GetAmmo(AmmoType type);
 		public abstract void SetAmmo(AmmoType type, int amount);
 		public abstract Vector GetPosition();
