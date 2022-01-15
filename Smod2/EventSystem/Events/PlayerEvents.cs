@@ -179,10 +179,10 @@ namespace Smod2.Events
 
 	public class PlayerSetRoleEvent : PlayerEvent
 	{
-		public PlayerSetRoleEvent(Player player, TeamRole teamRole, RoleType role, List<ItemType> items, bool usingDefaultItem = true) : base(player)
+		public PlayerSetRoleEvent(Player player, Role role, RoleType roleType, List<ItemType> items, bool usingDefaultItem = true) : base(player)
 		{
-			TeamRole = teamRole;
-			Role = role;
+			this.role = role;
+			this.roleType = roleType;
 			Items = items;
 			UsingDefaultItem = usingDefaultItem;
 		}
@@ -191,9 +191,9 @@ namespace Smod2.Events
 
 		public bool UsingDefaultItem { get; set; }
 
-		public RoleType Role { get; set; }
+		public RoleType roleType { get; set; }
 
-		public TeamRole TeamRole { get; }
+		public Role role { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{

@@ -12,11 +12,7 @@ namespace Smod2.API
 		public abstract List<Room> GetRooms();
 		public abstract List<Item> GetItems(ItemType type, bool world_only);
 		public abstract Vector GetRandomSpawnPoint(RoleType role);
-		[Obsolete("Use RoleType instead of Role")]
-		public abstract Vector GetRandomSpawnPoint(Role role);
 		public abstract List<Vector> GetSpawnPoints(RoleType role);
-		[Obsolete("Use RoleType instead of Role")]
-		public abstract List<Vector> GetSpawnPoints(Role role);
 		public abstract List<Vector> GetBlastDoorPoints();
 		public abstract List<Door> GetDoors();
 		public abstract List<PocketDimensionExit> GetPocketDimensionExits();

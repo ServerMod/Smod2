@@ -122,7 +122,7 @@ namespace Smod2.API
 	{
 		internal bool callSetRoleEvent { get; set; }
 		protected bool shouldCallSetRoleEvent { get => callSetRoleEvent; } // used in the game
-		public abstract TeamRole teamRole { get; set; }
+		public abstract Role role { get; set; }
 		public abstract string name { get; }
 		public abstract string displayedNickname { get; set; } // Differs from the Name in that it can be modified by server.
 		public abstract string ipAddress { get; }

@@ -41,7 +41,7 @@ namespace ExamplePlugin
 				microChance = value;
 			}
 		}
-		
+
 		// Grabs the "DamageMultiplier" field from the plugin with the ID "dev.plugin", given that the field is a pipe
 		[PipeLink("dev.plugin", "DamageMultiplier")]
 		private FieldPipe<float> damageMultiplier;
@@ -55,8 +55,8 @@ namespace ExamplePlugin
 		public readonly LiveConfig<int> lottoItemCount = new LiveConfig<int>(1);
 
 		// Registers lang setting CONFIG_VALUE in exampleplugin with a default of "Config value: " on initialization
-		[LangOption] 
-		public readonly string _configValue = "Config value: "; 
+		[LangOption]
+		public readonly string _configValue = "Config value: ";
 
 		public override void OnDisable()
 		{
@@ -73,7 +73,7 @@ namespace ExamplePlugin
 
 			this.Info(this.Details.name + " has loaded :)");
 		}
-		
+
 		public override void Register()
 		{
 			killChance = 0.2f;
@@ -94,7 +94,7 @@ namespace ExamplePlugin
 			// Sets a permission node as a default permission meaning all players will have it unless overridden by a permission plugin
 			this.AddDefaultPermission("exampleplugin.lottoitem");
 		}
-		
+
 		// Hooks to event called by any plugin
 		// Hooks can be private as well as public, but all other pipes must be public
 		[PipeEvent("dev.plugin.OnEpicDeath")]
@@ -125,9 +125,9 @@ namespace ExamplePlugin
 		public bool GiveLottoItem(Player player)
 		{
 			// Makes sure the player is playing on a team that can have items
-			if (player.teamRole.Team == TeamType.SPECTATOR || 
-				player.teamRole.Team == TeamType.NONE ||
-				player.teamRole.Team == TeamType.SCP)
+			if (player.role.team == TeamType.SPECTATOR ||
+				player.role.team == TeamType.NONE ||
+				player.role.team == TeamType.SCP)
 			{
 				return false;
 			}
