@@ -140,8 +140,12 @@ namespace Smod2.API
 	public abstract class TeslaGate
 	{
 		public abstract void Activate(bool instant = false);
-		public abstract float TriggerDistance { get; set; }
-		public abstract Vector Position { get; }
+		public abstract float triggerDistance { get; set; }
+		/// <summary>
+		/// The amount of time left on the cooldown before the tesla gate can fire again
+		/// </summary>
+		public abstract float cooldownTime { get; set; }
+		public abstract Vector position { get; }
 		public abstract object GetComponent();
 	}
 
@@ -279,13 +283,14 @@ namespace Smod2.API
 
 	public abstract class Room
 	{
+		public abstract int uniqueID { get; }
 		public abstract ZoneType zoneType { get; }
 		public abstract RoomType roomType { get; }
 		public abstract Vector position { get; }
 		public abstract Vector forward { get; }
 		public abstract Vector speakerPosition { get; }
 		public abstract void FlickerLights(float duration = 8.0f);
-		public abstract string[] GetObjectName();
+		public abstract string GetObjectName();
 		public abstract object GetGameObject();
 	}
 
