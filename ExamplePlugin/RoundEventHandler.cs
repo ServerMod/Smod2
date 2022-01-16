@@ -30,7 +30,7 @@ namespace ExamplePlugin
 			{
 				// Print the player info and then their class info
 				plugin.Info(player.ToString());
-				plugin.Info(player.role.ToString());
+				plugin.Info(player.TeamRole.ToString());
 			}
 		}
 	}

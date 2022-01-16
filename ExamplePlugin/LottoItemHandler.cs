@@ -19,9 +19,9 @@ namespace ExamplePlugin
 
 		public void OnPlayerPickupItem(PlayerPickupItemEvent ev)
 		{
-			plugin.Info(ev.Player.name + " picked up item " + ev.Item.itemType);
+			plugin.Info(ev.Player.Name + " picked up item " + ev.Item.ItemType);
 			//Checks the itemtype of the picked up item
-			if (ev.Item.itemType == ItemType.COIN)
+			if (ev.Item.ItemType == ItemType.COIN)
 			{
 				double luckyValue = random.NextDouble();
 

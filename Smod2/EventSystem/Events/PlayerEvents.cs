@@ -197,9 +197,9 @@ namespace Smod2.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			Player.callSetRoleEvent = false;
+			Player.CallSetRoleEvent = false;
 			((IEventHandlerSetRole)handler).OnSetRole(this);
-			Player.callSetRoleEvent = true;
+			Player.CallSetRoleEvent = true;
 		}
 	}
 

@@ -27,10 +27,10 @@ namespace ExamplePlugin
 		public void OnPlayerHurt(PlayerHurtEvent ev)
 		{
 			//If victim's name is John, set damage to 0f
-			if (ev.Player.name == "John")
+			if (ev.Player.Name == "John")
 				ev.Damage = 0f;
 			//If attacker's name is Hubert, set damage to 100000f
-			else if (ev.Attacker.name == "Hubert")
+			else if (ev.Attacker.Name == "Hubert")
 				ev.Damage = 100000f;
 		}
 	}

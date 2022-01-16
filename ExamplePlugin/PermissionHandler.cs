@@ -42,20 +42,20 @@ namespace ExamplePlugin
 			};
 
 			// Check if the player has a rank.
-			if (users.ContainsKey(player.userID))
+			if (users.ContainsKey(player.UserID))
 			{
 				// Check if the rank exists, steam id 2 above would fail this check as their rank does not exist.
-				if (ranks.ContainsKey(users[player.userID]))
+				if (ranks.ContainsKey(users[player.UserID]))
 				{
 					// Check if the user's rank has this permission listed.
-					if (ranks[users[player.userID]].Contains(permissionName))
+					if (ranks[users[player.UserID]].Contains(permissionName))
 					{
 						// Returns positive to indicate they have the permission.
 						return 1;
 					}
 
 					// Permission plugins can also support negative permissions in order to negate permissions which are given by default or by other permission handlers
-					if (ranks[users[player.userID]].Contains("-" + permissionName))
+					if (ranks[users[player.UserID]].Contains("-" + permissionName))
 					{
 						// Returns negative to forbid all permission handlers from allowing this permission
 						return -1;

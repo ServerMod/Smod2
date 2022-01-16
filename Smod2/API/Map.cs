@@ -113,14 +113,14 @@ namespace Smod2.API
 
 	public abstract class Door
 	{
-		public abstract bool isOpen { get; set; }
-		public abstract bool isDestroyed { get; }
-		public abstract bool isLocked { get; set; }
-		public abstract Vector position { get; }
-		public abstract string name { get; }
-		public abstract KeycardPermission requiredPermission { get; set; }
-		public abstract DoorLockReasons lockReasons { get; set; }
-		public abstract DoorLockModes lockModes { get; }
+		public abstract bool IsOpen { get; set; }
+		public abstract bool IsDestroyed { get; }
+		public abstract bool IsLocked { get; set; }
+		public abstract Vector Position { get; }
+		public abstract string Name { get; }
+		public abstract KeycardPermission RequiredPermission { get; set; }
+		public abstract DoorLockReasons LockReasons { get; set; }
+		public abstract DoorLockModes LockModes { get; }
 		public abstract void TriggerAction(DoorActions action);
 		public abstract object GetComponent();
 	}
@@ -128,12 +128,12 @@ namespace Smod2.API
 	public abstract class TeslaGate
 	{
 		public abstract void Activate(bool instant = false);
-		public abstract float triggerDistance { get; set; }
+		public abstract float TriggerDistance { get; set; }
 		/// <summary>
 		/// The amount of time left on the cooldown before the tesla gate can fire again
 		/// </summary>
-		public abstract float cooldownTime { get; set; }
-		public abstract Vector position { get; }
+		public abstract float CooldownTime { get; set; }
+		public abstract Vector Position { get; }
 		public abstract object GetComponent();
 	}
 
@@ -271,12 +271,12 @@ namespace Smod2.API
 
 	public abstract class Room
 	{
-		public abstract int uniqueID { get; }
-		public abstract ZoneType zoneType { get; }
-		public abstract RoomType roomType { get; }
-		public abstract Vector position { get; }
-		public abstract Vector forward { get; }
-		public abstract Vector speakerPosition { get; }
+		public abstract int UniqueID { get; }
+		public abstract ZoneType ZoneType { get; }
+		public abstract RoomType RoomType { get; }
+		public abstract Vector Position { get; }
+		public abstract Vector Forward { get; }
+		public abstract Vector SpeakerPosition { get; }
 		public abstract void FlickerLights(float duration = 8.0f);
 		public abstract string GetObjectName();
 		public abstract object GetGameObject();
@@ -284,16 +284,16 @@ namespace Smod2.API
 
 	public abstract class Generator
 	{
-		public abstract bool isOpen { get; set; }
-		public abstract bool isUnlocked { get; set; }
-		public abstract bool isEngaged { get; }
+		public abstract bool IsOpen { get; set; }
+		public abstract bool IsUnlocked { get; set; }
+		public abstract bool IsEngaged { get; }
 		/// <summary>
 		/// The amount of time it takes for a generator to activate from when the lever is pulled
 		/// </summary>
-		public abstract float activationTime { get; }
-		public abstract float timeLeft { get; }
-		public abstract Vector position { get; }
-		public abstract Room room { get; }
+		public abstract float ActivationTime { get; }
+		public abstract float TimeLeft { get; }
+		public abstract Vector Position { get; }
+		public abstract Room Room { get; }
 		public abstract object GetComponent();
 	}
 }

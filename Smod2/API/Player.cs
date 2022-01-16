@@ -120,35 +120,35 @@ namespace Smod2.API
 
 	public abstract class Player : ICommandSender, IEquatable<Player>
 	{
-		internal bool callSetRoleEvent { get; set; }
-		protected bool shouldCallSetRoleEvent { get => callSetRoleEvent; } // used in the game
-		public abstract Role role { get; set; }
-		public abstract string name { get; }
-		public abstract string displayedNickname { get; set; } // Differs from the Name in that it can be modified by server.
-		public abstract string ipAddress { get; }
-		public abstract int playerID { get; }
-		public abstract string userID { get; }
-		public abstract UserIdType userIDType { get; }
-		public abstract RadioStatus radioStatus { get; set; }
-		public abstract bool overwatchMode { get; set; }
-		public abstract bool doNotTrack { get; }
-		public abstract Scp079Data scp079Data { get; }
-		public abstract float artificialHealth { get; set; }
-		public abstract float health { get; set; }
-		public abstract float stamina { get; set; }
-		public abstract bool godMode { get; set; }
-		public abstract bool bypassMode { get; set; }
-		public abstract bool muted { get; set; }
-		public abstract bool intercomMuted { get; set; }
+		internal bool CallSetRoleEvent { get; set; }
+		protected bool ShouldCallSetRoleEvent { get => CallSetRoleEvent; } // used in the game
+		public abstract Role TeamRole { get; set; }
+		public abstract string Name { get; }
+		public abstract string DisplayedNickname { get; set; } // Differs from the Name in that it can be modified by server.
+		public abstract string IPAddress { get; }
+		public abstract int PlayerID { get; }
+		public abstract string UserID { get; }
+		public abstract UserIdType UserIDType { get; }
+		public abstract RadioStatus RadioStatus { get; set; }
+		public abstract bool OverwatchMode { get; set; }
+		public abstract bool DoNotTrack { get; }
+		public abstract Scp079Data SCP079Data { get; }
+		public abstract float ArtificialHealth { get; set; }
+		public abstract float Health { get; set; }
+		public abstract float Stamina { get; set; }
+		public abstract bool GodMode { get; set; }
+		public abstract bool BypassMode { get; set; }
+		public abstract bool Muted { get; set; }
+		public abstract bool IntercomMuted { get; set; }
 		public string GetParsedUserID()
         {
-            if (!string.IsNullOrWhiteSpace(userID))
+            if (!string.IsNullOrWhiteSpace(UserID))
             {
-                int charLocation = userID.LastIndexOf('@');
+                int charLocation = UserID.LastIndexOf('@');
 
                 if (charLocation > 0)
                 {
-                    return userID.Substring(0, charLocation);
+                    return UserID.Substring(0, charLocation);
                 }
             }
 
@@ -214,12 +214,12 @@ namespace Smod2.API
 		public bool Equals(Player other)
 		{
 			return other != null &&
-				   playerID == other.playerID;
+				   PlayerID == other.PlayerID;
 		}
 
 		public override int GetHashCode()
 		{
-			return 956575109 + playerID.GetHashCode();
+			return 956575109 + PlayerID.GetHashCode();
 		}
 
 		public static bool operator ==(Player left, Player right)

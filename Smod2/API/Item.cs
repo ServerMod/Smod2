@@ -63,13 +63,13 @@ namespace Smod2.API
 
 	public abstract class Item : IEquatable<Item>
 	{
-		public abstract bool inWorld { get; }
-		public abstract ItemType itemType { get; }
-		public abstract bool isWeapon { get; }
+		public abstract bool InWorld { get; }
+		public abstract ItemType ItemType { get; }
+		public abstract bool IsWeapon { get; }
         /// <summary>
         /// Used so IEquatable is possible so you can compare items.
         /// </summary>
-        public abstract ushort serialNumber { get; }
+        public abstract ushort SerialNumber { get; }
 		public abstract void Remove();
 		public abstract void Drop();
 		public abstract Vector GetPosition();
@@ -86,13 +86,13 @@ namespace Smod2.API
 
 		public bool Equals(Item other)
 		{
-			return other != null && serialNumber != 0 && other.serialNumber != 0 &&
-				   serialNumber == other.serialNumber;
+			return other != null && SerialNumber != 0 && other.SerialNumber != 0 &&
+				   SerialNumber == other.SerialNumber;
 		}
 
 		public override int GetHashCode()
 		{
-			return 1780733181 + serialNumber.GetHashCode();
+			return 1780733181 + SerialNumber.GetHashCode();
 		}
 
 		public static bool operator ==(Item left, Item right)

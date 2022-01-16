@@ -43,14 +43,14 @@ namespace Smod2.API
 
 	public abstract class Role
 	{
-		public abstract TeamType team { get; }
-		public abstract RoleType role { get; }
-		public abstract bool roleDisallowed { get; set; }
-		public abstract int maxHP { get; set; }
-		public abstract string name { get; set; }
+		public abstract TeamType Team { get; }
+		public abstract RoleType ID { get; }
+		public abstract bool RoleDisallowed { get; set; }
+		public abstract int MaxHP { get; set; }
+		public abstract string Name { get; set; }
 		public abstract object GetClass();
 
-		public static HashSet<RoleType> playables { get; } = new HashSet<RoleType>
+		public static HashSet<RoleType> Playables { get; } = new HashSet<RoleType>
 		{
 			RoleType.SCP_049,
 			RoleType.SCP_049_2,
@@ -74,7 +74,7 @@ namespace Smod2.API
 			RoleType.CHAOS_MARAUDER,
 		};
 
-		public static HashSet<RoleType> scps { get; } = new HashSet<RoleType> {
+		public static HashSet<RoleType> SCPs { get; } = new HashSet<RoleType> {
 			RoleType.SCP_049,
 			RoleType.SCP_049_2,
 			RoleType.SCP_079,
@@ -85,7 +85,7 @@ namespace Smod2.API
 			RoleType.SCP_939_89
 		};
 
-		public static HashSet<RoleType> banableSCPs { get; } = new HashSet<RoleType> {
+		public static HashSet<RoleType> BanableSCPs { get; } = new HashSet<RoleType> {
 			RoleType.SCP_049,
 			RoleType.SCP_079,
 			RoleType.SCP_096,
@@ -95,7 +95,7 @@ namespace Smod2.API
 			RoleType.SCP_939_89
 		};
 
-		public static HashSet<RoleType> pickableSCPs { get; } = new HashSet<RoleType> {
+		public static HashSet<RoleType> PickableSCPs { get; } = new HashSet<RoleType> {
 			RoleType.SCP_049,
 			RoleType.SCP_079,
 			RoleType.SCP_096,

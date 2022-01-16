@@ -111,13 +111,13 @@ namespace Smod2.API
 
 	public abstract class Weapon : IEquatable<Weapon>
 	{
-		public abstract WeaponType weaponType { get; }
-		public abstract Dictionary<AttachmentSlot, AttachmentType> attachments { get; }
-		public abstract int ammoInClip { get; set; }
-		public abstract int maxClipSize { get; }
-		public abstract AmmoType ammoType { get; }
-		public abstract DamageType damageType { get; }
-		public abstract ushort serialNumber { get; }
+		public abstract WeaponType WeaponType { get; }
+		public abstract Dictionary<AttachmentSlot, AttachmentType> Attachments { get; }
+		public abstract int AmmoInClip { get; set; }
+		public abstract int MaxClipSize { get; }
+		public abstract AmmoType AmmoType { get; }
+		public abstract DamageType DamageType { get; }
+		public abstract ushort SerialNumber { get; }
 		public abstract object GetComponent();
 		public abstract Item ToItem();
 
@@ -130,12 +130,12 @@ namespace Smod2.API
 
 		public bool Equals(Weapon other)
 		{
-			return other != null && serialNumber == other.serialNumber;
+			return other != null && SerialNumber == other.SerialNumber;
 		}
 
 		public override int GetHashCode()
 		{
-			return 1780733181 + serialNumber.GetHashCode();
+			return 1780733181 + SerialNumber.GetHashCode();
 		}
 
 		public static bool operator ==(Weapon left, Weapon right)
