@@ -125,9 +125,9 @@ namespace ExamplePlugin
 		public bool GiveLottoItem(Player player)
 		{
 			// Makes sure the player is playing on a team that can have items
-			if (player.TeamRole.Team == TeamType.SPECTATOR ||
-				player.TeamRole.Team == TeamType.NONE ||
-				player.TeamRole.Team == TeamType.SCP)
+			if (player.PlayerRole.Team == TeamType.SPECTATOR ||
+				player.PlayerRole.Team == TeamType.NONE ||
+				player.PlayerRole.Team == TeamType.SCP)
 			{
 				return false;
 			}

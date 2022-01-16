@@ -44,7 +44,7 @@ namespace Smod2.API
 	public abstract class Role
 	{
 		public abstract TeamType Team { get; }
-		public abstract RoleType ID { get; }
+		public abstract RoleType RoleID { get; }
 		public abstract bool RoleDisallowed { get; set; }
 		public abstract int MaxHP { get; set; }
 		public abstract string Name { get; set; }
