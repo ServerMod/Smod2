@@ -286,12 +286,13 @@ namespace Smod2.API
 	{
 		public abstract bool IsOpen { get; set; }
 		public abstract bool IsUnlocked { get; set; }
-		public abstract bool IsEngaged { get; }
+		public abstract bool IsEngaged { get; set; }
+		public abstract bool IsActivating { get; set;  }
 		/// <summary>
 		/// The amount of time it takes for a generator to activate from when the lever is pulled
 		/// </summary>
 		public abstract float ActivationTime { get; }
-		public abstract float TimeLeft { get; }
+		public abstract float ActivationTimeLeft { get; }
 		public abstract Vector Position { get; }
 		public abstract Room Room { get; }
 		public abstract object GetComponent();
