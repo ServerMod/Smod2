@@ -50,6 +50,8 @@ namespace Smod2.API
 		AK = 31,
 		SHOTGUN = 32,
 
+		// SCP-106 doesn't have a specific entry for it's normal attack in the base game so we add it here too
+		SCP_106 = 33
 	}
 
 	public enum UserRank
