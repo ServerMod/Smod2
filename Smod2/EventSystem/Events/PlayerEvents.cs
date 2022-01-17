@@ -25,7 +25,7 @@ namespace Smod2.Events
 
 		public Player Attacker { get; }
 		public float Damage { get; set; }
-		public DamageType DamageType { get; set; }
+		public DamageType DamageType { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
@@ -44,7 +44,7 @@ namespace Smod2.Events
 
 		public Player Killer { get; }
 		public bool SpawnRagdoll { get; set; }
-		public DamageType DamageTypeVar { get; set; }
+		public DamageType DamageTypeVar { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
@@ -367,7 +367,7 @@ namespace Smod2.Events
 		public Vector Position { get; set; }
 		public Vector Rotation { get; set; }
 		public Player Attacker { get; }
-		public DamageType DamageType { get; set; }
+		public DamageType DamageType { get; }
 		public bool AllowRecall { get; set; }
 
 		public PlayerSpawnRagdollEvent(Player player, RoleType role, Vector position, Vector rotation, Player attacker, DamageType damageType, bool allowRecall) : base(player)
