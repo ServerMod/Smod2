@@ -38,20 +38,21 @@ namespace Smod2.API
 		CRUSHED = 21,
 		FEMUR_BREAKER = 22,
 		FRIENDLY_FIRE_PUNISHMENT = 23,
-
-		// Remaining weapons
-		COM15 = 24,
-		E11_SR = 25,
-		CROSSVEC = 26,
-		FSP9 = 27,
-		LOGICER = 28,
-		COM18 = 29,
-		REVOLVER = 30,
-		AK = 31,
-		SHOTGUN = 32,
+		HYPOTHERMIA = 24,
 
 		// SCP-106 doesn't have a specific entry for it's normal attack in the base game so we add it here too
-		SCP_106 = 33
+		SCP_106 = 25,
+
+		// Remaining weapons
+		COM15 = 26,
+		E11_SR = 27,
+		CROSSVEC = 28,
+		FSP9 = 29,
+		LOGICER = 30,
+		COM18 = 31,
+		REVOLVER = 32,
+		AK = 33,
+		SHOTGUN = 34
 	}
 
 	public enum UserRank
