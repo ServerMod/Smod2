@@ -588,8 +588,9 @@ namespace Smod2.Events
 	{
 		public bool Allow { get; set; }
 
-		public PlayerMakeNoiseEvent(Player player) : base(player)
+		public PlayerMakeNoiseEvent(Player player, bool allow) : base(player)
 		{
+			this.Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -635,12 +636,14 @@ namespace Smod2.Events
 	public class PlayerReloadEvent : PlayerEvent
 	{
 		public Weapon Weapon { get; }
-		public int AmmoRemoved { get; set; }
-		public int ClipAmmoCountAfterReload { get; set; }
+		public int AmmoRemoved { get; }
+		public int ClipAmmoCountAfterReload { get; }
 		public int NormalMaxClipSize { get; }
 		public int CurrentClipAmmoCount { get; }
 		public int CurrentAmmoTotal { get; }
-		public PlayerReloadEvent(Player player, Weapon weapon, int ammoRemoved, int clipAmmoCountAfterReload, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal) : base(player)
+		public bool Allow { get; set; }
+
+		public PlayerReloadEvent(Player player, Weapon weapon, int ammoRemoved, int clipAmmoCountAfterReload, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal, bool allow) : base(player)
 		{
 			this.Weapon = weapon;
 			this.AmmoRemoved = ammoRemoved;
@@ -648,6 +651,7 @@ namespace Smod2.Events
 			this.NormalMaxClipSize = normalMaxClipSize;
 			this.CurrentClipAmmoCount = currentClipAmmoCount;
 			this.CurrentAmmoTotal = currentAmmoTotal;
+			this.Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
