@@ -586,6 +586,8 @@ namespace Smod2.Events
 
 	public class PlayerMakeNoiseEvent : PlayerEvent
 	{
+		public bool Allow { get; set; }
+
 		public PlayerMakeNoiseEvent(Player player) : base(player)
 		{
 		}
