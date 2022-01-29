@@ -71,7 +71,7 @@ namespace Smod2.Events
 			((IEventHandlerWarheadStopCountdown)handler).OnStopCountdown(this);
 		}
 	}
-	
+
 	public class WarheadChangeLeverEvent : Event
 	{
 		public Player Player { get; }
@@ -82,7 +82,7 @@ namespace Smod2.Events
 			Player = player;
 			Allow = true;
 		}
-		
+
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerWarheadChangeLever)handler).OnChangeLever(this);
@@ -99,7 +99,7 @@ namespace Smod2.Events
 			Player = player;
 			Allow = allow;
 		}
-		
+
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerWarheadKeycardAccess)handler).OnWarheadKeycardAccess(this);
@@ -154,18 +154,16 @@ namespace Smod2.Events
 			((IEventHandlerGeneratorFinish)handler).OnGeneratorFinish(this);
 		}
 	}
-	
+
 	public class ScpDeathAnnouncementEvent : Event
 	{
 		public bool ShouldPlay { get; set; }
 		public Player DeadPlayer { get; }
-		public RoleType PlayerRole { get; }
 
-		public ScpDeathAnnouncementEvent(bool shouldPlay, Player deadPlayer, RoleType playerRole)
+		public ScpDeathAnnouncementEvent(bool shouldPlay, Player deadPlayer)
 		{
 			ShouldPlay = shouldPlay;
 			DeadPlayer = deadPlayer;
-			PlayerRole = playerRole;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
