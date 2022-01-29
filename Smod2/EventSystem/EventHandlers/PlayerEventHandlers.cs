@@ -336,7 +336,7 @@ namespace Smod2.EventHandlers
 		/// <summary>
 		/// Called when a player switches the lever on a generator
 		/// </summary>
-		void OnGeneratorLeverUsed(PlayerGeneratorLeverUseEvent ev);
+		void OnGeneratorLeverUsed(PlayerGeneratorLeverUsedEvent ev);
 	}
 
 	public interface IEventHandler079Door : IEventHandler

@@ -756,13 +756,13 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PlayerGeneratorLeverUseEvent : PlayerEvent
+	public class PlayerGeneratorLeverUsedEvent : PlayerEvent
 	{
 		public Generator Generator { get; }
 		public bool Allow { get; set; }
 		public bool Activated { get; set; }
 
-		public PlayerGeneratorLeverUseEvent(Player player, Generator generator, bool allow, bool activated) : base(player)
+		public PlayerGeneratorLeverUsedEvent(Player player, Generator generator, bool allow, bool activated) : base(player)
 		{
 			Generator = generator;
 			Allow = allow;
