@@ -331,20 +331,12 @@ namespace Smod2.EventHandlers
 		void OnGeneratorAccess(PlayerGeneratorAccessEvent ev);
 	}
 
-	public interface IEventHandlerGeneratorInsertTablet : IEventHandler
+	public interface IEventHandlerGeneratorLeverUsed : IEventHandler
 	{
 		/// <summary>
-		/// Called when a player puts a tablet in or ejects the tablet.
+		/// Called when a player switches the lever on a generator
 		/// </summary>
-		void OnGeneratorInsertTablet(PlayerGeneratorInsertTabletEvent ev);
-	}
-
-	public interface IEventHandlerGeneratorEjectTablet : IEventHandler
-	{
-		/// <summary>
-		/// Called when a player puts a tablet in or ejects the tablet.
-		/// </summary>
-		void OnGeneratorEjectTablet(PlayerGeneratorEjectTabletEvent ev);
+		void OnGeneratorLeverUsed(PlayerGeneratorLeverUseEvent ev);
 	}
 
 	public interface IEventHandler079Door : IEventHandler

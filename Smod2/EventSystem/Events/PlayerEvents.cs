@@ -756,41 +756,22 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PlayerGeneratorInsertTabletEvent : PlayerEvent
+	public class PlayerGeneratorLeverUseEvent : PlayerEvent
 	{
 		public Generator Generator { get; }
 		public bool Allow { get; set; }
-		public bool RemoveTablet { get; set; }
+		public bool Activated { get; set; }
 
-		public PlayerGeneratorInsertTabletEvent(Player player, Generator generator, bool allow, bool removeTablet) : base(player)
+		public PlayerGeneratorLeverUseEvent(Player player, Generator generator, bool allow, bool activated) : base(player)
 		{
 			Generator = generator;
 			Allow = allow;
-			RemoveTablet = removeTablet;
+			Activated = activated;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerGeneratorInsertTablet)handler).OnGeneratorInsertTablet(this);
-		}
-	}
-
-	public class PlayerGeneratorEjectTabletEvent : PlayerEvent
-	{
-		public Generator Generator { get; }
-		public bool Allow { get; set; }
-		public bool SpawnTablet { get; set; }
-
-		public PlayerGeneratorEjectTabletEvent(Player player, Generator generator, bool allow, bool spawnTablet) : base(player)
-		{
-			Generator = generator;
-			Allow = allow;
-			SpawnTablet = spawnTablet;
-		}
-
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-			((IEventHandlerGeneratorEjectTablet)handler).OnGeneratorEjectTablet(this);
+			((IEventHandlerGeneratorLeverUsed)handler).OnGeneratorLeverUsed(this);
 		}
 	}
 
