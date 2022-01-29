@@ -393,21 +393,19 @@ namespace Smod2.Events
 
 	public class PlayerSpawnRagdollEvent : PlayerEvent
 	{
-		public RoleType Role { get; set; }
+		public RoleType RoleID { get; set; }
 		public Vector Position { get; set; }
 		public Vector Rotation { get; set; }
 		public Player Attacker { get; }
 		public DamageType DamageType { get; }
-		public bool AllowRecall { get; set; }
 
-		public PlayerSpawnRagdollEvent(Player player, RoleType role, Vector position, Vector rotation, Player attacker, DamageType damageType, bool allowRecall) : base(player)
+		public PlayerSpawnRagdollEvent(Player player, RoleType roleID, Vector position, Vector rotation, Player attacker, DamageType damageType) : base(player)
 		{
-			this.Role = role;
+			this.RoleID = roleID;
 			this.Position = position;
 			this.Rotation = rotation;
 			this.Attacker = attacker;
 			this.DamageType = damageType;
-			this.AllowRecall = allowRecall;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
