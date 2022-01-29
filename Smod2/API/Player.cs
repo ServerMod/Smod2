@@ -192,7 +192,7 @@ namespace Smod2.API
 		public abstract Vector GetRotation();
 		public abstract void SendConsoleMessage(string message, string color = "green");
 		public abstract void Infect(float time);
-		public abstract void ThrowGrenade(GrenadeType grenadeType, Vector direction = null, float throwForce = 1f, bool slowThrow = false);
+		public abstract void ThrowGrenade(GrenadeType grenadeType, Vector direction = null, bool slowThrow = false);
 		public abstract void HideTag(bool enable);
 		public abstract void PersonalClearBroadcasts();
 		public abstract string GetAuthToken();
