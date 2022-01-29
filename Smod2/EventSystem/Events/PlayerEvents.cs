@@ -179,27 +179,59 @@ namespace Smod2.Events
 
 	public class PlayerSetRoleEvent : PlayerEvent
 	{
-		public PlayerSetRoleEvent(Player player, Role role, RoleType roleType, List<ItemType> items, bool usingDefaultItem = true) : base(player)
+		/// <summary>
+		/// Called when a player role is set, on respawn or otherwise.
+		/// </summary>
+		/// <param name="player">The player whose role has changed.</param>
+		/// <param name="newRole">The role the player is about to get, use roleType to change it.</param>
+		/// <param name="roleType">The role type the player is about to get.</param>
+		public PlayerSetRoleEvent(Player player, Role newRole, RoleType roleType) : base(player)
 		{
-			this.Role = role;
+			this.NewRole = newRole;
 			this.RoleType = roleType;
-			this.Items = items;
-			this.UsingDefaultItem = usingDefaultItem;
 		}
-
-		public List<ItemType> Items { get; set; }
-
-		public bool UsingDefaultItem { get; set; }
 
 		public RoleType RoleType { get; set; }
 
-		public Role Role { get; }
+		public Role NewRole { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			Player.CallSetRoleEvent = false;
 			((IEventHandlerSetRole)handler).OnSetRole(this);
 			Player.CallSetRoleEvent = true;
+		}
+	}
+
+	public class PlayerSetInventoryEvent : PlayerEvent
+	{
+		/// <summary>
+		/// Triggers before a player gets their new inventory items after a role change.
+		/// </summary>
+		/// <param name="player">The player whose role has changed.</param>
+		/// <param name="previousRole">The role the player had before the role change, check the player for the new role.</param>
+		/// <param name="items">The items which will be given to the player.</param>
+		/// <param name="ammo">The ammo type and amount which will be given to the player.</param>
+		/// <param name="dropExistingItems">Whether to drop or simply delete the existing inventory items.</param>
+		public PlayerSetInventoryEvent(Player player, Role previousRole, List<ItemType> items, Dictionary<AmmoType, ushort> ammo, bool dropExistingItems) : base(player)
+		{
+			this.PreviousRole = previousRole;
+			this.Items = items;
+			this.Ammo = ammo;
+			this.DropExistingItems = dropExistingItems;
+		}
+
+		public List<ItemType> Items { get; set; }
+
+		public Dictionary<AmmoType, ushort> Ammo { get; set; }
+
+		public bool DropExistingItems { get; set; }
+
+		public Role PreviousRole { get; }
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSetInventory)handler).OnSetInventory(this);
 		}
 	}
 
