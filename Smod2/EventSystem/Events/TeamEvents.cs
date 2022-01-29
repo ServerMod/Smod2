@@ -15,7 +15,7 @@ namespace Smod2.EventSystem.Events
 
 		public TeamType[] Teams { get; set; }
 		public Player[] Players { get; set; }
-		
+
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerDecideTeamRespawnQueue)handler).OnDecideTeamRespawnQueue(this);
@@ -49,7 +49,7 @@ namespace Smod2.EventSystem.Events
 		}
 
 		public RoleType Role { get; }
-		
+
 		public int MaxHP { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -115,9 +115,9 @@ namespace Smod2.EventSystem.Events
 		}
 	}
 
-	public class SetNTFUnitNameEvent : Event
+	public class SetMTFUnitNameEvent : Event
 	{
-		public SetNTFUnitNameEvent(string unit)
+		public SetMTFUnitNameEvent(string unit)
 		{
 			this.Unit = unit;
 		}
@@ -126,7 +126,7 @@ namespace Smod2.EventSystem.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerSetNTFUnitName)handler).OnSetNTFUnitName(this);
+			((IEventHandlerSetMTFUnitName)handler).OnSetMTFUnitName(this);
 		}
 	}
 }
