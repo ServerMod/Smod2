@@ -12,8 +12,19 @@ namespace Smod2.Events
 		public List<Item> ItemInputs { get; set; }
 		public Vector IntakePos { get; set; }
 		public Vector OutputPos { get; set; }
+		public bool UpgradeHeldItemOnly { get; set; }
+		public bool UpgradeInventory { get; set; }
+		public bool UpgradeDropped { get; set; }
 
-		public SCP914ActivateEvent(Player user, KnobSetting knobSetting, List<Player> playerList, List<Item> itemList, Vector intakePos, Vector outputPos)
+		public SCP914ActivateEvent(Player user,
+			KnobSetting knobSetting,
+			List<Player> playerList,
+			List<Item> itemList,
+			Vector intakePos,
+			Vector outputPos,
+			bool upgradeDropped,
+			bool upgradeInventory,
+			bool upgradeHeldItemOnly)
 		{
 			this.User = user;
 			this.KnobSetting = knobSetting;
@@ -21,6 +32,9 @@ namespace Smod2.Events
 			this.ItemInputs = itemList;
 			this.IntakePos = intakePos;
 			this.OutputPos = outputPos;
+			this.UpgradeDropped = upgradeDropped;
+			this.UpgradeInventory = upgradeInventory;
+			this.UpgradeHeldItemOnly = upgradeHeldItemOnly;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
