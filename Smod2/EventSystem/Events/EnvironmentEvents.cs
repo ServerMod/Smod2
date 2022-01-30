@@ -207,16 +207,14 @@ namespace Smod2.Events
 
 	public class CassieTeamAnnouncementEvent : Event
 	{
-		public char NatoLetter { get; set; }
-		public int NatoNumber { get; set; }
+		public string CassieUnitName { get; set; }
 		public int SCPsLeft { get; set; }
 		public bool Allow { get; set; }
 
-		public CassieTeamAnnouncementEvent(char natoLetter, int natoNumber, int scpsLeft, bool allow = true)
+		public CassieTeamAnnouncementEvent(string cassieUnitName, int scpsLeft, bool allow = true)
 		{
-			this.NatoLetter = natoLetter;
-			this.NatoNumber = natoNumber;
 			this.SCPsLeft = scpsLeft;
+			CassieUnitName = cassieUnitName;
 			this.Allow = allow;
 		}
 
