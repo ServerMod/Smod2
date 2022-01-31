@@ -189,14 +189,16 @@ namespace Smod2.Events
 	public class CassieCustomAnnouncementEvent : Event
 	{
 		public string Words { get; set; }
-		public bool MonoSpaced { get; set; }
+		public bool Hold { get; set; }
+		public bool MakeNoise { get; set; }
 		public bool Allow { get; set; }
 
-		public CassieCustomAnnouncementEvent(string words, bool monospaced, bool allow = true)
+		public CassieCustomAnnouncementEvent(string words, bool hold, bool makeNoise, bool allow = true)
 		{
-			this.Words = words;
-			this.MonoSpaced = monospaced;
-			this.Allow = allow;
+			Words = words;
+			Hold = hold;
+			MakeNoise = makeNoise;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
