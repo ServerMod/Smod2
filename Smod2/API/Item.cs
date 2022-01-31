@@ -52,6 +52,15 @@ namespace Smod2.API
 		SCP2176 = 43
 	}
 
+	public enum MedicalItem
+	{
+		MEDKIT = ItemType.MEDKIT,
+		SCP500 = ItemType.SCP500,
+		SCP207 = ItemType.SCP207,
+		ADRENALINE = ItemType.ADRENALINE,
+		PAINKILLERS = ItemType.PAINKILLERS
+	}
+
 	public enum KnobSetting
 	{
 		ROUGH = 0,
