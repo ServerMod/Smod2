@@ -520,12 +520,12 @@ namespace Smod2.Events
 	{
 		public bool Allow { get; set; }
 
-		public Player Owner { get; set; }
+		public Player Disarmer { get; }
 
-		public PlayerHandcuffedEvent(Player player, Player owner, bool allow = true) : base(player)
+		public PlayerHandcuffedEvent(Player player, Player disarmer, bool allow = true) : base(player)
 		{
 			this.Allow = allow;
-			this.Owner = owner;
+			this.Disarmer = disarmer;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
