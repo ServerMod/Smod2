@@ -1,0 +1,9 @@
+name: 'Build Smod2'
+description: 'Build the Smod2.dll binary.'
+runs:
+  using: "composite"
+  steps:
+    - run: apt install mono-complete
+      shell: bash
+    - run: msbuild Smod2/Smod2.csproj -restore -p:PostBuildEvent=
+      shell: bash          
