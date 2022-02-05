@@ -145,6 +145,8 @@ namespace Smod2.API
 		public abstract bool BypassMode { get; set; }
 		public abstract bool Muted { get; set; }
 		public abstract bool IntercomMuted { get; set; }
+		public abstract int ItemCount { get; }
+
 		public string GetParsedUserID()
         {
             if (!string.IsNullOrWhiteSpace(UserID))
