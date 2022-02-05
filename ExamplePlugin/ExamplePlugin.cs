@@ -84,7 +84,7 @@ namespace ExamplePlugin
 			// Register multiple events
 			this.AddEventHandlers(new RoundEventHandler(this));
 			// Register single event with priority (need to specify the handler type)
-			this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.High);
+			this.AddEventHandler(typeof(IEventHandlerPlayerPickupItem), new LottoItemHandler(this), Priority.EARLY);
 			// Register Command(s)
 			this.AddCommand("hello", new HelloWorldCommand(this));
 			// Registers config at runtime (in this case it is in Register, so it is on initialization)
