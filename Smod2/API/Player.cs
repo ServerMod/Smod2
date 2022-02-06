@@ -93,9 +93,10 @@ namespace Smod2.API
 
 	public enum GrenadeType
 	{
-		FRAG_GRENADE = 0,
-		FLASHBANG = 1,
-		SCP018 = 2
+		GRENADE_HE = ItemType.GRENADE_HE,
+		GRENADE_FLASH = ItemType.GRENADE_FLASH,
+		SCP018 = ItemType.SCP018,
+		SCP2176 = ItemType.SCP2176
 	}
 
 	public enum StatusEffect
