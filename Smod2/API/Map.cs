@@ -12,11 +12,7 @@ namespace Smod2.API
 		public abstract List<Room> GetRooms();
 		public abstract List<Item> GetItems(ItemType type, bool world_only);
 		public abstract Vector GetRandomSpawnPoint(RoleType role);
-		[Obsolete("Use RoleType instead of Role")]
-		public abstract Vector GetRandomSpawnPoint(Role role);
 		public abstract List<Vector> GetSpawnPoints(RoleType role);
-		[Obsolete("Use RoleType instead of Role")]
-		public abstract List<Vector> GetSpawnPoints(Role role);
 		public abstract List<Vector> GetBlastDoorPoints();
 		public abstract List<Door> GetDoors();
 		public abstract List<PocketDimensionExit> GetPocketDimensionExits();
@@ -29,19 +25,19 @@ namespace Smod2.API
 		public abstract void Shake();
 		public abstract bool WarheadDetonated { get; }
 		public abstract bool LCZDecontaminated { get; }
-		public abstract void SpawnItem(ItemType type, Vector position, Vector rotation);
-		public abstract void SpawnItem(WeaponType type, float Ammo, WeaponSight Sight, WeaponBarrel Barrel, WeaponOther Other, Vector pos, Vector rotation);
-		public abstract void SpawnItem(AmmoType type, float Ammo, Vector position, Vector rotation);
-		/// <summary>  
+		public abstract void SpawnItem(ItemType type, Vector position, Vector rotation = null);
+		public abstract void SpawnItem(WeaponType type, int ammo, AttachmentType[] attachments, Vector pos, Vector rotation = null);
+		public abstract void SpawnItem(AmmoType type, int ammo, Vector position, Vector rotation = null);
+		/// <summary>
 		/// Note: When FemurBreaker is enabled, SCP-106 can't be contained. This might break the lure configs and mechanism.
-		/// </summary> 
+		/// </summary>
 		public abstract void FemurBreaker(bool enable);
 		public abstract List<Elevator> GetElevators();
 		public abstract void SetIntercomContent(IntercomStatus intercomStatus, string content);
 		public abstract string GetIntercomContent(IntercomStatus intercomStatus);
 		public abstract List<TeslaGate> GetTeslaGates();
 		public abstract void AnnounceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter);
-		public abstract void AnnounceScpKill(string scpNumber, Player killer = null);
+		public abstract void AnnounceScpKill(RoleType scp, string cassieAnnouncement = null);
 		public abstract void AnnounceCustomMessage(string words);
 		public abstract void AnnounceCustomMessage(string words, bool makeHold, bool makeNoise);
 		public abstract void SetIntercomSpeaker(Player player);
@@ -67,69 +63,61 @@ namespace Smod2.API
 	[Flags]
 	public enum KeycardPermission : ushort
 	{
-		None = 0x0,
-		Checkpoints = 0x1,
-		ExitGates = 0x2,
-		Intercom = 0x4,
-		AlphaWarhead = 0x8,
-		ContainmentLevelOne = 0x10,
-		ContainmentLevelTwo = 0x20,
-		ContainmentLevelThree = 0x40,
-		ArmoryLevelOne = 0x80,
-		ArmoryLevelTwo = 0x100,
-		ArmoryLevelThree = 0x200,
-		ScpOverride = 0x400
+		NONE = 0x0,
+		CHECKPOINTS = 0x1,
+		EXIT_GATES = 0x2,
+		INTERCOM = 0x4,
+		ALPHA_WARHEAD = 0x8,
+		CONTAINMENT_LEVEL_ONE = 0x10,
+		CONTAINMENT_LEVEL_TWO = 0x20,
+		CONTAINMENT_LEVEL_THREE = 0x40,
+		ARMORY_LEVEL_ONE = 0x80,
+		ARMORY_LEVEL_TWO = 0x100,
+		ARMORY_LEVEL_THREE = 0x200,
+		SCP_OVERRIDE = 0x400
 	}
 
 	[Flags]
 	public enum DoorLockReasons : ushort
 	{
-		None = 0x0,
-		Regular079 = 0x1,
-		Lockdown079 = 0x2,
-		Warhead = 0x4,
-		AdminCommand = 0x8,
-		DecontLockdown = 0x10,
-		DecontEvacuate = 0x20,
-		SpecialDoorFeature = 0x40,
-		NoPower = 0x80,
-		Isolation = 0x100
+		NONE = 0x0,
+		REGULAR079 = 0x1,
+		LOCKDOWN079 = 0x2,
+		WARHEAD = 0x4,
+		ADMIN_COMMAND = 0x8,
+		DECONTAMINATION_LOCKDOWN = 0x10,
+		DECONTAMINATION_EVACUATE = 0x20,
+		SPECIAL_DOOR_FEATURE = 0x40,
+		NO_POWER = 0x80,
+		ISOLATION = 0x100
 	}
 
 	[Flags]
 	public enum DoorLockModes : byte
 	{
-		FullLock = 0x0,
-		CanOpen = 0x1,
-		CanClose = 0x2,
-		ScpOverride = 0x4
+		FULL_LOCK = 0x0,
+		CAN_OPEN = 0x1,
+		CAN_CLOSE = 0x2,
+		SCP_OVERRIDE = 0x4
 	}
 
 	public enum DoorActions
 	{
-		Opened,
-		Closed,
-		AccessDenied,
-		Locked,
-		Unlocked,
-		Destroyed
+		OPENED,
+		CLOSED,
+		ACCESS_DENIED,
+		LOCKED,
+		UNLOCKED,
+		DESTROYED
 	}
 
 	public abstract class Door
 	{
-		public abstract bool Open { get; set; }
-		public abstract bool Destroyed { get; set; }
-		[Obsolete("DontOpenOnWarhead removed from base game.")]
-		public abstract bool DontOpenOnWarhead { get; set; }
-		[Obsolete("BlockAfterWarheadDetonation removed from base game.")]
-		public abstract bool BlockAfterWarheadDetonation { get; set; }
-		public abstract bool Locked { get; set; }
-		[Obsolete("LockCooldown removed from base game.")]
-		public abstract float LockCooldown { get; set; }
+		public abstract bool IsOpen { get; set; }
+		public abstract bool IsDestroyed { get; }
+		public abstract bool IsLocked { get; set; }
 		public abstract Vector Position { get; }
 		public abstract string Name { get; }
-		[Obsolete("Permission replaced with RequiredPermission")]
-		public abstract string Permission { get; }
 		public abstract KeycardPermission RequiredPermission { get; set; }
 		public abstract DoorLockReasons LockReasons { get; set; }
 		public abstract DoorLockModes LockModes { get; }
@@ -141,38 +129,42 @@ namespace Smod2.API
 	{
 		public abstract void Activate(bool instant = false);
 		public abstract float TriggerDistance { get; set; }
+		/// <summary>
+		/// The amount of time left on the cooldown before the tesla gate can fire again
+		/// </summary>
+		public abstract float CooldownTime { get; set; }
 		public abstract Vector Position { get; }
 		public abstract object GetComponent();
 	}
 
 	public enum ElevatorType
 	{
-		LiftA = 0,
-		LiftB = 1,
-		GateA = 2,
-		GateB = 3,
-		WarheadRoom = 4,
-		SCP049Chamber = 5
+		LIFT_A = 0,
+		LIFT_B = 1,
+		GATE_A = 2,
+		GATE_B = 3,
+		WARHEAD_ROOM = 4,
+		SCP_049_CHAMBER = 5
 	}
 
 	public enum ElevatorStatus
 	{
-		Up,
-		Down,
-		Moving
+		UP,
+		DOWN,
+		MOVING
 	}
 
 	public enum IntercomStatus
 	{
-		Ready = 0,
-		Transmitting = 1,
+		READY = 0,
+		TRANSMITTING = 1,
 		/* TransmittingBypass */
-		Transmitting_Bypass = 2,
-		Restarting = 3,
+		TRANSMITTING_BYPASS = 2,
+		RESTARTING = 3,
 		/* AdminSpeaking */
-		Transmitting_Admin = 4,
-		Muted = 5,
-		Custom = 6
+		TRANSMITTING_ADMIN = 4,
+		MUTED = 5,
+		CUSTOM = 6
 	}
 
 	public abstract class Elevator
@@ -189,8 +181,8 @@ namespace Smod2.API
 
 	public enum PocketDimensionExitType
 	{
-		Killer = 0,
-		Exit = 1
+		KILLER = 0,
+		EXIT = 1
 	}
 
 	public abstract class PocketDimensionExit
@@ -201,90 +193,74 @@ namespace Smod2.API
 
 	public enum Spawnable //1st is player and 2nd is Lobby_Playback and I don't know how spawning these would break/destroy existance itself.
 	{
-		Pickup = 2,
-		Work_Station = 3,
-		Ragdoll_SCP173 = 4,
-		Ragdoll_DClass = 5,
-		Ragdoll_SCP106 = 6,
-		Ragdoll_MTF = 7,
-		Ragdoll_SCIENTIST = 8,
-		Ragdoll_SCP049 = 9,
-		Ragdoll_CHAOS = 10,
-		SCP_096_Ragdoll = 11,
-		Ragdoll_SCP049_2 = 12,
-		Ragdoll_GUARD = 13,
-		Ragdoll_SCP939_53 = 14,
-		Ragdoll_SCP939_89 = 15,
-		Grenade_Flash = 16,
-		Grenade_Frag = 17,
-		Grenade_SCP_018 = 18
+		PICKUP = 2,
+		WORK_STATION = 3,
+		RAGDOLL_SCP173 = 4,
+		RAGDOLL_D_CLASS = 5,
+		RAGDOLL_SCP106 = 6,
+		RAGDOLL_MTF = 7,
+		RAGDOLL_SCIENTIST = 8,
+		RAGDOLL_SCP049 = 9,
+		RAGDOLL_CHAOS = 10,
+		SCP_096_RAGDOLL = 11,
+		RAGDOLL_SCP049_2 = 12,
+		RAGDOLL_GUARD = 13,
+		RAGDOLL_SCP939_53 = 14,
+		RAGDOLL_SCP939_89 = 15,
+		GRENADE_FLASH = 16,
+		GRENADE_FRAG = 17,
+		GRENADE_SCP_018 = 18
 	}
 
 	public enum ZoneType
 	{
-		LCZ,
-		HCZ,
+		NONE,
+		LIGHT_CONTAINMENT,
+		HEAVY_CONTAINMENT,
 		ENTRANCE,
-		SURFACE
+		SURFACE,
+		OTHER
 	}
 
 	public enum RoomType
 	{
-		//Light Containment Zone
-		LCZ_012,
-		LCZ_173,
-		LCZ_372,
-		LCZ_914,
-		LCZ_AIRLOCK,
-		LCZ_ARMORY,
-		LCZ_CAFE,
+		UNNAMED,
+		LCZ_CLASS_D_SPAWN,
+		LCZ_COMPUTER_ROOM,
 		LCZ_CHECKPOINT_A,
 		LCZ_CHECKPOINT_B,
-		LCZ_CLASSD_SPAWN,
-		LCZ_4_WAY_INTERSECTION,
-		LCZ_3_WAY_INTERSECTION,
-		LCZ_CURVE,
-		LCZ_PLANTS,
-		LCZ_STRAIGHT,
 		LCZ_TOILETS,
-		//Heavy Containment Zone
-		HCZ_049,
-		HCZ_079,
-		HCZ_106,
-		HCZ_096,
-		HCZ_939,
+		LCZ_ARMORY,
+		LCZ173,
+		LCZ_GLASS_ROOM,
+		LCZ_012,
+		LCZ_914,
+		LCZ_GREENHOUSE,
+		LCZ_AIRLOCK,
+		HCZ_CHECKPOINT_TO_ENTRANCE_ZONE,
 		HCZ_CHECKPOINT_A,
 		HCZ_CHECKPOINT_B,
-		HCZ_4_WAY_INTERSECTION,
-		HCZ_3_WAY_INTERSECTION,
-		HCZ_CURVE,
-		HCZ_STRAIGHT,
-		HCZ_EZ_CHECKPOINT,
-		HCZ_HID,
-		HCZ_NUKE,
-		HCZ_SERVER,
-		HCZ_TARMORY,
+		HCZ_WARHEAD,
+		HCZ_049,
+		HCZ_079,
+		HCZ_096,
+		HCZ_106,
+		HCZ_939,
+		HCZ_MICRO_HID,
+		HCZ_ARMORY,
+		HCZ_SERVERS,
 		HCZ_TESLA,
-		//Entrance Zone
-		EZ_STRAIGHT,
-		EZ_CAFETERIA,
-		EZ_CHEF, //There are 4 straight hallways... how do you name these properly >>>>:(
+		EZ_COLLAPSED_TUNNEL,
 		EZ_GATE_A,
 		EZ_GATE_B,
-		EZ_4_WAY_INTERSECTION,
-		EZ_3_WAY_INTERSECTION,
-		EZ_CURVE,
-		EZ_COLLAPSEDTUNNEL,
-		EZ_REDGATE,
+		EZ_RED_ROOM,
+		EZ_EVAC_SHELTER,
 		EZ_INTERCOM,
-		EZ_PC_LARGE,
-		EZ_PC_SMALL,
-		EZ_SHELTER,
-		EZ_SMALLSTRAIGHT,
-		EZ_SMALLSTRAIGHT2,
-		EZ_UPSTAIRS,
-		//End
-		SURFACE,
+		EZ_OFFICE_STORIED,
+		EZ_OFFICE_LARGE,
+		EZ_OFFICE_SMALL,
+		OUTSIDE,
+		POCKET
 	}
 
 	public enum Scp079InteractionType
@@ -295,29 +271,30 @@ namespace Smod2.API
 
 	public abstract class Room
 	{
+		public abstract int UniqueID { get; }
 		public abstract ZoneType ZoneType { get; }
 		public abstract RoomType RoomType { get; }
 		public abstract Vector Position { get; }
 		public abstract Vector Forward { get; }
 		public abstract Vector SpeakerPosition { get; }
-		public abstract void FlickerLights(float duration = 8f);
-		[Obsolete("Use FlickerLights(float duration = 8f) instead of FlickerLights()")]
-		public abstract void FlickerLights();
-		public abstract string[] GetObjectName();
+		public abstract void FlickerLights(float duration = 8.0f);
+		public abstract string GetObjectName();
 		public abstract object GetGameObject();
 	}
 
 	public abstract class Generator
 	{
-		public abstract bool Open { get; set; }
-		public abstract bool Locked { get; }
-		public abstract bool HasTablet { get; set; }
-		public abstract bool Engaged { get; }
-		public abstract float StartTime { get; }
-		public abstract float TimeLeft { get; set; }
+		public abstract bool IsOpen { get; set; }
+		public abstract bool IsUnlocked { get; set; }
+		public abstract bool IsEngaged { get; set; }
+		public abstract bool IsActivating { get; set;  }
+		/// <summary>
+		/// The amount of time it takes for a generator to activate from when the lever is pulled
+		/// </summary>
+		public abstract float ActivationTime { get; }
+		public abstract float ActivationTimeLeft { get; }
 		public abstract Vector Position { get; }
 		public abstract Room Room { get; }
-		public abstract void Unlock();
 		public abstract object GetComponent();
 	}
 }

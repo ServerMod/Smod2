@@ -1,7 +1,7 @@
 
 namespace Smod2.API
 {
-	public enum ROUND_END_STATUS {
+	public enum RoundEndStatus {
 		ON_GOING,
 		MTF_VICTORY,
 		SCP_VICTORY,
@@ -13,10 +13,10 @@ namespace Smod2.API
 	}
 	public enum LeadingTeam
 	{
-		FacilityForces = 0,
-		ChaosInsurgency = 1,
-		Anomalies = 2,
-		Draw = 3
+		FACILITY_FORCES = 0,
+		CHAOS_INSURGENCY = 1,
+		ANOMALIES = 2,
+		DRAW = 3
 	}
 	public abstract class Round
 	{

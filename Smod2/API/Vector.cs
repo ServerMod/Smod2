@@ -7,7 +7,7 @@ namespace Smod2.API
 		public readonly float x;
 		public readonly float y;
 		public readonly float z;
-		
+
 		public Vector(float x, float y, float z)
 		{
 			this.x = x;
@@ -15,44 +15,44 @@ namespace Smod2.API
 			this.z = z;
 		}
 
-		/// <summary>  
+		/// <summary>
 		///  Shorthand for writing new Vector(0, 0, 0).
-		/// </summary> 
+		/// </summary>
 		public static Vector Zero => new Vector(0, 0, 0);
 
-		/// <summary>  
+		/// <summary>
 		///  Shorthand for writing new Vector(1, 1, 1).
-		/// </summary> 
+		/// </summary>
 		public static Vector One => new Vector(1, 1, 1);
 
-		/// <summary>  
+		/// <summary>
 		///  Shorthand for writing new Vector(0, 0, 1).
-		/// </summary> 
+		/// </summary>
 		public static Vector Forward => new Vector(0, 0, 1);
 
-		/// <summary>  
+		/// <summary>
 		///  Shorthand for writing new Vector(0, 0, -1).
-		/// </summary> 
+		/// </summary>
 		public static Vector Back => new Vector(0, 0, -1);
 
-		/// <summary>  
+		/// <summary>
 		///  Shorthand for writing new Vector(0, 1, 0).
-		/// </summary> 
+		/// </summary>
 		public static Vector Up => new Vector(0, 1, 0);
 
-		/// <summary>  
+		/// <summary>
 		///  Shorthand for writing new Vector(0, -1, 0).
-		/// </summary> 
+		/// </summary>
 		public static Vector Down => new Vector(0, -1, 0);
 
-		/// <summary>  
+		/// <summary>
 		///  Shorthand for writing new Vector(1, 0, 0).
-		/// </summary> 
+		/// </summary>
 		public static Vector Right => new Vector(1, 0, 0);
 
-		/// <summary>  
+		/// <summary>
 		///  Shorthand for writing new Vector(-1, 0, 0).
-		/// </summary> 
+		/// </summary>
 		public static Vector Left => new Vector(-1, 0, 0);
 
 		/// <summary>
@@ -77,9 +77,9 @@ namespace Smod2.API
 		/// <summary>
 		/// Returns the smallest values of the two vectors.
 		/// </summary>
-		public static Vector Min(Vector a, Vector b) => 
+		public static Vector Min(Vector a, Vector b) =>
 			new Vector(
-				Math.Min(a.x, b.x), 
+				Math.Min(a.x, b.x),
 				Math.Min(a.y, b.y),
 				Math.Min(a.z, b.z)
 				);
@@ -87,10 +87,10 @@ namespace Smod2.API
 		/// <summary>
 		/// Returns the largest values of the two vectors.
 		/// </summary>
-		public static Vector Max(Vector a, Vector b) => 
+		public static Vector Max(Vector a, Vector b) =>
 			new Vector(
-				Math.Max(a.x, b.x), 
-				Math.Max(a.y, b.y), 
+				Math.Max(a.x, b.x),
+				Math.Max(a.y, b.y),
 				Math.Max(a.z, b.z)
 				);
 
@@ -114,8 +114,8 @@ namespace Smod2.API
 		{
 			get
 			{
-				float num = Magnitude;
-				if (num > 9.99999974737875E-06) return this / num;
+				float length = Magnitude;
+				if (length > 9.99999974737875E-06) return this / length;
 
 				return Zero;
 			}
@@ -123,13 +123,18 @@ namespace Smod2.API
 
 		public static Vector operator +(Vector a, float b)
 		{
-			return new Vector(a.x + b, a.y + b, a.z + b);
+			float length = a.Magnitude;
+			if (length > 9.99999974737875E-06) return a*((length + b)/length);
+
+			return Zero;
 		}
-		public static Vector operator +(float a, Vector b) => b + a;
 
 		public static Vector operator -(Vector a, float b)
 		{
-			return new Vector(a.x - b, a.y - b, a.z - b);
+			float length = a.Magnitude;
+			if (length > 9.99999974737875E-06) return a*((length - b)/length);
+
+			return Zero;
 		}
 
 		public static Vector operator *(Vector a, float b)
@@ -188,12 +193,12 @@ namespace Smod2.API
 		{
 			return !(a == b);
 		}
-		
+
 		public override bool Equals(object obj)
 		{
 			return ReferenceEquals(this, obj);
 		}
-		
+
 		public override int GetHashCode()
 		{
 			unchecked

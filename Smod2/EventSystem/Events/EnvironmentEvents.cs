@@ -12,8 +12,19 @@ namespace Smod2.Events
 		public List<Item> ItemInputs { get; set; }
 		public Vector IntakePos { get; set; }
 		public Vector OutputPos { get; set; }
+		public bool UpgradeHeldItemOnly { get; set; }
+		public bool UpgradeInventory { get; set; }
+		public bool UpgradeDropped { get; set; }
 
-		public SCP914ActivateEvent(Player user, KnobSetting knobSetting, List<Player> playerList, List<Item> itemList, Vector intakePos, Vector outputPos)
+		public SCP914ActivateEvent(Player user,
+			KnobSetting knobSetting,
+			List<Player> playerList,
+			List<Item> itemList,
+			Vector intakePos,
+			Vector outputPos,
+			bool upgradeDropped,
+			bool upgradeInventory,
+			bool upgradeHeldItemOnly)
 		{
 			this.User = user;
 			this.KnobSetting = knobSetting;
@@ -21,6 +32,9 @@ namespace Smod2.Events
 			this.ItemInputs = itemList;
 			this.IntakePos = intakePos;
 			this.OutputPos = outputPos;
+			this.UpgradeDropped = upgradeDropped;
+			this.UpgradeInventory = upgradeInventory;
+			this.UpgradeHeldItemOnly = upgradeHeldItemOnly;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -71,7 +85,7 @@ namespace Smod2.Events
 			((IEventHandlerWarheadStopCountdown)handler).OnStopCountdown(this);
 		}
 	}
-	
+
 	public class WarheadChangeLeverEvent : Event
 	{
 		public Player Player { get; }
@@ -82,7 +96,7 @@ namespace Smod2.Events
 			Player = player;
 			Allow = true;
 		}
-		
+
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerWarheadChangeLever)handler).OnChangeLever(this);
@@ -99,7 +113,7 @@ namespace Smod2.Events
 			Player = player;
 			Allow = allow;
 		}
-		
+
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerWarheadKeycardAccess)handler).OnWarheadKeycardAccess(this);
@@ -154,18 +168,16 @@ namespace Smod2.Events
 			((IEventHandlerGeneratorFinish)handler).OnGeneratorFinish(this);
 		}
 	}
-	
+
 	public class ScpDeathAnnouncementEvent : Event
 	{
 		public bool ShouldPlay { get; set; }
 		public Player DeadPlayer { get; }
-		public RoleType PlayerRole { get; }
 
-		public ScpDeathAnnouncementEvent(bool shouldPlay, Player deadPlayer, RoleType playerRole)
+		public ScpDeathAnnouncementEvent(bool shouldPlay, Player deadPlayer)
 		{
 			ShouldPlay = shouldPlay;
 			DeadPlayer = deadPlayer;
-			PlayerRole = playerRole;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -177,14 +189,16 @@ namespace Smod2.Events
 	public class CassieCustomAnnouncementEvent : Event
 	{
 		public string Words { get; set; }
-		public bool MonoSpaced { get; set; }
+		public bool Hold { get; set; }
+		public bool MakeNoise { get; set; }
 		public bool Allow { get; set; }
 
-		public CassieCustomAnnouncementEvent(string words, bool monospaced, bool allow = true)
+		public CassieCustomAnnouncementEvent(string words, bool hold, bool makeNoise, bool allow = true)
 		{
-			this.Words = words;
-			this.MonoSpaced = monospaced;
-			this.Allow = allow;
+			Words = words;
+			Hold = hold;
+			MakeNoise = makeNoise;
+			Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -195,16 +209,14 @@ namespace Smod2.Events
 
 	public class CassieTeamAnnouncementEvent : Event
 	{
-		public char NatoLetter { get; set; }
-		public int NatoNumber { get; set; }
+		public string CassieUnitName { get; set; }
 		public int SCPsLeft { get; set; }
 		public bool Allow { get; set; }
 
-		public CassieTeamAnnouncementEvent(char natoLetter, int natoNumber, int scpsLeft, bool allow = true)
+		public CassieTeamAnnouncementEvent(string cassieUnitName, int scpsLeft, bool allow = true)
 		{
-			this.NatoLetter = natoLetter;
-			this.NatoNumber = natoNumber;
 			this.SCPsLeft = scpsLeft;
+			CassieUnitName = cassieUnitName;
 			this.Allow = allow;
 		}
 
