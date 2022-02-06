@@ -8,10 +8,10 @@ namespace Smod2.API
 		NONE = -1,
 		KEYCARD_JANITOR = 0,
 		KEYCARD_SCIENTIST = 1,
-		KEYCARD_SCIENTIST_MAJOR = 2,
+		KEYCARD_RESEARCH_COORDINATOR = 2,
 		KEYCARD_ZONE_MANAGER = 3,
 		KEYCARD_GUARD = 4,
-		KEYCARD_SENIOR_GUARD = 5,
+		KEYCARD_NTF_OFFICER = 5,
 		KEYCARD_CONTAINMENT_ENGINEER = 6,
 		KEYCARD_NTF_LIEUTENANT = 7,
 		KEYCARD_NTF_COMMANDER = 8,
@@ -25,50 +25,40 @@ namespace Smod2.API
 		MICRO_HID = 16,
 		SCP500 = 17,
 		SCP207 = 18,
-		WEAPON_MANAGER_TABLET = 19,
+		AMMO_12_GAUGE = 19,
 		GUN_E11_SR = 20,
-		GUN_PROJECT90 = 21,
-		AMMO556 = 22,
-		GUN_MP7 = 23,
+		GUN_CROSSVEC = 21,
+		AMMO_556_X45 = 22,
+		GUN_FSP9 = 23,
 		GUN_LOGICER = 24,
-		GRENADE_FRAG = 25,
+		GRENADE_HE = 25,
 		GRENADE_FLASH = 26,
-		DISARMER = 27,
-		AMMO762 = 28,
-		AMMO9MM = 29,
-		GUN_USP = 30,
+		AMMO_44_CAL = 27,
+		AMMO_762_X39 = 28,
+		AMMO_9_X19 = 29,
+		GUN_COM18 = 30,
 		SCP018 = 31,
 		SCP268 = 32,
 		ADRENALINE = 33,
 		PAINKILLERS = 34,
 		COIN = 35,
+		ARMOR_LIGHT = 36,
+		ARMOR_COMBAT = 37,
+		ARMOR_HEAVY = 38,
+		GUN_REVOLVER = 39,
+		GUN_AK = 40,
+		GUN_SHOTGUN = 41,
+		SCP330 = 42,
+		SCP2176 = 43
+	}
 
-		NULL = -1,
-		CUP = -1,
-		JANITOR_KEYCARD = 0,
-		SCIENTIST_KEYCARD = 1,
-		MAJOR_SCIENTIST_KEYCARD = 2,
-		ZONE_MANAGER_KEYCARD = 3,
-		GUARD_KEYCARD = 4,
-		SENIOR_GUARD_KEYCARD = 5,
-		CONTAINMENT_ENGINEER_KEYCARD = 6,
-		MTF_LIEUTENANT_KEYCARD = 7,
-		MTF_COMMANDER_KEYCARD = 8,
-		FACILITY_MANAGER_KEYCARD = 9,
-		CHAOS_INSURGENCY_DEVICE = 10,
-		O5_LEVEL_KEYCARD = 11,
-		COM15 = 13,
-		MICROHID = 16,
-		E11_STANDARD_RIFLE = 20,
-		P90 = 21,
-		DROPPED_5 = 22,
-		MP7 = 23,
-		LOGICER = 24,
-		FRAG_GRENADE = 25,
-		FLASHBANG = 26,
-		DROPPED_7 = 28,
-		DROPPED_9 = 29,
-		USP = 30
+	public enum MedicalItem
+	{
+		MEDKIT = ItemType.MEDKIT,
+		SCP500 = ItemType.SCP500,
+		SCP207 = ItemType.SCP207,
+		ADRENALINE = ItemType.ADRENALINE,
+		PAINKILLERS = ItemType.PAINKILLERS
 	}
 
 	public enum KnobSetting
@@ -84,6 +74,11 @@ namespace Smod2.API
 	{
 		public abstract bool InWorld { get; }
 		public abstract ItemType ItemType { get; }
+		public abstract bool IsWeapon { get; }
+        /// <summary>
+        /// Used so IEquatable is possible so you can compare items.
+        /// </summary>
+        public abstract ushort SerialNumber { get; }
 		public abstract void Remove();
 		public abstract void Drop();
 		public abstract Vector GetPosition();
@@ -91,11 +86,6 @@ namespace Smod2.API
 		public abstract void SetKinematic(bool doPhysics);
 		public abstract bool GetKinematic();
 		public abstract object GetComponent();
-		public abstract bool IsWeapon { get; }
-		/// <summary>
-		/// Used so IEquatable is possible so you can compare items.
-		/// </summary>
-		public abstract int UniqueIdentifier { get; }
 		public abstract Weapon ToWeapon();
 
 		public override bool Equals(object obj)
@@ -105,13 +95,13 @@ namespace Smod2.API
 
 		public bool Equals(Item other)
 		{
-			return other != null && UniqueIdentifier != 0 && other.UniqueIdentifier != 0 && 
-				   UniqueIdentifier == other.UniqueIdentifier;
+			return other != null && SerialNumber != 0 && other.SerialNumber != 0 &&
+				   SerialNumber == other.SerialNumber;
 		}
 
 		public override int GetHashCode()
 		{
-			return 1780733181 + UniqueIdentifier.GetHashCode();
+			return 1780733181 + SerialNumber.GetHashCode();
 		}
 
 		public static bool operator ==(Item left, Item right)

@@ -5,183 +5,191 @@ namespace Smod2.EventHandlers
 	public interface IEventHandlerPlayerHurt : IEventHandler
 	{
 
-		/// <summary>  
+		/// <summary>
 		/// This is called before the player is going to take damage.
 		/// In case the attacker can't be passed, attacker will be null (fall damage etc)
 		/// This may be broken into two events in the future
-		/// </summary> 
+		/// </summary>
 		void OnPlayerHurt(PlayerHurtEvent ev);
 	}
 
 	public interface IEventHandlerPlayerDie : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// This is called before the player is about to die. Be sure to check if player is SCP106 (classID 3) and if so, set spawnRagdoll to false.
 		/// In case the killer can't be passed, attacker will be null, so check for that before doing something.
-		/// </summary> 
+		/// </summary>
 		void OnPlayerDie(PlayerDeathEvent ev);
 	}
 
 	public interface IEventHandlerPlayerPickupItem : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// This is called when a player picks up an item and its deleted off of the ground and is NOT in their inventory.
-		/// </summary> 
+		/// </summary>
 		void OnPlayerPickupItem(PlayerPickupItemEvent ev);
 	}
 
 	public interface IEventHandlerPlayerPickupItemLate : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// This is called after a player picks up an item and is in their inventory.
-		/// </summary> 
+		/// </summary>
 		void OnPlayerPickupItemLate(PlayerPickupItemLateEvent ev);
 	}
 	public interface IEventHandlerPlayerDropItem : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// This is called when a player drops up an item.
-		/// </summary> 
+		/// </summary>
 		void OnPlayerDropItem(PlayerDropItemEvent ev);
 	}
 	public interface IEventHandlerPlayerDropAllItems : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// This is called when all of the items in a player's inventory are going to be dropped.
-		/// </summary> 
+		/// </summary>
 		void OnPlayerDropAllItems(PlayerDropAllItemsEvent ev);
 	}
 	public interface IEventHandlerPlayerJoin : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// This is called when a player joins and is initialised.
-		/// </summary> 
+		/// </summary>
 		void OnPlayerJoin(PlayerJoinEvent ev);
 	}
 
 	public interface IEventHandlerNicknameSet : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// This is called when a player attempts to set their nickname after joining. This will only be called once per game join.
-		/// </summary> 
+		/// </summary>
 		void OnNicknameSet(PlayerNicknameSetEvent ev);
 	}
 
 	public interface IEventHandlerInitialAssignTeam : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a team is picked for a player. Nothing is assigned to the player, but you can change what team the player will spawn as.
-		/// </summary>  
+		/// </summary>
 		void OnAssignTeam(PlayerInitialAssignTeamEvent ev);
 	}
 
 	public interface IEventHandlerSetRole : IEventHandler
 	{
-		/// <summary>  
-		/// Called after the player is set a class, at any point in the game. 
-		/// </summary>  
+		/// <summary>
+		/// Called when a player role is set, on respawn or otherwise.
+		/// </summary>
 		void OnSetRole(PlayerSetRoleEvent ev);
+	}
+
+	public interface IEventHandlerSetInventory : IEventHandler
+	{
+		/// <summary>
+		/// Triggers before a player gets their new inventory items after a role change.
+		/// </summary>
+		void OnSetInventory(PlayerSetInventoryEvent ev);
 	}
 
 	public interface IEventHandlerCheckEscape : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player is checking if they should escape (this is regardless of class)
-		/// </summary>  
+		/// </summary>
 		void OnCheckEscape(PlayerCheckEscapeEvent ev);
 	}
 
 	public interface IEventHandlerSpawn : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player spawns into the world
-		/// </summary>  
+		/// </summary>
 		void OnSpawn(PlayerSpawnEvent ev);
 	}
 
 	public interface IEventHandlerDoorAccess : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player attempts to access a door that requires perms
-		/// </summary>  
+		/// </summary>
 		void OnDoorAccess(PlayerDoorAccessEvent ev);
 	}
 
 	public interface IEventHandlerIntercom : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player attempts to use intercom.
-		/// </summary>  
+		/// </summary>
 		void OnIntercom(PlayerIntercomEvent ev);
 	}
 
 	public interface IEventHandlerIntercomCooldownCheck : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player attempts to use intercom. This happens before the cooldown check.
-		/// </summary>  
+		/// </summary>
 		void OnIntercomCooldownCheck(PlayerIntercomCooldownCheckEvent ev);
 	}
 
 	public interface IEventHandlerPocketDimensionExit: IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player escapes from Pocket Demension
-		/// </summary>  
+		/// </summary>
 		void OnPocketDimensionExit(PlayerPocketDimensionExitEvent ev);
 	}
 
 	public interface IEventHandlerPocketDimensionEnter: IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player enters Pocket Demension
-		/// </summary>  
+		/// </summary>
 		void OnPocketDimensionEnter(PlayerPocketDimensionEnterEvent ev);
 	}
 
 	public interface IEventHandlerPocketDimensionDie : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player enters the wrong way of Pocket Demension. This happens before the player is killed.
-		/// </summary>  
+		/// </summary>
 		void OnPocketDimensionDie(PlayerPocketDimensionDieEvent ev);
 	}
 
 	public interface IEventHandlerThrowGrenade : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called after a player throws a grenade
-		/// </summary>  
+		/// </summary>
 		void OnThrowGrenade(PlayerThrowGrenadeEvent ev);
 	}
 
 	public interface IEventHandlerInfected : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player is cured by SCP-049
-		/// </summary>  
+		/// </summary>
 		void OnPlayerInfected(PlayerInfectedEvent ev);
 	}
 
 	public interface IEventHandlerSpawnRagdoll : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a ragdoll is spawned
-		/// </summary>  
+		/// </summary>
 		void OnSpawnRagdoll(PlayerSpawnRagdollEvent ev);
 	}
 
 	public interface IEventHandlerLure : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player enters FemurBreaker
-		/// </summary> 
+		/// </summary>
 		void OnLure(PlayerLureEvent ev);
 	}
 
 	public interface IEventHandlerContain106 : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player presses the button to contain SCP-106
 		/// </summary>
 		void OnContain106(PlayerContain106Event ev);
@@ -189,23 +197,15 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerMedicalUse : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player uses Medkit
 		/// </summary>
 		void OnMedicalUse(PlayerMedicalUseEvent ev);
 	}
 
-	public interface IEventHandlerShoot : IEventHandler
-	{
-		/// <summary>  
-		/// Called when a player shoots
-		/// </summary>
-		void OnShoot(PlayerShootEvent ev);
-	}
-
 	public interface IEventHandler106CreatePortal : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when SCP-106 creates a portal
 		/// </summary>
 		void On106CreatePortal(Player106CreatePortalEvent ev);
@@ -213,7 +213,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandler106Teleport : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when SCP-106 teleports through portals
 		/// </summary>
 		void On106Teleport(Player106TeleportEvent ev);
@@ -221,7 +221,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerElevatorUse : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player uses an elevator
 		/// </summary>
 		void OnElevatorUse(PlayerElevatorUseEvent ev);
@@ -229,7 +229,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerHandcuffed : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player is about to be handcuffed/released
 		/// </summary>
 		void OnHandcuffed(PlayerHandcuffedEvent ev);
@@ -237,7 +237,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerPlayerTriggerTesla : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player triggers a tesla gate
 		/// </summary>
 		void OnPlayerTriggerTesla(PlayerTriggerTeslaEvent ev);
@@ -245,7 +245,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerSCP914ChangeKnob : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player changes the knob of SCP-914
 		/// </summary>
 		void OnSCP914ChangeKnob(PlayerSCP914ChangeKnobEvent ev);
@@ -253,7 +253,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerRadioSwitch : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player changes the status of their radio
 		/// </summary>
 		void OnPlayerRadioSwitch(PlayerRadioSwitchEvent ev);
@@ -261,7 +261,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerMakeNoise : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player makes noise
 		/// </summary>
 		void OnMakeNoise(PlayerMakeNoiseEvent ev);
@@ -269,15 +269,15 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerRecallZombie : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when SCP-049 turns someone into a zombie
 		/// </summary>
 		void OnRecallZombie(PlayerRecallZombieEvent ev);
 	}
-	
+
 	public interface IEventHandlerCallCommand : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player uses a command that starts with .
 		/// </summary>
 		void OnCallCommand(PlayerCallCommandEvent ev);
@@ -285,7 +285,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerReload : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player reloads their weapon
 		/// </summary>
 		void OnReload(PlayerReloadEvent ev);
@@ -293,7 +293,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerGrenadeExplosion : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player's grenade explodes
 		/// </summary>
 		void OnGrenadeExplosion(PlayerGrenadeExplosion ev);
@@ -301,7 +301,7 @@ namespace Smod2.EventHandlers
 
 	public interface IEventHandlerGrenadeHitPlayer : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		/// Called when a player's grenade hits a player
 		/// </summary>
 		void OnGrenadeHitPlayer(PlayerGrenadeHitPlayer ev);
@@ -323,20 +323,12 @@ namespace Smod2.EventHandlers
 		void OnGeneratorAccess(PlayerGeneratorAccessEvent ev);
 	}
 
-	public interface IEventHandlerGeneratorInsertTablet : IEventHandler
+	public interface IEventHandlerGeneratorLeverUsed : IEventHandler
 	{
 		/// <summary>
-		/// Called when a player puts a tablet in or ejects the tablet.
+		/// Called when a player switches the lever on a generator
 		/// </summary>
-		void OnGeneratorInsertTablet(PlayerGeneratorInsertTabletEvent ev);
-	}
-
-	public interface IEventHandlerGeneratorEjectTablet : IEventHandler
-	{
-		/// <summary>
-		/// Called when a player puts a tablet in or ejects the tablet.
-		/// </summary>
-		void OnGeneratorEjectTablet(PlayerGeneratorEjectTabletEvent ev);
+		void OnGeneratorLeverUsed(PlayerGeneratorLeverUsedEvent ev);
 	}
 
 	public interface IEventHandler079Door : IEventHandler

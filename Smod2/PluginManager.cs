@@ -21,14 +21,14 @@ namespace Smod2
 		DESCRIPTION = 1 << 3,
 		VERSION = 1 << 4
 	}
-	
+
 	public class PluginManager
 	{
 		public static readonly int SMOD_MAJOR = 3;
-		public static readonly int SMOD_MINOR = 9;
-		public static readonly int SMOD_REVISION = 10;
+		public static readonly int SMOD_MINOR = 10;
+		public static readonly int SMOD_REVISION = 0;
 
-		public static readonly string SMOD_BUILD = "A";
+		public static readonly string SMOD_BUILD = "RC1";
 
 		public static readonly string DEPENDENCY_FOLDER = "dependencies";
 
@@ -179,14 +179,14 @@ namespace Smod2
 			return GetEnabledPlugin(id) ?? GetDisabledPlugin(id);
 		}
 
-		
+
 		private List<Plugin> GetPluginsOfSearchable(IEnumerable<Plugin> searchable, string query, SearchFlags flags)
 		{
 			if (query == null)
 			{
 				throw new ArgumentNullException(nameof(query));
 			}
-			
+
 			Array searchFlags = Enum.GetValues(typeof(SearchFlags));
 			List<Plugin> plugins = new List<Plugin>();
 			foreach (Plugin plugin in searchable)
@@ -210,23 +210,23 @@ namespace Smod2
 						case SearchFlags.ID:
 							match = plugin.Details.id == query;
 							break;
-					
+
 						case SearchFlags.NAME:
 							match = plugin.Details.name == query;
 							break;
-					
+
 						case SearchFlags.AUTHOR:
 							match = plugin.Details.author == query;
 							break;
-					
+
 						case SearchFlags.VERSION:
 							match = plugin.Details.version == query;
 							break;
-					
+
 						case SearchFlags.DESCRIPTION:
 							match = plugin.Details.description?.Length / 3 <= query.Length && plugin.Details.description.Contains(query);
 							break;
-						
+
 						// It should never get here but it won't compile otherwise.
 						default:
 							match = false;
@@ -295,7 +295,7 @@ namespace Smod2
 		public List<Plugin> FindPlugins(string name)
 		{
 			List<Plugin> matching = new List<Plugin>();
-			
+
 			foreach (var plugin in enabledPlugins.Values)
 			{
 				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
@@ -303,7 +303,7 @@ namespace Smod2
 					matching.Add(plugin);
 				}
 			}
-			
+
 			foreach (var plugin in disabledPlugins.Values)
 			{
 				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
@@ -320,7 +320,7 @@ namespace Smod2
 			// Converting to array is required because disabledPlugins is modified when a plugin is enabled.
 			Plugin[] plugins = new Plugin[disabledPlugins.Count];
 			disabledPlugins.Values.CopyTo(plugins, 0);
-			
+
 			foreach (Plugin plugin in plugins)
 			{
 				if (plugin == null)
@@ -365,11 +365,11 @@ namespace Smod2
 
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Invoking OnEnable");
 			plugin.OnEnable();
-			
+
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Altering dictionaries");
 			disabledPlugins.Remove(plugin.Details.id);
 			enabledPlugins.Add(plugin.Details.id, plugin);
-			
+
 			Manager.Logger.Info("PLUGIN_MANAGER", "Enabled plugin  " + plugin.Details.name + " " + plugin.Details.version);
 		}
 
@@ -377,7 +377,7 @@ namespace Smod2
 		{
 			Plugin[] plugins = new Plugin[disabledPlugins.Count];
 			disabledPlugins.Values.CopyTo(plugins, 0);
-			
+
 			foreach (Plugin plugin in plugins)
 			{
 				DisablePlugin(plugin);
@@ -407,13 +407,13 @@ namespace Smod2
 			{
 				return;
 			}
-			
+
 			Manager.Logger.Info("PLUGIN_MANAGER", "Disabling plugin " + plugin.Details.name + " " + plugin.Details.version);
-			
+
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Altering dictionaries");
 			enabledPlugins.Remove(plugin.Details.id);
 			disabledPlugins.Add(plugin.Details.id, plugin);
-			
+
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Invoking OnDisable");
 			plugin.OnDisable();
 
@@ -509,11 +509,11 @@ namespace Smod2
 								{
 									plugin.Details = details;
 									plugin.Pipes = new PluginPipes(plugin);
-									
+
 									ConfigManager.Manager.RegisterPlugin(plugin);
 									LangManager.Manager.RegisterPlugin(plugin);
 									PipeManager.Manager.RegisterPlugin(plugin);
-									
+
 									plugin.Register();
 
 									disabledPlugins.Add(details.id, plugin);
@@ -542,7 +542,7 @@ namespace Smod2
 				Logger.Debug("PLUGIN_LOADER", e.StackTrace);
 			}
 		}
-		
+
 		public static string ToUpperSnakeCase(string otherCase)
 		{
 			string snakeCase = "";
@@ -552,14 +552,14 @@ namespace Smod2
 				{
 					continue;
 				}
-				
+
 				if (i > 0 && char.IsUpper(otherCase[i]) && otherCase[i - 1] != '_')
 				{
 					snakeCase += "_" + otherCase[i];
 				}
 				else
 				{
-					snakeCase += char.ToUpper(otherCase[i]);	
+					snakeCase += char.ToUpper(otherCase[i]);
 				}
 			}
 

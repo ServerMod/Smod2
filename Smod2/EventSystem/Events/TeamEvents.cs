@@ -5,23 +5,6 @@ using System.Collections.Generic;
 
 namespace Smod2.EventSystem.Events
 {
-	public class DecideRespawnQueueEvent : Event
-	{
-		public DecideRespawnQueueEvent(TeamType[] teams, Player[] players)
-		{
-			Teams = teams;
-			Players = players;
-		}
-
-		public TeamType[] Teams { get; set; }
-		public Player[] Players { get; set; }
-		
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-			((IEventHandlerDecideTeamRespawnQueue)handler).OnDecideTeamRespawnQueue(this);
-		}
-	}
-
 	public class TeamRespawnEvent : Event
 	{
 		public TeamRespawnEvent(List<Player> playerlist, bool isCI)
@@ -49,7 +32,7 @@ namespace Smod2.EventSystem.Events
 		}
 
 		public RoleType Role { get; }
-		
+
 		public int MaxHP { get; set; }
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -115,9 +98,9 @@ namespace Smod2.EventSystem.Events
 		}
 	}
 
-	public class SetNTFUnitNameEvent : Event
+	public class SetMTFUnitNameEvent : Event
 	{
-		public SetNTFUnitNameEvent(string unit)
+		public SetMTFUnitNameEvent(string unit)
 		{
 			this.Unit = unit;
 		}
@@ -126,7 +109,7 @@ namespace Smod2.EventSystem.Events
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerSetNTFUnitName)handler).OnSetNTFUnitName(this);
+			((IEventHandlerSetMTFUnitName)handler).OnSetMTFUnitName(this);
 		}
 	}
 }

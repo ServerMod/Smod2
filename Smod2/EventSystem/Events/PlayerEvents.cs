@@ -25,7 +25,7 @@ namespace Smod2.Events
 
 		public Player Attacker { get; }
 		public float Damage { get; set; }
-		public DamageType DamageType { get; set; }
+		public DamageType DamageType { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
@@ -44,7 +44,7 @@ namespace Smod2.Events
 
 		public Player Killer { get; }
 		public bool SpawnRagdoll { get; set; }
-		public DamageType DamageTypeVar { get; set; }
+		public DamageType DamageTypeVar { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
@@ -179,27 +179,59 @@ namespace Smod2.Events
 
 	public class PlayerSetRoleEvent : PlayerEvent
 	{
-		public PlayerSetRoleEvent(Player player, TeamRole teamRole, RoleType role, List<ItemType> items, bool usingDefaultItem = true) : base(player)
+		/// <summary>
+		/// Called when a player role is set, on respawn or otherwise.
+		/// </summary>
+		/// <param name="player">The player whose role has changed.</param>
+		/// <param name="newRole">The role the player is about to get, use roleType to change it.</param>
+		/// <param name="roleType">The role type the player is about to get.</param>
+		public PlayerSetRoleEvent(Player player, Role newRole, RoleType roleType) : base(player)
 		{
-			TeamRole = teamRole;
-			Role = role;
-			Items = items;
-			UsingDefaultItem = usingDefaultItem;
+			this.NewRole = newRole;
+			this.RoleType = roleType;
 		}
 
-		public List<ItemType> Items { get; set; }
+		public RoleType RoleType { get; set; }
 
-		public bool UsingDefaultItem { get; set; }
-
-		public RoleType Role { get; set; }
-
-		public TeamRole TeamRole { get; }
+		public Role NewRole { get; }
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			Player.CallSetRoleEvent = false;
 			((IEventHandlerSetRole)handler).OnSetRole(this);
 			Player.CallSetRoleEvent = true;
+		}
+	}
+
+	public class PlayerSetInventoryEvent : PlayerEvent
+	{
+		/// <summary>
+		/// Triggers before a player gets their new inventory items after a role change.
+		/// </summary>
+		/// <param name="player">The player whose role has changed.</param>
+		/// <param name="previousRole">The role the player had before the role change, check the player for the new role.</param>
+		/// <param name="items">The items which will be given to the player.</param>
+		/// <param name="ammo">The ammo type and amount which will be given to the player.</param>
+		/// <param name="dropExistingItems">Whether to drop or simply delete the existing inventory items.</param>
+		public PlayerSetInventoryEvent(Player player, Role previousRole, List<ItemType> items, Dictionary<AmmoType, ushort> ammo, bool dropExistingItems) : base(player)
+		{
+			this.PreviousRole = previousRole;
+			this.Items = items;
+			this.Ammo = ammo;
+			this.DropExistingItems = dropExistingItems;
+		}
+
+		public List<ItemType> Items { get; set; }
+
+		public Dictionary<AmmoType, ushort> Ammo { get; set; }
+
+		public bool DropExistingItems { get; set; }
+
+		public Role PreviousRole { get; }
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerSetInventory)handler).OnSetInventory(this);
 		}
 	}
 
@@ -324,16 +356,14 @@ namespace Smod2.Events
 		public GrenadeType GrenadeType { get; set; }
 		public Vector Direction { get; set; }
 		public bool SlowThrow { get; set; }
-		public bool RemoveItem { get; set; }
 		public bool Allow { get; set; }
 
-		public PlayerThrowGrenadeEvent(Player player, GrenadeType grenadeType, Vector direction, bool slowThrow, bool removeItem, bool allow) : base(player)
+		public PlayerThrowGrenadeEvent(Player player, GrenadeType grenadeType, Vector direction, bool slowThrow, bool allow) : base(player)
 		{
 			this.GrenadeType = grenadeType;
 			this.Direction = direction;
 			this.SlowThrow = slowThrow;
 			this.Allow = allow;
-			this.RemoveItem = removeItem;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -363,21 +393,19 @@ namespace Smod2.Events
 
 	public class PlayerSpawnRagdollEvent : PlayerEvent
 	{
-		public RoleType Role { get; set; }
+		public RoleType RoleID { get; set; }
 		public Vector Position { get; set; }
 		public Vector Rotation { get; set; }
 		public Player Attacker { get; }
-		public DamageType DamageType { get; set; }
-		public bool AllowRecall { get; set; }
+		public DamageType DamageType { get; }
 
-		public PlayerSpawnRagdollEvent(Player player, RoleType role, Vector position, Vector rotation, Player attacker, DamageType damageType, bool allowRecall) : base(player)
+		public PlayerSpawnRagdollEvent(Player player, RoleType roleID, Vector position, Vector rotation, Player attacker, DamageType damageType) : base(player)
 		{
-			this.Role = role;
+			this.RoleID = roleID;
 			this.Position = position;
 			this.Rotation = rotation;
 			this.Attacker = attacker;
 			this.DamageType = damageType;
-			this.AllowRecall = allowRecall;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -420,53 +448,26 @@ namespace Smod2.Events
 
 	public class PlayerMedicalUseEvent : PlayerEvent
 	{
-		public int AmountHealth { get; set; }
-		public int AmountArtificial { get; set; }
-		public int AmountRegen { get; }
-		public ItemType MedicalItem { get; }
+		public float Health { get; set; }
+		public float ArtificialHealth { get; set; }
+		public float HealthRegenAmount { get; set; }
+		public float HealthRegenSpeedMultiplier { get; set; }
+		public float Stamina { get; set; }
+		public MedicalItem MedicalItem { get; set; }
 
-		public PlayerMedicalUseEvent(Player player, int amountHealth, int artificalHP, int TotalhpRegenerated, ItemType item) : base(player)
+		public PlayerMedicalUseEvent(Player player, float health, float artificialHealth, float stamina, MedicalItem medicalItem, float healthRegenAmount, float healthRegenSpeedMultiplier) : base(player)
 		{
-			this.AmountHealth = amountHealth;
-			this.AmountArtificial = artificalHP;
-			this.AmountRegen = TotalhpRegenerated;
-			this.MedicalItem = item;
+			Health = health;
+			ArtificialHealth = artificialHealth;
+			Stamina = stamina;
+			MedicalItem = medicalItem;
+			HealthRegenAmount = healthRegenAmount;
+			HealthRegenSpeedMultiplier = healthRegenSpeedMultiplier;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
 			((IEventHandlerMedicalUse)handler).OnMedicalUse(this);
-		}
-	}
-
-	public class PlayerShootEvent : PlayerEvent
-	{
-		public Player Target { get; }
-		public Weapon Weapon { get; }
-		public bool ShouldSpawnHitmarker { get; set; }
-		public bool ShouldSpawnBloodDecal { get; set; }
-		public Vector SourcePosition { get; }
-		public Vector TargetPosition { get; }
-		public HitBoxType TargetHitbox { get; }
-		public Vector Direction { get; set; }
-		public WeaponSound ?WeaponSound { get; set; }
-
-		public PlayerShootEvent(Player player, Player target, Weapon weapon, WeaponSound ?weaponSound, Vector sourcePosition, Vector targetPosition, HitBoxType targetHitbox, Vector direction, bool spawnHitmarker = true, bool spawnBloodDecal = true) : base(player)
-		{
-			this.Target = target;
-			this.Weapon = weapon;
-			this.ShouldSpawnHitmarker = spawnHitmarker;
-			this.ShouldSpawnBloodDecal = spawnBloodDecal;
-			this.SourcePosition = sourcePosition;
-			this.TargetPosition = targetPosition;
-			this.TargetHitbox = targetHitbox;
-			this.Direction = direction;
-			this.WeaponSound = weaponSound;
-		}
-
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-			((IEventHandlerShoot)handler).OnShoot(this);
 		}
 	}
 
@@ -523,12 +524,12 @@ namespace Smod2.Events
 	{
 		public bool Allow { get; set; }
 
-		public Player Owner { get; set; }
+		public Player Disarmer { get; }
 
-		public PlayerHandcuffedEvent(Player player, Player owner, bool allow = true) : base(player)
+		public PlayerHandcuffedEvent(Player player, Player disarmer, bool allow = true) : base(player)
 		{
 			this.Allow = allow;
-			this.Owner = owner;
+			this.Disarmer = disarmer;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -586,8 +587,11 @@ namespace Smod2.Events
 
 	public class PlayerMakeNoiseEvent : PlayerEvent
 	{
-		public PlayerMakeNoiseEvent(Player player) : base(player)
+		public bool Allow { get; set; }
+
+		public PlayerMakeNoiseEvent(Player player, bool allow) : base(player)
 		{
+			this.Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -633,12 +637,14 @@ namespace Smod2.Events
 	public class PlayerReloadEvent : PlayerEvent
 	{
 		public Weapon Weapon { get; }
-		public int AmmoRemoved { get; set; }
-		public int ClipAmmoCountAfterReload { get; set; }
+		public int AmmoRemoved { get; }
+		public int ClipAmmoCountAfterReload { get; }
 		public int NormalMaxClipSize { get; }
 		public int CurrentClipAmmoCount { get; }
 		public int CurrentAmmoTotal { get; }
-		public PlayerReloadEvent(Player player, Weapon weapon, int ammoRemoved, int clipAmmoCountAfterReload, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal) : base(player)
+		public bool Allow { get; set; }
+
+		public PlayerReloadEvent(Player player, Weapon weapon, int ammoRemoved, int clipAmmoCountAfterReload, int normalMaxClipSize, int currentClipAmmoCount, int currentAmmoTotal, bool allow) : base(player)
 		{
 			this.Weapon = weapon;
 			this.AmmoRemoved = ammoRemoved;
@@ -646,6 +652,7 @@ namespace Smod2.Events
 			this.NormalMaxClipSize = normalMaxClipSize;
 			this.CurrentClipAmmoCount = currentClipAmmoCount;
 			this.CurrentAmmoTotal = currentAmmoTotal;
+			this.Allow = allow;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -659,10 +666,10 @@ namespace Smod2.Events
 		public bool Allow { get; set; }
 		public GrenadeType GrenadeType { get; }
 		public Vector Position { get; set; }
-		public PlayerGrenadeExplosion(Player thrower, GrenadeType grenadetype, Vector position, bool allow = true) : base(thrower)
+		public PlayerGrenadeExplosion(Player thrower, GrenadeType grenadeType, Vector position, bool allow = true) : base(thrower)
 		{
 			this.Allow = allow;
-			this.GrenadeType = grenadetype;
+			this.GrenadeType = grenadeType;
 			this.Position = position;
 		}
 
@@ -676,9 +683,14 @@ namespace Smod2.Events
 	{
 		public Player Victim { get; }
 		public GrenadeType GrenadeType { get; }
-		public PlayerGrenadeHitPlayer(Player thrower, Player victim, GrenadeType type) : base(thrower)
+		public Vector ExplosionForce { get; set; }
+		public float Damage { get; set; }
+
+		public PlayerGrenadeHitPlayer(Player thrower, Player victim, GrenadeType type, Vector explosionForce, float damage) : base(thrower)
 		{
 			GrenadeType = type;
+			ExplosionForce = explosionForce;
+			Damage = damage;
 			Victim = victim;
 		}
 
@@ -722,41 +734,22 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PlayerGeneratorInsertTabletEvent : PlayerEvent
+	public class PlayerGeneratorLeverUsedEvent : PlayerEvent
 	{
 		public Generator Generator { get; }
 		public bool Allow { get; set; }
-		public bool RemoveTablet { get; set; }
+		public bool Activated { get; set; }
 
-		public PlayerGeneratorInsertTabletEvent(Player player, Generator generator, bool allow, bool removeTablet) : base(player)
+		public PlayerGeneratorLeverUsedEvent(Player player, Generator generator, bool allow, bool activated) : base(player)
 		{
 			Generator = generator;
 			Allow = allow;
-			RemoveTablet = removeTablet;
+			Activated = activated;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerGeneratorInsertTablet)handler).OnGeneratorInsertTablet(this);
-		}
-	}
-
-	public class PlayerGeneratorEjectTabletEvent : PlayerEvent
-	{
-		public Generator Generator { get; }
-		public bool Allow { get; set; }
-		public bool SpawnTablet { get; set; }
-
-		public PlayerGeneratorEjectTabletEvent(Player player, Generator generator, bool allow, bool spawnTablet) : base(player)
-		{
-			Generator = generator;
-			Allow = allow;
-			SpawnTablet = spawnTablet;
-		}
-
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-			((IEventHandlerGeneratorEjectTablet)handler).OnGeneratorEjectTablet(this);
+			((IEventHandlerGeneratorLeverUsed)handler).OnGeneratorLeverUsed(this);
 		}
 	}
 
@@ -1106,11 +1099,11 @@ namespace Smod2.Events
 		public PlayerEffect PlayerEffect { get; }
 		public float NewValue { get; set; }
 
-		public EarlyStatusEffectChangeEvent(Player player, PlayerEffect effect, float New, bool allow = true) : base(player)
+		public EarlyStatusEffectChangeEvent(Player player, PlayerEffect effect, float newValue, bool allow = true) : base(player)
 		{
 			PlayerEffect = effect;
 			Allow = allow;
-			NewValue = New;
+			NewValue = newValue;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -1124,10 +1117,10 @@ namespace Smod2.Events
 		public PlayerEffect PlayerEffect { get; }
 		public float NewValue { get; set; }
 
-		public LateStatusEffectChangeEvent(Player player, PlayerEffect effect, float New) : base(player)
+		public LateStatusEffectChangeEvent(Player player, PlayerEffect effect, float newValue) : base(player)
 		{
 			PlayerEffect = effect;
-			NewValue = New;
+			NewValue = newValue;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)

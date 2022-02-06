@@ -19,10 +19,6 @@ namespace Smod2.API
 		public abstract Map Map { get; }
 		public abstract int NumPlayers { get; }
 		public abstract int MaxPlayers { get; set; }
-		[Obsolete("Nonfunctional", true)]
-		public abstract bool Verified { get; } //Not used whatsoever. Only kept to prevent plugins to have to be recompiled
-		[Obsolete("Nonfunctional", true)]
-		public abstract bool Visible { get; set; } //Not used whatsoever. Only kept to prevent plugins to have to be recompiled
 		public abstract string PlayerListTitle { get; set; }
 
 		public abstract List<Player> GetPlayers();
@@ -30,23 +26,13 @@ namespace Smod2.API
 		public abstract List<Player> GetPlayers(RoleType role);
 		public abstract List<Player> GetPlayers(RoleType[] roles);
 		public abstract List<Player> GetPlayers(TeamType team);
-		[Obsolete("Use Smod2.API.RoleType instead of Smod2.API.Role")]
-		public abstract List<Player> GetPlayers(Role role);
-		[Obsolete("Use Smod2.API.RoleType instead of Smod2.API.Role")]
-		public abstract List<Player> GetPlayers(Role[] roles);
-		[Obsolete("Use Smod2.API.TeamType instead of Smod2.API.Team")]
-		public abstract List<Player> GetPlayers(Team team);
 		public abstract List<Player> GetPlayers(Predicate<Player> predicate);
 		public abstract Player GetPlayer(int playerId);
 		public abstract List<Connection> GetConnections(string filter = "");
-		public abstract List<TeamRole> GetRoles(string filter = "");
+		public abstract List<Role> GetRoles(string filter = "");
 		public abstract string GetAppFolder(bool addSeparator = true, bool serverConfig = false, string centralConfig = "");
-		[Obsolete("Use GetAppFolder(bool addSeparator = true, bool serverConfig = false, string centralConfig = \"\") instead of GetAppFolder(bool shared = false, bool addSeparator = false, bool addPort = false, bool addConfigs = false)")]
-		public abstract string GetAppFolder(bool shared = false, bool addSeparator = false, bool addPort = false, bool addConfigs = false);
 
 		public abstract bool BanUserId(string username, string userId, int duration, string reason = "", string issuer = "Server");
-		[Obsolete("Use BanUserId insteadof BanSteamId")]
-		public abstract bool BanSteamId(string username, string steamId, int duration, string reason = "", string issuer = "Server");
 		public abstract bool BanIpAddress(string username, string ipAddress, int duration, string reason = "", string issuer = "Server");
 	}
 }
