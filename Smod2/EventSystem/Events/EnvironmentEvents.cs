@@ -157,10 +157,12 @@ namespace Smod2.Events
 	public class GeneratorFinishEvent : Event
 	{
 		public Generator Generator { get; }
+		public Player ActivatingPlayer { get; }
 
-		public GeneratorFinishEvent(Generator generator)
+		public GeneratorFinishEvent(Generator generator, Player activatingPlayer)
 		{
 			Generator = generator;
+			ActivatingPlayer = activatingPlayer;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
