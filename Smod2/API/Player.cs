@@ -54,7 +54,8 @@ namespace Smod2.API
 		COM18,
 		REVOLVER,
 		AK,
-		SHOTGUN
+		SHOTGUN,
+		DISRUPTOR
 	}
 
 	public enum UserRank

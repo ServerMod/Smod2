@@ -446,28 +446,28 @@ namespace Smod2.Events
 		}
 	}
 
-	public class PlayerMedicalUseEvent : PlayerEvent
+	public class PlayerConsumableUseEvent : PlayerEvent
 	{
 		public float Health { get; set; }
 		public float ArtificialHealth { get; set; }
 		public float HealthRegenAmount { get; set; }
 		public float HealthRegenSpeedMultiplier { get; set; }
 		public float Stamina { get; set; }
-		public MedicalItem MedicalItem { get; set; }
+		public ConsumableItem ConsumableItem { get; set; }
 
-		public PlayerMedicalUseEvent(Player player, float health, float artificialHealth, float stamina, MedicalItem medicalItem, float healthRegenAmount, float healthRegenSpeedMultiplier) : base(player)
+		public PlayerConsumableUseEvent(Player player, float health, float artificialHealth, float stamina, ConsumableItem consumableItem, float healthRegenAmount, float healthRegenSpeedMultiplier) : base(player)
 		{
 			Health = health;
 			ArtificialHealth = artificialHealth;
 			Stamina = stamina;
-			MedicalItem = medicalItem;
+			ConsumableItem = consumableItem;
 			HealthRegenAmount = healthRegenAmount;
 			HealthRegenSpeedMultiplier = healthRegenSpeedMultiplier;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
 		{
-			((IEventHandlerMedicalUse)handler).OnMedicalUse(this);
+			((IEventHandlerConsumableUse)handler).OnConsumableUse(this);
 		}
 	}
 

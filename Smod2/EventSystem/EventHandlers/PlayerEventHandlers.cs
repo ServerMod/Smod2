@@ -195,12 +195,12 @@ namespace Smod2.EventHandlers
 		void OnContain106(PlayerContain106Event ev);
 	}
 
-	public interface IEventHandlerMedicalUse : IEventHandler
+	public interface IEventHandlerConsumableUse : IEventHandler
 	{
 		/// <summary>
 		/// Called when a player uses Medkit
 		/// </summary>
-		void OnMedicalUse(PlayerMedicalUseEvent ev);
+		void OnConsumableUse(PlayerConsumableUseEvent ev);
 	}
 
 	public interface IEventHandler106CreatePortal : IEventHandler

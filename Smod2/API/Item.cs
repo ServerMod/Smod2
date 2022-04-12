@@ -49,16 +49,21 @@ namespace Smod2.API
 		GUN_AK = 40,
 		GUN_SHOTGUN = 41,
 		SCP330 = 42,
-		SCP2176 = 43
+		SCP2176 = 43,
+		SCP244a,
+		SCP244b,
+		SCP1853,
+		ParticleDisruptor
 	}
 
-	public enum MedicalItem
+	public enum ConsumableItem
 	{
 		MEDKIT = ItemType.MEDKIT,
 		SCP500 = ItemType.SCP500,
 		SCP207 = ItemType.SCP207,
 		ADRENALINE = ItemType.ADRENALINE,
-		PAINKILLERS = ItemType.PAINKILLERS
+		PAINKILLERS = ItemType.PAINKILLERS,
+		SCP1853 = ItemType.SCP1853
 	}
 
 	public enum KnobSetting
