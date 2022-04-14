@@ -14,7 +14,8 @@ namespace Smod2.API
 		COM18     = ItemType.GUN_COM18,
 		REVOLVER  = ItemType.GUN_REVOLVER,
 		AK        = ItemType.GUN_AK,
-		SHOTGUN   = ItemType.GUN_SHOTGUN
+		SHOTGUN   = ItemType.GUN_SHOTGUN,
+		PARTICLE_DISRUPTOR = ItemType.PARTICLE_DISRUPTOR
 	}
 
 	public enum WeaponSound

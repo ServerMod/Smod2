@@ -23,8 +23,8 @@ namespace Smod2.API
 		MEDKIT = 14,
 		FLASHLIGHT = 15,
 		MICRO_HID = 16,
-		SCP500 = 17,
-		SCP207 = 18,
+		SCP_500 = 17,
+		SCP_207 = 18,
 		AMMO_12_GAUGE = 19,
 		GUN_E11_SR = 20,
 		GUN_CROSSVEC = 21,
@@ -37,8 +37,8 @@ namespace Smod2.API
 		AMMO_762_X39 = 28,
 		AMMO_9_X19 = 29,
 		GUN_COM18 = 30,
-		SCP018 = 31,
-		SCP268 = 32,
+		SCP_018 = 31,
+		SCP_268 = 32,
 		ADRENALINE = 33,
 		PAINKILLERS = 34,
 		COIN = 35,
@@ -48,22 +48,22 @@ namespace Smod2.API
 		GUN_REVOLVER = 39,
 		GUN_AK = 40,
 		GUN_SHOTGUN = 41,
-		SCP330 = 42,
-		SCP2176 = 43,
-		SCP244a,
-		SCP244b,
-		SCP1853,
-		ParticleDisruptor
+		SCP_330 = 42,
+		SCP_2176 = 43,
+		SCP_244_A,
+		SCP_244_B,
+		SCP_1853,
+		PARTICLE_DISRUPTOR
 	}
 
 	public enum ConsumableItem
 	{
 		MEDKIT = ItemType.MEDKIT,
-		SCP500 = ItemType.SCP500,
-		SCP207 = ItemType.SCP207,
+		SCP500 = ItemType.SCP_500,
+		SCP207 = ItemType.SCP_207,
 		ADRENALINE = ItemType.ADRENALINE,
 		PAINKILLERS = ItemType.PAINKILLERS,
-		SCP1853 = ItemType.SCP1853
+		SCP1853 = ItemType.SCP_1853
 	}
 
 	public enum KnobSetting

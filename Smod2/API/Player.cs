@@ -96,8 +96,8 @@ namespace Smod2.API
 	{
 		GRENADE_HE = ItemType.GRENADE_HE,
 		GRENADE_FLASH = ItemType.GRENADE_FLASH,
-		SCP018 = ItemType.SCP018,
-		SCP2176 = ItemType.SCP2176
+		SCP018 = ItemType.SCP_018,
+		SCP2176 = ItemType.SCP_2176
 	}
 
 	public enum StatusEffect
