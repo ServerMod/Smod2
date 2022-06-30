@@ -29,6 +29,8 @@ namespace Smod2
 		public static readonly int SMOD_REVISION = 2;
 
 		public static readonly string SMOD_BUILD = "A";
+		/// <summary> Used by AssemblyInfo.cs, needs to be a const. </summary>
+		internal const string AssemblyVersion = "3.10.2.0";
 
 		public static readonly string DEPENDENCY_FOLDER = "dependencies";
 

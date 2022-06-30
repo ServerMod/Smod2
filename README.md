@@ -1,4 +1,4 @@
-# ServerMod2 [![Release](https://img.shields.io/github/release/ServerMod/Smod2.svg)](https://github.com/ServerMod/Smod2/releases) [![Downloads](https://img.shields.io/github/downloads/ServerMod/Smod2/total.svg)](https://github.com/ServerMod/Smod2/releases) [![Discord Server](https://img.shields.io/discord/430468637183442945.svg?label=discord)](https://discord.gg/8nvmMTr)
+# ServerMod2 [![Release](https://img.shields.io/github/release/ServerMod/Smod2.svg)](https://github.com/ServerMod/Smod2/releases)  [![Downloads](https://img.shields.io/github/downloads/ServerMod/Smod2/total.svg)](https://github.com/ServerMod/Smod2/releases) [![GitHub latest commit](https://badgen.net/github/last-commit/ServerMod/Smod2)](https://GitHub.com/ServerMod/Smod2/commit/) [![Discord Server](https://img.shields.io/discord/430468637183442945.svg?label=discord)](https://discord.gg/8nvmMTr)
 ServerMod2 is a server side plugin system with a bunch of additional configuration options, bug fixes, security patches and some optimisations built in.
 
 For how to use/configure SMod, go to the [SMOD WIKI](https://github.com/Grover-c13/Smod2/wiki)
