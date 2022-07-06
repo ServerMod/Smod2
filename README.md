@@ -1,4 +1,7 @@
 
+[![Button Discord]][Discord]
+
+<br>
 <br>
 
 <div align = center>
@@ -15,21 +18,15 @@
 *options, **Bug Fixes**, **Security Patches** and **Optimizations**.*
 
 <br>
-
-[![Button Discord]][Discord]
-
 <br>
-
----
 
 [![Button Download]][Release]   
 [![Button Usage]][Wiki]   
 [![Button Issues]][Issues]
 
----
-
 </div>
 
+<br>
 <br>
 <br>
 
