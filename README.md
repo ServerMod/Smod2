@@ -1,7 +1,4 @@
 
-[![Button Discord]][Discord]
-
-<br>
 <br>
 
 <div align = center>
@@ -27,6 +24,12 @@
 </div>
 
 <br>
+<br>
+
+## Join Us
+
+[![Button Discord]][Discord]
+
 <br>
 <br>
 
