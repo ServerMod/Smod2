@@ -1097,13 +1097,13 @@ namespace Smod2.Events
 	{
 		public bool Allow { get; set; }
 		public PlayerEffect PlayerEffect { get; }
-		public float NewValue { get; set; }
+		public float NewDuration { get; set; }
 
-		public EarlyStatusEffectChangeEvent(Player player, PlayerEffect effect, float newValue, bool allow = true) : base(player)
+		public EarlyStatusEffectChangeEvent(Player player, PlayerEffect effect, float newDuration, bool allow = true) : base(player)
 		{
 			PlayerEffect = effect;
 			Allow = allow;
-			NewValue = newValue;
+			NewDuration = newDuration;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
@@ -1115,12 +1115,12 @@ namespace Smod2.Events
 	public class LateStatusEffectChangeEvent : PlayerEvent
 	{
 		public PlayerEffect PlayerEffect { get; }
-		public float NewValue { get; set; }
+		public float OldDuration { get; set; }
 
-		public LateStatusEffectChangeEvent(Player player, PlayerEffect effect, float newValue) : base(player)
+		public LateStatusEffectChangeEvent(Player player, PlayerEffect effect, float oldDuration) : base(player)
 		{
 			PlayerEffect = effect;
-			NewValue = newValue;
+			OldDuration = oldDuration;
 		}
 
 		public override void ExecuteHandler(IEventHandler handler)
