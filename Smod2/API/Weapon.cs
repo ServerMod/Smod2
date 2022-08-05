@@ -6,7 +6,7 @@ namespace Smod2.API
 	public enum WeaponType
 	{
 		COM15     = ItemType.GUN_COM15,
-		MICRO_HID = ItemType.MICRO_HID,
+		//MICRO_HID = ItemType.MICRO_HID, // This does not count as a firearm in the SCPSL code currently
 		E11_SR    = ItemType.GUN_E11_SR,
 		CROSSVEC  = ItemType.GUN_CROSSVEC,
 		FSP9      = ItemType.GUN_FSP9,
