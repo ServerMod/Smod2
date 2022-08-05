@@ -298,7 +298,7 @@ namespace Smod2
 			{
 				return base.ToString();
 			}
-			return Details.name + "(" + Details.id + ")";
+			return Details.name + " (" + Details.id + ")";
 		}
 	}
 }

@@ -294,7 +294,7 @@ namespace Smod2
 				return;
 			}
 
-			Manager.Logger.Info("PLUGIN_MANAGER", "Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Enabling plugin " + plugin.Details.name + " " + plugin.Details.version);
 
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Registering pipe exports");
 			if (!PipeManager.Manager.IsRegistered(plugin)) PipeManager.Manager.RegisterPlugin(plugin); // In case it got disabled
@@ -356,7 +356,7 @@ namespace Smod2
 				return;
 			}
 
-			Manager.Logger.Info("PLUGIN_MANAGER", "Disabling plugin " + plugin.Details.name + " " + plugin.Details.version);
+			Manager.Logger.Debug("PLUGIN_MANAGER", "Disabling plugin " + plugin.Details.name + " " + plugin.Details.version);
 
 			Manager.Logger.Debug("PLUGIN_MANAGER", "Altering dictionaries");
 			enabledPlugins.Remove(plugin.Details.id);
