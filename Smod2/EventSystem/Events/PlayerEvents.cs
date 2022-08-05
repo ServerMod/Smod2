@@ -474,7 +474,7 @@ namespace Smod2.Events
 	public class PlayerShootEvent : PlayerEvent
 	{
 		public Player Target { get; }
-		public Weapon Weapon { get; }
+		public Item Weapon { get; }
 		public bool ShowHitmarker { get; set; }
 		public bool SpawnBloodDecal { get; set; }
 		public bool SpawnBulletHoleDecal { get; set; }
@@ -483,7 +483,7 @@ namespace Smod2.Events
 		public HitBoxType HitType { get; }
 		public Vector Direction { get; }
 
-		public PlayerShootEvent(Player player, Player target, Weapon weapon, Vector sourcePosition, Vector targetPosition, HitBoxType hitType, Vector direction, bool showHitmarker, bool spawnBloodDecal, bool spawnBulletholeDecal) : base(player)
+		public PlayerShootEvent(Player player, Player target, Item weapon, Vector sourcePosition, Vector targetPosition, HitBoxType hitType, Vector direction, bool showHitmarker, bool spawnBloodDecal, bool spawnBulletholeDecal) : base(player)
 		{
 			Target = target;
 			Weapon = weapon;
