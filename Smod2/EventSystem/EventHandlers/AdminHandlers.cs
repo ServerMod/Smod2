@@ -7,11 +7,7 @@ namespace Smod2.EventHandlers
 	{
 		void OnAdminQuery(AdminQueryEvent ev);
 	}
-	[Obsolete("This event is never triggered and will be removed in the future")]
-	public interface IEventHandlerAuthCheck : IEventHandler
-	{
-		void OnAuthCheck(AuthCheckEvent ev);
-	}
+
 	public interface IEventHandlerBan : IEventHandler
 	{
 		void OnBan(BanEvent ev);

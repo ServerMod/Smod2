@@ -4,122 +4,113 @@ namespace Smod2.EventHandlers
 {
 	public interface IEventHandlerRoundStart : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This is the event handler for Round start events (before people are spawned in)
-		/// </summary> 
+		/// </summary>
 		void OnRoundStart(RoundStartEvent ev);
 	}
 
 	public interface IEventHandlerRoundEnd : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This is the event handler for Round end events (when the stats appear on screen)
-		/// </summary> 
+		/// </summary>
 		void OnRoundEnd(RoundEndEvent ev);
 	}
 
 	public interface IEventHandlerConnect : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This is the event handler for connection events, before players have been created, so names and what not are available. See PlayerJoin if you need that information
-		/// </summary> 
+		/// </summary>
 		void OnConnect(ConnectEvent ev);
 	}
 
 	public interface IEventHandlerDisconnect : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This is the event handler for disconnection events.
 		/// </summary>
 		void OnDisconnect(DisconnectEvent ev);
 	}
 
-	[Obsolete("Provides no information please use IEventHandlerPlayerLeave")]
-	public interface IEventHandlerLateDisconnect : IEventHandler
-	{
-		/// <summary>  
-		///  This is the event handler for disconnection events after the player has disconnected.
-		/// </summary>
-		void OnLateDisconnect(LateDisconnectEvent ev);
-	}
-
 	public interface IEventHandlerPlayerLeave : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  Called OnDestroy of QueryProcessor aka when a player leaves.
-		/// </summary> 
+		/// </summary>
 		void OnPlayerLeave(PlayerLeaveEvent ev);
 	}
 
 	public interface IEventHandlerCheckRoundEnd : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This event handler will call everytime the game checks for a round end
-		/// </summary> 
+		/// </summary>
 		void OnCheckRoundEnd(CheckRoundEndEvent ev);
 	}
 
 	public interface IEventHandlerWaitingForPlayers : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This event handler will call when the server is waiting for players
-		/// </summary> 
+		/// </summary>
 		void OnWaitingForPlayers(WaitingForPlayersEvent ev);
 	}
 
 	public interface IEventHandlerRoundRestart : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This event handler will call when the server is about to restart
-		/// </summary> 
+		/// </summary>
 		void OnRoundRestart(RoundRestartEvent ev);
 	}
 
 	public interface IEventHandlerSetServerName : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This event handler will call when the server name is set
-		/// </summary> 
+		/// </summary>
 		void OnSetServerName(SetServerNameEvent ev);
 	}
 
 	public interface IEventHandlerUpdate : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This event handler will call every server tick
-		/// </summary> 
+		/// </summary>
 		void OnUpdate(UpdateEvent ev);
 	}
 
 	public interface IEventHandlerFixedUpdate : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This event handler will call every server tick at a fixed rate (0.02)
-		/// </summary> 
+		/// </summary>
 		void OnFixedUpdate(FixedUpdateEvent ev);
 	}
 
 	public interface IEventHandlerLateUpdate : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This event handler will call after OnUpdate
-		/// </summary> 
+		/// </summary>
 		void OnLateUpdate(LateUpdateEvent ev);
 	}
 
 	public interface IEventHandlerSceneChanged : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This event handler will call when the server scene changes
-		/// </summary> 
+		/// </summary>
 		void OnSceneChanged(SceneChangedEvent ev);
 	}
-	
+
 	public interface IEventHandlerSetSeed : IEventHandler
 	{
-		/// <summary>  
+		/// <summary>
 		///  This event handler will call when the seed for the round is being set
-		/// </summary> 
+		/// </summary>
 		void OnSetSeed(SetSeedEvent ev);
 	}
 }
