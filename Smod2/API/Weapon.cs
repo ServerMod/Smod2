@@ -91,13 +91,13 @@ namespace Smod2.API
 
 	public enum HitBoxType
 	{
-		NONE = -1,
-		LEG = 0, // Arm and leg should possibly be changed to limb
-		ARM = 1,
-		BODY = 2,
-		HEAD = 3,
-		WINDOW = 4,
-		HOLE = 5
+		NOTHING = 0,
+		WORLD = 1,
+		PLAYER = 2,
+		BREAKABLE_WINDOW = 3,
+		SCP_244 = 4,
+		SHOOTING_TARGET = 5,
+		SQUEAK_INTERACTION = 6
 	}
 
 	public enum AmmoType
