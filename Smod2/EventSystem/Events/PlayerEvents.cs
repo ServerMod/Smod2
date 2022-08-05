@@ -471,6 +471,37 @@ namespace Smod2.Events
 		}
 	}
 
+	public class PlayerShootEvent : PlayerEvent
+	{
+		public Player Target { get; }
+		public Weapon Weapon { get; }
+		public bool ShowHitmarker { get; set; }
+		public bool SpawnBloodDecal { get; set; }
+		public bool SpawnBulletHoleDecal { get; set; }
+		public Vector SourcePosition { get; }
+		public Vector TargetPosition { get; }
+		public HitBoxType HitType { get; }
+		public Vector Direction { get; }
+
+		public PlayerShootEvent(Player player, Player target, Weapon weapon, Vector sourcePosition, Vector targetPosition, HitBoxType hitType, Vector direction, bool showHitmarker, bool spawnBloodDecal, bool spawnBulletholeDecal) : base(player)
+		{
+			Target = target;
+			Weapon = weapon;
+			ShowHitmarker = showHitmarker;
+			SpawnBloodDecal = spawnBloodDecal;
+			SpawnBulletHoleDecal = spawnBulletholeDecal;
+			SourcePosition = sourcePosition;
+			TargetPosition = targetPosition;
+			HitType = hitType;
+			Direction = direction;
+		}
+
+		public override void ExecuteHandler(IEventHandler handler)
+		{
+			((IEventHandlerShoot)handler).OnShoot(this);
+		}
+	}
+
 	public class Player106CreatePortalEvent : PlayerEvent
 	{
 		public Vector Position { get; set; }

@@ -203,6 +203,14 @@ namespace Smod2.EventHandlers
 		void OnConsumableUse(PlayerConsumableUseEvent ev);
 	}
 
+	public interface IEventHandlerShoot : IEventHandler
+	{
+		/// <summary>
+		/// Called when a player shoots
+		/// </summary>
+		void OnShoot(PlayerShootEvent ev);
+	}
+
 	public interface IEventHandler106CreatePortal : IEventHandler
 	{
 		/// <summary>
