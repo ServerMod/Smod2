@@ -90,21 +90,6 @@ namespace Smod2.Events
 		}
 	}
 
-
-	public class LateDisconnectEvent : Event
-	{
-		public LateDisconnectEvent()
-		{
-		}
-
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-#pragma warning disable 618
-			((IEventHandlerLateDisconnect)handler).OnLateDisconnect(this);
-#pragma warning restore 618
-		}
-	}
-
 	public class PlayerLeaveEvent : Event
 	{
 		public Player Player { get; }
@@ -225,7 +210,7 @@ namespace Smod2.Events
 			((IEventHandlerSceneChanged)handler).OnSceneChanged(this);
 		}
 	}
-	
+
 	public class SetSeedEvent : Event
 	{
 		public int Seed { get; set; }

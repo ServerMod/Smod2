@@ -27,11 +27,7 @@ namespace Smod2
 			internal set;
 		}
 
-		[Obsolete("Use EventManager instead.")]
-		public readonly EventManager eventManager = EventManager.Manager;
 		public EventManager EventManager => EventManager.Manager;
-		[Obsolete("Use PluginManager instead.")]
-		public readonly PluginManager pluginManager = PluginManager.Manager;
 		public PluginManager PluginManager => PluginManager.Manager;
 		public LangManager LangManager => LangManager.Manager;
 		public ConfigManager ConfigManager => ConfigManager.Manager;

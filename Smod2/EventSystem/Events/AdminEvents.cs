@@ -17,20 +17,6 @@ namespace Smod2.Events
 		}
 	}
 
-	public class AuthCheckEvent : Event
-	{
-		public Player Requester { get; set; }
-		public AuthType AuthType { get; set; }
-		public bool Allow { get; set; }
-		public string DeniedMessage { get; set; }
-		public override void ExecuteHandler(IEventHandler handler)
-		{
-#pragma warning disable 618
-			((IEventHandlerAuthCheck)handler).OnAuthCheck(this);
-#pragma warning restore 618
-		}
-	}
-
 	public class BanEvent : Event
 	{
 		public Player Player { get; set; }

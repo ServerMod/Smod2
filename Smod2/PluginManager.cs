@@ -263,60 +263,6 @@ namespace Smod2
 			return plugins;
 		}
 
-		[Obsolete("Use GetEnabledPlugins instead.")]
-		public List<Plugin> FindEnabledPlugins(string name)
-		{
-			List<Plugin> matching = new List<Plugin>();
-			foreach (var plugin in enabledPlugins.Values)
-			{
-				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
-				{
-					matching.Add(plugin);
-				}
-			}
-
-			return matching;
-		}
-
-		[Obsolete("Use GetDisabledPlugins instead.")]
-		public List<Plugin> FindDisabledPlugins(string name)
-		{
-			List<Plugin> matching = new List<Plugin>();
-			foreach (var plugin in disabledPlugins.Values)
-			{
-				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
-				{
-					matching.Add(plugin);
-				}
-			}
-
-			return matching;
-		}
-
-		[Obsolete("Use GetMatchingPlugins instead.")]
-		public List<Plugin> FindPlugins(string name)
-		{
-			List<Plugin> matching = new List<Plugin>();
-
-			foreach (var plugin in enabledPlugins.Values)
-			{
-				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
-				{
-					matching.Add(plugin);
-				}
-			}
-
-			foreach (var plugin in disabledPlugins.Values)
-			{
-				if (plugin.Details.name.Contains(name) || plugin.Details.author.Contains(name))
-				{
-					matching.Add(plugin);
-				}
-			}
-
-			return matching;
-		}
-
 		public void EnablePlugins()
 		{
 			// Converting to array is required because disabledPlugins is modified when a plugin is enabled.
