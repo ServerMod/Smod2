@@ -11,7 +11,7 @@
 
 # ServerMod2  
 
-# [This API has been adandoned in favour of the new NorthWood API](https://github.com/northwood-studios/NwPluginAPI)
+# [This API has been adandoned in favour of the new LabAPI](https://github.com/northwood-studios/NwPluginAPI)
 
 *Server side **Plugin System** with additional configuration* <br>
 *options, **Bug Fixes**, **Security Patches** and **Optimizations**.*
