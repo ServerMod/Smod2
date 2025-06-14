@@ -9,8 +9,7 @@
 
 <br>
 
-# ServerMod2  
-
+# ServerMod2
 # [This plugin API has been adandoned in favour of the official LabAPI](https://github.com/northwood-studios/LabAPI)
 
 *Server side **Plugin System** with additional configuration* <br>
@@ -36,6 +35,9 @@
 <br>
 
 ## Installation
+
+> [!Warning]
+> This does not work for modern versions of the game! This API is abandoned and will not receive updates!
 
 [![Button Windows]][Windows]   [![Button Linux]][Linux]
 
